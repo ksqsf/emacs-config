@@ -660,6 +660,7 @@ date: %s
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
+
 
 ;;;
 ;;; Permanently enable disabled commands (because I use them)

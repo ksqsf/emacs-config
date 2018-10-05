@@ -1,0 +1,20 @@
+This is my finely tweaked Emacs configuration. I live on it every day.
+
+I intend to keep it as small as possible, but unfortunately, it has
+grown into several hundreds of lines of Lisp code, and it's now
+necessary to back it up in case of data loss.
+
+Note: This configuration is NOT self-contained. It requires some
+external programs to work properly. To name a few:
+* StarDict for sdcv.
+* Proof General.
+* doc-rfc from Debian.
+* epdfinfo (refer to pdf-tools for details)
+
+Some of my own Lisp functions:
+* region ring
+* window-configuration ring
+* ACM mode (separate repo)
+* jekyll blog
+* google
+* rfc
