@@ -10,6 +10,7 @@ external programs to work properly. To name a few:
 * Proof General.
 * doc-rfc from Debian.
 * epdfinfo (refer to pdf-tools for details)
+* fortune.
 
 Some of my own Lisp functions:
 * region ring

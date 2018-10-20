@@ -3,13 +3,12 @@
 ;;;
 (scroll-bar-mode -1)
 (column-number-mode 1)
-(set-frame-parameter nil 'alpha 90)
 
 
 ;;;
 ;;; Emacs itself
 ;;;
-(setq gc-cons-threshold 20000000)
+(setq gc-cons-threshold 100000000)
 
 
 ;;;
@@ -35,7 +34,7 @@ saved in register 1."
   (delete-other-windows)
   (switch-to-buffer "*scratch*")
   (erase-buffer)
-  (insert initial-scratch-message)
+  (insert (scratch-message))
   (set-buffer-modified-p nil))
 
 (global-set-key (kbd "<home>") #'go-to-home)
@@ -82,15 +81,29 @@ saved in register 1."
 
 ;; (desktop-save-mode t)
 
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message (format "%s\n;; Happy Hacking!
+(defun renew-scratch-message ()
+  (interactive)
+  (save-excursion
+    (get-buffer-create "*scratch*")
+    (with-current-buffer "*scratch*"
+      (lisp-interaction-mode)
+      (erase-buffer)
+      (insert (scratch-message))
+      (goto-char (point-max)))))
+(run-with-idle-timer 600 t #'renew-scratch-message)
+
+(defun scratch-message ()
+  (format "%s\n;; Happy Hacking!
 ;; Don't forget to check your calendar! (C-c a)\n\n"
-				      (with-temp-buffer
-					(lisp-interaction-mode)
-					(insert (shell-command-to-string "fortune"))
-					(comment-region (point-min) (point-max))
-					(ansi-color-apply-on-region (point-min) (point-max))
-					(buffer-string))))
+	  (with-temp-buffer
+	    (lisp-interaction-mode)
+	    (insert (shell-command-to-string "fortune"))
+	    (comment-region (point-min) (point-max))
+	    (ansi-color-apply-on-region (point-min) (point-max))
+	    (buffer-string))))
+
+(setq inhibit-startup-screen t)
+(setq initial-scratch-message (scratch-message))
 
 (defun my-toggle-fullscreen ()
   (interactive)
@@ -105,27 +118,7 @@ saved in register 1."
                                         frame-name
                                         "\""))))
 
-(use-package dracula-theme
-  :config
-  (defvar *my-dark-theme* 'dracula)
-  (defvar *my-light-theme* 'spacemacs-light)
-  (defvar *current-variant* 'dark)
-
-  (defun switch-theme-variant ()
-    (interactive)
-    (cond ((eq *current-variant* 'light)
-	   (disable-theme *my-light-theme*)
-	   (load-theme *my-dark-theme*)
-	   (setq *current-variant* 'dark))
-	  ((eq *current-variant* 'dark)
-	   (disable-theme *my-dark-theme*)
-	   (load-theme *my-light-theme*)
-	   (setq *current-variant* 'light))
-	  (t (error "unknown variant"))))
-
-  (load-theme 'dracula t)
-  (global-set-key (kbd "<f8>") #'switch-theme-variant))
-
+(use-package dracula-theme)
 
 (use-package all-the-icons
   :ensure t)
@@ -428,10 +421,11 @@ current mark will be popped off the mark ring."
 (defun my-cc-common ()
   "Initialize my CC mode working environment."
   (electric-pair-mode)
-  (setq c-default-style "linux"
-	c-basic-offset 4
-	tab-width 8
-	indent-tabs-mode nil))
+  ;; (setq c-default-style "linux"
+  ;; 	c-basic-offset 4
+  ;; 	tab-width 8
+  ;; 	indent-tabs-mode nil)
+  )
 (add-hook 'c-mode-common-hook 'my-cc-common)
 
 (defun my-c++ ()
@@ -555,7 +549,13 @@ current mark will be popped off the mark ring."
 ;;;
 ;;; Bison Flex
 ;;;
-(require 'bison-mode)
+(add-to-list 'load-path (expand-file-name "contrib" user-emacs-directory))
+(require 'bison)
+(require 'flex)
+(add-to-list 'auto-mode-alist '("\\.y$" . bison-mode))
+(add-to-list 'auto-mode-alist '("\\.l$" . flex-mode))
+(autoload 'bison-mode "bison")
+(autoload 'flex-mode "flex")
 
 
 ;;;
