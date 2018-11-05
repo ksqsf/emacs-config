@@ -92,7 +92,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "WAITING" "DONE"))))
  '(package-selected-packages
    (quote
-    (ggtags cycle-themes shx eglot ycmd php-mode elisp-docstring-mode string-edit bison-mode nyan-mode typescript-mode chinese-yasdcv all-the-icons chinese-wbim neotree org-download intero ox-reveal centered-cursor-mode yasnippet-snippets company-lsp minimap projectile-ripgrep ido-completing-read+ flx-ido ido-vertical-mode helm lsp-rust z3-mode boogie-friends org-drill-table spacemacs-theme edit-indirect dracula-theme powerline org-plus-contrib ox-twbs org-bullets docker disaster auctex graphviz-dot-mode yaml-mode restclient toml-mode ripgrep xkcd mips-mode use-package magit yasnippet rust-mode racer elpy multiple-cursors ripgrep company flycheck markdown-mode pdf-tools company-c-headers cargo flycheck-rust cnfonts paredit)))
+    (vue-mode ggtags cycle-themes shx eglot ycmd php-mode elisp-docstring-mode string-edit bison-mode nyan-mode typescript-mode chinese-yasdcv all-the-icons chinese-wbim neotree org-download intero ox-reveal centered-cursor-mode yasnippet-snippets company-lsp minimap projectile-ripgrep ido-completing-read+ flx-ido ido-vertical-mode helm lsp-rust z3-mode boogie-friends org-drill-table spacemacs-theme edit-indirect dracula-theme powerline org-plus-contrib ox-twbs org-bullets docker disaster auctex graphviz-dot-mode yaml-mode restclient toml-mode ripgrep xkcd mips-mode use-package magit yasnippet rust-mode racer elpy multiple-cursors ripgrep company flycheck markdown-mode pdf-tools company-c-headers cargo flycheck-rust cnfonts paredit)))
  '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef")))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")

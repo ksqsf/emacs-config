@@ -9,8 +9,9 @@
 ;;; Emacs itself
 ;;;
 (setq gc-cons-threshold 100000000)
+(global-unset-key (kbd "C-z"))
 
-
+
 ;;;
 ;;; WC ring
 ;;;
