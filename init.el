@@ -1,5 +1,5 @@
 ;;;
-;;; Early Apperance (to avoid flickers)
+;;; Early Appearance (to avoid flickers)
 ;;;
 (scroll-bar-mode -1)
 (column-number-mode 1)
@@ -70,12 +70,12 @@ saved in register 1."
 
 
 ;;;
-;;; Apperance
+;;; Appearance
 ;;;
-;; (use-package powerline
-;;   :ensure t
-;;   :config
-;;   (powerline-default-theme))
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-default-theme))
 
 (require 'ansi-color)
 (defalias 'list-buffers 'ibuffer)
@@ -344,11 +344,13 @@ current mark will be popped off the mark ring."
 
 
 ;;;
-;;; Syntax checking
+;;; Syntax checking and spelling checking
 ;;;
 (use-package flycheck
   :ensure t
   :commands flycheck-mode)
+
+(add-hook 'text-mode-hook #'flyspell-mode)
 
 
 ;;;
@@ -523,7 +525,10 @@ current mark will be popped off the mark ring."
 ;;;;
 (setq-default proof-splash-enable nil)
 ;; (add-hook 'coq-mode-hook 'tool-bar-mode)
-(add-hook 'coq-mode-hook 'unicode-tokens-mode)
+(add-hook 'coq-mode-hook
+	  (lambda ()
+	    (local-set-key [?\C-z] #'proof-assert-next-command-interactive)
+	    (local-set-key (kbd "C-M-z") #'proof-undo-last-successful-command)))
 
 
 ;;;
@@ -624,9 +629,9 @@ current mark will be popped off the mark ring."
   :ensure t
   :commands xkcd)
 
-(use-package nyan-mode
-  :config
-  (nyan-mode))
+;; (use-package nyan-mode
+;;   :config
+;;   (nyan-mode))
 
 
 ;;;

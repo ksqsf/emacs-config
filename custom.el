@@ -71,7 +71,9 @@
 	(mode . java-mode)
 	(mode . idl-mode)
 	(mode . lisp-mode)))))))
+ '(ispell-dictionary "english")
  '(magit-diff-use-overlays nil)
+ '(mouse-wheel-scroll-amount (quote (1 ((shift) . 5) ((control)))))
  '(my-blog-posts-dir "/home/ksqsf/Site/jekyll/_posts/" t)
  '(nrepl-message-colors
    (quote
