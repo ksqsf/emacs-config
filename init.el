@@ -10,6 +10,7 @@
 ;;;
 (setq gc-cons-threshold 100000000)
 (global-unset-key (kbd "C-z"))
+(add-to-list 'load-path (expand-file-name "contrib" user-emacs-directory))
 
 
 ;;;
@@ -549,13 +550,13 @@ current mark will be popped off the mark ring."
 ;;;
 ;;; ANTLR
 ;;;
-(setq auto-mode-alist (cons '("\\.g4\\'" . antlr-mode) auto-mode-alist))
+(autoload 'antlr-v4-mode "antlr-mode" nil t)
+(push '("\\.g4\\'" . antlr-v4-mode) auto-mode-alist)
 
 
 ;;;
 ;;; Bison Flex
 ;;;
-(add-to-list 'load-path (expand-file-name "contrib" user-emacs-directory))
 (require 'bison)
 (require 'flex)
 (add-to-list 'auto-mode-alist '("\\.y$" . bison-mode))
@@ -677,3 +678,4 @@ date: %s
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 (put 'scroll-left 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
