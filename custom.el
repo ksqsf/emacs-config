@@ -21,7 +21,10 @@
  '(ede-project-directories
    (quote
     ("/tmp/myproject/include" "/tmp/myproject/src" "/tmp/myproject")))
+ '(eww-search-prefix "https://www.google.com/search?q=")
+ '(fancy-splash-image nil)
  '(fci-rule-color "#eee8d5")
+ '(gdb-mi-decode-strings t)
  '(global-centered-cursor-mode t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
@@ -94,7 +97,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "WAITING" "DONE"))))
  '(package-selected-packages
    (quote
-    (cmake-ide ein vue-mode ggtags cycle-themes shx eglot ycmd php-mode elisp-docstring-mode string-edit bison-mode nyan-mode chinese-yasdcv all-the-icons chinese-wbim neotree org-download intero ox-reveal centered-cursor-mode yasnippet-snippets company-lsp minimap projectile-ripgrep ido-completing-read+ flx-ido ido-vertical-mode helm lsp-rust z3-mode boogie-friends org-drill-table spacemacs-theme edit-indirect dracula-theme powerline org-plus-contrib ox-twbs org-bullets docker disaster auctex graphviz-dot-mode yaml-mode restclient toml-mode ripgrep xkcd mips-mode use-package magit rust-mode elpy multiple-cursors ripgrep company flycheck markdown-mode company-c-headers cargo flycheck-rust cnfonts paredit)))
+    (company-irony-c-headers irony-eldoc company-irony flycheck-irony irony undo-tree cmake-ide ein vue-mode ggtags cycle-themes shx eglot ycmd php-mode elisp-docstring-mode string-edit bison-mode nyan-mode chinese-yasdcv all-the-icons chinese-wbim neotree org-download intero ox-reveal centered-cursor-mode yasnippet-snippets company-lsp minimap projectile-ripgrep ido-completing-read+ flx-ido ido-vertical-mode helm lsp-rust z3-mode boogie-friends org-drill-table spacemacs-theme edit-indirect dracula-theme powerline org-plus-contrib ox-twbs org-bullets docker disaster auctex graphviz-dot-mode yaml-mode restclient toml-mode ripgrep xkcd mips-mode use-package magit rust-mode elpy multiple-cursors ripgrep company flycheck markdown-mode company-c-headers cargo flycheck-rust cnfonts paredit)))
  '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef")))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
@@ -109,6 +112,7 @@
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
  '(tool-bar-mode nil)
+ '(undo-limit 800000)
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map

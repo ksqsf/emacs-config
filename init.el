@@ -11,6 +11,7 @@
 (setq gc-cons-threshold 100000000)
 (global-unset-key (kbd "C-z"))
 (add-to-list 'load-path (expand-file-name "contrib" user-emacs-directory))
+(setq-default bidi-display-reordering nil)
 
 
 ;;;
@@ -340,7 +341,8 @@ current mark will be popped off the mark ring."
   ; :functions company-mode
   :config
   (global-company-mode)
-  (setq company-idle-delay 0.15)
+  (setq company-idle-delay 0.05)
+  (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t))
 
 
@@ -403,40 +405,20 @@ current mark will be popped off the mark ring."
 
 
 ;;;
-;;; LSP (not ready!)
-;;;
-;; (use-package lsp-mode
-;;   :ensure t)
-
-;; (use-package lsp-rust
-;;   :after lsp-mode
-;;   :functions lsp-rust-enable
-;;   :ensure t)
-
-;; (use-package company-lsp
-;;   :after lsp-rust company-mode
-;;   :config
-;;   (push 'company-lsp company-backends))
-
-
-;;;
 ;;; C/C++
 ;;;
+(push '("\\.h\\'" . c++-mode) auto-mode-alist)
+
 (defun my-cc-common ()
   "Initialize my CC mode working environment."
   (electric-pair-mode)
-  ;; (setq c-default-style "linux"
-  ;; 	c-basic-offset 4
-  ;; 	tab-width 8
-  ;; 	indent-tabs-mode nil)
+  (setq c-default-style "linux"
+  	c-basic-offset 4
+  	tab-width 8
+  	indent-tabs-mode nil)
+  (local-set-key (kbd "C-c m") 'imenu)
   )
 (add-hook 'c-mode-common-hook 'my-cc-common)
-
-(defun my-c++ ()
-  (defvar c++-arguments "-std=c++14")
-  (setq company-clang-arguments `(,c++-arguments))
-  (setq flycheck-clang-args c++-arguments))
-(add-hook 'c++-mode-hook 'my-c++)
 
 (use-package company-c-headers
   :ensure t
@@ -449,6 +431,41 @@ current mark will be popped off the mark ring."
   :after cc-mode
   :config
   (define-key c-mode-base-map (kbd "C-c d") 'disaster))
+
+(use-package irony
+  :ensure t
+  :config
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+
+  (setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
+						  irony-cdb-clang-complete))
+
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+(use-package flycheck-irony
+  :ensure t
+  :after flycheck
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
+(use-package company-irony
+  :ensure t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-irony))
+
+(use-package irony-eldoc
+  :ensure t
+  :after irony
+  :config
+  (add-hook 'irony-mode-hook #'irony-eldoc))
+
+(use-package company-irony-c-headers
+  :ensure t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-irony-c-headers))
 
 (load "~/.emacs.d/acm/acm")
 
