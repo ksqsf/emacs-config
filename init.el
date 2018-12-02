@@ -3,6 +3,7 @@
 ;;;
 (scroll-bar-mode -1)
 (column-number-mode 1)
+(tool-bar-mode -1)
 
 
 ;;;
@@ -48,7 +49,7 @@ saved in register 1."
 ;;;
 (add-hook 'dired-load-hook
 	  (lambda ()
-	    (load "dired-x")
+	    ;; (load "dired-x")
 	    ;; set dired-x global variables here
 	    ))
 (add-hook 'dired-mode-hook
@@ -121,10 +122,16 @@ saved in register 1."
                                         frame-name
                                         "\""))))
 
-(use-package dracula-theme)
+(use-package dracula-theme
+  :ensure t
+  :config
+  ;(load-theme 'dracula)
+  )
 
 (use-package all-the-icons
   :ensure t)
+
+(set-frame-parameter nil 'alpha 0.95)
 
 
 ;;;
@@ -341,7 +348,7 @@ current mark will be popped off the mark ring."
   ; :functions company-mode
   :config
   (global-company-mode)
-  (setq company-idle-delay 0.05)
+  (setq company-idle-delay t)
   (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t))
 
@@ -361,9 +368,8 @@ current mark will be popped off the mark ring."
 ;;;
 (use-package yasnippet
   :ensure t
-  :commands yas-minor-mode
-  ;; :config (progn (yas-reload-all))
-  )
+  :config
+  (yas-global-mode))
 
 
 ;;;
@@ -675,6 +681,28 @@ date: %s
     (find-file (expand-file-name filename my-blog-posts-dir))
     (insert header)
     (newline)))
+
+
+
+;;;
+;;; Fancy Box Comment
+;;;
+(defun box-comment (start end)
+  (interactive "r")
+  (let* ((content (buffer-substring start end))
+	 (mode major-mode)
+	 (stripe (make-string fill-column ?*))
+	 (comment (with-temp-buffer
+		    (funcall mode)
+		    (insert stripe "\n")
+		    (insert content)
+		    (goto-char (point-max))
+		    (insert stripe)
+		    (center-region (point-min) (point-max))
+		    (comment-region (point-min) (point-max))
+		    (buffer-substring (point-min) (point-max)))))
+    (delete-region start end)
+    (insert comment)))
 
 
 

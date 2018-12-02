@@ -97,7 +97,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "WAITING" "DONE"))))
  '(package-selected-packages
    (quote
-    (company-irony-c-headers irony-eldoc company-irony flycheck-irony irony undo-tree cmake-ide ein vue-mode ggtags cycle-themes shx eglot ycmd php-mode elisp-docstring-mode string-edit bison-mode nyan-mode chinese-yasdcv all-the-icons chinese-wbim neotree org-download intero ox-reveal centered-cursor-mode yasnippet-snippets company-lsp minimap projectile-ripgrep ido-completing-read+ flx-ido ido-vertical-mode helm lsp-rust z3-mode boogie-friends org-drill-table spacemacs-theme edit-indirect dracula-theme powerline org-plus-contrib ox-twbs org-bullets docker disaster auctex graphviz-dot-mode yaml-mode restclient toml-mode ripgrep xkcd mips-mode use-package magit rust-mode elpy multiple-cursors ripgrep company flycheck markdown-mode company-c-headers cargo flycheck-rust cnfonts paredit)))
+    (company-irony-c-headers irony-eldoc company-irony flycheck-irony irony undo-tree cmake-ide ein vue-mode ggtags cycle-themes shx eglot ycmd php-mode elisp-docstring-mode string-edit bison-mode nyan-mode chinese-yasdcv all-the-icons chinese-wbim neotree org-download intero ox-reveal centered-cursor-mode company-lsp minimap projectile-ripgrep ido-completing-read+ flx-ido ido-vertical-mode helm lsp-rust z3-mode boogie-friends org-drill-table edit-indirect dracula-theme powerline org-plus-contrib ox-twbs org-bullets docker disaster auctex graphviz-dot-mode yaml-mode restclient toml-mode ripgrep xkcd mips-mode use-package magit rust-mode elpy multiple-cursors ripgrep company flycheck markdown-mode company-c-headers cargo flycheck-rust cnfonts paredit)))
  '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef")))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
@@ -111,7 +111,6 @@
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
- '(tool-bar-mode nil)
  '(undo-limit 800000)
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
@@ -206,4 +205,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(markdown-table-face ((t (:inherit org-table)))))
