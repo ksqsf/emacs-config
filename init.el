@@ -3,13 +3,18 @@
 ;;;
 (scroll-bar-mode -1)
 (column-number-mode 1)
-(tool-bar-mode -1)
+;; (menu-bar-mode -1)
+;; (tool-bar-mode -1)
+
+(when (daemonp)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1))
 
 
 ;;;
 ;;; Emacs itself
 ;;;
-(setq gc-cons-threshold 100000000)
+;(setq gc-cons-threshold 100000000)
 (global-unset-key (kbd "C-z"))
 (add-to-list 'load-path (expand-file-name "contrib" user-emacs-directory))
 (setq-default bidi-display-reordering nil)
@@ -75,10 +80,13 @@ saved in register 1."
 ;;;
 ;;; Appearance
 ;;;
-(use-package powerline
-  :ensure t
-  :config
-  (powerline-default-theme))
+;; (use-package powerline
+;;   :ensure t
+;;   :config
+;;   (powerline-default-theme))
+
+;; Do my own modeline...
+
 
 (require 'ansi-color)
 (defalias 'list-buffers 'ibuffer)
@@ -122,16 +130,10 @@ saved in register 1."
                                         frame-name
                                         "\""))))
 
-(use-package dracula-theme
-  :ensure t
-  :config
-  ;(load-theme 'dracula)
-  )
-
 (use-package all-the-icons
   :ensure t)
 
-(set-frame-parameter nil 'alpha 0.95)
+;(set-frame-parameter nil 'alpha 0.95)
 
 
 ;;;
@@ -211,6 +213,8 @@ current mark will be popped off the mark ring."
 	 ("C-c b" . org-iswitchb)
 	 ("C-c c" . org-capture)
 	 ("C-'" . org-cycle-agenda-files))
+  :init
+  (require 'org-mouse)
   :config
   (setq org-ellipsis "↩")
   (setq org-capture-templates
@@ -248,28 +252,51 @@ current mark will be popped off the mark ring."
 ;;;
 (windmove-default-keybindings)
 
+(use-package winum
+  :config
+  (global-set-key (kbd "s-0") #'winum-select-window-0)
+  (global-set-key (kbd "s-1") #'winum-select-window-1)
+  (global-set-key (kbd "s-2") #'winum-select-window-2)
+  (global-set-key (kbd "s-3") #'winum-select-window-3)
+  (global-set-key (kbd "s-4") #'winum-select-window-4)
+  (global-set-key (kbd "s-5") #'winum-select-window-5)
+  (global-set-key (kbd "s-6") #'winum-select-window-6)
+  (global-set-key (kbd "s-7") #'winum-select-window-7)
+  (global-set-key (kbd "s-8") #'winum-select-window-8)
+  (global-set-key (kbd "s-9") #'winum-select-window-9))
+
+;; (use-package ivy :ensure t
+;;   :diminish (ivy-mode . "")
+;;   :config
+;;   (ivy-mode 1)
+;;   (setq ivy-use-virtual-buffers t))
+
+(icomplete-mode 1)
 (ido-mode 1)
 (ido-everywhere 1)
-(setq ido-use-filename-at-point 'guess)
 
-(use-package ido-vertical-mode
-  :ensure t
-  :config
-  (ido-vertical-mode 1)
-  (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
+;; (ido-mode 1)
+;; (setq ido-use-filename-at-point 'guess)
 
-(use-package flx-ido
-  :ensure t
-  :config
-  (flx-ido-mode 1)
-  (setq ido-enable-flex-matching nil)
-  (setq flx-ido-use-faces nil))
+;; (use-package ido-vertical-mode
+;;   :ensure t
+;;   :config
+;;   ;; (ido-vertical-mode 1)
+;;   ;; (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+;;   )
 
-;; Formerly known as ido-ubiquitous
-(use-package ido-completing-read+
-  :ensure t
-  :config
-  (ido-ubiquitous-mode 1))
+;; (use-package flx-ido
+;;   :ensure t
+;;   :config
+;;   (flx-ido-mode 1)
+;;   (setq ido-enable-flex-matching nil)
+;;   (setq flx-ido-use-faces nil))
+
+;; ;; Formerly known as ido-ubiquitous
+;; (use-package ido-completing-read+
+;;   :ensure t
+;;   :config
+;;   (ido-ubiquitous-mode 1))
 
 (global-set-key (kbd "C-x C-M-f") 'find-file-at-point)
 
@@ -292,6 +319,7 @@ current mark will be popped off the mark ring."
 
 (use-package projectile
   :ensure t
+  :diminish ""
   :bind (("C-c p p" . projectile-switch-project)
 	 ("C-c p f" . projectile-find-file)
 	 ("C-c p g" . projectile-ripgrep)
@@ -302,7 +330,7 @@ current mark will be popped off the mark ring."
 	 ("C-c p t" . projectile-test-project)
 	 ("C-c p RET" . projectile-run-shell)
 	 ("C-c p o" . projectile-find-other-file)
-	 ("M-p" . projectile-commander))
+	 ("<menu>" . projectile-commander))
   :config
   (projectile-global-mode)
   (setq projectile-indexing-method 'alien)
@@ -345,10 +373,11 @@ current mark will be popped off the mark ring."
 ;;;
 (use-package company
   :ensure t
+  :diminish company-mode
   ; :functions company-mode
   :config
-  (global-company-mode)
-  (setq company-idle-delay t)
+  ;(global-company-mode)
+  (setq company-idle-delay 0.5)
   (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t))
 
@@ -358,6 +387,7 @@ current mark will be popped off the mark ring."
 ;;;
 (use-package flycheck
   :ensure t
+  :diminish ""
   :commands flycheck-mode)
 
 (add-hook 'text-mode-hook #'flyspell-mode)
@@ -368,6 +398,7 @@ current mark will be popped off the mark ring."
 ;;;
 (use-package yasnippet
   :ensure t
+  :diminish yas-minor-mode
   :config
   (yas-global-mode))
 
@@ -378,7 +409,8 @@ current mark will be popped off the mark ring."
 (use-package magit
   :ensure t
   :commands (magit-status)
-  :bind (("C-x g" . magit-status)))
+  :bind (("C-x g" . magit-status)
+	 ("C-x M-g" . magit-dispatch-popup)))
 
 
 ;;;
@@ -404,6 +436,7 @@ current mark will be popped off the mark ring."
 ;;;
 (use-package paredit
   :ensure t
+  :diminish ""
   :commands enable-paredit-mode)
 
 (add-hook 'emacs-lisp-mode-hook 'electric-pair-mode)
@@ -484,7 +517,7 @@ current mark will be popped off the mark ring."
   :mode "\\.rs\\'"
   :config
   (defun my-init-rust-mode ()
-    ;; (company-mode)
+    (company-mode)
     (yas-minor-mode)
     (cargo-minor-mode)
     (racer-mode)
@@ -494,6 +527,7 @@ current mark will be popped off the mark ring."
 
 (use-package cargo
   :ensure t
+  :diminish cargo-minor-mode
   :after rust-mode)
 
 (use-package flycheck-rust
@@ -509,9 +543,11 @@ current mark will be popped off the mark ring."
 (use-package racer
   :ensure t
   :after rust-mode
+  :diminish racer-mode
   :config
   (define-key rust-mode-map [C-mouse-1] 'racer-find-definition)
-  (define-key rust-mode-map [f1] 'racer-describe))
+  (define-key rust-mode-map [f1] 'racer-describe)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
 
 
 ;;;
@@ -552,7 +588,7 @@ current mark will be popped off the mark ring."
 (add-hook 'coq-mode-hook
 	  (lambda ()
 	    (local-set-key [?\C-z] #'proof-assert-next-command-interactive)
-	    (local-set-key (kbd "C-M-z") #'proof-undo-last-successful-command)))
+	    (local-set-key (kbd "C-Z") #'proof-undo-last-successful-command)))
 
 
 ;;;
@@ -586,6 +622,13 @@ current mark will be popped off the mark ring."
 (add-to-list 'auto-mode-alist '("\\.l$" . flex-mode))
 (autoload 'bison-mode "bison")
 (autoload 'flex-mode "flex")
+
+
+;;;
+;;; X86 ASM
+;;;
+(add-to-list 'auto-mode-alist '("\\.asm$" . asm86-mode))
+(autoload 'asm86-mode "asm86-mode.elc")
 
 
 ;;;
