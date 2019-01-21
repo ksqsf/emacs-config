@@ -4,7 +4,8 @@
 (scroll-bar-mode -1)
 (column-number-mode 1)
 ;; (menu-bar-mode -1)
-;; (tool-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 
 (when (daemonp)
   (menu-bar-mode -1)
@@ -14,7 +15,7 @@
 ;;;
 ;;; Emacs itself
 ;;;
-;(setq gc-cons-threshold 100000000)
+(setq gc-cons-threshold 100000000)
 (global-unset-key (kbd "C-z"))
 (add-to-list 'load-path (expand-file-name "contrib" user-emacs-directory))
 (setq-default bidi-display-reordering nil)
@@ -47,21 +48,6 @@ saved in register 1."
   (set-buffer-modified-p nil))
 
 (global-set-key (kbd "<home>") #'go-to-home)
-
-
-;;;
-;;; Dired
-;;;
-(add-hook 'dired-load-hook
-	  (lambda ()
-	    ;; (load "dired-x")
-	    ;; set dired-x global variables here
-	    ))
-(add-hook 'dired-mode-hook
-	  (lambda ()
-	    ;; set dired-x buffer-local variables here
-	    ; (dired-omit-mode 1)
-	    ))
 
 
 ;;;
@@ -130,8 +116,11 @@ saved in register 1."
                                         frame-name
                                         "\""))))
 
+(add-hook 'after-init-hook #'set-selected-frame-dark)
+
 (use-package all-the-icons
-  :ensure t)
+  :ensure t
+  :defer 2)
 
 ;(set-frame-parameter nil 'alpha 0.95)
 
@@ -184,6 +173,7 @@ current mark will be popped off the mark ring."
 ;;; Input methods
 ;;;
 (use-package chinese-wbim
+  :defer 2
   :config
   (register-input-method
    "chinese-wbim" "euc-cn" 'chinese-wbim-use-package
@@ -194,6 +184,8 @@ current mark will be popped off the mark ring."
 ;;; Neotree
 ;;;
 (use-package neotree
+  :defer t
+  :commands (neotree-toggle)
   :bind (("<f9>" . neotree-toggle))
   :after all-the-icons
   :config
@@ -206,6 +198,7 @@ current mark will be popped off the mark ring."
 ;;; 
 (use-package org
   :ensure t
+  :defer t
   :mode (("\\.org\\'" . org-mode)
 	 ("\\.org_archive\\'" . org-mode))
   :bind (("C-c l" . org-store-link)
@@ -248,11 +241,15 @@ current mark will be popped off the mark ring."
 
 
 ;;;
-;;; Efficiency
+;;; Efficiency for Window Manipulation
 ;;;
-(windmove-default-keybindings)
+(use-package windmove
+  :defer 1
+  :config
+  (windmove-default-keybindings))
 
 (use-package winum
+  :ensure t
   :config
   (global-set-key (kbd "s-0") #'winum-select-window-0)
   (global-set-key (kbd "s-1") #'winum-select-window-1)
@@ -263,17 +260,28 @@ current mark will be popped off the mark ring."
   (global-set-key (kbd "s-6") #'winum-select-window-6)
   (global-set-key (kbd "s-7") #'winum-select-window-7)
   (global-set-key (kbd "s-8") #'winum-select-window-8)
-  (global-set-key (kbd "s-9") #'winum-select-window-9))
+  (global-set-key (kbd "s-9") #'winum-select-window-9)
+  (winum-mode 1))
+
+
+;;;
+;;; Efficiency for Command Invocation
+;;;
+(icomplete-mode 1)
+(ido-mode 1)
+(ido-everywhere 1)
+
+(use-package smex
+  :ensure t
+  :defer t
+  :bind (("M-x" . smex)
+	 ("M-X" . smex-major-mode-commands)))
 
 ;; (use-package ivy :ensure t
 ;;   :diminish (ivy-mode . "")
 ;;   :config
 ;;   (ivy-mode 1)
 ;;   (setq ivy-use-virtual-buffers t))
-
-(icomplete-mode 1)
-(ido-mode 1)
-(ido-everywhere 1)
 
 ;; (ido-mode 1)
 ;; (setq ido-use-filename-at-point 'guess)
@@ -292,27 +300,66 @@ current mark will be popped off the mark ring."
 ;;   (setq ido-enable-flex-matching nil)
 ;;   (setq flx-ido-use-faces nil))
 
-;; ;; Formerly known as ido-ubiquitous
-;; (use-package ido-completing-read+
-;;   :ensure t
-;;   :config
-;;   (ido-ubiquitous-mode 1))
 
+
+;;;
+;;; Efficiency for Find Files
+;;;
 (global-set-key (kbd "C-x C-M-f") 'find-file-at-point)
 
-(recentf-mode 1)
-(global-set-key (kbd "<f7>") 'recentf-open-files)
+
+;;;
+;;; Recent Files
+;;;
+(use-package recentf
+  :bind (("<f7>" . recentf-open-files))
+  :config
+  (recentf-mode 1))
 
+
+;;;
+;;; Editing Facilities
+;;;
 (use-package multiple-cursors
   :ensure t
+  :defer 2
   :bind (("C->" . mc/mark-next-like-this)
 	 ("C-<" . mc/mark-previous-like-this)))
 
+
+;;;
+;;; Search
+;;;
 (use-package ripgrep
   :ensure t
+  :defer 2
   :commands rg ripgrep-regexp
   :config (defalias 'rg 'ripgrep-regexp))
 
+
+;;;
+;;; Discoverability
+;;;
+(use-package which-key
+  :ensure t
+  :defer 1
+  :diminish ""
+  :config
+  (which-key-mode))
+
+(use-package helpful
+  :defer 1
+  :commands (helpful-function helpful-command helpful-key helpful-macro helpful-callable helpful-variable helpful-at-point)
+  :ensure t
+  :bind (("C-h ." . helpful-at-point)
+	 ("C-h f" . helpful-function)
+	 ("C-h v" . helpful-variable)
+	 ("C-h k" . helpful-key)))
+
+
+;;;
+;;; Project Management
+;;;
 (use-package projectile-ripgrep
   :ensure t
   :commands projectile-ripgrep)
@@ -320,6 +367,7 @@ current mark will be popped off the mark ring."
 (use-package projectile
   :ensure t
   :diminish ""
+  :after hydra
   :bind (("C-c p p" . projectile-switch-project)
 	 ("C-c p f" . projectile-find-file)
 	 ("C-c p g" . projectile-ripgrep)
@@ -333,7 +381,7 @@ current mark will be popped off the mark ring."
 	 ("<menu>" . projectile-commander))
   :config
   (projectile-global-mode)
-  (setq projectile-indexing-method 'alien)
+  (setq projectile-indexing-method 'hybrid)
   ;; (setq projectile-enable-caching t)
   (setq projectile-switch-project-action #'projectile-find-dir)
   (setq projectile-find-dir-includes-top-level t))
@@ -347,7 +395,7 @@ current mark will be popped off the mark ring."
 
 
 ;;;
-;;; Editing
+;;; Additional Editing Commands
 ;;;
 (defun mark-line ()
   "Mark the current line."
@@ -355,7 +403,6 @@ current mark will be popped off the mark ring."
   (end-of-line)
   (push-mark (line-beginning-position))
   (exchange-point-and-mark))
-(global-set-key (kbd "C-x x") 'mark-line)
 
 (defun mark-contiguous-heading (heading)
   "Mark a series of contiguous lines whose first column are the same."
@@ -365,7 +412,13 @@ current mark will be popped off the mark ring."
     (forward-line)
     (beginning-of-line))
   (exchange-point-and-mark))
-(global-set-key (kbd "C-x c") 'mark-contiguous-heading)
+
+(global-set-key
+ (kbd "C-x m")
+ (defhydra hydra-mark (global-map "C-x m")
+   "mark"
+   ("l" mark-line "line")
+   ("h" mark-contiguous-heading "head")))
 
 
 ;;;
@@ -387,6 +440,7 @@ current mark will be popped off the mark ring."
 ;;;
 (use-package flycheck
   :ensure t
+  :defer t
   :diminish ""
   :commands flycheck-mode)
 
@@ -402,12 +456,14 @@ current mark will be popped off the mark ring."
   :config
   (yas-global-mode))
 
+
 
 ;;;
 ;;; Git
 ;;;
 (use-package magit
   :ensure t
+  :defer t
   :commands (magit-status)
   :bind (("C-x g" . magit-status)
 	 ("C-x M-g" . magit-dispatch-popup)))
@@ -455,8 +511,8 @@ current mark will be popped off the mark ring."
   	c-basic-offset 4
   	tab-width 8
   	indent-tabs-mode nil)
-  (local-set-key (kbd "C-c m") 'imenu)
-  )
+  (local-set-key (kbd "C-c m") 'imenu))
+
 (add-hook 'c-mode-common-hook 'my-cc-common)
 
 (use-package company-c-headers
@@ -506,7 +562,7 @@ current mark will be popped off the mark ring."
   :config
   (add-to-list 'company-backends 'company-irony-c-headers))
 
-(load "~/.emacs.d/acm/acm")
+(autoload 'acm-mode "~/.emacs.d/acm/acm.el")
 
 
 ;;;
@@ -573,8 +629,9 @@ current mark will be popped off the mark ring."
 ;;;
 ;;; TeX and LaTeX
 ;;;
-(use-package tex
+(use-package auctex
   :ensure auctex
+  :defer t
   :mode (("\\.tex$" . latex-mode))
   :config
   (setq-default TeX-engine 'xetex))
@@ -642,6 +699,7 @@ current mark will be popped off the mark ring."
     (insert open-tag)
     (insert close-tag)
     (backward-char (length close-tag))))
+
 (defun insert-self-closing-tag (tag)
   "Insert a self-closing tag."
   (interactive "sTag: ")
@@ -662,7 +720,9 @@ current mark will be popped off the mark ring."
 ;;;
 ;;; StarDict
 ;;;
-(use-package yasdcv)
+(use-package chinese-yasdcv
+  :ensure t
+  :commands (yasdcv-translate-input yasdcv-translate-at-point))
 
 
 ;;;
@@ -692,10 +752,6 @@ current mark will be popped off the mark ring."
 ;;;
 ;;; Fun
 ;;;
-(use-package xkcd
-  :ensure t
-  :commands xkcd)
-
 ;; (use-package nyan-mode
 ;;   :config
 ;;   (nyan-mode))
