@@ -72,7 +72,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "WAITING" "DONE"))))
  '(package-selected-packages
    (quote
-    (yasdcv smex dired-x helpful which-key hydra mips-mode racer monokai-theme windresize winum company-irony-c-headers irony-eldoc company-irony flycheck-irony irony ggtags eglot php-mode elisp-docstring-mode string-edit nyan-mode chinese-yasdcv all-the-icons chinese-wbim neotree org-download ox-reveal company-lsp projectile-ripgrep flx-ido org-drill-table edit-indirect powerline org-plus-contrib ox-twbs org-bullets disaster auctex graphviz-dot-mode yaml-mode restclient toml-mode magit elpy multiple-cursors flycheck markdown-mode company-c-headers cargo flycheck-rust paredit)))
+    (pinyinlib counsel-projectile counsel tide rainbow-delimiters yasdcv smex dired-x helpful which-key hydra mips-mode racer monokai-theme windresize winum company-irony-c-headers irony-eldoc company-irony flycheck-irony irony ggtags eglot php-mode elisp-docstring-mode string-edit nyan-mode chinese-yasdcv all-the-icons chinese-wbim neotree org-download ox-reveal company-lsp projectile-ripgrep flx-ido org-drill-table edit-indirect powerline org-plus-contrib ox-twbs org-bullets disaster auctex graphviz-dot-mode yaml-mode restclient toml-mode magit elpy multiple-cursors flycheck markdown-mode company-c-headers cargo flycheck-rust paredit)))
  '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef")))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")

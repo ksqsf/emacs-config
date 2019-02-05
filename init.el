@@ -116,13 +116,13 @@ saved in register 1."
                                         frame-name
                                         "\""))))
 
-(add-hook 'after-init-hook #'set-selected-frame-dark)
+(set-selected-frame-dark)
 
 (use-package all-the-icons
   :ensure t
   :defer 2)
 
-;(set-frame-parameter nil 'alpha 0.95)
+; (set-frame-parameter nil 'alpha 0.95)
 
 
 ;;;
@@ -174,7 +174,7 @@ current mark will be popped off the mark ring."
 ;;;
 (use-package chinese-wbim
   :defer 2
-  :config
+  :init
   (register-input-method
    "chinese-wbim" "euc-cn" 'chinese-wbim-use-package
    "五笔" "汉字五笔输入法" "wb.txt"))
@@ -265,40 +265,67 @@ current mark will be popped off the mark ring."
 
 
 ;;;
-;;; Efficiency for Command Invocation
+;;; Ivy
 ;;;
-(icomplete-mode 1)
-(ido-mode 1)
-(ido-everywhere 1)
-
-(use-package smex
+(use-package ivy
   :ensure t
-  :defer t
-  :bind (("M-x" . smex)
-	 ("M-X" . smex-major-mode-commands)))
+  :diminish (ivy-mode . "")
+  :config
+  (ivy-mode 1)
+  (setq ivy-height 10)
+  (setq ivy-count-format "")
+  (setq ivy-use-virtual-buffers t))
 
-;; (use-package ivy :ensure t
-;;   :diminish (ivy-mode . "")
-;;   :config
-;;   (ivy-mode 1)
-;;   (setq ivy-use-virtual-buffers t))
+(use-package counsel
+  :ensure t
+  :bind (("M-x" . counsel-M-x)
+	 ("<f7>" . counsel-recentf)))
 
-;; (ido-mode 1)
-;; (setq ido-use-filename-at-point 'guess)
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper)))
 
-;; (use-package ido-vertical-mode
-;;   :ensure t
-;;   :config
-;;   ;; (ido-vertical-mode 1)
-;;   ;; (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
-;;   )
+(use-package counsel-projectile
+  :ensure t
+  :bind (("C-c p f" . counsel-projectile)))
 
-;; (use-package flx-ido
-;;   :ensure t
-;;   :config
-;;   (flx-ido-mode 1)
-;;   (setq ido-enable-flex-matching nil)
-;;   (setq flx-ido-use-faces nil))
+(use-package pinyinlib
+  :ensure t
+  :functions ivy--regex-plus ivy--regex-ignore-order
+  :commands pinyinlib-build-regexp-string
+  :preface
+  (defun re-builder-pinyin (str)
+    "The regex builder wrapper to support pinyin."
+    (or (pinyin-to-utf8 str)
+	(ivy--regex-plus str)
+	(ivy--regex-ignore-order str)))
+  (defun my-pinyinlib-build-regexp-string (str)
+    "Build a pinyin regexp sequence from STR."
+    (cond ((equal str ".*")
+	   ".*")
+	  (t
+	   (pinyinlib-build-regexp-string str t))))
+  (defun my-pinyin-regexp-helper (str)
+    "Construct pinyin regexp for STR."
+    (cond ((equal str " ")
+	   ".*")
+	  ((equal str "")
+	   nil)
+	  (t
+	   str)))
+  (defun pinyin-to-utf8 (str)
+    (cond ((equal 0 (length str))
+	   nil)
+	  ((equal (substring str 0 1) ":")
+	   (mapconcat 'my-pinyinlib-build-regexp-string
+		      (remove nil (mapcar 'my-pinyin-regexp-helper
+					  (split-string
+					   (replace-regexp-in-string ":" "" str ) "")))
+		      ""))
+	  (t
+	   nil)))
+  :init (setq ivy-re-builders-alist
+	      '((t . re-builder-pinyin))))
 
 
 
@@ -312,7 +339,6 @@ current mark will be popped off the mark ring."
 ;;; Recent Files
 ;;;
 (use-package recentf
-  :bind (("<f7>" . recentf-open-files))
   :config
   (recentf-mode 1))
 
@@ -369,7 +395,7 @@ current mark will be popped off the mark ring."
   :diminish ""
   :after hydra
   :bind (("C-c p p" . projectile-switch-project)
-	 ("C-c p f" . projectile-find-file)
+	 ;; ("C-c p f" . projectile-find-file) ; we use counsel
 	 ("C-c p g" . projectile-ripgrep)
 	 ("C-c p k" . projectile-kill-buffers)
 	 ("C-c p r" . projectile-replace)
@@ -392,6 +418,16 @@ current mark will be popped off the mark ring."
 (defun google (keyword)
   (interactive "sKeyword: ")
   (browse-url (format "https://google.com/search?q=%s" keyword)))
+
+
+;;;
+;;; Additional syntax coloring
+;;;
+(use-package rainbow-delimiters
+  :ensure t
+  :commands (rainbow-delimiters-mode)
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 
 ;;;
