@@ -1,0 +1,51 @@
+# Backup
+*~
+
+# Auto save
+auto-save-list/
+
+# Swap files
+\#*\#
+
+# Filesets
+filesets-cache.el
+
+# Desktop
+.emacs.desktop
+.emacs.desktop.lock
+
+# Bookmarks
+bookmarks
+
+# ELPA
+elpa/
+
+# Local customizations
+custom.el
+
+# Sessions
+session.*
+
+# eww
+url/
+
+# eshell
+eshell/
+
+# erc
+.ercrc.el
+
+# ido
+ido.last
+
+# what's this?
+network-security.data
+
+# game records (keep it to me!)
+games/
+
+# tramp
+tramp
+
+# secret files
+volatile/*-priv.el

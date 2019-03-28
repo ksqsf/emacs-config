@@ -1,0 +1,75 @@
+* ksqsf's =.emacs.d=
+
+  I modularized my config and provide a list of external packages in
+  [[file:external][external]] which are managed by system package managers.
+
+  Loading packages provided by Emacs and the OS somehow seems faster
+  than using package.el, and that's the motivation behind using
+  OS-provided packages.
+
+  NOTE: This configuration is only tested on Emacs 26.1.  No guarantee
+  about forward/backward compatibility.  You can comment out the first
+  paragraph in =init.el= if you do want to try.
+
+** Philosophy
+
+   My primary goals are
+
+   * Fast, and responsive
+   * Healthy, and easy on the eye
+   * Productive, and distraction-free
+   * Predictable
+   * Stable
+   * Maintainable codebase
+   * Prefer built-in functionality to third-party packages
+
+
+   I don't strive to achieve eye-candy and powerfulness, but they are
+   good, and may be considered in the future.
+
+** Structure
+
+  There are two kinds of configuration, Module and Volatile.  The
+  distinction is (in my mind) very successful.
+
+*** Module
+
+    Modules make up the functionality and keybindings.  They are
+    stable and can be byte compiled safely and cleanly.  Ideally, they
+    use lexical scoping.
+
+*** Volatile
+
+    Volatile configuration files are more fragile and personal.  They
+    are mainly temporary tests or (let's hope not) ugly hacks.  A
+    volatile Lisp file should never be byte compiled.  Typically, it's
+    dynamically scoped.
+
+** Fonts
+
+  The following fonts are "blessed" in this configuration.
+
+  | Font             | Size | Usage                     |
+  |------------------+------+---------------------------|
+  | Source Code Pro  |   14 | General use (non-Chinese) |
+  | Iosevka Term     |   11 | Org Table                 |
+  | Noto Sans CJK TC |   14 | General use (Chinese)     |
+
+** Better Defaults
+
+   These modifications are generally in =prelude-core.el=.
+
+   User-*very*-visible modifications are listed here.
+
+*** Themes
+
+    The background color is changed to "honeydew", because it's easier
+    on the eye.
+
+*** Zap [up] to char
+
+   | Zap to char    | =M-z f= |
+   | Zap up to char | =M-z t= |
+
+   =t= and =f= are copied from =dt= (delete to) and =df= (delete find)
+   in vim.
