@@ -27,12 +27,6 @@
 (require 'prelude-blog)
 
 (require 'prelude-prog)
-(require 'prelude-gdb)
-(require 'prelude-lisp)
-(require 'prelude-cc)
-(require 'prelude-rust)
-(require 'prelude-ocaml)
-(require 'prelude-web)
 
 ;; Volatile.
 (when (file-exists-p prelude-volatile-dir)
