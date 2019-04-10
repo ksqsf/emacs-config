@@ -44,4 +44,10 @@
   (package-install 'ido-grid-mode))
 (ido-grid-mode t)
 
+;; I'm the winner ;-)
+(defvar winner-dont-bind-my-keys t)
+(winner-mode t)
+(define-key winner-mode-map (kbd "C-c ,") 'winner-undo)
+(define-key winner-mode-map (kbd "C-c .") 'winner-redo)
+
 (provide 'prelude-ui)
