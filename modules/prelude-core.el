@@ -57,6 +57,10 @@
 
 ;; Use ace-window for quick window navigation
 ;; Sorry, `other-window', but you are too weak!
+(custom-set-faces
+ '(aw-leading-char-face
+   ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (global-set-key (kbd "C-x o") #'ace-window)
 
 ;; Waste less room on modeline
