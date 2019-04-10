@@ -37,8 +37,8 @@
 
 ;; Ido for faster file navigation
 (ido-mode t)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
+(setq ido-enable-flex-matching t
+      ido-everywhere t)
 
 (unless (package-installed-p 'ido-grid-mode)
   (package-install 'ido-grid-mode))

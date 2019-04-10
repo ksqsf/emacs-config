@@ -27,6 +27,12 @@
 (require 'prelude-blog)
 
 (require 'prelude-prog)
+(require 'prelude-lang-lisp)
+(require 'prelude-lang-cc)
+(require 'prelude-lang-rust)
+(require 'prelude-lang-coq)
+(require 'prelude-lang-ml)
+(require 'prelude-lang-js)
 
 ;; Volatile.
 (when (file-exists-p prelude-volatile-dir)

@@ -14,4 +14,4 @@
 (add-hook 'c-mode-common-hook #'prelude--enter-cc)
 (add-hook 'c++-mode-hook #'prelude--enter-cc)
 
-(provide 'prelude-cc)
+(provide 'prelude-lang-cc)
