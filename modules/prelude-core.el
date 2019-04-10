@@ -44,9 +44,12 @@
 ;; The former should provide much more functions.
 (defalias 'list-buffers 'ibuffer)
 
-;; Undo tree
-(unless (package-installed-p 'undo-tree)
-  (package-install 'undo-tree))
+;; For quick undo, use C-/
+;; For tree-style undo history, use C-x u
 (global-undo-tree-mode)
+(setq undo-tree-visualizer-timestamps t
+      undo-tree-visualizer-relative-timestamps t
+      undo-tree-visualizer-diff t
+      undo-tree-enable-undo-in-region t)
 
 (provide 'prelude-core)

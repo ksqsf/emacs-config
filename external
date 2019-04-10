@@ -1,4 +1,4 @@
-Generated on Sat Mar 16 19:21:48 CST 2019
+Generated on Wed Apr 10 14:55:33 CST 2019
 Extract the list of packages by `grep ^elpa- external`
 
 elpa-agda2-mode
@@ -40,6 +40,7 @@ elpa-rust-mode
 elpa-s
 elpa-sml-mode
 elpa-treepy
+elpa-undo-tree
 elpa-use-package
 elpa-vala-mode
 elpa-web-mode
