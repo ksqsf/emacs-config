@@ -1,36 +1,20 @@
-Generated on Wed Apr 10 15:22:44 CST 2019
+Generated on Wed Apr 10 15:25:40 CST 2019
 Extract the list of packages by `grep ^elpa- external`
 
 elpa-ace-window
 elpa-agda2-mode
 elpa-apache-mode
-elpa-async
-elpa-avy
-elpa-bind-key
 elpa-company
 elpa-csv-mode
-elpa-dash
-elpa-debian-el
-elpa-diminish
 elpa-geiser
-elpa-ghub
-elpa-git-commit
 elpa-git-modes
 elpa-git-timemachine
-elpa-gitattributes-mode
-elpa-gitconfig-mode
-elpa-gitignore-mode
 elpa-gnuplot-mode
-elpa-graphql
 elpa-graphviz-dot-mode
-elpa-haskell-mode
 elpa-hl-todo
-elpa-htmlize
 elpa-js2-mode
-elpa-let-alist
 elpa-lua-mode
 elpa-magit
-elpa-magit-popup
 elpa-markdown-mode
 elpa-meson-mode
 elpa-muse
@@ -39,15 +23,12 @@ elpa-pdf-tools-server
 elpa-php-mode
 elpa-racket-mode
 elpa-rust-mode
-elpa-s
 elpa-smex
 elpa-sml-mode
-elpa-treepy
 elpa-undo-tree
 elpa-use-package
 elpa-vala-mode
 elpa-web-mode
-elpa-with-editor
 elpa-yaml-mode
 elpa-yasnippet
 elpa-yasnippet-snippets
