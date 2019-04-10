@@ -55,4 +55,9 @@
       undo-tree-visualizer-diff t
       undo-tree-enable-undo-in-region t)
 
+;; Waste less room on modeline
+(diminish 'undo-tree-mode)
+(diminish 'eldoc-mode)
+(diminish 'auto-revert-mode)
+
 (provide 'prelude-core)
