@@ -40,6 +40,9 @@
 ;; C-z is too easy to hit, and you can use C-x z instead
 (global-unset-key (kbd "C-z"))
 
+;; Auto revert
+(global-auto-revert-mode)
+
 ;; Use `ibuffer' as a drop-in replacement of `list-buffers' (C-x C-b).
 ;; The former should provide much more functions.
 (defalias 'list-buffers 'ibuffer)
