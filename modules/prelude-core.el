@@ -55,6 +55,10 @@
       undo-tree-visualizer-diff t
       undo-tree-enable-undo-in-region t)
 
+;; Use ace-window for quick window navigation
+;; Sorry, `other-window', but you are too weak!
+(global-set-key (kbd "C-x o") #'ace-window)
+
 ;; Waste less room on modeline
 (diminish 'undo-tree-mode)
 (diminish 'eldoc-mode)

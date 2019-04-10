@@ -1,9 +1,11 @@
-Generated on Wed Apr 10 14:55:33 CST 2019
+Generated on Wed Apr 10 15:22:44 CST 2019
 Extract the list of packages by `grep ^elpa- external`
 
+elpa-ace-window
 elpa-agda2-mode
 elpa-apache-mode
 elpa-async
+elpa-avy
 elpa-bind-key
 elpa-company
 elpa-csv-mode
@@ -38,6 +40,7 @@ elpa-php-mode
 elpa-racket-mode
 elpa-rust-mode
 elpa-s
+elpa-smex
 elpa-sml-mode
 elpa-treepy
 elpa-undo-tree

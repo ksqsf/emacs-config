@@ -30,11 +30,9 @@
 (set-face-attribute 'mode-line nil :box '(:line-width -1 :color "gray60"))
 
 ;; Smex for faster command typing
-(unless (package-installed-p 'smex)
-  (package-install 'smex))
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c M-x") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Ido for faster file navigation
