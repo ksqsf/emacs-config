@@ -57,19 +57,33 @@
 
 ** Better Defaults
 
-   These modifications are generally in =prelude-core.el=.
+   These modifications are generally in =prelude-core.el= and
+   =prelude-ui.el=.
 
    User-*very*-visible modifications are listed here.
 
 *** Themes
 
-    The background color is changed to "honeydew", because it's easier
-    on the eye.
+    The default theme (too bright) was replaced by Dracula (middle
+    constrast and interesting colors).
 
-*** Zap [up] to char
+    By default, the frame is 92% transparent.
 
-   | Zap to char    | =M-z f= |
-   | Zap up to char | =M-z t= |
+*** Zap up to char
 
-   =t= and =f= are copied from =dt= (delete to) and =df= (delete find)
-   in vim.
+    =M-z= was assigned to =zap-up-to-char=.  You can easily achieve
+    what =zap-to-char= does with =M-z <char> C-d=.
+
+    At first, I thought =M-z t= and =M-z f= would be cool, but it
+    turned out to be a horrible idea, because one must stop to think
+    which key to press.
+
+*** Mode line
+
+    Doom mode line.
+
+*** Quick Completion
+
+    I use Ido (built-in) and Smex (built upon Ido).  Moreover, the
+    completions are displayed in a grid, which is much better than a
+    simple horizontal/vertical list.
