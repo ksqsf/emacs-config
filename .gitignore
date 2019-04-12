@@ -49,3 +49,6 @@ tramp
 
 # secret files
 volatile/*-priv.el
+
+#
+request/

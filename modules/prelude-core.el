@@ -63,9 +63,4 @@
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (global-set-key (kbd "C-x o") #'ace-window)
 
-;; Waste less room on modeline
-(diminish 'undo-tree-mode)
-(diminish 'eldoc-mode)
-(diminish 'auto-revert-mode)
-
 (provide 'prelude-core)

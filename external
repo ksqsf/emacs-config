@@ -19,6 +19,7 @@ elpa-markdown-mode
 elpa-meson-mode
 elpa-muse
 elpa-org
+elpa-org-bullets
 elpa-pdf-tools-server
 elpa-php-mode
 elpa-racket-mode

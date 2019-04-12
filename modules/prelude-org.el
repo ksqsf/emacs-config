@@ -42,4 +42,13 @@
 (when (package-installed-p 'cdlatex)
   (add-hook 'org-mode-hook #'org-cdlatex-mode))
 
+;; Better looking bullets
+(with-eval-after-load "org"
+  (org-bullets-mode))
+
+;; LaTeX preview fragments should be larger and clearer
+(with-eval-after-load "org"
+  (setq org-preview-latex-default-process 'dvisvgm)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5)))
+
 (provide 'prelude-org)

@@ -1,0 +1,3 @@
+[submodule "lisp/leetcode.el"]
+	path = lisp/leetcode.el
+	url = git@github.com:kaiwk/leetcode.el.git
