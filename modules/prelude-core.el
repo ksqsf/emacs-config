@@ -34,8 +34,7 @@
 
 ;; zap chars
 (global-unset-key (kbd "M-z"))
-(global-set-key (kbd "M-z t") #'zap-up-to-char)
-(global-set-key (kbd "M-z f") #'zap-to-char)
+(global-set-key (kbd "M-z") #'zap-up-to-char)
 
 ;; C-z is too easy to hit, and you can use C-x z instead
 (global-unset-key (kbd "C-z"))
