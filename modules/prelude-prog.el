@@ -11,6 +11,10 @@ mode."
 (add-hook 'prog-mode-hook #'prelude--enter-prog)
 
 
+;;; Company
+(setq company-idle-delay 0.0)
+
+
 ;;; GDB
 ;; Refer to https://debbugs.gnu.org/cgi/bugreport.cgi?bug=33548
 (setq gdb-mi-decode-strings 'utf-8)

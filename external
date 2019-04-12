@@ -1,4 +1,4 @@
-Generated on Wed Apr 10 15:25:40 CST 2019
+Generated on Fri Apr 12 22:39:41 JST 2019
 Extract the list of packages by `grep ^elpa- external`
 
 elpa-ace-window
@@ -6,6 +6,7 @@ elpa-agda2-mode
 elpa-apache-mode
 elpa-company
 elpa-csv-mode
+elpa-elpy
 elpa-geiser
 elpa-git-modes
 elpa-git-timemachine
@@ -13,6 +14,7 @@ elpa-gnuplot-mode
 elpa-graphviz-dot-mode
 elpa-hl-todo
 elpa-js2-mode
+elpa-ledger
 elpa-lua-mode
 elpa-magit
 elpa-markdown-mode

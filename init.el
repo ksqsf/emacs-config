@@ -29,6 +29,7 @@
 (require 'prelude-prog)
 (require 'prelude-lang-lisp)
 (require 'prelude-lang-cc)
+(require 'prelude-lang-python)
 (require 'prelude-lang-rust)
 (require 'prelude-lang-coq)
 (require 'prelude-lang-ml)
