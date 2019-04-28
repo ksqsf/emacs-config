@@ -1,5 +1,7 @@
 (defcustom blog-posts-dir (expand-file-name "~/Site/jekyll/_posts/")
-  "The directory for your post Markdown files.")
+  "The directory for your post Markdown files."
+  :group 'prelude
+  :type '(string))
 
 (defun blog--header (layout title time)
   (let ((datetime (format-time-string "%Y-%m-%d %H:%M:%S" time)))
