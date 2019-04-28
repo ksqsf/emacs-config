@@ -30,4 +30,7 @@ Foundations and typical Verilog files."
 
 (add-to-list 'auto-mode-alist '("\\.v\\'" . coq-or-verilog-mode))
 
+(eval-after-load 'proof-general
+  (setq proof-splash-enable nil))
+
 (provide 'prelude-lang-coq)
