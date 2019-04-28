@@ -42,6 +42,9 @@
 ;; Auto revert
 (global-auto-revert-mode)
 
+;; why, but why, emacs!
+(setq load-prefer-newer t)
+
 ;; Use `ibuffer' as a drop-in replacement of `list-buffers' (C-x C-b).
 ;; The former should provide much more functions.
 (defalias 'list-buffers 'ibuffer)
