@@ -1,4 +1,5 @@
-;; Recommends:
+;; -*- lexical-binding: t; -*-
+;; Recommends: 
 ;; 1. prelude-tex: for cdlatex
 
 ;; Productivity Problems:
@@ -42,13 +43,32 @@
 (when (package-installed-p 'cdlatex)
   (add-hook 'org-mode-hook #'org-cdlatex-mode))
 
-;; Better looking bullets
-(with-eval-after-load "org"
-  (org-bullets-mode))
+(with-eval-after-load 'org
+  ;; Better looking bullets
+  (add-hook 'org-mode-hook #'org-bullets-mode)
 
-;; LaTeX preview fragments should be larger and clearer
-(with-eval-after-load "org"
+  ;; Formulae preview
   (setq org-preview-latex-default-process 'dvisvgm)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5)))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+
+  ;; Babel
+  (org-babel-do-load-languages
+   'org-babel-load-languages '((emacs-lisp . t)
+			       (sqlite . t)
+			       (python . t))))
+
+;; add ctex support to ox-latex
+(with-eval-after-load 'ox-latex
+  (setq org-latex-compiler "xelatex")
+  (add-to-list 'org-latex-classes
+	       '("ctexart"
+		 "\\documentclass{ctexart}
+[PACKAGES]
+[EXTRA]"
+		 ("\\section{%s}" . "\\section*{%s}")
+		 ("\\subsection{%s}" . "\\subsection*{%s}")
+		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+		 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+		 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
 (provide 'prelude-org)
