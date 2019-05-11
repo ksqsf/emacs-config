@@ -1,6 +1,8 @@
 ;; -*- lexical-binding: t; -*-
-;; Recommends: 
+;; Recommends:
 ;; 1. prelude-tex: for cdlatex
+
+
 
 ;; Productivity Problems:
 ;; 1. Trackable activities: I want to record my life.
@@ -44,6 +46,9 @@
   (add-hook 'org-mode-hook #'org-cdlatex-mode))
 
 (with-eval-after-load 'org
+  ;; Catch invisible edits!
+  (setq org-catch-invisible-edits 'smart)
+
   ;; Better looking bullets
   (add-hook 'org-mode-hook #'org-bullets-mode)
 
