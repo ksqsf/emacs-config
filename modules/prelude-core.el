@@ -2,7 +2,7 @@
 ;;; likely everyone wants them, thus the name "core".
 
 ;; GC less conservative.  No more frequently than every 10 MiB.
-(setq gc-cons-threshold (* 10 1024 1024))
+(setq gc-cons-threshold (* 20 1024 1024))
 
 ;; Stop Emacs littering init.el
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
