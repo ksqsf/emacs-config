@@ -8,6 +8,7 @@
 mode."
   (hl-todo-mode t)               			    ; Highlight TODOs
   (company-mode t)                                          ; Auto complete
+  (define-key prog-mode-map (kbd "C-c C-j") #'imenu)
   )
 
 (add-hook 'prog-mode-hook #'prelude--enter-prog)
