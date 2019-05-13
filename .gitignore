@@ -1,6 +1,9 @@
 # Backup
 *~
 
+# Byte-compiled files
+*.elc
+
 # Auto save
 auto-save-list/
 
@@ -52,3 +55,12 @@ volatile/*-priv.el
 
 #
 request/
+
+# entertainment?
+speed-type
+
+# recent files
+recentf
+
+# Projectile
+projectile-bookmarks.eld

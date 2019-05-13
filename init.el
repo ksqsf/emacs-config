@@ -19,6 +19,7 @@
 ;; Modules.
 (require 'prelude-core)
 (require 'prelude-ui)
+(require 'prelude-project)
 (require 'prelude-chinese)
 (require 'prelude-dired)
 (require 'prelude-git)

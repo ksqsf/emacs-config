@@ -1,4 +1,4 @@
-Generated on Fri Apr 12 22:39:41 JST 2019
+Generated on Mon May 13 11:28:05 JST 2019
 Extract the list of packages by `grep ^elpa- external`
 
 elpa-ace-window
@@ -22,8 +22,10 @@ elpa-meson-mode
 elpa-muse
 elpa-org
 elpa-org-bullets
+elpa-pdf-tools
 elpa-pdf-tools-server
 elpa-php-mode
+elpa-projectile
 elpa-racket-mode
 elpa-rust-mode
 elpa-smex
