@@ -1,6 +1,8 @@
 ;;; Configuration for programming needs.
 ;;; Some portions might be a standalone module.
 
+(setq-default indent-tabs-mode nil)
+
 (defun prelude--enter-prog ()
   "Common tasks before entering a `prog-mode'-derived major
 mode."
