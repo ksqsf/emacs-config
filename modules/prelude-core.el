@@ -6,6 +6,7 @@
 
 ;; Stop Emacs littering init.el
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(add-hook 'after-init-hook #'(lambda () (load custom-file)))
 
 ;; MELPA Stable
 (setq package-archives '(("gnu" . "http://elpa.emacs-china.org/gnu/")
