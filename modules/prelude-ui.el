@@ -25,12 +25,10 @@
     (setq initial-frame-alist '((tool-bar-lines . 0)))
     (setq default-frame-alist '((tool-bar-lines . 0)))))
 
-
 ;; Use dracula theme by default
 (unless (package-installed-p 'dracula-theme)
   (package-install 'dracula-theme))
 (load-theme 'dracula t)
-
 
 ;; Mode line
 (unless (package-installed-p 'doom-modeline)
@@ -42,12 +40,12 @@
 (diminish 'eldoc-mode)
 (diminish 'auto-revert-mode)
 
-
 ;; Smex for faster command typing
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c M-x") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
 ;; Ido for faster file navigation
 (ido-mode t)
 (setq ido-enable-flex-matching t
