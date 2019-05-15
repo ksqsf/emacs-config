@@ -1,8 +1,9 @@
 ;;; This file modifies some of the essential behaviors of Emacs, and
 ;;; likely everyone wants them, thus the name "core".
 
-;; GC less conservative.  No more frequently than every 10 MiB.
-(setq gc-cons-threshold (* 20 1024 1024))
+;; GC less conservative.  No more frequently than every 20 MiB.
+(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 20 1024 1024))))
 
 ;; Stop Emacs littering init.el
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
