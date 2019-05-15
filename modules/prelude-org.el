@@ -46,6 +46,8 @@
   (add-hook 'org-mode-hook #'org-cdlatex-mode))
 
 (with-eval-after-load 'org
+  (cl-eval-when 'compile (require 'org))
+
   ;; Catch invisible edits!
   (setq org-catch-invisible-edits 'smart)
 
@@ -64,6 +66,8 @@
 
 ;; add ctex support to ox-latex
 (with-eval-after-load 'ox-latex
+  (cl-eval-when 'compile (require 'ox-latex))
+
   (setq org-latex-compiler "xelatex")
   (add-to-list 'org-latex-classes
 	       '("ctexart"

@@ -1,5 +1,8 @@
 ;;; Config for C/C++/Java/...
 
+(cl-eval-when 'compile
+  (require 'cc-mode))
+
 (setq c-default-style '((java-mode . "java")
 			(awk-mode . "awk")
 			(c-mode . "k&r")
