@@ -33,20 +33,12 @@
 (diminish 'eldoc-mode)
 (diminish 'auto-revert-mode)
 
-;; Smex for faster command typing
-(ensure-package 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-c M-x") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+;; Ivy and Counsel
+(ensure-package 'ivy)
+(ensure-package 'counsel)
 
-;; Ido for faster file navigation
-(ido-mode t)
-(setq ido-enable-flex-matching t
-      ido-everywhere t)
-
-(ensure-package 'ido-grid-mode)
-(ido-grid-mode t)
+(ivy-mode 1)
+(counsel-mode 1)
 
 ;; I'm the winner ;-)
 (defvar winner-dont-bind-my-keys t)
