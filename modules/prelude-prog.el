@@ -5,6 +5,7 @@
 (ensure-package 'company-box)
 (ensure-package 'yasnippet)
 (ensure-package 'hl-todo)
+(ensure-package 'rainbow-delimiters)
 
 (setq-default indent-tabs-mode nil)
 
@@ -13,6 +14,7 @@
 mode."
   (hl-todo-mode t)               			    ; Highlight TODOs
   (company-mode t)                                          ; Auto complete
+  (rainbow-delimiters-mode t)
   (define-key prog-mode-map (kbd "C-c C-j") #'imenu)
   )
 

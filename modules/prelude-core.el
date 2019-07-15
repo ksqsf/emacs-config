@@ -15,11 +15,6 @@
 			 ("melpa-unstable" . "http://elpa.emacs-china.org/melpa/")))
 (package-initialize)
 
-(defun ensure-package (package)
-  "Ensure we've got `PACKAGE` installed."
-  (unless (package-installed-p package)
-    (package-install package)))
-
 ;; Don't blink!
 (blink-cursor-mode 0)
 
@@ -73,5 +68,19 @@
    ((t (:inherit ace-jump-face-foreground :height 3.0)))))
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (global-set-key (kbd "C-x o") #'ace-window)
+
+;; Ivy and Counsel
+(ensure-package 'ivy)
+(ensure-package 'counsel)
+
+(ivy-mode 1)
+(counsel-mode 1)
+
+;; Recentf
+(require 'recentf)
+(setq recentf-exclude '("recentf"))
+(setq recentf-auto-cleanup 'never)
+(run-with-idle-timer 30 t #'(lambda () (with-suppressed-message (recentf-save-list))))
+(recentf-mode t)
 
 (provide 'prelude-core)

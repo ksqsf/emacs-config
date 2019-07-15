@@ -17,6 +17,7 @@
 (add-to-list 'load-path prelude-modules-dir)
 
 ;; Modules.
+(require 'prelude)
 ;(require 'prelude-benchmark)
 (require 'prelude-core)
 (require 'prelude-ui)

@@ -33,13 +33,6 @@
 (diminish 'eldoc-mode)
 (diminish 'auto-revert-mode)
 
-;; Ivy and Counsel
-(ensure-package 'ivy)
-(ensure-package 'counsel)
-
-(ivy-mode 1)
-(counsel-mode 1)
-
 ;; I'm the winner ;-)
 (defvar winner-dont-bind-my-keys t)
 (winner-mode t)
