@@ -1,19 +1,14 @@
 ;;; Rust
 
-;; Cargo
-(unless (package-installed-p 'cargo)
-  (package-install 'cargo))
+(ensure-package 'rust-mode)
+(ensure-package 'cargo)
+(ensure-package 'racer)
 
 (add-hook 'rust-mode-hook #'cargo-minor-mode)
 (add-hook 'find-file-hook
 	  (lambda ()
 	    (when (string= (file-name-nondirectory buffer-file-name) "Cargo.toml")
 	      (cargo-minor-mode))))
-
-;; Racer
-(unless (package-installed-p 'racer)
-  (package-install 'racer))
-
 (add-hook 'rust-mode-hook #'racer-mode)
 
 (provide 'prelude-lang-rust)

@@ -1,5 +1,4 @@
 ;; Tuareg for OCaml
-(unless (package-installed-p 'tuareg)
-  (package-install 'tuareg))
+(ensure-package 'tuareg)
 
 (provide 'prelude-lang-ml)

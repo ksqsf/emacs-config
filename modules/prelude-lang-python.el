@@ -1,3 +1,5 @@
+(ensure-package 'elpy)
+
 ;; Prefer Python 3
 (setq doom-modeline-env-python-executable "python3")
 (setq python-shell-interpreter "python3")

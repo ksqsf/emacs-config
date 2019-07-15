@@ -1,7 +1,7 @@
 ;; Don't show useless UI elements
 (menu-bar-mode 0)
 (tool-bar-mode 0)
-(scroll-bar-mode 0)
+(scroll-bar-mode 1)
 
 ;; My vendor settings!
 ;; 1. Choose a better background color (thanks to Xah Lee)
@@ -12,27 +12,20 @@
 (setq initial-frame-alist nil)
 (if (display-graphic-p)
     (progn
-     (setq initial-frame-alist
-	   '((tool-bar-lines . 0)
-	     (left-fringe . 8) (right-fringe . 8)
-	     (width . 110) (height . 45)
-	     (alpha . 92)))
-     (setq default-frame-alist
-	   '((tool-bar-lines . 0)
-	     (width . 110) (height . 45)
-	     (left-fringe . 8) (right-fringe . 8))))
+      (setq initial-frame-alist
+            '((alpha . 0.92))))
   (progn
     (setq initial-frame-alist '((tool-bar-lines . 0)))
     (setq default-frame-alist '((tool-bar-lines . 0)))))
 
 ;; Use dracula theme by default
-(unless (package-installed-p 'dracula-theme)
-  (package-install 'dracula-theme))
+(ensure-package 'dracula-theme)
 (load-theme 'dracula t)
 
 ;; Mode line
-(unless (package-installed-p 'doom-modeline)
-  (package-install 'doom-modeline))
+(ensure-package 'diminish)
+(ensure-package 'doom-modeline)
+
 (doom-modeline-mode t)
 (setq doom-modeline-minor-modes nil)
 
@@ -41,6 +34,7 @@
 (diminish 'auto-revert-mode)
 
 ;; Smex for faster command typing
+(ensure-package 'smex)
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c M-x") 'smex-major-mode-commands)
@@ -51,8 +45,7 @@
 (setq ido-enable-flex-matching t
       ido-everywhere t)
 
-(unless (package-installed-p 'ido-grid-mode)
-  (package-install 'ido-grid-mode))
+(ensure-package 'ido-grid-mode)
 (ido-grid-mode t)
 
 ;; I'm the winner ;-)
@@ -60,5 +53,8 @@
 (winner-mode t)
 (define-key winner-mode-map (kbd "C-c ,") 'winner-undo)
 (define-key winner-mode-map (kbd "C-c .") 'winner-redo)
+
+;; Eye candy icons
+(ensure-package 'all-the-icons)
 
 (provide 'prelude-ui)

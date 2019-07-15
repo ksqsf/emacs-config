@@ -1,6 +1,11 @@
 ;;; Configuration for programming needs.
 ;;; Some portions might be a standalone module.
 
+(ensure-package 'company)
+(ensure-package 'company-box)
+(ensure-package 'yasnippet)
+(ensure-package 'hl-todo)
+
 (setq-default indent-tabs-mode nil)
 
 (defun prelude--enter-prog ()
@@ -17,8 +22,6 @@ mode."
 ;;; Company
 (setq company-idle-delay 0.3)
 
-(unless (package-installed-p 'company-box)
-  (package-install 'company-box))
 (add-hook 'company-mode-hook #'company-box-mode)
 
 

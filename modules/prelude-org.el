@@ -2,7 +2,7 @@
 ;; Recommends:
 ;; 1. prelude-tex: for cdlatex
 
-
+(ensure-package 'org-bullets)
 
 ;; Productivity Problems:
 ;; 1. Trackable activities: I want to record my life.

@@ -1,6 +1,5 @@
 ;;; Lisp
-(unless (package-installed-p 'paredit)
-  (package-install 'paredit))
+(ensure-package 'paredit)
 
 (defun prelude--enter-lisp ()
   (paredit-mode 1))

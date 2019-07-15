@@ -15,6 +15,11 @@
 			 ("melpa-unstable" . "http://elpa.emacs-china.org/melpa/")))
 (package-initialize)
 
+(defun ensure-package (package)
+  "Ensure we've got `PACKAGE` installed."
+  (unless (package-installed-p package)
+    (package-install package)))
+
 ;; Don't blink!
 (blink-cursor-mode 0)
 
@@ -53,6 +58,7 @@
 
 ;; For quick undo, use C-/
 ;; For tree-style undo history, use C-x u
+(ensure-package 'undo-tree)
 (global-undo-tree-mode)
 (setq undo-tree-visualizer-timestamps t
       undo-tree-visualizer-relative-timestamps t
@@ -61,6 +67,7 @@
 
 ;; Use ace-window for quick window navigation
 ;; Sorry, `other-window', but you are too weak!
+(ensure-package 'ace-window)
 (custom-set-faces
  '(aw-leading-char-face
    ((t (:inherit ace-jump-face-foreground :height 3.0)))))

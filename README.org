@@ -1,13 +1,8 @@
 * ksqsf's =.emacs.d=
 
-  I modularized my config and provide a list of external packages in
-  [[file:external][external]] which are managed by system package managers.
+  This configuration has been tested on macOS and Debian.
 
-  Loading packages provided by Emacs and the OS somehow seems faster
-  than using package.el, and that's the motivation behind using
-  OS-provided packages.
-
-  NOTE: This configuration is only tested on Emacs 26.1.  No guarantee
+  NOTE: This configuration only targets Emacs 26.1.  No guarantee
   about forward/backward compatibility.  You can comment out the first
   paragraph in =init.el= if you do want to try.
 
