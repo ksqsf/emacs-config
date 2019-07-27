@@ -27,7 +27,8 @@
 ;; Agenda
 (setq org-agenda-files '("~/org/todo.org"
 			 "~/org/read.org"
-			 "~/org/research.org"))
+			 "~/org/research.org"
+                         "~/org/work.org"))
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-'") #'org-cycle-agenda-files)
 
