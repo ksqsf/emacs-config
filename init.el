@@ -37,6 +37,7 @@
 (require 'prelude-lang-coq)
 (require 'prelude-lang-ml)
 (require 'prelude-lang-js)
+(require 'prelude-other)
 
 ;; Volatile.
 (when (file-exists-p prelude-volatile-dir)
