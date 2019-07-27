@@ -11,8 +11,8 @@
 
 ;; MELPA Stable
 (setq package-archives '(("gnu" . "http://elpa.emacs-china.org/gnu/")
-			 ("melpa" . "http://elpa.emacs-china.org/melpa-stable/")
-			 ("melpa-unstable" . "http://elpa.emacs-china.org/melpa/")))
+			 ("melpa" . "http://elpa.emacs-china.org/melpa/")
+			 ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")))
 (package-initialize)
 
 ;; Don't blink!
