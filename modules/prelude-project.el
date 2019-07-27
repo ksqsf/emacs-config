@@ -1,11 +1,11 @@
 ;; Deal with the concept of `Project'
-;;
-;; find-file-in-project and project.el cannot make use of ido, so projectile here.
 
 (ensure-package 'projectile)
+(ensure-package 'counsel-projectile)
 
 (require 'projectile)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
 (projectile-mode +1)
+(counsel-projectile-mode +1)
 
 (provide 'prelude-project)
