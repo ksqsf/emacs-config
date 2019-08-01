@@ -1,7 +1,7 @@
 ;; Don't show useless UI elements
-(menu-bar-mode 0)
+(menu-bar-mode 1)
 (tool-bar-mode 0)
-(scroll-bar-mode 1)
+(scroll-bar-mode 0)
 
 ;; My vendor settings!
 ;; 1. Choose a better background color (thanks to Xah Lee)
@@ -17,6 +17,13 @@
   (progn
     (setq initial-frame-alist '((tool-bar-lines . 0)))
     (setq default-frame-alist '((tool-bar-lines . 0)))))
+
+;; Mac-specific settings
+(when (string-equal system-type "darwin")
+  (push '(ns-transparent-titlebar . t) default-frame-alist)
+  (push '(ns-appearance . dark) default-frame-alist)
+  (push '(ns-transparent-titlebar . t) initial-frame-alist)
+  (push '(ns-appearance . dark) initial-frame-alist))
 
 ;; Use dracula theme by default
 (ensure-package 'dracula-theme)

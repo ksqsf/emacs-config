@@ -83,4 +83,11 @@
 (run-with-idle-timer 30 t #'(lambda () (with-suppressed-message (recentf-save-list))))
 (recentf-mode t)
 
+;; Mac is stupid
+(when (string-equal system-type "darwin")
+  (ensure-package 'exec-path-from-shell)
+  (setq exec-path-from-shell-check-startup-files nil)
+  (setq exec-path-from-shell-arguments '("-l"))
+  (exec-path-from-shell-copy-envs '("PATH" "MANPATH")))
+
 (provide 'prelude-core)
