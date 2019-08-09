@@ -2,7 +2,6 @@
 ;;; Some portions might be a standalone module.
 
 (ensure-package 'company)
-(ensure-package 'company-box)
 (ensure-package 'yasnippet)
 (ensure-package 'hl-todo)
 (ensure-package 'rainbow-delimiters)
@@ -23,8 +22,6 @@ mode."
 
 ;;; Company
 (setq company-idle-delay 0.3)
-
-(add-hook 'company-mode-hook #'company-box-mode)
 
 
 ;;; GDB
