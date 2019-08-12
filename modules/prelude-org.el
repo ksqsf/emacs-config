@@ -38,7 +38,9 @@
 	 "* TODO %?\n  %i\n  %a")
 	("d" "今天做了什么？有什么感想？" entry (file+olp+datetree "~/org/diary.org")
 	 "* %?")
-	("r" "一些乱糟糟的思绪" entry (file+headline "~/org/capture.org" "随机垃圾"))))
+	("r" "一些乱糟糟的思绪" entry (file+headline "~/org/capture.org" "随机垃圾"))
+        ("n" "任何东西的记录" entry (file+olp+datetree "~/org/notes.org")
+         "* %?")))
 (global-set-key (kbd "C-c c") #'org-capture)
 
 ;; Enable org-cdlatex by default
