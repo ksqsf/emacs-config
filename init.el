@@ -39,6 +39,7 @@
 (require 'prelude-lang-js)
 (require 'prelude-lang-haskell)
 
+(require 'prelude-utils)
 (require 'prelude-other)
 
 ;; Volatile.
