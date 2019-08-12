@@ -83,6 +83,9 @@
 (run-with-idle-timer 30 t #'(lambda () (with-suppressed-message (recentf-save-list))))
 (recentf-mode t)
 
+;; Replace dabbrev with hippie
+(global-set-key [remap dabbrev-expand] 'hippie-expand)
+
 ;; Mac is stupid
 (when (string-equal system-type "darwin")
   (ensure-package 'exec-path-from-shell)
