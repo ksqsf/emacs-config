@@ -86,6 +86,18 @@
 ;; Replace dabbrev with hippie
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
+;; recursive edit
+(defun isearch-open-recursive-edit ()
+  "Use `\\\\[exit-recursive-edit]' to end the recursive edit. Or
+  use `abort-recursive-edit' to exit the recursive edit and
+  cancel the previous search."
+  (interactive)
+  (with-isearch-suspended (recursive-edit)))
+
+(global-set-key (kbd "s-x") #'exit-recursive-edit)
+(define-key isearch-mode-map (kbd "s-r") #'isearch-open-recursive-edit)
+
+
 ;; Mac is stupid
 (when (string-equal system-type "darwin")
   (ensure-package 'exec-path-from-shell)
