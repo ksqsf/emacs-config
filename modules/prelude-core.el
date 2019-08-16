@@ -71,8 +71,8 @@
 (global-set-key (kbd "C-x o") #'ace-window)
 
 ;; Ivy and Counsel
-(ensure-package 'ivy)
 (ensure-package 'flx)
+(ensure-package 'ivy)
 (ensure-package 'counsel)
 
 (ivy-mode 1)
