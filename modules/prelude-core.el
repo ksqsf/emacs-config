@@ -75,8 +75,6 @@
 (ensure-package 'flx)
 (ensure-package 'counsel)
 
-(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-
 (ivy-mode 1)
 (counsel-mode 1)
 
