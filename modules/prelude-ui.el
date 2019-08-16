@@ -26,8 +26,8 @@
   (push '(ns-appearance . dark) initial-frame-alist))
 
 ;; Use dracula theme by default
-(ensure-package 'dracula-theme)
-(load-theme 'dracula t)
+(ensure-package 'srcery-theme)
+(load-theme 'srcery t)
 
 ;; Mode line
 (ensure-package 'diminish)
@@ -48,5 +48,8 @@
 
 ;; Eye candy icons
 (ensure-package 'all-the-icons)
+
+;; Make the cursor stand out.
+(global-hl-line-mode t)
 
 (provide 'prelude-ui)
