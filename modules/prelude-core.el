@@ -66,7 +66,8 @@
 (custom-set-faces
  '(aw-leading-char-face
    ((t (:inherit ace-jump-face-foreground :height 3.0)))))
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
+      aw-scope 'frame)
 (global-set-key (kbd "M-o") #'ace-window)
 (global-set-key (kbd "C-x o") #'ace-window)
 
