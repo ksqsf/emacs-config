@@ -11,6 +11,7 @@
 
 (defun prelude--enter-cc ()
   (yas-minor-mode)
+  (subword-mode)
   (define-key c-mode-map (kbd "<f5>") #'compile)
   (define-key c++-mode-map (kbd "<f5>") #'compile))
 
