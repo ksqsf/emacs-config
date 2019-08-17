@@ -79,6 +79,8 @@
 (ivy-mode 1)
 (counsel-mode 1)
 
+(setq ivy-extra-directories '("./"))
+
 ;; Recentf
 (require 'recentf)
 (setq recentf-exclude '("recentf"))
