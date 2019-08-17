@@ -22,4 +22,9 @@ date: %s
     (insert header)
     (newline)))
 
+(defun find-blog-post ()
+  "Find one of your blog posts."
+  (interactive)
+  (find-file (completing-read "Post: " (directory-files blog-posts-dir nil "^[^\\.].*"))))
+
 (provide 'prelude-blog)
