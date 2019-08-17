@@ -8,7 +8,10 @@
   (yas-minor-mode t)
   (cargo-minor-mode t)
   (racer-mode t)
-  (subword-mode t))
+  (subword-mode t)
+
+  ;; Racer is very slow
+  (setq-local company-idle-delay nil))
 
 (add-hook 'rust-mode-hook #'prelude--setup-rust-mode)
 (add-hook 'find-file-hook
