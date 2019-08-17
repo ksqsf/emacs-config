@@ -50,6 +50,8 @@
   | Iosevka Term     |   11 | Org Table                 |
   | Noto Sans CJK TC |   14 | General use (Chinese)     |
 
+  However, other fonts also seem to work well, like Monaco and Menlo.
+
 ** Better Defaults
 
    These modifications are generally in =prelude-core.el= and
@@ -59,8 +61,8 @@
 
 *** Themes
 
-    The default theme (too bright) was replaced by Dracula (middle
-    constrast and interesting colors).
+    The default theme (too bright) was replaced by
+    [Srcery](https://srcery-colors.github.io).
 
     By default, the frame is 92% transparent.
 
@@ -79,6 +81,5 @@
 
 *** Quick Completion
 
-    I use Ido (built-in) and Smex (built upon Ido).  Moreover, the
-    completions are displayed in a grid, which is much better than a
-    simple horizontal/vertical list.
+    I use Ivy and the Counsel family, as they tend to blend better
+    with other modern packages.
