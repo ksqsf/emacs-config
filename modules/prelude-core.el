@@ -25,6 +25,9 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 
+;; Delete selection when try to insert text
+(delete-selection-mode t)
+
 ;; f2. 2C-mode can be invoked using C-x 6
 (global-set-key (kbd "<f2>") #'follow-mode)
 
