@@ -5,6 +5,7 @@
 ;; GC less conservative.  No more frequently than every 20 MiB.
 (setq gc-cons-threshold most-positive-fixnum)
 (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 20 1024 1024))))
+(add-hook 'focus-out-hook #'garbage-collect)
 
 ;; Stop Emacs littering init.el
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
