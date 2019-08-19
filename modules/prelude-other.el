@@ -34,4 +34,8 @@
 
 (add-hook 'eshell-kill-hook #'eshell-command-alert)
 
+;; cabon now sh
+(ensure-package 'carbon-now-sh)
+
 (provide 'prelude-other)
+
