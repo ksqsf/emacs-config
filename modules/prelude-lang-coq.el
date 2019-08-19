@@ -1,6 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
-(unless (package-installed-p 'proof-general)
-  (package-install 'proof-general))
+(ensure-package 'proof-general)
 
 ;; Resolve Coq and Verilog
 (defvar coq-or-verilog-mode--regexp "\\(?:\\(Theorem\\|Ltac\\|Example\\|Lemma\\|Axiom\\)[ 	]\\).+:")

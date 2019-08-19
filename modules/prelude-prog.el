@@ -9,7 +9,7 @@
 
 (setq-default indent-tabs-mode nil)
 
-(defun prelude--enter-prog ()
+(defun prelude/enter-prog ()
   "Common tasks before entering a `prog-mode'-derived major
 mode."
   (hl-todo-mode t)               			    ; Highlight TODOs
@@ -18,7 +18,7 @@ mode."
   (define-key prog-mode-map (kbd "C-c C-j") #'imenu)
   )
 
-(add-hook 'prog-mode-hook #'prelude--enter-prog)
+(add-hook 'prog-mode-hook #'prelude/enter-prog)
 
 
 ;;; Company

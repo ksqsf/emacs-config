@@ -2,11 +2,11 @@
 ;;; Lisp
 (ensure-package 'paredit)
 
-(defun prelude--enter-lisp ()
+(defun prelude/enter-lisp ()
   (paredit-mode 1))
 
-(add-hook 'lisp-mode-hook #'prelude--enter-lisp)
-(add-hook 'emacs-lisp-mode-hook #'prelude--enter-lisp)
+(add-hook 'lisp-mode-hook #'prelude/enter-lisp)
+(add-hook 'emacs-lisp-mode-hook #'prelude/enter-lisp)
 
 ;; Scheme prefers Guile
 (eval-after-load 'scheme
