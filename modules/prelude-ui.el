@@ -53,4 +53,9 @@
 ;; Make the cursor stand out.
 (global-hl-line-mode t)
 
+;; Rainbow
+(ensure-package 'rainbow-mode)
+(add-hook 'after-init-hook #'rainbow-mode)
+(add-hook 'prog-mode-hook #'rainbow-mode)
+
 (provide 'prelude-ui)
