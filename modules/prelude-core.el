@@ -94,6 +94,9 @@
 (global-set-key (kbd "s-x") #'exit-recursive-edit)
 (define-key isearch-mode-map (kbd "s-r") #'isearch-open-recursive-edit)
 
+;; Meaningful M-<, M->
+(ensure-package 'beginend)
+(beginend-global-mode 1)
 
 ;; Mac is stupid
 (when (string-equal system-type "darwin")
