@@ -23,6 +23,7 @@
 (require 'prelude-core)
 (require 'prelude-ui)
 (require 'prelude-ivy)
+(require 'prelude-ibuffer)
 (require 'prelude-project)
 (require 'prelude-chinese)
 (require 'prelude-dired)
