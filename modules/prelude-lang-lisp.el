@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; Lisp
 (ensure-package 'paredit)
 

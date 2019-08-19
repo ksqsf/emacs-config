@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; run benchmark-init/show-durations-tree after init
 
 (add-to-list 'load-path (expand-file-name "elpa/benchmark-init-20150905.938" user-emacs-directory))

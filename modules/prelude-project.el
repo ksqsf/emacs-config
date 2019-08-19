@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Deal with the concept of `Project'
 
 (ensure-package 'projectile)

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (unless (package-installed-p 'proof-general)
   (package-install 'proof-general))
 

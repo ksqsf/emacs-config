@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
 (defun run-node ()

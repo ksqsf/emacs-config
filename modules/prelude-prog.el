@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; Configuration for programming needs.
 ;;; Some portions might be a standalone module.
 

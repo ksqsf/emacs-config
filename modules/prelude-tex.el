@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (ensure-package 'auctex)
 
 ;; Prefer XeTeX; it should be compatible with the default engine

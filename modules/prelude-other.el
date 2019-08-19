@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; things that don't fit elsewhere
 
 (ensure-package 'wakatime-mode)

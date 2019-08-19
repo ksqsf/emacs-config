@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; This file modifies some of the essential behaviors of Emacs, and
 ;;; likely everyone wants them, thus the name "core".
 

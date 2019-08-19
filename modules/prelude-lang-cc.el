@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; Config for C/C++/Java/...
 
 (cl-eval-when 'compile

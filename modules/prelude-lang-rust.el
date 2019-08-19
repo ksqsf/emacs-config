@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; Rust
 
 (ensure-package 'rust-mode)

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (defun json-format ()
   (interactive)
   (save-excursion

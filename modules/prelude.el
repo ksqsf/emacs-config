@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Supporting functions that every module might want to use.
 
 (defun ensure-package (package)

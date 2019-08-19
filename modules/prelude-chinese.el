@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Table font for perfect alignment.
 
 ;; TODO: need work on mac

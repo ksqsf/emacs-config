@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (defcustom blog-posts-dir (expand-file-name "~/Site/jekyll/_posts/")
   "The directory for your post Markdown files."
   :group 'prelude
