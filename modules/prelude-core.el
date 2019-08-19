@@ -75,16 +75,6 @@
 (global-set-key (kbd "M-o") #'ace-window)
 (global-set-key (kbd "C-x o") #'ace-window)
 
-;; Ivy and Counsel
-(ensure-package 'flx)
-(ensure-package 'ivy)
-(ensure-package 'counsel)
-
-(ivy-mode 1)
-(counsel-mode 1)
-
-(setq ivy-extra-directories '("./"))
-
 ;; Recentf
 (require 'recentf)
 (setq recentf-exclude '("recentf"))

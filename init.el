@@ -22,6 +22,7 @@
 ;(require 'prelude-benchmark)
 (require 'prelude-core)
 (require 'prelude-ui)
+(require 'prelude-ivy)
 (require 'prelude-project)
 (require 'prelude-chinese)
 (require 'prelude-dired)
