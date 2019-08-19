@@ -99,7 +99,7 @@
 (beginend-global-mode 1)
 
 ;; Mac is stupid
-(when (string-equal system-type "darwin")
+(when *is-a-mac*
   (ensure-package 'exec-path-from-shell)
   (setq exec-path-from-shell-check-startup-files nil)
   (setq exec-path-from-shell-arguments '("-l"))

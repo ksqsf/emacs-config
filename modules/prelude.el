@@ -14,4 +14,6 @@ it immediately."
   (let ((message-log-max nil))
     `(with-temp-message (or (current-message) "") ,@body)))
 
+(defconst *is-a-mac* (eq system-type 'darwin))
+
 (provide 'prelude)

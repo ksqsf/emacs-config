@@ -28,7 +28,7 @@
 
 (alert-add-rule :status '(buried)
                 :mode 'eshell-mode
-                :style (if (string-equal system-type "darwin")
+                :style (if *is-a-mac*
                            'osx-notifier
                          'notifications))
 

@@ -20,7 +20,7 @@
     (setq default-frame-alist '((tool-bar-lines . 0)))))
 
 ;; Mac-specific settings
-(when (string-equal system-type "darwin")
+(when *is-a-mac*
   (push '(ns-transparent-titlebar . t) default-frame-alist)
   (push '(ns-appearance . dark) default-frame-alist)
   (push '(ns-transparent-titlebar . t) initial-frame-alist)
