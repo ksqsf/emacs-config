@@ -1,20 +1,20 @@
 ;;; -*- lexical-binding: t; -*-
 
+;; Search file names when point is at a file name; Search unlimitedly
+;; otherwise.
+(setq dired-isearch-filenames 'dwim)
+
+;; Intelligently guess the target directory.
+(setq dired-dwim-target t)
+
+;; Set a default value for certain types of files on !
+(setq prelude/default-opener (if *is-a-mac* "open" "xdg-open"))
+
+(setq dired-guess-shell-alist-user
+      '(("\\.pdf\\'" prelude--default-opener)
+        ("\\.png\\'" prelude--default-opener)))
+
 (defun prelude/setup-dired ()
-  ;; Set a default value for certain types of files on !
-  (setq prelude/default-opener (if *is-a-mac* "open" "xdg-open"))
-
-  (setq dired-guess-shell-alist-user
-        '(("\\.pdf\\'" prelude--default-opener)
-          ("\\.png\\'" prelude--default-opener)))
-
-  ;; Search file names when point is at a file name; Search unlimitedly
-  ;; otherwise.
-  (setq dired-isearch-filenames 'dwim)
-
-  ;; Intelligently guess the target directory.
-  (setq dired-dwim-target t)
-
   ;; Filters
   (ensure-package 'dired-filter)
   (add-hook 'dired-mode-hook #'dired-filter-group-mode)
