@@ -4,8 +4,8 @@
 (ensure-package 'ivy)
 (ensure-package 'counsel)
 
-(ivy-mode 1)
-(counsel-mode 1)
+(add-hook 'after-init-hook #'ivy-mode)
+(add-hook 'after-init-hook #'counsel-mode)
 
 (setq ivy-extra-directories '("./"))
 

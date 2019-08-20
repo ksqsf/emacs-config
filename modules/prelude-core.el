@@ -96,7 +96,7 @@
 
 ;; Meaningful M-<, M->
 (ensure-package 'beginend)
-(beginend-global-mode 1)
+(add-hook 'after-init-hook 'beginend-global-mode)
 
 ;; Mac is stupid
 (when *is-a-mac*
@@ -104,5 +104,8 @@
   (setq exec-path-from-shell-check-startup-files nil)
   (setq exec-path-from-shell-arguments '("-l"))
   (exec-path-from-shell-copy-envs '("PATH" "MANPATH")))
+
+;; Disable keys I don't use.
+(global-unset-key (kbd "C-x C-n"))
 
 (provide 'prelude-core)
