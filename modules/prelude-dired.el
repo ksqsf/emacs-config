@@ -67,6 +67,6 @@
   (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")
 )
 
-(eval-after-load "dired" (prelude/setup-dired))
+(with-eval-after-load "dired" (prelude/setup-dired))
 
 (provide 'prelude-dired)
