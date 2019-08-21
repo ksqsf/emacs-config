@@ -3,7 +3,8 @@
 
 (defun ensure-package (package)
   "Ensure that we've got PACKAGE installed.  If it isn't, install
-it immediately."
+it immediately.  This is a lightweight operation, so it can be
+used freely in configuration."
   (unless (package-installed-p package)
     (package-install package)))
 

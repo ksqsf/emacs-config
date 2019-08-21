@@ -108,4 +108,8 @@
 ;; Disable keys I don't use.
 (global-unset-key (kbd "C-x C-n"))
 
+;; Jump pages
+(global-set-key (kbd "M-]") #'forward-page)
+(global-set-key (kbd "M-[") #'backward-page)
+
 (provide 'prelude-core)
