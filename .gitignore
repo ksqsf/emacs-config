@@ -71,5 +71,9 @@ smex-items
 
 # ?
 transient/
+
+# undohist
+undohist/
+
 # abbrev
 abbrev_defs

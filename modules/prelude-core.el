@@ -56,14 +56,15 @@
 ;; The former should provide much more functions.
 (defalias 'list-buffers 'ibuffer)
 
-;; For quick undo, use C-/
-;; For tree-style undo history, use C-x u
-(ensure-package 'undo-tree)
-(global-undo-tree-mode)
-(setq undo-tree-visualizer-timestamps t
-      undo-tree-visualizer-relative-timestamps t
-      undo-tree-visualizer-diff t
-      undo-tree-enable-undo-in-region t)
+;; Better undo
+(ensure-package 'undohist)
+(ensure-package 'undo-propose)
+(global-set-key (kbd "C-?") #'undo-only)
+(global-set-key (kbd "C-x u") #'undo-propose)
+(add-hook 'after-init-hook
+          '(lambda ()
+             (require 'undohist)
+             (undohist-initialize)))
 
 ;; Use ace-window for quick window navigation
 ;; Sorry, `other-window', but you are too weak!
