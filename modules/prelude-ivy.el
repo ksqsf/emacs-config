@@ -8,5 +8,6 @@
 (add-hook 'after-init-hook #'counsel-mode)
 
 (setq ivy-extra-directories '("./"))
+(setq ivy-use-virtual-buffers 'recentf)
 
 (provide 'prelude-ivy)
