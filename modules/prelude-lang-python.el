@@ -10,7 +10,12 @@
         elpy-get-info-from-shell t)
 
   ;; enable elpy
-  (elpy-enable))
+  (elpy-enable)
+
+  ;; my keys
+  (define-key elpy-mode-map (kbd "C-c C-c") #'elpy-shell-send-region-or-buffer-and-go)
+  (define-key python-mode-map (kbd "C-z C-z") #'elpy-shell-send-region-or-buffer-and-go)
+  (define-key python-mode-map (kbd "C-M-x") #'elpy-shell-send-defun-and-go))
 
 (with-eval-after-load "python"
   (prelude/setup-python))
