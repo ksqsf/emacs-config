@@ -26,6 +26,9 @@ date: %s
 (defun find-blog-post ()
   "Find one of your blog posts."
   (interactive)
-  (find-file (completing-read "Post: " (directory-files blog-posts-dir nil "^[^\\.].*"))))
+  (let ((files (reverse (directory-files blog-posts-dir
+                                         nil
+                                         "^[^\\.].*\\.md$"))))
+    (find-file (ivy-read "Post: " files))))
 
 (provide 'prelude-blog)
