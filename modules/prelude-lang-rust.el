@@ -20,4 +20,8 @@
             (when (string= (file-name-nondirectory buffer-file-name) "Cargo.toml")
               (cargo-minor-mode))))
 
+(with-eval-after-load 'rust-mode
+  (define-key rust-mode-map (kbd "[") (double-tap-to-insert ?\())
+  (define-key rust-mode-map (kbd "]") (double-tap-to-insert ?\))))
+
 (provide 'prelude-lang-rust)

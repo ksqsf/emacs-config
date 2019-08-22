@@ -17,4 +17,16 @@ used freely in configuration."
 
 (defconst *is-a-mac* (eq system-type 'darwin))
 
+(defmacro double-tap-to-insert (to-char)
+  "Create a function suitable for key binding.  It replaces
+double consecutive occurrences of that character with TO-CHAR."
+  `(lambda (cnt raw)
+     (interactive "p\nP")
+     (if (and (eq (preceding-char) last-command-event)
+              (not raw))
+         (progn
+           (backward-delete-char 1)
+           (insert ,to-char))
+       (self-insert-command cnt))))
+
 (provide 'prelude)
