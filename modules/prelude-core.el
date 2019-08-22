@@ -11,6 +11,9 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (add-hook 'after-init-hook #'(lambda () (load custom-file)))
 
+;; Move backups away
+(setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory))))
+
 ;; MELPA Stable
 (setq package-archives '(("gnu" . "http://elpa.emacs-china.org/gnu/")
 			 ("melpa" . "http://elpa.emacs-china.org/melpa/")
