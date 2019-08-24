@@ -14,7 +14,8 @@
   (yas-minor-mode)
   (subword-mode)
   (define-key c-mode-map (kbd "<f5>") #'compile)
-  (define-key c++-mode-map (kbd "<f5>") #'compile))
+  (define-key c++-mode-map (kbd "<f5>") #'compile)
+  (rainbow-turn-off))
 
 (add-hook 'c-mode-common-hook #'prelude/enter-cc)
 (add-hook 'c++-mode-hook #'prelude/enter-cc)
