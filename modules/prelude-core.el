@@ -81,11 +81,14 @@
 (global-set-key (kbd "C-x o") #'ace-window)
 
 ;; Recentf
-(require 'recentf)
-(setq recentf-exclude '("recentf"))
-(setq recentf-auto-cleanup 'never)
-(run-with-idle-timer 30 t #'(lambda () (with-suppressed-message (recentf-save-list))))
-(recentf-mode t)
+(defun prelude/setup-recentf ()
+  (require 'recentf)
+  (require 'recentf)
+  (setq recentf-exclude '("recentf"))
+  (setq recentf-auto-cleanup 'never)
+  (run-with-idle-timer 30 t #'(lambda () (with-suppressed-message (recentf-save-list))))
+  (recentf-mode t))
+(add-hook 'after-init-hook #'prelude/setup-recentf)
 
 ;; recursive edit
 (defun isearch-open-recursive-edit ()
