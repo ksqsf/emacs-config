@@ -73,7 +73,7 @@
              (undohist-initialize)
 
              ;; Patch to make undohist silent
-             (defun undohist-recover-1 ()
+             (define-advice undohist-recover-1 (:override ())
                (let* ((buffer (current-buffer))
                       (file (buffer-file-name buffer))
                       (undo-file (make-undohist-file-name file))
@@ -90,6 +90,7 @@
                          (message "File digest doesn't match, so undo history will be discarded."))))
                    (when (consp undo-list)
                      (setq buffer-undo-list undo-list)))))))
+
 (setq undohist-ignored-files '("\\.git/COMMIT_EDITMSG$"))
 
 ;; Use ace-window for quick window navigation

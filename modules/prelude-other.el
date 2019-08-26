@@ -10,9 +10,7 @@
 (require 'alert)
 
 (when (fboundp 'mac-do-applescript)
-  (defun alert-osx-notifier-notify (info)
-    "Patched to make use of Emacs MacPort's native AppleScript
-  capability."
+  (define-advice alert-osx-notifier-notify (:override (info))
     (mac-do-applescript (format "display notification %S with title %S"
                                 (alert-encode-string (plist-get info :message))
                                 (alert-encode-string (plist-get info :title))))
