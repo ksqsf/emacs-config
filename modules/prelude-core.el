@@ -70,7 +70,27 @@
 (add-hook 'after-init-hook
           '(lambda ()
              (require 'undohist)
-             (undohist-initialize)))
+             (undohist-initialize)
+
+             ;; Patch to make undohist silent
+             (defun undohist-recover-1 ()
+               (let* ((buffer (current-buffer))
+                      (file (buffer-file-name buffer))
+                      (undo-file (make-undohist-file-name file))
+                      undo-list)
+                 (when (and (undohist-recover-file-p file)
+                            (file-exists-p undo-file)
+                            (null buffer-undo-list))
+                   (with-temp-buffer
+                     (insert-file-contents undo-file)
+                     (goto-char (point-min))
+                     (let ((alist (undohist-decode (read (current-buffer)))))
+                       (if (string= (md5 buffer) (assoc-default 'digest alist))
+                           (setq undo-list (assoc-default 'undo-list alist))
+                         (message "File digest doesn't match, so undo history will be discarded."))))
+                   (when (consp undo-list)
+                     (setq buffer-undo-list undo-list)))))))
+(setq undohist-ignored-files '("\\.git/COMMIT_EDITMSG$"))
 
 ;; Use ace-window for quick window navigation
 ;; Sorry, `other-window', but you are too weak!
