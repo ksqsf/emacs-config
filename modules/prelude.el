@@ -1,12 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 ;; Supporting functions that every module might want to use.
-
-(defun ensure-package (package)
-  "Ensure that we've got PACKAGE installed.  If it isn't, install
-it immediately.  This is a lightweight operation, so it can be
-used freely in configuration."
-  (unless (package-installed-p package)
-    (package-install package)))
+;; NOTE: This file should NOT depend on any third-party packages.
 
 (defmacro with-suppressed-message (&rest body)
   "Suppress new messages temporarily in the echo area and the

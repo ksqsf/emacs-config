@@ -1,19 +1,18 @@
 ;;; -*- lexical-binding: t; -*-
-(ensure-package 'auctex)
 
-;; Prefer XeTeX; it should be compatible with the default engine
-(setq-default TeX-engine 'xetex)
+(use-package tex
+  :straight auctex
+  :mode (("\\.tex\\'" . LaTeX-mode))
+  :config
+  (setq-default TeX-engine 'xetex))
 
-;; Use CDLaTeX for faster typing
-(ensure-package 'cdlatex)
-
-(add-hook 'latex-mode-hook #'turn-on-cdlatex)
-(add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
-
-(setq cdlatex-command-alist
+(use-package cdlatex
+  :hook ((latex-mode LaTeX-mode) . turn-on-cdlatex)
+  :config
+  (setq cdlatex-command-alist
       '(("sum" "Insert \\sum_{}^{}"
          "\\sum_{?}^{}" cdlatex-position-cursor nil nil t)
         ("prd" "Insert \\prod_{}^{}"
-         "\\prod_{?}^{}" cdlatex-position-cursor nil nil t)))
+         "\\prod_{?}^{}" cdlatex-position-cursor nil nil t))))
 
 (provide 'prelude-tex)

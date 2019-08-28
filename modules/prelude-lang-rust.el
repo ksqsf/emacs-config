@@ -1,27 +1,24 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Rust
 
-(ensure-package 'rust-mode)
-(ensure-package 'cargo)
-(ensure-package 'racer)
-
-(defun prelude/enter-rust ()
-  (yas-minor-mode t)
-  (cargo-minor-mode t)
-  (racer-mode t)
-  (subword-mode t)
-
-  ;; Racer is very slow
-  (setq-local company-idle-delay nil))
-
-(add-hook 'rust-mode-hook #'prelude/enter-rust)
-(add-hook 'find-file-hook
-          (lambda ()
-            (when (string= (file-name-nondirectory buffer-file-name) "Cargo.toml")
-              (cargo-minor-mode))))
-
-(with-eval-after-load 'rust-mode
+(use-package rust-mode
+  :mode ("\\.rs\\'" . rust-mode)
+  :config
   (define-key rust-mode-map (kbd "[") (double-tap-to-insert ?\())
-  (define-key rust-mode-map (kbd "]") (double-tap-to-insert ?\))))
+  (define-key rust-mode-map (kbd "]") (double-tap-to-insert ?\)))
+  (add-hook 'rust-mode-hook #'yas-minor-mode)
+  (add-hook 'rust-mode-hook #'subword-mode)
+  (add-hook 'rust-mode-hook #'(lambda () (setq company-idle-delay nil))))
+
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode)
+  :config
+  (add-hook 'find-file-hook
+            (lambda ()
+              (when (string= (file-name-nondirectory buffer-file-name) "Cargo.toml")
+                (cargo-minor-mode)))))
+
+(use-package racer
+  :hook (rust-mode . racer-mode))
 
 (provide 'prelude-lang-rust)

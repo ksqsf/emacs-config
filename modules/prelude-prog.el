@@ -2,27 +2,25 @@
 ;;; Configuration for programming needs.
 ;;; Some portions might be a standalone module.
 
-(ensure-package 'company)
-(ensure-package 'yasnippet)
-(ensure-package 'hl-todo)
-(ensure-package 'rainbow-delimiters)
-
 (setq-default indent-tabs-mode nil)
 
-(defun prelude/enter-prog ()
-  "Common tasks before entering a `prog-mode'-derived major
-mode."
-  (hl-todo-mode t)               			    ; Highlight TODOs
-  (company-mode t)                                          ; Auto complete
-  (rainbow-delimiters-mode t)
-  (define-key prog-mode-map (kbd "C-c C-j") #'imenu)
-  )
+(use-package company
+  :hook (prog-mode . company-mode)
+  :config
+  (setq company-idle-delay 0.3))
 
-(add-hook 'prog-mode-hook #'prelude/enter-prog)
+(use-package imenu
+  :bind (:map prog-mode-map
+	      ("C-c C-j" . imenu)))
 
-
-;;; Company
-(setq company-idle-delay 0.3)
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode))
+
+(use-package hl-todo
+  :hook (prog-mode . hl-todo-mode))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 
 ;;; GDB

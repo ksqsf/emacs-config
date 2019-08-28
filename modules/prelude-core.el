@@ -2,9 +2,9 @@
 ;;; This file modifies some of the essential behaviors of Emacs, and
 ;;; likely everyone wants them, thus the name "core".
 
-;; GC less conservative.  No more frequently than every 20 MiB.
+;; GC less conservative.  No more frequently than every 50 MiB.
 (setq gc-cons-threshold most-positive-fixnum)
-(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 20 1024 1024))))
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 50 1024 1024))))
 (add-hook 'focus-out-hook #'garbage-collect)
 
 ;; Stop Emacs littering init.el
@@ -16,12 +16,6 @@
 
 ;; Don't recenter to the middle of the screen
 (setq recenter-positions '(top 0.25 bottom))
-
-;; MELPA Stable
-(setq package-archives '(("gnu" . "http://elpa.emacs-china.org/gnu/")
-			 ("melpa" . "http://elpa.emacs-china.org/melpa/")
-			 ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")))
-(package-initialize)
 
 ;; Don't blink!
 (blink-cursor-mode 0)
@@ -63,8 +57,8 @@
 (defalias 'list-buffers 'ibuffer)
 
 ;; Better undo
-(ensure-package 'undohist)
-(ensure-package 'undo-propose)
+(use-package undohist)
+(use-package undo-propose)
 (global-set-key (kbd "C-?") #'undo-only)
 (global-set-key (kbd "C-x u") #'undo-propose)
 (add-hook 'after-init-hook
@@ -95,14 +89,15 @@
 
 ;; Use ace-window for quick window navigation
 ;; Sorry, `other-window', but you are too weak!
-(ensure-package 'ace-window)
-(custom-set-faces
- '(aw-leading-char-face
-   ((t (:inherit ace-jump-face-foreground :height 3.0)))))
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
-      aw-scope 'frame)
-(global-set-key (kbd "M-o") #'ace-window)
-(global-set-key (kbd "C-x o") #'ace-window)
+(use-package ace-window
+  :bind (("M-o" . ace-window)
+         ("C-x o" . ace-window))
+  :config
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
+        aw-scope 'frame))
 
 ;; Recentf
 (defun prelude/setup-recentf ()
@@ -126,15 +121,19 @@
 (define-key isearch-mode-map (kbd "s-r") #'isearch-open-recursive-edit)
 
 ;; Meaningful M-<, M->
-(ensure-package 'beginend)
-(add-hook 'after-init-hook 'beginend-global-mode)
+(use-package beginend
+  :defer 1
+  :config
+  (beginend-global-mode))
 
 ;; Mac is stupid
 (when *is-a-mac*
-  (ensure-package 'exec-path-from-shell)
-  (setq exec-path-from-shell-check-startup-files nil)
-  (setq exec-path-from-shell-arguments '("-l"))
-  (exec-path-from-shell-copy-envs '("PATH" "MANPATH")))
+  (use-package exec-path-from-shell
+    :init
+    (setq exec-path-from-shell-check-startup-files nil)
+    (setq exec-path-from-shell-arguments '("-l"))
+    :config
+    (exec-path-from-shell-copy-envs '("PATH" "MANPATH"))))
 
 ;; Disable keys I don't use.
 (global-unset-key (kbd "C-x C-n"))
@@ -142,5 +141,9 @@
 ;; Jump pages
 (global-set-key (kbd "M-]") #'forward-page)
 (global-set-key (kbd "M-[") #'backward-page)
+
+;; Ripgrep
+(use-package ripgrep
+  :commands (ripgrep-regexp ripgrep-search-mode))
 
 (provide 'prelude-core)

@@ -16,15 +16,13 @@
 
 ;; Overwrite the builtin version, to stop `join-line' (alias of
 ;; `delete-indentation') insert whitespace between CJK characters.
-(defun fixup-whitespace ()
-  "Fixup whitespace between objects around point.
-Leave one space or none, according to the context."
+(define-advice fixup-whitespace (:override ())
   (interactive "*")
   (save-excursion
     (delete-horizontal-space)
-    (if (or (looking-at "^\\|$\\|\\s)\\|\\cc\\|\\cj\\|\\ck")
+    (if (or (looking-at "^\\|$\\|\\s)\\|\\cc\\|\\cj\\|\\ch")
 	    (save-excursion (forward-char -1)
-			    (looking-at "$\\|\\s(\\|\\s'\\|\\cc\\|\\cj\\|\\ck")))
+			    (looking-at "$\\|\\s(\\|\\s'\\|\\cc\\|\\cj\\|\\ch")))
 	nil
       (insert ?\s))))
 

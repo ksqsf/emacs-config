@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
-(ensure-package 'magit)
-(global-set-key (kbd "C-x g") #'magit-status)
+
+(use-package magit
+  :bind (("C-x g" . magit-status)))
 
 (provide 'prelude-git)

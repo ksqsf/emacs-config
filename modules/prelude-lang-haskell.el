@@ -1,10 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
-(ensure-package 'intero)
 
-(defun prelude/setup-haskell ()
-  (add-hook 'haskell-mode-hook 'intero-mode))
-
-(eval-after-load 'haskell-mode
-  (prelude/setup-haskell))
+(use-package intero
+  :commands (haskell-mode intero-mode)
+  :mode ("\\.hs\\'" . haskell-mode)
+  :hook (haskell-mode . intero-mode))
 
 (provide 'prelude-lang-haskell)

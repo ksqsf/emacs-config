@@ -1,17 +1,16 @@
 ;;; -*- lexical-binding: t; -*-
 ;; Deal with the concept of `Project'
 
-(ensure-package 'projectile)
-(ensure-package 'counsel-projectile)
+(use-package projectile
+  :commands (projectile-mode)
+  :bind-keymap ("C-c p" . projectile-command-map)
+  :config
+  (setq projectile-completion-system 'ivy)
+  (projectile-mode +1)
+  (counsel-projectile-mode +1))
 
-(setq projectile-completion-system 'ivy)
-
-(add-hook
- 'after-init-hook
- #'(lambda ()
-     (require 'projectile)
-     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-     (projectile-mode +1)
-     (counsel-projectile-mode +1)))
+(use-package counsel-projectile
+  :after (projectile)
+  :commands (counsel-projectile-mode))
 
 (provide 'prelude-project)

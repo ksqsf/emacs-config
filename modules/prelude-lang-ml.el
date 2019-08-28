@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 ;; Tuareg for OCaml
-(ensure-package 'tuareg)
+(use-package tuareg
+  :commands (ocaml-mode)
+  :mode (("\\.ml\\'" . ocaml-mode)))
 
 (provide 'prelude-lang-ml)

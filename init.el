@@ -19,7 +19,8 @@
 
 ;; Modules.
 (require 'prelude)
-;(require 'prelude-benchmark)
+(require 'prelude-straight)
+(require 'prelude-benchmark)
 (require 'prelude-core)
 (require 'prelude-ui)
 (require 'prelude-ivy)

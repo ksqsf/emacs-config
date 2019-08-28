@@ -27,34 +27,42 @@
   (push '(ns-appearance . dark) initial-frame-alist))
 
 ;; Use dracula theme by default
-(ensure-package 'srcery-theme)
-(load-theme 'srcery t)
+(use-package srcery-theme
+  :init
+  (load-theme 'srcery t))
 
 ;; Mode line
-(ensure-package 'diminish)
-(ensure-package 'doom-modeline)
+(use-package diminish
+  :disabled
+  :defer 1
+  :config
+  (diminish 'eldoc-mode)
+  (diminish 'auto-revert-mode))
 
-(doom-modeline-mode t)
-(setq doom-modeline-minor-modes nil)
-
-(diminish 'undo-tree-mode)
-(diminish 'eldoc-mode)
-(diminish 'auto-revert-mode)
+(use-package doom-modeline
+  :init
+  (setq doom-modeline-minor-modes nil)
+  (doom-modeline-mode t))
 
 ;; I'm the winner ;-)
-(defvar winner-dont-bind-my-keys t)
-(winner-mode t)
-(define-key winner-mode-map (kbd "C-c ,") 'winner-undo)
-(define-key winner-mode-map (kbd "C-c .") 'winner-redo)
+(use-package winner
+  :bind (:map winner-mode-map
+              ("C-c ," . winner-undo)
+              ("C-c ." . winner-redo))
+  :init
+  (defvar winner-dont-bind-my-keys t)
+  (add-hook 'after-init-hook #'winner-mode))
 
 ;; Eye candy icons
-(ensure-package 'all-the-icons)
+(use-package all-the-icons
+  :defer t)
 
 ;; Make the cursor stand out.
 (global-hl-line-mode t)
 
 ;; Rainbow
-(ensure-package 'rainbow-mode)
-(add-hook 'prog-mode-hook #'rainbow-mode)
+(use-package rainbow-mode
+  :commands (rainbow-mode)
+  :hook (prog-mode-hook))
 
 (provide 'prelude-ui)

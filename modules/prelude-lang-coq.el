@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
-(ensure-package 'proof-general)
+
+(use-package proof-general
+  :commands (coq-mode)
+  :mode ("\\.v\\'" . coq-or-verilog-mode)
+  :config
+  (setq proof-splash-enable nil))
 
 ;; Resolve Coq and Verilog
 (defvar coq-or-verilog-mode--regexp "\\(?:\\(Theorem\\|Ltac\\|Example\\|Lemma\\|Axiom\\)[ 	]\\).+:")
@@ -27,10 +32,5 @@ Foundations and typical Verilog files."
                                (point-max) t))))
       (coq-mode)
     (verilog-mode)))
-
-(add-to-list 'auto-mode-alist '("\\.v\\'" . coq-or-verilog-mode))
-
-(eval-after-load 'proof-general
-  (setq proof-splash-enable nil))
 
 (provide 'prelude-lang-coq)

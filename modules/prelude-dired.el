@@ -1,25 +1,33 @@
 ;;; -*- lexical-binding: t; -*-
 
-;; Search file names when point is at a file name; Search unlimitedly
-;; otherwise.
-(setq dired-isearch-filenames 'dwim)
+(use-package dired
+  :straight nil
+  :commands (dired)
+  :init
+  ;; Search file names when point is at a file name; Search unlimitedly
+  ;; otherwise.
+  (setq dired-isearch-filenames 'dwim)
 
-;; Intelligently guess the target directory.
-(setq dired-dwim-target t)
+  ;; Intelligently guess the target directory.
+  (setq dired-dwim-target t)
 
-;; Set a default value for certain types of files on !
-(setq prelude/default-opener (if *is-a-mac* "open" "xdg-open"))
+  ;; Set a default value for certain types of files on !
+  (setq prelude/default-opener (if *is-a-mac* "open" "xdg-open"))
 
-(setq dired-guess-shell-alist-user
-      '(("\\.pdf\\'" prelude--default-opener)
-        ("\\.png\\'" prelude--default-opener)))
+  (setq dired-guess-shell-alist-user
+        '(("\\.pdf\\'" prelude--default-opener)
+          ("\\.png\\'" prelude--default-opener))))
 
-(defun prelude/setup-dired ()
-  ;; Filters
-  (ensure-package 'dired-filter)
-  (add-hook 'dired-mode-hook #'dired-filter-group-mode)
-  (add-hook 'dired-mode-hook #'dired-filter-mode)
-  (define-key dired-mode-map (kbd "/") dired-filter-map)
+(use-package dired-filter
+  :commands (dired-filter-map
+             dired-filter-mode
+             dired-filter-group-mode)
+  :after (dired)
+  :hook (dired-mode-hook . dired-filter-mode)
+  :hook (dired-mode-hook . dired-filter-group-mode)
+  :bind (:map dired-mode-map
+              ("/" . dired-filter-map))
+  :config
   (setq dired-filter-group-saved-groups
         '(("default"
            ("Git"
@@ -40,11 +48,11 @@
            ("Archives"
             (extension "zip" "rar" "tar" "gz" "bz2" "xz"))
            ("Images"
-            (extension "jpg" "jpeg" "webp" "png" "bmp" "gif" "tiff" "xcf")))))
+            (extension "jpg" "jpeg" "webp" "png" "bmp" "gif" "tiff" "xcf"))))))
 
-  ;; Colors
-  (ensure-package 'dired-rainbow)
-  (require 'dired-rainbow)
+(use-package dired-rainbow
+  :after (dired)
+  :config
   (dired-rainbow-define-chmod directory "#6cb2eb" "d.*")
   (dired-rainbow-define html        "#eb5286" ("css" "less" "sass" "scss" "htm" "html" "jhtm" "mht" "eml" "mustache" "xhtml"))
   (dired-rainbow-define xml         "#f2d024" ("xml" "xsd" "xsl" "xslt" "wsdl" "bib" "json" "msg" "pgn" "rss" "yaml" "yml" "rdata"))
@@ -64,9 +72,6 @@
   (dired-rainbow-define fonts       "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf" "otf"))
   (dired-rainbow-define partition   "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
   (dired-rainbow-define vc          "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
-  (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")
-)
-
-(with-eval-after-load "dired" (prelude/setup-dired))
+  (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*"))
 
 (provide 'prelude-dired)
