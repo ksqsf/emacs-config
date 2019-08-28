@@ -11,6 +11,7 @@
 	    (company-mode t))))
 
 (use-package elpy
+  :commands (elpy-shell-send-region-or-buffer-and-go elpy-shell-send-defun-and-go)
   :after (python)
   :hook (python-mode . elpy-enable)
   :config

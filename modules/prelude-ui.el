@@ -63,6 +63,6 @@
 ;; Rainbow
 (use-package rainbow-mode
   :commands (rainbow-mode)
-  :hook (prog-mode-hook))
+  :hook (prog-mode))
 
 (provide 'prelude-ui)

@@ -2,7 +2,6 @@
 
 (use-package proof-general
   :commands (coq-mode)
-  :mode ("\\.v\\'" . coq-or-verilog-mode)
   :config
   (setq proof-splash-enable nil))
 
@@ -32,5 +31,7 @@ Foundations and typical Verilog files."
                                (point-max) t))))
       (coq-mode)
     (verilog-mode)))
+
+(add-to-list 'auto-mode-alist '("\\.v\\'" . coq-or-verilog-mode))
 
 (provide 'prelude-lang-coq)
