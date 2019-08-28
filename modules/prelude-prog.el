@@ -14,7 +14,9 @@
 	      ("C-c C-j" . imenu)))
 
 (use-package yasnippet
-  :hook (prog-mode . yas-minor-mode))
+  :hook (prog-mode . yas-minor-mode)
+  :config
+  (yas-reload-all))
 
 (use-package hl-todo
   :hook (prog-mode . hl-todo-mode))

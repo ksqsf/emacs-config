@@ -3,7 +3,6 @@
 
 (use-package cc-mode
   :defer t
-  :requires (rainbow-mode)
   :init
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
@@ -12,7 +11,7 @@
                           (other . "gnu")))
   :config
   (add-hook 'c-mode-common-hook #'subword-mode)
-  (add-hook 'c-mode-common-hook #'(lambda () (rainbow-mode nil)))
+  (add-hook 'c-mode-common-hook #'(lambda () (rainbow-mode 0)))
   (define-key c-mode-map (kbd "<f5>") #'compile)
   (define-key c++-mode-map (kbd "<f5>") #'compile)
   (define-key c-mode-base-map (kbd "[") (double-tap-to-insert ?\())
