@@ -26,7 +26,7 @@
   (push '(ns-transparent-titlebar . t) initial-frame-alist)
   (push '(ns-appearance . dark) initial-frame-alist))
 
-;; Use dracula theme by default
+;; Use srcery theme by default
 (use-package srcery-theme
   :init
   (load-theme 'srcery t))
