@@ -27,6 +27,8 @@
 	 ("C-'" . org-cycle-agenda-files)
 	 ("C-c c" . org-capture))
   :config
+  (require 'org-tempo)
+
   ;; Agenda
   (setq org-agenda-files '("~/org/todo.org"
 			   "~/org/read.org"
