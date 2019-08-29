@@ -2,8 +2,8 @@
 
 (use-package dired
   :straight nil
-  :commands (dired)
-  :init
+  :defer t
+  :config
   ;; Search file names when point is at a file name; Search unlimitedly
   ;; otherwise.
   (setq dired-isearch-filenames 'dwim)
@@ -19,15 +19,11 @@
           ("\\.png\\'" prelude--default-opener))))
 
 (use-package dired-filter
-  :commands (dired-filter-map
-             dired-filter-mode
-             dired-filter-group-mode)
   :after (dired)
-  :hook (dired-mode-hook . dired-filter-mode)
-  :hook (dired-mode-hook . dired-filter-group-mode)
-  :bind (:map dired-mode-map
-              ("/" . dired-filter-map))
+  :hook ((dired-mode . dired-filter-group-mode)
+         (dired-mode . dired-filter-mode))
   :config
+  (define-key dired-mode-map "/" dired-filter-map)
   (setq dired-filter-group-saved-groups
         '(("default"
            ("Git"
