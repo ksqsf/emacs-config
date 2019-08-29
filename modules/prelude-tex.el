@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 (use-package tex
+  :defer t
   :straight auctex
   :mode (("\\.tex\\'" . LaTeX-mode))
   :config
