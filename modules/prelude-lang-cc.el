@@ -3,13 +3,12 @@
 
 (use-package cc-mode
   :defer t
-  :init
+  :config
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (c-mode . "k&r")
                           (c++-mode . "stroustrup")
                           (other . "gnu")))
-  :config
   (add-hook 'c-mode-common-hook #'subword-mode)
   (add-hook 'c-mode-common-hook #'(lambda () (rainbow-mode 0)))
   (define-key c-mode-map (kbd "<f5>") #'compile)
