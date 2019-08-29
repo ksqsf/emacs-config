@@ -38,5 +38,9 @@
 (use-package carbon-now-sh
   :commands (carbon-now-sh))
 
+;; elfeed
+(use-package elfeed
+  :commands (elfeed))
+
 (provide 'prelude-other)
 
