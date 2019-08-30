@@ -3,6 +3,7 @@
               :filter
               (lambda (process output)
                 (with-current-buffer "*scratch*"
+                  (fundamental-mode)
                   (erase-buffer)
                   (insert output)
                   (insert "\nHappy Hacking!\nDon't forget to check your calendar (C-c a)\n\n")
