@@ -3,7 +3,7 @@
 (use-package wakatime-mode
   :commands (global-wakatime-mode)
   :defer 1
-  :init
+  :config
   (global-wakatime-mode t))
 
 ;; eshell sends notifications when commands finished

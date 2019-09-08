@@ -46,6 +46,7 @@
 
 ;; I'm the winner ;-)
 (use-package winner
+  :defer t
   :bind (:map winner-mode-map
               ("C-c ," . winner-undo)
               ("C-c ." . winner-redo))
