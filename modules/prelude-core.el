@@ -130,7 +130,17 @@
     (setq exec-path-from-shell-check-startup-files nil)
     (setq exec-path-from-shell-arguments '("-l"))
     :config
-    (exec-path-from-shell-copy-envs '("PATH" "MANPATH"))))
+    (exec-path-from-shell-copy-envs '("PATH" "MANPATH")))
+
+  (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
+  (global-set-key (kbd "s-v") #'clipboard-yank)
+  (global-set-key (kbd "s-w") #'delete-frame)
+  (global-set-key (kbd "s-q") #'save-buffers-kill-emacs)
+  (global-set-key (kbd "s-t") #'split-window-horizontally)
+  (global-set-key (kbd "s-T") #'split-window-vertically)
+  (global-set-key (kbd "s-o") #'ace-window)
+  (global-set-key (kbd "s-x") #'execute-extended-command)
+  (global-set-key (kbd "s-n") #'make-frame-command))
 
 ;; Disable keys I don't use.
 (global-unset-key (kbd "C-x C-n"))
