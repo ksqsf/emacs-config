@@ -1,0 +1,4 @@
+(use-package company-tabnine
+  :after company
+  :config
+  (add-to-list 'company-backends #'company-tabnine))
