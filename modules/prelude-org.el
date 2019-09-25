@@ -60,7 +60,15 @@
   (org-babel-do-load-languages
    'org-babel-load-languages '((emacs-lisp . t)
 			       (sqlite . t)
-			       (python . t))))
+			       (python . t)))
+
+  (defun find-org ()
+    "Find one of your org files."
+    (interactive)
+    (let ((files (reverse (directory-files (expand-file-name "~/org")
+                                           nil
+                                           "^[^\\.].*\\.org$"))))
+      (find-file (ivy-read "Org File: " files)))))
 
 ;;; CTeX support
 (use-package ox-latex
