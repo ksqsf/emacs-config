@@ -135,7 +135,6 @@
   (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
   (global-set-key (kbd "s-v") #'clipboard-yank)
   (global-set-key (kbd "s-w") #'delete-frame)
-  (global-set-key (kbd "s-q") #'save-buffers-kill-emacs)
   (global-set-key (kbd "s-t") #'split-window-horizontally)
   (global-set-key (kbd "s-T") #'split-window-vertically)
   (global-set-key (kbd "s-o") #'ace-window)
