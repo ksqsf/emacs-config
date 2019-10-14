@@ -66,4 +66,8 @@
   :commands (rainbow-mode)
   :hook (prog-mode))
 
+;; Enable ligatures
+(when *is-a-mac*
+  (mac-auto-operator-composition-mode))
+
 (provide 'prelude-ui)
