@@ -58,9 +58,11 @@
 
   ;; Babel
   (org-babel-do-load-languages
-   'org-babel-load-languages '((emacs-lisp . t)
+   'org-babel-load-languages '((C . t)
+                               (emacs-lisp . t)
 			       (sqlite . t)
-			       (python . t)))
+			       (python . t)
+                               (haskell . t)))
 
   (defun find-org ()
     "Find one of your org files."
