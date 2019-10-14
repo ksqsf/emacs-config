@@ -44,11 +44,10 @@
 
   The following fonts are "blessed" in this configuration.
 
-  | Font             | Size | Usage                     |
-  |------------------+------+---------------------------|
-  | Source Code Pro  |   14 | General use (non-Chinese) |
-  | Iosevka Term     |   11 | Org Table                 |
-  | Noto Sans CJK TC |   14 | General use (Chinese)     |
+  | Font         | Size | Usage                     |
+  |--------------+------+---------------------------|
+  | Fira Code    |   14 | General use (non-Chinese) |
+  | Iosevka Term |   14 | Tabular content           |
 
   However, other fonts also seem to work well, like Monaco and Menlo.
 
