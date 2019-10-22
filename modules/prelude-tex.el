@@ -2,7 +2,7 @@
 
 (use-package tex
   :defer t
-  :straight auctex
+  :ensure auctex
   :mode (("\\.tex\\'" . LaTeX-mode))
   :config
   (setq-default TeX-engine 'xetex))

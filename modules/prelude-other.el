@@ -43,4 +43,3 @@
   :commands (elfeed))
 
 (provide 'prelude-other)
-

@@ -73,10 +73,8 @@
       (find-file (ivy-read "Org File: " files)))))
 
 ;;; CTeX support
-(use-package ox-latex
-  :straight nil
-  :after (org)
-  :config
+(with-eval-after-load 'org
+  (require 'ox-latex)
   (setq org-latex-compiler "xelatex")
   (add-to-list 'org-latex-classes
 	       '("ctexart"

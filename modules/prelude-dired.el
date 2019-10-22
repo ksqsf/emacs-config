@@ -1,9 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-(use-package dired
-  :straight nil
-  :defer t
-  :config
+(with-eval-after-load 'dired
   ;; Search file names when point is at a file name; Search unlimitedly
   ;; otherwise.
   (setq dired-isearch-filenames 'dwim)
