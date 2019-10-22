@@ -78,3 +78,11 @@ undohist/
 
 # abbrev
 abbrev_defs
+
+# cedet
+ede-projects.el
+semanticdb/
+srecode-map.el
+
+# elpy
+elpy/
