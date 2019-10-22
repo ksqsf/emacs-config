@@ -24,6 +24,13 @@
                          ("org" . "https://mirrors.ustc.edu.cn/elpa/org/")))
 (package-initialize)
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 ;; Modules.
 (require 'prelude)
 (require 'prelude-benchmark)
