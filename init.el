@@ -26,9 +26,9 @@
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
-  (package-install 'use-package))
+  (package-install 'use-package)
+  (require 'use-package))
 
-(require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
 ;; Modules.
