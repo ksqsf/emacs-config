@@ -70,6 +70,9 @@
                                            "^[^\\.].*\\.org$"))))
       (find-file (ivy-read "Org File: " files)))))
 
+(use-package org-ref
+  :after (org))
+
 ;;; CTeX support
 (with-eval-after-load 'org
   (require 'ox-latex)
