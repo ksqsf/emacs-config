@@ -86,6 +86,7 @@
   (interactive)
   (match-string-no-properties 1))
 
+;;;###autoload
 (define-derived-mode pest-mode prog-mode "Pest"
   "Major mode for editing Pest files"
   (setq-local font-lock-defaults '(pest--highlights))
