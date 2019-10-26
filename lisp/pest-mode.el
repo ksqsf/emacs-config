@@ -23,7 +23,8 @@
 ;;; Commentary:
 
 ;; This package provides GNU Emacs major modes for editing Pest grammar files.
-;; Currently, it supports syntax highlighting and indentation.
+;; Currently, it supports syntax highlighting, indentation, and imenu
+;; integration.
 
 ;;; Code:
 
@@ -54,6 +55,7 @@
           (goto-char (- (point-max) pos))))))
 
 (defun calculate-pest-indentation ()
+  "Calculate the indentation of the current line."
   (let (indent)
     (save-excursion
       (back-to-indentation)
@@ -72,9 +74,23 @@
               (setq indent (+ 2 base)))))))
     indent))
 
+(defun pest-imenu-prev-index-position ()
+  (interactive)
+  (re-search-backward (rx bol
+                          (group (+ (or alpha "_") (* (or (char alnum) "_"))))
+                          (* blank)
+                          "=" (* blank) (or "_{" "@{" "{"))
+                      (point-min) t))
+
+(defun pest-imenu-extract-index-name ()
+  (interactive)
+  (match-string-no-properties 1))
+
 (define-derived-mode pest-mode prog-mode "Pest"
   "Major mode for editing Pest files"
   (setq-local font-lock-defaults '(pest--highlights))
-  (setq-local indent-line-function #'pest-indent-line))
+  (setq-local indent-line-function #'pest-indent-line)
+  (setq-local imenu-prev-index-position-function #'pest-imenu-prev-index-position)
+  (setq-local imenu-extract-index-name-function #'pest-imenu-extract-index-name))
 
 (provide 'pest-mode)
