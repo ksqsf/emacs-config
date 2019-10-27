@@ -29,6 +29,7 @@
 ;;; Code:
 
 (require 'rx)
+(require 'imenu)
 
 (defvar pest--highlights
   `((,(rx (or "SOI" "EOI" "@" "+" "*" "?" "~"))         . font-lock-keyword-face)
