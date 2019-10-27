@@ -111,7 +111,7 @@
              :noquery t
              :connection-type 'pipe
              :buffer (generate-new-buffer " *pest-flymake*")
-             :command '("pesta")
+             :command '("pesta" "meta_check")
              :sentinel
              (lambda (proc _event)
                (when (eq 'exit (process-status proc))
