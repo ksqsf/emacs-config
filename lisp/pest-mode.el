@@ -32,6 +32,9 @@
 (require 'imenu)
 (require 'flymake)
 
+(eval-when-compile
+  (require 'cl))
+
 (defvar pest--highlights
   `((,(rx (or "SOI" "EOI" "@" "+" "*" "?" "~"))         . font-lock-keyword-face)
     (,(rx "//" (* nonl) eol)                            . font-lock-comment-face)
