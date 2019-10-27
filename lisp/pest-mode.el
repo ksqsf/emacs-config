@@ -30,6 +30,7 @@
 
 (require 'rx)
 (require 'imenu)
+(require 'flymake)
 
 (defvar pest--highlights
   `((,(rx (or "SOI" "EOI" "@" "+" "*" "?" "~"))         . font-lock-keyword-face)
@@ -75,6 +76,8 @@
               (setq indent (+ 2 base)))))))
     indent))
 
+
+
 (defun pest-imenu-prev-index-position ()
   (interactive)
   (re-search-backward (rx bol
@@ -87,12 +90,63 @@
   (interactive)
   (match-string-no-properties 1))
 
+
+
+(defvar-local pest--flymake-proc nil)
+
+(defun pest-flymake (report-fn &rest _args)
+  (unless (executable-find "pesta")
+    (error "Cannot find a suitable `pesta' executable"))
+  (when (process-live-p pest--flymake-proc)
+    (kill-process pest--flymake-proc))
+  (let ((source (current-buffer)))
+    (save-restriction
+      (widen)
+      (setq pest--flymake-proc
+            (make-process
+             :name "pest-flymake"
+             :noquery t
+             :connection-type 'pipe
+             :buffer (generate-new-buffer " *pest-flymake*")
+             :command '("pesta")
+             :sentinel
+             (lambda (proc _event)
+               (when (eq 'exit (process-status proc))
+                 (unwind-protect
+                     (if (with-current-buffer source (eq proc pest--flymake-proc))
+                         (with-current-buffer (process-buffer proc)
+                           (goto-char (point-min))
+                           (cl-loop
+                            while (search-forward-regexp (rx bol
+                                                             (group (or "nil")) " "
+                                                             (group (+ (char digit))) " "
+                                                             "(" (+ (char digit)) "," (+ (char digit)) ") "
+                                                             (group (* nonl))
+                                                             eol)
+                                                         nil t)
+                            for msg = (match-string 3)
+                            for beg = (string-to-number (match-string 2))
+                            for type = :error
+                            collect (flymake-make-diagnostic source
+                                                             beg
+                                                             (1+ beg)
+                                                             type
+                                                             msg)
+                            into diags
+                            finally (funcall report-fn diags)))
+                       (flymake-log :warning "Canceling obsolete check %s"
+                                    proc))
+                   (kill-buffer (process-buffer proc)))))))
+      (process-send-region pest--flymake-proc (point-min) (point-max))
+      (process-send-eof pest--flymake-proc))))
+
 ;;;###autoload
 (define-derived-mode pest-mode prog-mode "Pest"
   "Major mode for editing Pest files"
   (setq-local font-lock-defaults '(pest--highlights))
   (setq-local indent-line-function #'pest-indent-line)
   (setq-local imenu-prev-index-position-function #'pest-imenu-prev-index-position)
-  (setq-local imenu-extract-index-name-function #'pest-imenu-extract-index-name))
+  (setq-local imenu-extract-index-name-function #'pest-imenu-extract-index-name)
+  (add-hook 'flymake-diagnostic-functions 'pest-flymake nil t))
 
 (provide 'pest-mode)
