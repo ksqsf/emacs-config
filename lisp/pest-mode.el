@@ -79,7 +79,7 @@
   (re-search-backward (rx bol
                           (group (+ (or alpha "_") (* (or (char alnum) "_"))))
                           (* blank)
-                          "=" (* blank) (or "_{" "@{" "{"))
+                          "=" (* blank) (or "_{" "@{" "!{" "${" "{"))
                       (point-min) t))
 
 (defun pest-imenu-extract-index-name ()
