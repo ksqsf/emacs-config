@@ -1,7 +1,7 @@
 ;;; pest-mode.el --- Major mode for editing Pest files -*- lexical-binding: t; -*-
 
 ;; Author: ksqsf <i@ksqsf.moe>
-;; URL: https://github.com/ksqsf/pest-mode.el
+;; URL: https://github.com/ksqsf/pest-mode
 ;; Version: 0.1
 ;; Package-Requires: ((emacs "26.3"))
 
@@ -22,9 +22,19 @@
 
 ;;; Commentary:
 
-;; This package provides GNU Emacs major modes for editing Pest grammar files.
-;; Currently, it supports syntax highlighting, indentation, and imenu
-;; integration.
+;; This package provides GNU Emacs major modes for editing Pest
+;; grammar files.  Currently, it supports syntax highlighting,
+;; indentation, imenu integration, and flymake support (requires
+;; the `pesta' program).
+
+;; Also, you can use `pest-test-grammar' to open a new buffer, in
+;; which you can experiment with your language defined by the grammar.
+;; The input will be automatically checked against your grammar with
+;; flymake.
+
+;; Planned features:
+;; + Grammatical structure analysis
+;; + Eldoc integration
 
 ;;; Code:
 
