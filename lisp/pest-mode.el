@@ -30,10 +30,11 @@
 ;; Also, you can use `pest-test-grammar' to open a new buffer, in
 ;; which you can experiment with your language defined by the grammar.
 ;; The input will be automatically checked against your grammar with
-;; flymake.
+;; flymake.  In this new buffer, you can use `pest-analyze-input'
+;; (default keybinding: C-c C-c) to analyze the input, which will give
+;; you an analysis report of the structure.
 
 ;; Planned features:
-;; + Grammatical structure analysis
 ;; + Eldoc integration
 
 ;;; Code:
@@ -314,6 +315,22 @@ flag NO-SWITCH is non-nill."
           (process-send-string pest--lang-flymake-proc send-data)
           (process-send-eof pest--lang-flymake-proc))))))
 
+(defun pest-input-eldoc ()
+  (unless (executable-find "pesta")
+    (error "Cannot find a suitable `pesta' executable"))
+  (if (null pest--selected-rule)
+      (message "You haven't selected a start rule; do so with `pest-select-rule'")
+    (save-excursion
+      (let* ((source (buffer-string))
+             (selected-rule pest--selected-rule)
+             (grammar (with-current-buffer pest--grammar-buffer (buffer-string)))
+             (pos (save-restriction (widen) (point))))
+        (with-temp-buffer
+          (call-process-region (json-encode-list (list grammar source)) nil "pesta"
+                               nil (current-buffer) nil
+                               "lang_point" selected-rule (number-to-string pos))
+          (string-trim-right (buffer-string)))))))
+
 (defvar pest-input-mode-map
   (let ((map (make-sparse-keymap))
         (menu-map (make-sparse-keymap "Pest")))
@@ -325,6 +342,7 @@ flag NO-SWITCH is non-nill."
   "Major mode for input to test a Pest grammar file.  This mode should only be enabled with `pest-test-grammar'.
 
 \\{pest-input-mode-map}"
+  (setq-local eldoc-documentation-function #'pest-input-eldoc)
   (add-hook 'flymake-diagnostic-functions 'pest-input-flymake nil t)
   (flymake-mode))
 
