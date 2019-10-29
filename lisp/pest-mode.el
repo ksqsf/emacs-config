@@ -208,7 +208,7 @@ newly-created buffer, with real-time diagnosis messages."
 
 
 (defvar-local pest--lang-flymake-proc nil)
-(defvar-local pest--lang-eldoc-proc nil)
+(defvar-local pest--lang-analyze-proc nil)
 (defvar-local pest--grammar-buffer nil)
 (defvar-local pest--selected-rule nil)
 
@@ -224,7 +224,36 @@ newly-created buffer, with real-time diagnosis messages."
 (defun pest-analyze-input ()
   "Analyze the input and show a report of the parsing result in a new buffer."
   (interactive)
-  (message "todo; pest-analyze-input invoked"))
+  (unless (executable-find "pesta")
+    (error "Cannot find a suitable `pesta' executable"))
+  (when (process-live-p pest--lang-analyze-proc)
+    (kill-process pest--lang-analyze-proc))
+  (if (null pest--selected-rule)
+      (message "You haven't selected a rule to start; do so with `pest-select-rule'.")
+    (let ((source (current-buffer))
+          (selected-rule pest--selected-rule)
+          (output (generate-new-buffer "*pest-analyze*")))
+      (message "Analyze with start rule: %s" selected-rule)
+      (setq pest--lang-analyze-proc
+            (make-process
+             :name "pest-analyze"
+             :noquery t
+             :connection-type 'pipe
+             :buffer output
+             :command `("pesta" "lang_analyze" ,selected-rule)
+             :sentinel
+             (lambda (proc _event)
+               (when (eq 'exit (process-status proc))
+                 (unwind-protect
+                     (unless (with-current-buffer source (eq proc pest--lang-analyze-proc))
+                       (message "Canceling obsolete analysis %s" proc)))))))
+      (let* ((grammar (with-current-buffer pest--grammar-buffer
+                        (buffer-string)))
+             (input (with-current-buffer source (buffer-string)))
+             (data-to-send (json-encode-list (list grammar input))))
+        (process-send-string pest--lang-analyze-proc data-to-send)
+        (process-send-eof pest--lang-analyze-proc)
+        (switch-to-buffer-other-window output)))))
 
 (defun pest-input-flymake (report-fn &rest _args)
   "Check and give diagnosis messages about the input."
@@ -242,7 +271,7 @@ newly-created buffer, with real-time diagnosis messages."
                :name "pest-input-flymake"
                :noquery t
                :connection-type 'pipe
-               :buffer (generate-new-buffer " *pest-input-flymake*")
+               :buffer (get-buffer-create " *pest-input-flymake*")
                :command `("pesta" "lang_check" ,pest--selected-rule)
                :sentinel
                (lambda (proc _event)
