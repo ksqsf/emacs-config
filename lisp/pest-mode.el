@@ -235,8 +235,10 @@ flag NO-SWITCH is non-nill."
       (message "You haven't selected a rule to start; do so with `pest-select-rule'.")
     (let ((source (current-buffer))
           (selected-rule pest--selected-rule)
-          (output (generate-new-buffer "*pest-analyze*")))
+          (output (get-buffer-create "*pest-analyze*")))
       (message "Analyze with start rule: %s" selected-rule)
+      (with-current-buffer output
+        (delete-region (point-min) (point-max)))
       (setq pest--lang-analyze-proc
             (make-process
              :name "pest-analyze"
@@ -249,15 +251,16 @@ flag NO-SWITCH is non-nill."
                (when (eq 'exit (process-status proc))
                  (unwind-protect
                      (unless (with-current-buffer source (eq proc pest--lang-analyze-proc))
-                       (message "Canceling obsolete analysis %s" proc)))))))
+                       (message "Canceling obsolete analysis %s" proc)))
+                 (unless no-switch
+                   (switch-to-buffer-other-window output)
+                   (goto-char (point-min)))))))
       (let* ((grammar (with-current-buffer pest--grammar-buffer
                         (buffer-string)))
              (input (with-current-buffer source (buffer-string)))
              (data-to-send (json-encode-list (list grammar input))))
         (process-send-string pest--lang-analyze-proc data-to-send)
-        (process-send-eof pest--lang-analyze-proc)
-        (if no-switch
-            (switch-to-buffer-other-window output))))))
+        (process-send-eof pest--lang-analyze-proc)))))
 
 (defun pest-input-flymake (report-fn &rest _args)
   "Check and give diagnosis messages about the input."
@@ -275,7 +278,7 @@ flag NO-SWITCH is non-nill."
                :name "pest-input-flymake"
                :noquery t
                :connection-type 'pipe
-               :buffer (get-buffer-create " *pest-input-flymake*")
+               :buffer (generate-new-buffer " *pest-input-flymake*")
                :command `("pesta" "lang_check" ,pest--selected-rule)
                :sentinel
                (lambda (proc _event)
