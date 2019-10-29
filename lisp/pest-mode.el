@@ -221,8 +221,11 @@ newly-created buffer, with real-time diagnosis messages."
          (rule (completing-read "Start rule: " rules nil t)))
     (setq-local pest--selected-rule rule)))
 
-(defun pest-analyze-input ()
-  "Analyze the input and show a report of the parsing result in a new buffer."
+(defun pest-analyze-input (&optional no-switch)
+  "Analyze the input and show a report of the parsing result in a new buffer.
+
+By default, you'll be directed to the analysis report, unless the
+flag NO-SWITCH is non-nill."
   (interactive)
   (unless (executable-find "pesta")
     (error "Cannot find a suitable `pesta' executable"))
@@ -253,7 +256,8 @@ newly-created buffer, with real-time diagnosis messages."
              (data-to-send (json-encode-list (list grammar input))))
         (process-send-string pest--lang-analyze-proc data-to-send)
         (process-send-eof pest--lang-analyze-proc)
-        (switch-to-buffer-other-window output)))))
+        (if no-switch
+            (switch-to-buffer-other-window output))))))
 
 (defun pest-input-flymake (report-fn &rest _args)
   "Check and give diagnosis messages about the input."
