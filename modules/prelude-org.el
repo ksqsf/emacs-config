@@ -61,7 +61,8 @@
                                (emacs-lisp . t)
 			       (sqlite . t)
 			       (python . t)
-                               (haskell . t)))
+                               (haskell . t)
+                               (dot . t)))
 
   (defun find-org-file ()
     "Find one of my org files."
