@@ -25,7 +25,8 @@
   :hook (org-mode . org-cdlatex-mode)
   :bind (("C-c a" . org-agenda)
 	 ("C-'" . org-cycle-agenda-files)
-	 ("C-c c" . org-capture))
+	 ("C-c c" . org-capture)
+         ("C-c o" . find-org-file))
   :config
   ;; Agenda
   (setq org-agenda-files '("~/org/todo.org"
@@ -62,13 +63,14 @@
 			       (python . t)
                                (haskell . t)))
 
-  (defun find-org ()
-    "Find one of your org files."
+  (defun find-org-file ()
+    "Find one of my org files."
     (interactive)
-    (let ((files (reverse (directory-files (expand-file-name "~/org")
-                                           nil
-                                           "^[^\\.].*\\.org$"))))
-      (find-file (ivy-read "Org File: " files)))))
+    (let* ((files (reverse (directory-files (expand-file-name "~/org")
+                                            nil
+                                            "^[^\\.].*\\.org$")))
+           (file (completing-read "Org File: " files)))
+      (find-file (expand-file-name file "~/org")))))
 
 (use-package org-ref
   :after (org))
