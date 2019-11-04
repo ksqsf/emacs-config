@@ -7,8 +7,8 @@
   (set-face-font 'org-todo "Iosevka Term-14")
   (set-face-font 'org-done "Iosevka Term-14"))
 
-(eval-after-load 'markdown
-  '(set-face-font 'markdown-table-face "Iosevka Term-14"))
+(with-eval-after-load 'markdown
+  (set-face-font 'markdown-table-face "Iosevka Term-14"))
 
 ;; Even though I speak Chinese, please use English dictionary for
 ;; spell checking.
