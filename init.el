@@ -36,7 +36,7 @@
 (require 'prelude-benchmark)
 (require 'prelude-core)
 (require 'prelude-ui)
-(require 'prelude-ivy)
+(require 'prelude-completion)
 (require 'prelude-ibuffer)
 (require 'prelude-project)
 (require 'prelude-chinese)
