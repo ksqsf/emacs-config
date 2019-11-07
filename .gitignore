@@ -67,8 +67,9 @@ recentf
 # Projectile
 projectile-bookmarks.eld
 
-# Smex
+# Smex/Amx
 smex-items
+amx-items
 
 # ?
 transient/
@@ -86,3 +87,12 @@ srecode-map.el
 
 # elpy
 elpy/
+
+# lsp
+.lsp-session-v1
+
+# forge
+forge-database.sqlite
+
+# type-break
+type-break
