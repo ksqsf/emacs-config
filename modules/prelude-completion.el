@@ -1,7 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 
 (use-package flx)
-(use-package amx)
+
+(use-package amx
+  :config
+  (setq amx-backend 'ivy)
+  (amx-mode 1))
 
 (use-package ivy
   :commands (ivy-mode)
@@ -16,8 +20,7 @@
   (setq ivy-use-virtual-buffers 'recentf))
 
 (use-package counsel
-  :bind (("C-c c" . counsel-compile)
-         ("C-c g" . counsel-git)
+  :bind (("C-c g" . counsel-git)
          ("C-c j" . counsel-git-grep)
          ("C-c L" . counsel-git-log)
          ("C-c k" . counsel-rg)
