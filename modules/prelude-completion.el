@@ -30,4 +30,14 @@
 (use-package ivy-hydra
   :after ivy)
 
+(use-package ivy-posframe
+  :disabled
+  :after ivy
+  :config
+  (setq ivy-posframe-parameters
+        '((left-fringe . 8)
+          (right-fringe . 8)))
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-point)))
+  (ivy-posframe-mode 1))
+
 (provide 'prelude-completion)

@@ -21,7 +21,8 @@
 (blink-cursor-mode 0)
 
 ;; Don't let Emacs hurt my ears
-(setq visible-bell t)
+(setq visible-bell nil)
+(setq ring-bell-function 'ignore)
 
 ;; Don't show messages that I don't read
 (setq initial-scratch-message "")
