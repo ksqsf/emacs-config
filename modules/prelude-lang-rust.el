@@ -21,4 +21,7 @@
 (use-package racer
   :hook (rust-mode . racer-mode))
 
+(use-package ob-rust
+  :after org)
+
 (provide 'prelude-lang-rust)

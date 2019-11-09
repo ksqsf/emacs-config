@@ -62,7 +62,8 @@
 			       (sqlite . t)
 			       (python . t)
                                (haskell . t)
-                               (dot . t)))
+                               (dot . t)
+                               (rust . t)))
 
   (defun find-org-file ()
     "Find one of my org files."
