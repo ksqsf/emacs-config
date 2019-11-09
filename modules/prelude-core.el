@@ -131,7 +131,7 @@
     (setq exec-path-from-shell-check-startup-files nil)
     (setq exec-path-from-shell-arguments '("-l"))
     :config
-    (exec-path-from-shell-copy-envs '("PATH" "MANPATH")))
+    (exec-path-from-shell-copy-envs '("PATH")))
 
   (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
   (global-set-key (kbd "s-v") #'clipboard-yank)
