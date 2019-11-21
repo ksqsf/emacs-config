@@ -2,7 +2,7 @@
 
   This configuration has been tested on macOS and Debian.
 
-  NOTE: This configuration only targets Emacs 26.1.  No guarantee
+  NOTE: This configuration only targets Emacs 26.3.  No guarantee
   about forward/backward compatibility.  You can comment out the first
   paragraph in =init.el= if you do want to try.
 
