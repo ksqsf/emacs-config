@@ -28,6 +28,8 @@
 	 ("C-c c" . org-capture)
          ("C-c o" . find-org-file))
   :config
+  (setq org-directory (expand-file-name "~/org"))
+
   ;; Agenda
   (setq org-agenda-files '("~/org/todo.org"
 			   "~/org/read.org"
@@ -40,12 +42,12 @@
   ;; Capture
   (setq org-capture-templates
 	'(("t" "待办" entry (file+headline "~/org/todo.org" "未分类任务")
-	   "* TODO %?\n  %i\n  %a")
-	  ("d" "今天做了什么？有什么感想？" entry (file+olp+datetree "~/org/diary.org")
-	   "* %?")
-	  ("r" "一些乱糟糟的思绪" entry (file+headline "~/org/capture.org" "随机垃圾"))
-	  ("n" "任何东西的记录" entry (file+olp+datetree "~/org/notes.org")
-	   "* %?")))
+           "* TODO %?\n  %i\n  %a")
+          ("d" "今天做了什么？有什么感想？" entry (file+olp+datetree "~/org/diary.org")
+           "* %?")
+          ("r" "一些乱糟糟的思绪" entry (file+headline "~/org/capture.org" "随机垃圾"))
+          ("n" "任何东西的记录" entry (file+olp+datetree "~/org/notes.org")
+           "* %?")))
 
   ;; Catch invisible edits!
   (setq org-catch-invisible-edits 'smart)
@@ -68,11 +70,11 @@
   (defun find-org-file ()
     "Find one of my org files."
     (interactive)
-    (let* ((files (reverse (directory-files (expand-file-name "~/org")
+    (let* ((files (reverse (directory-files (expand-file-name org-directory)
                                             nil
                                             "^[^\\.].*\\.org$")))
            (file (completing-read "Org File: " files)))
-      (find-file (expand-file-name file "~/org")))))
+      (find-file (expand-file-name file org-directory)))))
 
 (use-package org-ref
   :after (org))
