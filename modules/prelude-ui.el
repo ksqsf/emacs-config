@@ -1,4 +1,9 @@
 ;;; -*- lexical-binding: t; -*-
+
+(defcustom prelude-ui-accent-color
+  "brown2"
+  "Accent color of UI elements. This affects the mode line.")
+
 ;; Don't show useless UI elements
 (menu-bar-mode 1)
 (tool-bar-mode 0)
@@ -40,7 +45,8 @@
 (use-package doom-modeline
   :init
   (setq doom-modeline-minor-modes nil)
-  (doom-modeline-mode t))
+  (doom-modeline-mode t)
+  (set-face-attribute 'doom-modeline-bar nil :background prelude-ui-accent-color))
 
 ;; I'm the winner ;-)
 (use-package winner
