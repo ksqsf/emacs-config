@@ -149,6 +149,10 @@
 (global-set-key (kbd "M-]") #'forward-page)
 (global-set-key (kbd "M-[") #'backward-page)
 
+;; dwim
+(global-set-key (kbd "M-l") #'downcase-dwim)
+(global-set-key (kbd "M-u") #'upcase-dwim)
+
 ;; Ripgrep
 (use-package ripgrep
   :commands (ripgrep-regexp ripgrep-search-mode))

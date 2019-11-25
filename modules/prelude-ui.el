@@ -2,7 +2,9 @@
 
 (defcustom prelude-ui-accent-color
   "brown2"
-  "Accent color of UI elements. This affects the mode line.")
+  "Accent color of UI elements. This affects the mode line."
+  :group 'prelude
+  :type '(color))
 
 ;; Don't show useless UI elements
 (menu-bar-mode 1)
