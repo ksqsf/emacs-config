@@ -41,8 +41,11 @@
 
   ;; Capture
   (setq org-capture-templates
-	'(("t" "待办" entry (file+headline "~/org/todo.org" "未分类任务")
+	'(("T" "未分类待办" entry (file+headline "~/org/todo.org" "未分类任务")
            "* TODO %?\n  %i\n  %a")
+          ("t" "待办" entry (file+olp+datetree "~/org/todo.org" "今天")
+           "* TODO %?\n" :tree-type 'week)
+          ("n" "记笔记" plain (clock))
           ("d" "今天做了什么？有什么感想？" entry (file+olp+datetree "~/org/diary.org")
            "* %?")
           ("r" "一些乱糟糟的思绪" entry (file+headline "~/org/capture.org" "随机垃圾"))
@@ -66,6 +69,16 @@
                                (haskell . t)
                                (dot . t)
                                (rust . t)))
+
+  ;; Publish
+  (setq org-publish-project-alist
+        '(("moe"
+           :base-directory "~/moe/org"
+           :publishing-directory "~/moe/html"
+           :publishing-function org-html-publish-to-html
+           :with-author nil
+           :auto-sitemap t
+           :sitemap-file "sitemap.org")))
 
   (defun find-org-file ()
     "Find one of my org files."
