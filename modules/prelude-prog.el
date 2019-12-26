@@ -25,6 +25,13 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 
+(use-package lsp-mode
+  :commands (lsp lsp-mode))
+
+(use-package lsp-ui
+  :commands (lsp-ui-mode))
+
+
 ;;; GDB
 ;; Refer to https://debbugs.gnu.org/cgi/bugreport.cgi?bug=33548
 (setq gdb-mi-decode-strings 'utf-8)
