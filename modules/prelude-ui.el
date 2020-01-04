@@ -6,6 +6,11 @@
   :group 'prelude
   :type '(color))
 
+(defcustom prelude-ui-frame-alpha
+  0.92
+  "Default frame alpha."
+  :group 'prelude)
+
 ;; Don't show useless UI elements
 (menu-bar-mode 1)
 (tool-bar-mode 0)
