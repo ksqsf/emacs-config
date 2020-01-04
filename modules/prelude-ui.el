@@ -39,7 +39,8 @@
 ;; Use srcery theme by default
 (use-package srcery-theme
   :init
-  (load-theme 'srcery t))
+  (load-theme 'srcery t)
+  (set-face-attribute 'font-lock-comment-face nil :foreground "orange"))
 
 ;; Mode line
 (use-package diminish
