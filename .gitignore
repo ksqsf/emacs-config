@@ -35,7 +35,8 @@ session.*
 url/
 
 # eshell
-eshell/
+eshell/history
+eshell/lastdir
 
 # erc
 .ercrc.el
