@@ -130,13 +130,52 @@ Uses the default stack config file, or STACK-YAML file if given."
             '("-fno-code" "-fwrite-interface")
           '("-fobject-code"))))))
 
-(defvar *prelude--latest-stackage-lts-version*)
+(defvar *prelude--latest-stackage-lts-version* nil
+  "Cached value for stackage lts version.")
+(defvar *prelude--stack-proc* nil)
+
 (defun prelude--get-latest-stackage-lts-version ()
   "Returns the latest version of the Stackage LTS resolver.
 
-It's intended to fetch this data from 'stack ls snapshots --resolver remote', 
-but stack incorrectly launches the pager on a pipe.  Let's fix that problem
-first."
-  "lts-14.20")
+This data is fetched from 'stack ls snapshots --resolver remote'.
+If no data can be fetched, a default value (lts-14.20) is returned."
+  (catch 'answer
+    ;; The result is ready.
+    (when (not (null *prelude--latest-stackage-lts-version*))
+      (throw 'answer *prelude--latest-stackage-lts-version*))
+    ;; We don't have an answer yet, but the process has been started.
+    ;; Wait for the result.
+    (when (and (not (null *prelude--stack-proc*))
+               (eq 'run (process-status *prelude--stack-proc*)))
+      (sit-for 0.1)
+      (throw 'answer *prelude--latest-stackage-lts-version*))
+    ;; No answer and no process. Start the process.
+    (message "Fetching data from stack...")
+    (let ((process (make-process
+                    :name "prelude-stack"
+                    :buffer " *prelude-stack*"
+                    :command '("stack" "--no-terminal"
+                               "ls" "snapshots" "--lts" "remote")
+                    :noquery t
+                    :sentinel
+                    (lambda (proc _event)
+                      (when (eq 'exit (process-status proc))
+                        (with-current-buffer " *prelude-stack*"
+                          (goto-char (point-max))
+                          (if (re-search-backward "Resolver name: \\(lts-[0-9]+\\.[0-9]+\\)" nil t)
+                              (progn (setq *prelude--latest-stackage-lts-version*
+                                           (match-string-no-properties 1))
+                                     (throw 'answer *prelude--latest-stackage-lts-version*))
+                            (setq default "lts-14.20")
+                            (warn "Unable to get the version number! Returning a default value: %s." default)
+                            (setq *prelude--latest-stackage-lts-version* default)
+                            (throw 'answer default))
+                          (kill-buffer " *prelude-stack*")))))))
+      ;; Wait for result...?
+      (setq *prelude--stack-proc* process)
+      (while (null *prelude--latest-stackage-lts-version*)
+        (sit-for 0.1))
+      (kill-process process)
+      (throw 'answer *prelude--latest-stackage-lts-version*))))
 
 (provide 'prelude-lang-haskell)
