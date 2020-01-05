@@ -27,4 +27,12 @@ double consecutive occurrences of that character with TO-CHAR."
            (insert ,to-char))
        (self-insert-command cnt))))
 
+(defun require-async (feature)
+  "Call `require' in a new thread.
+
+The effect is yet to be experimented."
+  (make-thread
+   (lambda ()
+     (require feature))))
+
 (provide 'prelude)
