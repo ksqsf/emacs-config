@@ -45,3 +45,5 @@
                         (revert-buffer nil t)))
                    'follow-link t))))
             (setq ad-index (1+ ad-index))))))))
+
+(provide 'prelude-help)
