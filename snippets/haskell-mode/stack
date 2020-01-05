@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: stack
+# key: stack
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#!/usr/bin/env stack
+{- stack --resolver `(prelude--get-latest-stackage-lts-version)` script $1-}
+$0

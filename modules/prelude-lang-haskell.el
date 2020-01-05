@@ -1,7 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
 (use-package haskell-mode
-  :mode ("\\.hs\\'" . haskell-mode))
+  :mode ("\\.hs\\'" . haskell-mode)
+  :hook (haskell-mode-hook . yas-minor-mode))
 
 ;; https://github.com/digital-asset/ghcide
 ;; https://github.com/haskell/haskell-ide-engine#using-hie-with-emacs
@@ -128,5 +129,14 @@ Uses the default stack config file, or STACK-YAML file if given."
         (if (intero-version>= current-version '(8 4 1))
             '("-fno-code" "-fwrite-interface")
           '("-fobject-code"))))))
+
+(defvar *prelude--latest-stackage-lts-version*)
+(defun prelude--get-latest-stackage-lts-version ()
+  "Returns the latest version of the Stackage LTS resolver.
+
+It's intended to fetch this data from 'stack ls snapshots --resolver remote', 
+but stack incorrectly launches the pager on a pipe.  Let's fix that problem
+first."
+  "lts-14.20")
 
 (provide 'prelude-lang-haskell)
