@@ -56,6 +56,7 @@
 (require 'prelude-lang-js)
 (require 'prelude-lang-haskell)
 
+(require 'prelude-help)
 (require 'prelude-utils)
 (require 'prelude-other)
 
