@@ -1,4 +1,8 @@
-* ksqsf's =.emacs.d=
+* Venus Emacs
+
+  [[./data/venus.jpg]]
+
+  Venus Emacs is a "slightly configured" Emacs flavor, made by ksqsf.
 
   This configuration has been tested on macOS and Debian.
 
