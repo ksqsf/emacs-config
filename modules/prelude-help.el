@@ -26,7 +26,7 @@
         (goto-char (point-min))
         (let ((ad-index 0)
               (ad-list (reverse (function-advices function))))
-          (while (re-search-forward +prelude--advice-regex+)
+          (while (re-search-forward +prelude--advice-regex+ nil t)
             (let* ((name (string-trim (match-string 1) "'" "'"))
                    (advice (or (intern-soft name) (nth ad-index ad-list))))
               (when (and advice (functionp advice))
