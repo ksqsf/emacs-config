@@ -17,9 +17,6 @@
 ;; Don't recenter to the middle of the screen
 (setq recenter-positions '(top 0.25 bottom))
 
-;; Don't blink!
-(blink-cursor-mode 0)
-
 ;; Don't let Emacs hurt my ears
 (setq visible-bell nil)
 (setq ring-bell-function 'ignore)

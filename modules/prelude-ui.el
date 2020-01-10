@@ -44,7 +44,6 @@
 
 ;; Mode line
 (use-package diminish
-  :disabled
   :defer 1
   :config
   (diminish 'eldoc-mode)
@@ -69,9 +68,6 @@
 ;; Eye candy icons
 (use-package all-the-icons
   :defer t)
-
-;; Make the cursor stand out.
-(global-hl-line-mode t)
 
 ;; Rainbow
 (use-package rainbow-mode
