@@ -8,8 +8,10 @@
 (eval-after-load 'scheme
   (setq scheme-program-name "mechanics"))
 
-(eval-after-load 'guile
-  (setq geiser-default-implementation 'guile))
+(use-package geiser
+  :mode (("\\.ss\\'" . geiser-mode))
+  :config
+  (setq geiser-default-implementation 'chez))
 
 (defun mechanics ()
   (interactive)
