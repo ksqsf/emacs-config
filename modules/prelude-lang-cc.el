@@ -1,6 +1,24 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Config for C/C++/Java/...
 
+(defvar c-newline-and-indent-regexp "\\s)")
+
+(defun c-newline-and-indent ()
+  "Open one more line when the next char is a closing paren.
+
+The exact behavior can be controlled by
+`c-newline-and-indent-regexp'.
+
+This command relies on `c-indent-line' so it only works in CC
+Mode."
+  (interactive)
+  (newline)
+  (save-excursion
+    (when (looking-at-p c-newline-and-indent-regexp)
+      (newline)
+      (c-indent-line)))
+  (c-indent-line))
+
 (use-package cc-mode
   :defer t
   :config
@@ -16,6 +34,7 @@
   (define-key c-mode-base-map (kbd "[") (double-tap-to-insert ?\())
   (define-key c-mode-base-map (kbd "]") (double-tap-to-insert ?\)))
   (define-key c-mode-base-map (kbd "'") (double-tap-to-insert ?\"))
-  (define-key c-mode-base-map (kbd "`") (double-tap-to-insert ?\")))
+  (define-key c-mode-base-map (kbd "`") (double-tap-to-insert ?\"))
+  (define-key c-mode-base-map (kbd "RET") #'c-newline-and-indent))
 
 (provide 'prelude-lang-cc)
