@@ -126,7 +126,7 @@
   (use-package exec-path-from-shell
     :init
     (setq exec-path-from-shell-check-startup-files nil)
-    (setq exec-path-from-shell-arguments '("-l"))
+    (setq exec-path-from-shell-arguments '("-l" "--no-rcs"))
     :config
     (exec-path-from-shell-copy-envs '("PATH")))
 
