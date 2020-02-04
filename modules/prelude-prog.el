@@ -7,7 +7,14 @@
 (use-package company
   :hook (prog-mode . company-mode)
   :config
-  (setq company-idle-delay 0.3))
+  ;; Note, some completers are very slow (like Racer)
+  ;; In that case, make sure to use a saner value...
+  (setq company-idle-delay 0.1))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode)
+  :config
+  (setq company-box-icons-alist 'company-box-icons-all-the-icons))
 
 (use-package imenu
   :bind (:map prog-mode-map
