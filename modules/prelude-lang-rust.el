@@ -8,8 +8,9 @@
   (define-key rustic-mode-map (kbd "]") (double-tap-to-insert ?\)))
   (add-hook 'rustic-mode-hook #'yas-minor-mode)
   (add-hook 'rustic-mode-hook #'subword-mode)
-  (add-hook 'rustic-mode-hook #'(lambda () (setq company-idle-delay nil))))
   (add-hook 'rustic-mode-hook #'smartparens-mode)
+  (add-hook 'rustic-mode-hook #'(lambda () (setq company-idle-delay 0.1)))
+  (add-hook 'rustic-mode-hook #'electric-pair-mode))
 
 ;; (use-package rust-mode
 ;;   :mode ("\\.rs\\'" . rust-mode)
