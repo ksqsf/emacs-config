@@ -31,6 +31,9 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package smartparens
+  :commands (smartparens-mode))
+
 
 (use-package lsp-mode
   :commands (lsp lsp-mode))

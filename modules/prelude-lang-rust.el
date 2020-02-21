@@ -9,6 +9,7 @@
   (add-hook 'rustic-mode-hook #'yas-minor-mode)
   (add-hook 'rustic-mode-hook #'subword-mode)
   (add-hook 'rustic-mode-hook #'(lambda () (setq company-idle-delay nil))))
+  (add-hook 'rustic-mode-hook #'smartparens-mode)
 
 ;; (use-package rust-mode
 ;;   :mode ("\\.rs\\'" . rust-mode)
