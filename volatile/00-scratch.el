@@ -2,7 +2,8 @@
   "Refresh the *scratch* buffer with a fortune cookie."
   (interactive)
   (make-process :name "fortune"
-                :command '("fortune")
+                ;; https://github.com/ksqsf/fortune-monika
+                :command '("fortune" "monika")
                 :filter
                 (lambda (process output)
                   (with-current-buffer "*scratch*"
