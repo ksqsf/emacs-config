@@ -1,12 +1,12 @@
+# various files
+var/
+
 # Backup
 *~
 backups
 
 # Byte-compiled files
 *.elc
-
-# Auto save
-auto-save-list/
 
 # Swap files
 \#*\#
@@ -19,9 +19,6 @@ SessionDesktop.el
 .emacs.desktop
 .emacs.desktop.lock
 
-# Bookmarks
-bookmarks
-
 # ELPA
 elpa/
 
@@ -31,18 +28,8 @@ custom.el
 # Sessions
 session.*
 
-# eww
-url/
-
-# eshell
-eshell/history
-eshell/lastdir
-
 # erc
 .ercrc.el
-
-# ido
-ido.last
 
 # what's this?
 network-security.data
@@ -50,50 +37,5 @@ network-security.data
 # game records (keep it to me!)
 games/
 
-# tramp
-tramp
-
 # secret files
 volatile/*-priv.el
-
-#
-request/
-
-# entertainment?
-speed-type
-
-# recent files
-recentf
-
-# Projectile
-projectile-bookmarks.eld
-
-# Smex/Amx
-smex-items
-amx-items
-
-# ?
-transient/
-
-# undohist
-undohist/
-
-# abbrev
-abbrev_defs
-
-# cedet
-ede-projects.el
-semanticdb/
-srecode-map.el
-
-# elpy
-elpy/
-
-# lsp
-.lsp-session-v1
-
-# forge
-forge-database.sqlite
-
-# type-break
-type-break

@@ -11,6 +11,12 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (add-hook 'after-init-hook #'(lambda () (load custom-file)))
 
+;; No-littering
+(use-package no-littering
+  :config
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
 ;; Move backups away
 (setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory))))
 
@@ -93,12 +99,6 @@
      ((t (:inherit ace-jump-face-foreground :height 3.0)))))
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
         aw-scope 'frame))
-
-;; No-littering
-(use-package no-littering
-  :config
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 ;; Recentf
 (use-package recentf
