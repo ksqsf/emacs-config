@@ -78,7 +78,7 @@
   :hook (prog-mode))
 
 ;; Enable ligatures
-(when *is-a-mac*
+(when (fboundp 'mac-auto-operator-composition-mode)
   (mac-auto-operator-composition-mode))
 
 (provide 'prelude-ui)
