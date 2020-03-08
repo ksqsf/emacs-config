@@ -39,11 +39,12 @@
   (push '(ns-transparent-titlebar . t) default-frame-alist)
   (push '(ns-appearance . dark) default-frame-alist))
 
-;; Use srcery theme by default
+;; Default theme
 (use-package srcery-theme
-  :init
+  :config
   (load-theme 'srcery t)
-  (set-face-attribute 'font-lock-comment-face nil :foreground "orange"))
+  (set-face-attribute 'font-lock-comment-face nil :foreground "orange")
+  (set-face-attribute 'font-lock-comment-delimiter-face nil :foreground "orange"))
 
 ;; Mode line
 (use-package diminish
