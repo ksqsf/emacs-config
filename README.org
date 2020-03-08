@@ -1,6 +1,6 @@
 * Venus Emacs
 
-  [[./data/venus.jpg]]
+  [[./venus.jpg]]
 
   Venus Emacs is a "slightly configured" Emacs flavor, made by ksqsf.
 

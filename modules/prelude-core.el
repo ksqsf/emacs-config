@@ -79,7 +79,7 @@
                          (message "File digest doesn't match, so undo history will be discarded."))))
                    (when (consp undo-list)
                      (setq buffer-undo-list undo-list)))))))
-
+(setq undohist-directory (no-littering-expand-var-file-name "undohist"))
 (setq undohist-ignored-files '("\\.git/COMMIT_EDITMSG$"))
 
 ;; Use ace-window for quick window navigation
@@ -94,15 +94,20 @@
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
         aw-scope 'frame))
 
+;; No-littering
+(use-package no-littering
+  :config
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
 ;; Recentf
-(defun prelude/setup-recentf ()
-  (require 'recentf)
-  (require 'recentf)
-  (setq recentf-exclude '("recentf"))
+(use-package recentf
+  :hook ((after-init . recentf-mode))
+  :config
   (setq recentf-auto-cleanup 'never)
   (run-with-idle-timer 30 t #'(lambda () (with-suppressed-message (recentf-save-list))))
-  (recentf-mode t))
-(add-hook 'after-init-hook #'prelude/setup-recentf)
+  (add-to-list 'recentf-exclude no-littering-var-directory)
+  (add-to-list 'recentf-exclude no-littering-etc-directory))
 
 ;; recursive edit
 (defun isearch-open-recursive-edit ()
