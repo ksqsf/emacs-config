@@ -1,15 +1,16 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Configuration for programming needs.
 ;;; Some portions might be a standalone module.
+;;;
+;;; Note, all facilities here are not enabled by default.
+;;; Opt-in enable in the corresponding lang-xxx.el file.
+;;;
+;;; Most of the time, things like company will only be a burden...
 
 (setq-default indent-tabs-mode nil)
 
 (use-package company
-  :hook (prog-mode . company-mode)
-  :config
-  ;; Note, some completers are very slow (like Racer)
-  ;; In that case, make sure to use a saner value...
-  (setq company-idle-delay 0.1))
+  :commands (company-mode))
 
 (use-package company-box
   :hook (company-mode . company-box-mode)
@@ -21,12 +22,12 @@
 	      ("C-c C-j" . imenu)))
 
 (use-package yasnippet
-  :hook (prog-mode . yas-minor-mode)
+  :commands (yas-minor-mode yas-global-mode)
   :config
   (yas-reload-all))
 
 (use-package hl-todo
-  :hook (prog-mode . hl-todo-mode))
+  :commands (hl-todo-mode))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -40,6 +41,21 @@
 
 (use-package lsp-ui
   :commands (lsp-ui-mode))
+
+
+(use-package dap-mode
+  :commands (dap-mode)
+  :config
+  (require 'dap-lldb))
+
+
+(defun prelude--enable-prog-features (&rest features)
+  (dolist (feature features)
+    (pcase feature
+      (`:company (company-mode))
+      (`:yasnippet (yas-minor-mode))
+      (`:hl-todo (hl-todo-mode))
+      (`:smartparens (smartparens-mode)))))
 
 
 ;;; GDB
