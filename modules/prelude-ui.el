@@ -6,7 +6,7 @@
   :group 'prelude
   :type '(color))
 
-(defcustom prelude-ui-frame-alpha
+(defcustom prelude-ui-frame-alpha       ; TODO
   0.92
   "Default frame alpha."
   :group 'prelude)
@@ -18,8 +18,7 @@
 (add-hook 'after-init-hook
           #'(lambda ()
               (menu-bar-mode 1)
-              (tool-bar-mode 0)
-              (scroll-bar-mode 0)))
+              (tool-bar-mode 0)))
 
 ;; My vendor settings!
 ;; 1. Choose a better background color (thanks to Xah Lee)
@@ -31,8 +30,7 @@
 (if (display-graphic-p)
     (progn
       (setq default-frame-alist
-            '((alpha . 0.92)
-              (vertical-scroll-bars . nil))))
+            '((vertical-scroll-bars . nil))))
   (progn
     (setq default-frame-alist '((tool-bar-lines . 0)))))
 

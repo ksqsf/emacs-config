@@ -66,8 +66,6 @@
 
     The default theme (too bright) was replaced by [[https://srcery-colors.github.io][Srcery]].
 
-    By default, the frame is 92% transparent.
-
 *** Zap up to char
 
     =M-z= was assigned to =zap-up-to-char=.  You can easily achieve
