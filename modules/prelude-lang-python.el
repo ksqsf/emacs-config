@@ -16,6 +16,7 @@
   :hook (python-mode . elpy-enable)
   :config
   (setq elpy-rpc-python-command "python3"
+        elpy-rpc-virtualenv-path (no-littering-expand-var-file-name "elpy/rpc-venv")
         elpy-get-info-from-shell t)
   (define-key elpy-mode-map (kbd "C-c C-c") #'elpy-shell-send-region-or-buffer-and-go)
   (define-key python-mode-map (kbd "C-z C-z") #'elpy-shell-send-region-or-buffer-and-go)
