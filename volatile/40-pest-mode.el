@@ -1,3 +1,3 @@
-(add-to-list 'load-path (expand-file-name "~/src/pest-mode"))
-(autoload 'pest-mode "pest-mode")
-(add-to-list 'auto-mode-alist '("\\.pest\\'" . pest-mode))
+(use-package pest-mode
+  :mode ("\\.pest\\'" . pest-mode)
+  :quelpa (pest-mode :fetcher github :repo "ksqsf/pest-mode"))
