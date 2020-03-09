@@ -1,0 +1,25 @@
+(use-package w
+  :quelpa (w :fetcher github :repo "lepisma/w.el"))
+(use-package pile
+  :quelpa (pile :fetcher github :repo "lepisma/pile"))
+
+(setq wiki (pile-project-wiki
+            :name "Ksqsf's Wiki"
+            :root-url "https://wiki.ksqsf.moe/"
+            :base-url "https://wiki.ksqsf.moe/"
+            :input-dir "/tmp/wiki/src"
+            :output-dir "/tmp/wiki/output"
+            :postamble "Yo yo yo!"
+            :preamble "Yeah yeah yeah!"))
+
+(setq blog (pile-project-blog
+            :name "Ksqsf's Blog"
+            :root-url "https://blog.ksqsf.moe/"
+            :base-url "https://blog.ksqsf.moe/"
+            :input-dir "/tmp/blog/src"
+            :output-dir "/tmp/blog/output"
+            :postamble "what?"
+            :preamble "so that"))
+
+(setq pile-projects (list blog wiki))
+(pile-setup)

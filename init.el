@@ -17,22 +17,9 @@
 (add-to-list 'load-path prelude-lisp-dir)
 (add-to-list 'load-path prelude-modules-dir)
 
-;; Packages.
-(setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
-                         ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
-                         ("melpa-stable" . "https://mirrors.ustc.edu.cn/elpa/melpa-stable/")
-                         ("org" . "https://mirrors.ustc.edu.cn/elpa/org/")))
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package)
-  (require 'use-package))
-
-(setq use-package-always-ensure t)
-
 ;; Modules.
 (require 'prelude)
+(require 'prelude-package)
 (require 'prelude-benchmark)
 (require 'prelude-core)
 (require 'prelude-ui)
