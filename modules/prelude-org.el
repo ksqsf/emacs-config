@@ -70,16 +70,6 @@
                                (dot . t)
                                (rust . t)))
 
-  ;; Publish
-  (setq org-publish-project-alist
-        '(("moe"
-           :base-directory "~/moe/org"
-           :publishing-directory "~/moe/html"
-           :publishing-function org-html-publish-to-html
-           :with-author nil
-           :auto-sitemap t
-           :sitemap-file "sitemap.org")))
-
   (defun find-org-file ()
     "Find one of my org files."
     (interactive)
