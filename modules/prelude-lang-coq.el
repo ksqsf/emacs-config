@@ -2,7 +2,7 @@
 
 (use-package proof-general
   :commands (coq-mode)
-  :config
+  :init
   (setq proof-splash-enable nil))
 
 ;; Resolve Coq and Verilog
