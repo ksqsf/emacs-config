@@ -2,7 +2,9 @@
 
   [[./venus.jpg]]
 
-  Venus Emacs is a "slightly configured" Emacs flavor, made by ksqsf.
+  Venus Emacs is a "slightly configured" Emacs flavor, made by
+  ksqsf. (It also hosts some packages that I have written for my own
+  convenience. See the last section.)
 
   This configuration has been tested on macOS and Debian.
 
@@ -83,3 +85,12 @@
 
     I use Ivy and the Counsel family, as they tend to blend better
     with other modern packages.
+** Unlimited Lisp Works
+   This repo hosts some other Emacs Lisp works made by me for my own
+   convenience. It might be useful for you, too, so I made a list
+   here for better discoverability.
+
+   | Who       | Where                  | What                      |
+   |-----------+------------------------+---------------------------|
+   | pest-mode | github ksqsf/pest-mode | Major mode for Pest files |
+   | treefold  | ./lisp/treefold.el     | Fold any tree-like text   |
