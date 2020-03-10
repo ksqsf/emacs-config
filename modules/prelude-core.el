@@ -142,7 +142,10 @@
   (global-set-key (kbd "s-T") #'split-window-vertically)
   (global-set-key (kbd "s-o") #'ace-window)
   (global-set-key (kbd "s-x") #'execute-extended-command)
-  (global-set-key (kbd "s-n") #'make-frame-command))
+  (global-set-key (kbd "s-n") #'make-frame-command)
+
+  ;; macport feature: too slow!
+  (setq mac-mouse-wheel-smooth-scroll nil))
 
 ;; Disable keys I don't use.
 (global-unset-key (kbd "C-x C-n"))
