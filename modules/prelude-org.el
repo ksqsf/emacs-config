@@ -82,6 +82,9 @@
 (use-package org-ref
   :after (org))
 
+(use-package org-download
+  :after (org))
+
 ;;; CTeX support
 (with-eval-after-load 'org
   (require 'ox-latex)
