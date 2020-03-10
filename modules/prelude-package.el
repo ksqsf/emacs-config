@@ -26,7 +26,8 @@
   (setq quelpa-dir (no-littering-expand-var-file-name "quelpa/")
         quelpa-build-dir (no-littering-expand-var-file-name "quelpa/build/")
         quelpa-melpa-dir (no-littering-expand-var-file-name "quelpa/melpa/")
-        quelpa-packages-dir (no-littering-expand-var-file-name "quelpa/packages/")))
+        quelpa-packages-dir (no-littering-expand-var-file-name "quelpa/packages/")
+        quelpa-persistent-cache-file (no-littering-expand-var-file-name "quelpa/cache")))
 (use-package quelpa-use-package)
 (quelpa-use-package-activate-advice)    ; Don't consult melpa when :quelpa is found
 
