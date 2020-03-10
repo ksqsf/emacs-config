@@ -75,12 +75,16 @@
             (delete-overlay hide-overlay))
         (overlay-put line-overlay 'after-string " [...]")
         (overlay-put line-overlay 'treefold 'line)
+        (overlay-put line-overlay 'treefold-link hide-overlay)
         (overlay-put hide-overlay 'invisible t)
-        (overlay-put hide-overlay 'treefold 'hide)))))
+        (overlay-put hide-overlay 'treefold 'hide)
+        (overlay-put hide-overlay 'treefold-link line-overlay)))))
 
 (defun treefold--unfold-in-region (start end)
   "Unfold all subtrees in region (START, END)."
-  (remove-overlays start end))
+  (dolist (overlay (overlays-in start end))
+    (when (overlay-get overlay 'treefold)
+      (delete-overlay overlay))))
 
 (defun treefold--fold ()
   "Fold the subtree found on this line."
@@ -111,15 +115,13 @@
 
 (defun treefold--unfold (line-overlay)
   "Unfold the subtree found on this line."
-  ;; Delete line-overlay.
-  (delete-overlay line-overlay)
   ;; Delete hide-overlay.
-  (let ((beg (1+ (point-at-eol))))
-    (dolist (overlay (overlays-at beg))
-      (when (eq 'hide (overlay-get overlay 'treefold))
-        (delete-overlay overlay)))))
+  (delete-overlay (overlay-get line-overlay 'treefold-link))
+  ;; Delete line-overlay.
+  (delete-overlay line-overlay))
 
 (defun treefold-unfold-all ()
+  "Unfold all subtrees in this buffer."
   (interactive)
   (treefold--unfold-in-region (point-min) (point-max)))
 
