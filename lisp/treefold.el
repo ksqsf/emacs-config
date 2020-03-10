@@ -101,7 +101,7 @@
     (treefold--fold-subtree start end)))
 
 (defun treefold--line-overlay (pos)
-  "Check if the current line is part of a folded subtree."
+  "Return the line overlay at POS, or nil if none is found."
   (catch 'return
     (dolist (overlay (overlays-at (point)))
       (when (eq 'line (overlay-get overlay 'treefold))
@@ -129,10 +129,26 @@
   (interactive)
   (treefold--unfold-in-region (point-min) (point-max)))
 
+(defun treefold-forward-subtree (&optional n)
+  "Go to the position of the indicator for the next N-th subtree.
+
+If N is negative, search backwards."
+  (interactive)
+  (re-search-forward treefold-subtree-indicator-regexp nil nil (or n 1)))
+
+(defun treefold-backward-subtree (&optional n)
+  "Go to the position of the indicator for the previous N-th subtree.
+
+If N is negative, search forward."
+  (interactive)
+  (treefold-forward-subtree (- (or n 1))))
+
 (define-minor-mode treefold-mode
   "Enable treefold functions in this buffer."
   :keymap (let ((keymap (make-sparse-keymap)))
             (define-key keymap (kbd "<RET>") #'treefold-toggle)
+            (define-key keymap (kbd "C-c C-n") #'treefold-forward-subtree)
+            (define-key keymap (kbd "C-c C-p") #'treefold-backward-subtree)
             keymap))
 
 (provide 'treefold)
