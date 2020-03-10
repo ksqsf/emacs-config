@@ -47,12 +47,15 @@
 
 ;;; Code:
 
+(setq treefold-continuation-regexp (rx (or " " " " "|" "│")))
+(setq treefold-subtree-indicator-regexp (rx (or "+" "└" "├")))
+
 (defun treefold--subtree-end ()
   (save-excursion
     (let (end (col (current-column)))
       (while (and (= (forward-line) 0)
                   (= (move-to-column col) col)
-                  (looking-at "[ |]"))
+                  (looking-at treefold-continuation-regexp))
         nil)
       (1+ (point-at-eol 0)))))
 
@@ -89,7 +92,8 @@
 (defun treefold--fold ()
   "Fold the subtree found on this line."
   (beginning-of-line)
-  (unless (re-search-forward "\\+" (point-at-eol) t 1)
+  (unless (re-search-forward treefold-subtree-indicator-regexp
+                             (point-at-eol) t 1)
     (error "This line doesn't have a subtree."))
   (let* ((start (point-at-bol))
          (end (treefold--subtree-end)))
