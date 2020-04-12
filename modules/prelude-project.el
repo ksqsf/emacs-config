@@ -7,7 +7,13 @@
   :config
   (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
-  (counsel-projectile-mode +1))
+  (counsel-projectile-mode +1)
+
+  ;; cmake
+  (projectile-register-project-type 'cmake '("CMakeLists.txt")
+                                    :configure "cmake -Bbuild"
+                                    :compile "cmake --build build"
+                                    :test "cd build && ctest"))
 
 (use-package counsel-projectile
   :after (projectile)
