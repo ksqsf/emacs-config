@@ -4,6 +4,7 @@
 ;; URL: https://github.com/ksqsf/emacs-config
 ;; Version: 0.1
 ;; Package-Requires: ((emacs "26.3"))
+;; Keywords: convenience
 
 ;; Copyright (C) 2020 ksqsf
 
@@ -77,9 +78,11 @@
             (delete-overlay line-overlay)
             (delete-overlay hide-overlay))
         (overlay-put line-overlay 'after-string " [...]")
+        (overlay-put line-overlay 'evaporate t)
         (overlay-put line-overlay 'treefold 'line)
         (overlay-put line-overlay 'treefold-link hide-overlay)
         (overlay-put hide-overlay 'invisible t)
+        (overlay-put line-overlay 'evaporate t)
         (overlay-put hide-overlay 'treefold 'hide)
         (overlay-put hide-overlay 'treefold-link line-overlay)))))
 
