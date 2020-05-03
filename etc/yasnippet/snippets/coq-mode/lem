@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: lem
+# key: lem
+# --
+Lemma $1 :
+  $2
+Proof.
+  $3
+Qed.

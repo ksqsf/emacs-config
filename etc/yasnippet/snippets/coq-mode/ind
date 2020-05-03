@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ind
+# key: ind
+# --
+Inductive $1 : Type :=

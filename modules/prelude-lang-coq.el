@@ -2,6 +2,7 @@
 
 (use-package proof-general
   :commands (coq-mode)
+  :hook ((coq-mode . yas-minor-mode))
   :init
   (setq proof-splash-enable nil))
 

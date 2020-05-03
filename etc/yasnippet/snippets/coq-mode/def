@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: def
+# key: def
+# --
+Definition $1 : $2 := $3.
