@@ -10,7 +10,7 @@
 (eval-after-load 'scheme
   (setq scheme-program-name "mechanics"))
 
-(use-package geiserb
+(use-package geiser
   :mode (("\\.ss\\'" . geiser-mode))
   :config
   (setq geiser-default-implementation 'chez))
