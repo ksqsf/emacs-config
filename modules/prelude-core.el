@@ -162,4 +162,7 @@
 (use-package ripgrep
   :commands (ripgrep-regexp ripgrep-search-mode))
 
+;; Auto insert
+(use-package autoinsert)
+
 (provide 'prelude-core)
