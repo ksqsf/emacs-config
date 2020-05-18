@@ -111,6 +111,7 @@
         (throw 'return overlay)))
     (throw 'return nil)))
 
+;;;###autoload
 (defun treefold-toggle ()
   "Toggle whether the current subtree is folded."
   (interactive)
@@ -127,11 +128,13 @@
   ;; Delete line-overlay.
   (delete-overlay line-overlay))
 
+;;;###autoload
 (defun treefold-unfold-all ()
   "Unfold all subtrees in this buffer."
   (interactive)
   (treefold--unfold-in-region (point-min) (point-max)))
 
+;;;###autoload
 (defun treefold-forward-subtree (&optional n)
   "Go to the position of the indicator for the next N-th subtree.
 
@@ -139,6 +142,7 @@ If N is negative, search backwards."
   (interactive)
   (re-search-forward treefold-subtree-indicator-regexp nil nil (or n 1)))
 
+;;;###autoload
 (defun treefold-backward-subtree (&optional n)
   "Go to the position of the indicator for the previous N-th subtree.
 
@@ -146,6 +150,7 @@ If N is negative, search forward."
   (interactive)
   (treefold-forward-subtree (- (or n 1))))
 
+;;;###autoload
 (define-minor-mode treefold-mode
   "Enable treefold functions in this buffer."
   :keymap (let ((keymap (make-sparse-keymap)))

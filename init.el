@@ -17,6 +17,12 @@
 (add-to-list 'load-path prelude-lisp-dir)
 (add-to-list 'load-path prelude-modules-dir)
 
+;;; Set up autoloads from prelude-lisp-dir.
+(require 'loaddefs)
+
+;; Customization.
+;; (load custom-file)
+
 ;; Modules.
 (require 'prelude)
 (require 'prelude-package)
@@ -45,7 +51,7 @@
 
 (require 'prelude-help)
 (require 'prelude-utils)
-(require 'prelude-other)
+(require 'prelude-apps)
 
 ;; Volatile.
 (when (file-exists-p prelude-volatile-dir)
