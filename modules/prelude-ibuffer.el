@@ -23,6 +23,7 @@
                     (mode . emacs-lisp-mode)
                     (mode . haskell-mode)
                     (mode . rust-mode)
+                    (mode . rustic-mode)
                     (mode . html-mode)
                     (mode . css-mode)
                     (mode . python-mode)
