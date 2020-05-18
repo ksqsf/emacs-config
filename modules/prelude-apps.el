@@ -46,4 +46,23 @@
 (use-package speed-type
   :commands (speed-type-text speed-type-buffer))
 
-(provide 'prelude-other)
+;; stack exchange
+(use-package sx)
+
+;; telega
+(use-package telega
+  :commands (telega)
+  :config
+  )
+
+;; google translate
+(use-package google-translate
+  :commands (google-translate-buffer google-translate-at-point)
+  :config
+  (define-advice google-translate-json-suggestion (:override (json))
+    (let ((info (aref json 7)))
+      (if (and info (> (length info) 0))
+          (aref info 1)
+        nil))))
+
+(provide 'prelude-apps)
