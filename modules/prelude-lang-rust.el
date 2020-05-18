@@ -5,6 +5,7 @@
   :mode ("\\.rs\\'" . rustic-mode)
   :config
   (setq rustic-analyzer-command "~/.cargo/bin/rust-analyzer")
+  (setq rustic-lsp-server 'rust-analyzer)
   (define-key rustic-mode-map (kbd "[") (double-tap-to-insert ?\())
   (define-key rustic-mode-map (kbd "]") (double-tap-to-insert ?\)))
   (add-hook 'rustic-mode-hook #'yas-minor-mode)
