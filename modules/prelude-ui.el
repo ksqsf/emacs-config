@@ -60,7 +60,7 @@
   :config
   (set-face-attribute 'doom-modeline-bar nil :background prelude-ui-accent-color))
 
-;; ;; I'm the winner ;-)
+;; I'm the winner ;-)
 (use-package winner
   :defer t
   :bind (:map winner-mode-map
@@ -70,16 +70,42 @@
   (defvar winner-dont-bind-my-keys t)
   (add-hook 'after-init-hook #'winner-mode))
 
-;; ;; Eye candy icons
+;; Eye candy icons
 (use-package all-the-icons
   :defer t)
 
-;; ;; Rainbow
+;; Rainbow
 (use-package rainbow-mode
   :commands (rainbow-mode))
 
-;; ;; Enable ligatures
+;; Enable ligatures
 (when (fboundp 'mac-auto-operator-composition-mode)
   (mac-auto-operator-composition-mode))
+
+;; Auto set margins
+(use-package perfect-margin
+  :disabled
+  :quelpa (perfect-margin :fetcher github :repo "mpwang/perfect-margin")
+  :custom
+  (perfect-margin-visible-width 128)
+  :config
+  (perfect-margin-mode t)
+  (dolist (margin '("<left-margin> " "<right-margin> "))
+    (global-set-key (kbd (concat margin "<mouse-1>")) 'ignore)
+    (global-set-key (kbd (concat margin "<mouse-3>")) 'ignore)
+    (dolist (multiple '("" "double-" "triple-"))
+      (global-set-key (kbd (concat margin "<" multiple "wheel-up>")) 'mwheel-scroll)
+      (global-set-key (kbd (concat margin "<" multiple "wheel-down>")) 'mwheel-scroll))))
+
+;; Dashboard
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-items '((projects . 5)
+                          (bookmarks . 5)
+                          (recents . 5)))
+  (setq dashboard-center-content t)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t))
 
 (provide 'prelude-ui)
