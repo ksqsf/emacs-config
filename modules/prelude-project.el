@@ -5,9 +5,13 @@
   :commands (projectile-mode)
   :bind-keymap ("C-c p" . projectile-command-map)
   :config
-  (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system
+        (cond ((eq prelude-completion-framework 'ido-only) 'ido)
+              ((eq prelude-completion-framework 'ivy+counsel) 'ivy)
+              (t 'default)))
+  (setq projectile-switch-project-action #'projectile-dired)
   (projectile-mode +1)
-  (counsel-projectile-mode +1)
+  ;; (counsel-projectile-mode +1)
 
   ;; cmake
   (projectile-register-project-type 'cmake '("CMakeLists.txt")
