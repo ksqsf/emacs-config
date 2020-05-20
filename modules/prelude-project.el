@@ -3,7 +3,7 @@
 
 (use-package projectile
   :commands (projectile-mode)
-  :bind-keymap ("M-p" . projectile-command-map)
+  :bind-keymap ("C-c p" . projectile-command-map)
   :config
   (setq projectile-completion-system
         (cond ((eq prelude-completion-framework 'ido-only) 'ido)
