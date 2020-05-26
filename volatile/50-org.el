@@ -1,126 +1,5 @@
 (require 'ox-publish)
 
-(setq prelude-site-dir (expand-file-name "~/Site"))
-
-(setq prelude-site-style-dir (expand-file-name "~/Site/css"))
-(setq prelude-site-style-output-dir (expand-file-name "~/Site/output/css"))
-
-(setq prelude-blog-dir (expand-file-name "cicada" prelude-site-dir))
-(setq prelude-blog-output-dir (expand-file-name "~/Site/output/blog"))
-
-(setq prelude-journal-dir (expand-file-name "chaos" prelude-site-dir))
-(setq prelude-journal-output-dir (expand-file-name "~/Site/output/journal"))
-
-(setq prelude-wiki-dir (expand-file-name "~/org/wiki"))
-(setq prelude-wiki-output-dir (expand-file-name "~/Site/output/wiki"))
-
-(setq prelude-site-homepage-dir (expand-file-name "~/Site/homepage"))
-(setq prelude-site-homepage-output-dir (expand-file-name "~/Site/output"))
-
-(setq prelude-pages-dir (expand-file-name "~/Site/pages"))
-(setq prelude-pages-output-dir (expand-file-name "~/Site/output"))
-
-(setq org-publish-project-alist
-      `(("site-homepage"
-         :base-directory ,prelude-site-homepage-dir
-         :base-extension "html\\|jpg\\|png\\|css"
-         :publishing-directory ,prelude-site-homepage-output-dir
-         :publishing-function org-publish-attachment
-         :recursive t)
-        ("site-style"
-         :base-directory ,prelude-site-style-dir
-         :base-extension "css"
-         :publishing-directory ,prelude-site-style-output-dir
-         :publishing-function org-publish-attachment
-         :recursive t)
-        ("pages"
-         :base-directory ,prelude-pages-dir
-         :base-extension "org"
-         :publishing-directory ,prelude-pages-output-dir
-         :publishing-function org-html-publish-to-html
-         :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/site.css\" />"
-         :html-validation-link nil
-         :html-preamble k/about-preamble)
-        ("blog-posts"
-         :base-directory ,prelude-blog-dir
-         :publishing-function org-html-publish-to-html
-         :publishing-directory ,(expand-file-name prelude-blog-output-dir)
-         :exclude ,(regexp-opt '("feed.org" "index.org"))
-         :language "zh-CN"
-         ;; Export
-         :section-numbers nil
-         :with-author nil
-         :with-date t
-         :with-timestamps nil
-         ;; HTML
-         :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/site.css\" />"
-         :html-validation-link nil
-         :html-preamble k/blog-post-preamble
-         ;; Site map
-         :auto-sitemap t
-         :sitemap-title "蝉"
-         :sitemap-filename "index.org"
-         :sitemap-sort-files anti-chronologically
-         :sitemap-function k/sitemap
-         :sitemap-format-entry k/sitemap-format-entry)
-        ("blog-media"
-         :base-directory ,prelude-blog-dir
-         :base-extension "svg\\|jpg\\|gif\\|png"
-         :publishing-directory ,prelude-blog-output-dir
-         :publishing-function org-publish-attachment
-         :recursive t)
-        ("blog-rss"
-         :base-directory ,prelude-blog-dir
-         :base-extension "org"
-         :recursive nil
-         :exclude ,(regexp-opt '("index.org" "404.org" "feed.org"))
-         :publishing-function k/publish-rss
-         :publishing-directory ,prelude-blog-output-dir
-         :rss-extension "xml"
-         :html-link-home "https://ksqsf.moe/blog"
-         :rss-link-home "https://ksqsf.moe/blog"
-         :rss-image-url nil
-         :html-link-use-abs-url t
-         :language "zh-CN"
-         :section-number nil
-         :table-of-contents nil
-         :auto-sitemap t
-         :sitemap-filename "feed.org"
-         :sitemap-title "蝉"
-         :sitemap-style list
-         :sitemap-sort-files anti-chronologically
-         :sitemap-function k/format-rss-feed
-         :sitemap-format-entry k/format-rss-feed-entry)
-        ("blog"
-         :components ("site-style" "blog-rss" "blog-posts" "blog-media"))
-        ("journal-posts"
-         :base-directory ,prelude-journal-dir
-         :base-extension "org"
-         :publishing-function org-html-publish-to-html
-         :publishing-directory ,prelude-journal-output-dir
-         :recursive t
-         :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/site.css\" />"
-         :html-preamble k/journal-post-preamble
-         :auto-sitemap t
-         :sitemap-filename "index.org"
-         :sitemap-title "混乱"
-         :sitemap-style list
-         :sitemap-sort-files anti-chronologically
-         :sitemap-format-entry k/sitemap-format-entry)
-        ("wiki-pages"
-         :base-directory ,prelude-wiki-dir
-         :base-extension "org"
-         :publishing-function org-html-publish-to-html
-         :publishing-directory ,prelude-wiki-output-dir
-         :recursive t
-         :language "zh-CN"
-         :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/site.css\" />"
-         :html-validation-link nil
-         :html-preamble k/wiki-page-preamble
-         :auto-sitemap t
-         :sitemap-filename "index.org"
-         :sitemap-title "Wiki")))
-
 (defun md2org ()
   "Convert the current buffer (Markdown) to Org format.
 
@@ -192,28 +71,152 @@ and make changes afterwards."
 		 (and (not force) org-publish-use-timestamps-flag)))
 	    (org-publish-projects (list project))))))))
 
-(defun blog-post-p (&optional path)
-  "Determine if PATH, or the current file if PATH is nil, is a blog post.
-
-This is done by checking if PATH is just under
-`prelude-blog-dir'."
-  (if (null (or (buffer-file-name) path))
-      nil
-    (let ((path (or path (file-name-directory (buffer-file-name)))))
-      (and path
-           (file-equal-p prelude-blog-dir path)))))
-
-;;; If the current org file is a blog post, then images are downloaded
-;;; to its own resource directory.
-(add-hook 'org-mode-hook
-          #'(lambda ()
-              (when (blog-post-p)
-                (setq org-download-image-dir
-                      (file-name-sans-versions (file-name-sans-extension (buffer-file-name)))))))
-
 (setq k/date-format "%Y 年 %m 月 %d 日")
 
-(defun k/sitemap (title list)
+;;; My own wrapping around org-publish
+
+
+(defclass k/project! ()
+  ((name :initarg :name
+         :type string)
+   (url :initarg :url
+        :type string)
+   (css :initarg :css
+        :type string
+        :initform "../css/site.css")
+   (input-dir :initarg :input-dir
+              :type string)
+   (output-dir :initarg :output-dir
+               :type string)
+   (language :initarg :language
+             :type string
+             :initform "zh-CN")
+   (preamble :initarg :preamble
+             :initform "")
+   (postamble :initarg :postamble
+              :initform "<footer></footer>"))
+  :abstract t)
+
+(cl-defgeneric k/static-config ((pj k/project!))
+  (list (format "k-%s-static" (oref pj :name))
+        :hidden t
+        :base-directory (oref pj :input-dir)
+        :base-extension ".*"
+        :exclude ".*\\.org$"
+        :publishing-function #'org-publish-attachment
+        :publishing-directory (oref pj :output-dir)
+        :recursive t))
+
+(cl-defgeneric k/pages-config ((pj k/project!))
+  (list (format "k-%s-pages" (oref pj :name))
+        :hidden t
+        :base-directory (oref pj :input-dir)
+        :base-extension "org"
+        :exclude (regexp-opt '("feed.org"))
+        :publishing-directory (oref pj :output-dir)
+        :publishing-function #'org-html-publish-to-html
+        :recursive t
+        :language (oref pj :language)
+        :html-head (format "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />"
+                           (oref pj :css))
+        :htmlized-source nil
+        :html-doctype "html5"
+        :html-checkbox-type 'unicode
+        :html-html5-fancy t
+        :html-postamble (oref pj :postamble)
+        :html-preamble (oref pj :preamble)))
+
+(cl-defmethod k/configs ((pj k/project!))
+  (list (k/static-config pj)
+        (k/pages-config pj)
+        (let ((name (oref pj :name)))
+          (list (format "k-%s" name)
+                :components (list (format "k-%s-static" name)
+                                  (format "k-%s-pages" name))))))
+
+
+(defclass k/blog! (k/project!)
+  ((rss? :initarg :rss?
+         :type boolean
+         :initform t)
+   (archive? :initarg :archive?
+             :type boolean
+             :initform t)))
+
+(cl-defmethod k/rss-config ((pj k/blog!))
+  (list (format "k-%s-rss" (oref pj :name))
+        :hidden t
+        :base-directory (oref pj :input-dir)
+        :base-extension "org"
+        :recursive t
+        :exclude (regexp-opt '("index.org" "404.org" "feed.org"))
+        :publishing-function 'k/blog-rss-publish
+        :publishing-directory (oref pj :output-dir)
+        :language (oref pj :language)
+        :html-link-home (oref pj :url)
+        :rss-link-home (oref pj :url)
+        :html-link-use-abs-url t
+        :auto-sitemap t
+        :sitemap-filename "feed.org"
+        :sitemap-title (oref pj :name)
+        :sitemap-style 'list
+        :sitemap-sort-files 'anti-chronologically
+        :sitemap-function 'k/blog-format-rss
+        :sitemap-format-entry 'k/blog-format-rss-entry))
+
+(defun k/blog-rss-publish (plist filename pub-dir)
+  "Publish RSS with PLIST, only when FILENAME is 'feed.org'.
+
+PUB-DIR is when the output will be placed."
+  (if (string= "feed.org" (file-name-nondirectory filename))
+      (org-rss-publish-to-rss plist filename pub-dir)))
+
+(defun k/blog-format-rss (title list)
+  "Generate RSS feed, as a string.
+
+TITLE is the title of the RSS feed.  LIST is an internal
+representation for the files to include, as returned by
+`org-list-to-lisp'.  PROJECT is the current project."
+  (concat "#+TITLE: " title "\n\n"
+          (org-list-to-subtree list 0 '(:icount "" :istart ""))))
+
+(defun k/blog-format-rss-entry (entry style project)
+  "Format ENTRY for the RSS feed.
+
+ENTRY is a file name.  STYLE is either 'list' or 'tree'.
+PROJECT is the current project."
+  (cond ((not (directory-name-p entry))
+         (let* ((file (org-publish--expand-file-name entry project))
+                (title (org-publish-find-title entry project))
+                (date (format-time-string "%Y-%m-%d" (org-publish-find-date entry project)))
+                (link (concat (file-name-sans-extension entry) ".html")))
+           (with-temp-buffer
+             (insert (format "* [[file:%s][%s]]\n" file title))
+             (org-set-property "RSS_TITLE" title)
+             (org-set-property "RSS_PERMALINK" link)
+             (org-set-property "PUBDATE" date)
+             ;; (insert-file-contents file) ;; BUG??
+             (buffer-string))))
+        ((eq style 'tree)
+         ;; Return only last subdir.
+         (file-name-nondirectory (directory-file-name entry)))
+        (t entry)))
+
+(cl-defmethod k/pages-config ((pj k/blog!))
+  (let ((base-config (cl-call-next-method pj)))
+    (when (oref pj :archive?)
+      (setq base-config
+            (append base-config
+                    (list :auto-sitemap t
+                          :sitemap-filename "index.org"
+                          :sitemap-title (oref pj :name)
+                          :sitemap-style 'list
+                          :sitemap-sort-files 'anti-chronologically
+                          :sitemap-function 'k/blog-format-archive
+                          :sitemap-format-entry 'k/blog-format-archive-entry))))
+    base-config))
+
+(defun k/blog-format-archive (title list)
   "Default site map, as a string.
 TITLE is the the title of the site map.  LIST is an internal
 representation for the files to include, as returned by
@@ -221,32 +224,82 @@ representation for the files to include, as returned by
   (concat "#+TITLE: " title "\n\n#+ATTR_HTML: :class blog-posts\n"
 	  (org-list-to-org list)))
 
-(defun k/sitemap-format-entry (entry style project)
+(defun k/blog-format-archive-entry (entry style project)
   "ENTRY is an Org page."
+  (message "GEN ENTRY: %s" entry)
   (cond ((not (directory-name-p entry))
          (format "*[[file:%s][%s]]*
                  #+HTML: <p class='pubdate'>%s</p>"
                  entry
                  (org-publish-find-title entry project)
-                 ;; (or (k/post-hitogoto entry project) "")
                  (format-time-string k/date-format
                                      (org-publish-find-date entry project))))
         ((eq style 'tree) (file-name-nondirectory (directory-file-name entry)))
         (t entry)))
 
-;; (defun k/post-hitogoto (file project)
-;;   "Find the title of FILE in PROJECT."
-;;   (let ((file (org-publish--expand-file-name file project)))
-;;     (or (org-publish-cache-get-file-property file :hitogoto nil t)
-;; 	(let* ((parsed (org-publish-find-property file :hitogoto project))
-;; 	       (hitogoto
-;; 		(if parsed
-;; 		    (org-no-properties
-;; 		     (org-element-interpret-data parsed))
-;; 		  (file-name-nondirectory (file-name-sans-extension file)))))
-;; 	  (org-publish-cache-set-file-property file :hitogoto hitogoto)
-;; 	  hitogoto))))
+(cl-defmethod k/configs ((pj k/blog!))
+  (let ((base-configs (cl-call-next-method pj)))
+    (if (oref pj :rss?)
+        (progn
+          (push (k/rss-config pj) base-configs)
+          (let* ((name (oref pj :name))
+                 (components (caddr (assoc (format "k-%s" name) base-configs))))
+            (push (format "k-%s-rss" name) components)
+            (setf (caddr (assoc (format "k-%s" name) base-configs))
+                  components))
+          base-configs)
+      base-configs)))
 
+
+(defclass k/send! (k/project!)
+  ((extension :initarg :extension
+              :initform ".*"
+              :type string))
+  :documentation "Send the files from INPUT-DIR to OUTPUT-DIR as-is.")
+
+(cl-defmethod k/configs ((pj k/send!))
+  (list (list (format "%s" (oref pj :name))
+              :base-directory (oref pj :input-dir)
+              :base-extension (oref pj :extension)
+              :publishing-directory (oref pj :output-dir)
+              :publishing-function #'org-publish-attachment)))
+
+
+(defclass k/wiki! (k/project!) ()
+  :documentation "Wiki project type.")
+
+(cl-defmethod k/pages-config ((pj k/wiki!))
+  (let ((base-config (cl-call-next-method pj)))
+    (cons (car base-config)
+          (append (list :auto-sitemap t
+                        :sitemap-title (oref pj :name)
+                        :sitemap-filename "index.org"
+                        :sitemap-style 'tree)
+                  (cdr base-config)))))
+
+
+(defclass k/page! (k/project!) ()
+  :documentation "A single page (a directory containing index.org and other static files)")
+
+
+(defclass k/group! (k/project!)
+  ((components :initarg :components)))
+
+(cl-defmethod k/configs ((pj k/group!))
+  (list (list (format "%s" (oref pj :name))
+              :components (oref pj :components))))
+
+
+
+(setq org-publish-project-alist nil)    ; FIXME: to be removed
+(defvar k/projects nil)
+
+(defun k/setup! ()
+  (dolist (pj k/projects)
+    (setq org-publish-project-alist
+          (append org-publish-project-alist (k/configs pj)))))
+
+
 (defun k/site-nav (active)
   "Generate a navbar."
   (format
@@ -261,59 +314,51 @@ representation for the files to include, as returned by
        <a%s href=\"/journal\"> journal</a>
        <a%s href=\"/koishi\"> koishi</a>
        <a%s href=\"/wiki\"> wiki</a>
-       <a%s href=\"/about.html\"> about<a/>
+       <a%s href=\"/about\"> about</a>
      </div>
      <div class=\"clearfix\"></div>
    </header>"
    (if (eq active 'blog) " class=\"active\"" "")
    (if (eq active 'journal) " class=\"active\"" "")
-   (if (eq active 'coishi) " class=\"active\"" "")
+   (if (eq active 'koishi) " class=\"active\"" "")
    (if (eq active 'wiki) " class=\"active\"" "")
    (if (eq active 'about) " class=\"active\"" "")))
 
-(defun k/blog-post-preamble (entry)
-  "ENTRY is a plist."
-  (k/site-nav 'blog))
+(setq input-dir (expand-file-name "~/Site"))
+(setq output-dir (expand-file-name "~/Site/ksqsf.moe-deploy"))
 
-(defun k/wiki-page-preamble (entry)
-  (k/site-nav 'wiki))
+(setq k/projects
+      (list (k/send! :name "css"
+                     :input-dir (concat input-dir "/css")
+                     :output-dir (concat output-dir "/css"))
+            (k/send! :name "homepage"
+                     :input-dir (concat input-dir "/homepage")
+                     :output-dir "/tmp/hhh")
+            (k/blog! :name "Cicada"
+                     :url "https://ksqsf.moe/blog"
+                     :input-dir (concat input-dir "/cicada")
+                     :output-dir (concat output-dir "/blog")
+                     :preamble #'(lambda (entry) (k/site-nav 'blog)))
+            (k/blog! :name "Chaos"
+                     :url "https://ksqsf.moe/journal"
+                     :input-dir (concat input-dir "/chaos")
+                     :output-dir (concat output-dir "/journal")
+                     :preamble #'(lambda (entry) (k/site-nav 'journal)))
+            (k/page! :name "about"
+                     :url "https://ksqsf.moe/about"
+                     :input-dir (concat input-dir "/about")
+                     :output-dir (concat output-dir "/about")
+                     :preamble #'(lambda (entry) (k/site-nav 'about)))
+            (k/page! :name "koishi"
+                     :url "https://ksqsf.moe/koishi"
+                     :input-dir (concat input-dir "/koishi")
+                     :output-dir (concat output-dir "/koishi")
+                     :preamble #'(lambda (entry) (k/site-nav 'koishi)))
+            (k/wiki! :name "wiki"
+                     :input-dir "~/org/wiki" ; NOTE
+                     :output-dir (concat output-dir "/wiki")
+                     :preamble #'(lambda (entry) (k/site-nav 'wiki)))
+            (k/group! :name "ksqsf.moe"
+                      :components '("k-Cicada" "k-wiki" "k-Chaos" "k-koishi" "css" "homepage" "k-about"))))
 
-(defun k/journal-post-preamble (entry)
-  (k/site-nav 'journal))
-
-(defun k/about-preamble (entry)
-  (k/site-nav 'about))
-
-(defun k/publish-rss (plist filename pub-dir)
-  "Publish RSS with PLIST, only when FILENAME is 'feed.org'.
-PUB-DIR is when the output will be placed."
-  (if (equal "feed.org" (file-name-nondirectory filename))
-      (org-rss-publish-to-rss plist filename pub-dir)))
-
-(defun k/format-rss-feed (title list)
-  "Generate RSS feed, as a string.
-TITLE is the title of the RSS feed.  LIST is an internal
-representation for the files to include, as returned by
-`org-list-to-lisp'.  PROJECT is the current project."
-  (concat "#+TITLE: " title "\n\n"
-          (org-list-to-subtree list '(:icount "" :istart ""))))
-
-(defun k/format-rss-feed-entry (entry style project)
-  "Format ENTRY for the RSS feed.
-ENTRY is a file name.  STYLE is either 'list' or 'tree'.
-PROJECT is the current project."
-  (cond ((not (directory-name-p entry))
-         (let* ((file (org-publish--expand-file-name entry project))
-                (title (org-publish-find-title entry project))
-                (date (format-time-string "%Y-%m-%d" (org-publish-find-date entry project)))
-                (link (concat (file-name-sans-extension entry) ".html")))
-           (with-temp-buffer
-             (insert (format "* [[file:%s][%s]]\n" file title))
-             (org-set-property "RSS_PERMALINK" link)
-             (org-set-property "PUBDATE" date)
-             ;; (insert-file-contents file) ;; BUG??
-             (buffer-string))))
-        ((eq style 'tree)
-         ;; Return only last subdir.
-         (file-name-nondirectory (directory-file-name entry)))
-        (t entry)))
+(k/setup!)
