@@ -89,6 +89,7 @@
   :custom
   (perfect-margin-visible-width 128)
   :config
+  (setq perfect-margin-ignore-regexps '("^minibuf"))
   (perfect-margin-mode t)
   (dolist (margin '("<left-margin> " "<right-margin> "))
     (global-set-key (kbd (concat margin "<mouse-1>")) 'ignore)
