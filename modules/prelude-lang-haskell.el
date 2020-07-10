@@ -14,6 +14,7 @@
 
 ;; Intero is discontinued (Nov 2019)
 (use-package intero
+  :disabled
   :hook (haskell-mode . intero-mode)
   :config
   ;; See https://github.com/chrisdone/intero/pull/643
