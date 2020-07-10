@@ -18,7 +18,8 @@
     :hook (after-init . ivy-mode)
     :config
     (setq ivy-use-virtual-buffers 'recentf)
-    (setq ivy-height 10))
+    (setq ivy-height 10)
+    (setq ivy-fixed-height-minibuffer t))
 
   (use-package ivy-hydra
     :after ivy)
@@ -48,8 +49,8 @@
 
   (use-package counsel
     :hook (ivy-mode . counsel-mode)
-    :bind (("C-s" . swiper-isearch)
-           ("C-r" . swiper-isearch-backward)
+    :bind (;; ("C-s" . swiper-isearch)
+           ;; ("C-r" . swiper-isearch-backward)
            
            ("C-c C-r" . ivy-resume)
            ("C-c v p" . ivy-push-view)
