@@ -5,21 +5,19 @@
   :init
   (setq doom-modeline-env-python-executable "python3")
   (setq python-shell-interpreter "python3")
+  :bind (:map python-mode-map
+              ("C-x C-e" . python-shell-send-statement))
   :config
   (add-hook 'inferior-python-mode-hook
 	  (lambda ()
 	    (company-mode t))))
 
 (use-package elpy
-  :commands (elpy-shell-send-region-or-buffer-and-go elpy-shell-send-defun-and-go)
   :after (python)
   :hook (python-mode . elpy-enable)
   :config
   (setq elpy-rpc-python-command "python3"
         elpy-rpc-virtualenv-path (no-littering-expand-var-file-name "elpy/rpc-venv")
-        elpy-get-info-from-shell t)
-  (define-key elpy-mode-map (kbd "C-c C-c") #'elpy-shell-send-region-or-buffer-and-go)
-  (define-key python-mode-map (kbd "C-z C-z") #'elpy-shell-send-region-or-buffer-and-go)
-  (define-key python-mode-map (kbd "C-M-x") #'elpy-shell-send-defun-and-go))
+        elpy-get-info-from-shell t))
 
 (provide 'prelude-lang-python)

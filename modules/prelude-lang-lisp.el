@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-buffer)
+
 (setq inferior-lisp-program "ccl64")
 
 (use-package paredit
@@ -20,7 +22,7 @@
   (run-scheme "/usr/local/scmutils/mit-scheme/bin/scheme --library /usr/local/scmutils/mit-scheme/lib"))
 
 (use-package sly
-  :mode (("\\.lisp\\'" . sly-mode))
-  :commands (sly-mode))
+  :commands (sly sly-mode)
+  :mode (("\\.lisp\\'" . lisp-mode)))
 
 (provide 'prelude-lang-lisp)

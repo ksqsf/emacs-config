@@ -85,6 +85,40 @@
 
     I use Ivy and the Counsel family, as they tend to blend better
     with other modern packages.
+
+    Over the months, I've tried several other setups, like ido and
+    icomplete that comes with Emacs itself, and the configs are still
+    there, but will not receive updates as often as Ivy+Counsel.  Just
+    customize =prelude-completion-framework=, if you want to try.
+
+*** REPL
+
+    Many major modes support REPL, but their keybindings are often
+    very different.  The following keychords are adopted by Emacs
+    itself, so they are preferred when possible.
+
+    | Key     | Function             |
+    |---------+----------------------|
+    | C-c C-c | Send buffer          |
+    | C-c C-l | Send file            |
+    | C-x C-e | Send this expression |
+    | C-M-x   | Send this function   |
+
+**** Haskell, Idris
+
+     Haskell-mode has Interactive Haskell mode supporting ghci.  Due
+     to Haskell's specialness, all you can do is =C-c C-l=.
+
+**** Python
+
+     Elpy defined a bunch of send functions, but they turn out to be
+     not so helpful.
+
+**** Coq
+
+     Coq is an interactive proof assistant, whose Emacs interface is
+     Proof General, which defines its own set of commands.
+
 ** Unlimited Lisp Works
    This repo hosts some other Emacs Lisp works made by me for my own
    convenience. It might be useful for you, too, so I made a list
