@@ -83,7 +83,7 @@ and make changes afterwards."
         :type string)
    (css :initarg :css
         :type string
-        :initform "../css/site.css")
+        :initform "/css/main.css")
    (input-dir :initarg :input-dir
               :type string)
    (output-dir :initarg :output-dir
@@ -94,7 +94,7 @@ and make changes afterwards."
    (preamble :initarg :preamble
              :initform "")
    (postamble :initarg :postamble
-              :initform "<footer></footer>"))
+              :initform t))
   :abstract t)
 
 (cl-defgeneric k/static-config ((pj k/project!))
@@ -124,7 +124,8 @@ and make changes afterwards."
         :html-checkbox-type 'unicode
         :html-html5-fancy t
         :html-postamble (oref pj :postamble)
-        :html-preamble (oref pj :preamble)))
+        :html-preamble (oref pj :preamble)
+        :html-klipsify-src t))
 
 (cl-defmethod k/configs ((pj k/project!))
   (list (k/static-config pj)
@@ -145,7 +146,6 @@ and make changes afterwards."
 
 (cl-defmethod k/rss-config ((pj k/blog!))
   (list (format "k-%s-rss" (oref pj :name))
-        :hidden t
         :base-directory (oref pj :input-dir)
         :base-extension "org"
         :recursive t
@@ -195,7 +195,7 @@ PROJECT is the current project."
              (org-set-property "RSS_TITLE" title)
              (org-set-property "RSS_PERMALINK" link)
              (org-set-property "PUBDATE" date)
-             ;; (insert-file-contents file) ;; BUG??
+             (insert-file-contents file) ;; BUG??
              (buffer-string))))
         ((eq style 'tree)
          ;; Return only last subdir.
@@ -300,13 +300,40 @@ representation for the files to include, as returned by
           (append org-publish-project-alist (k/configs pj)))))
 
 
+(defun k/get-url (entry)
+  (message "what: %s" entry)
+  nil)
+(defun k/get-disqus-post-id (entry)
+  (message "the fuck: %s" entry)
+  nil)
+
+(defun k/postamble-disqus (entry)
+  (format "
+<div id=\"disqus_thread\"></div>
+<script>
+
+   var disqus_config = function () {
+	   this.page.url = \"%s\";
+	   this.page.identifier = \"%s\";
+   };
+(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://ksqsf-moe.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href=\"https://disqus.com/?ref_noscript\">comments powered by Disqus.</a></noscript>
+" (k/get-url entry) (k/get-disqus-post-id entry)))
+
+
 (defun k/site-nav (active)
   "Generate a navbar."
   (format
    "<header>
      <div class=\"site-title\">
        <a href=\"/\">
-         <img src=\"\">
+         <img src=\"/avatar.jpg\">
        </a>
      </div>
      <div class=\"site-nav\">
@@ -333,7 +360,7 @@ representation for the files to include, as returned by
                      :output-dir (concat output-dir "/css"))
             (k/send! :name "homepage"
                      :input-dir (concat input-dir "/homepage")
-                     :output-dir "/tmp/hhh")
+                     :output-dir (concat output-dir "/"))
             (k/blog! :name "Cicada"
                      :url "https://ksqsf.moe/blog"
                      :input-dir (concat input-dir "/cicada")
@@ -354,11 +381,43 @@ representation for the files to include, as returned by
                      :input-dir (concat input-dir "/koishi")
                      :output-dir (concat output-dir "/koishi")
                      :preamble #'(lambda (entry) (k/site-nav 'koishi)))
-            (k/wiki! :name "wiki"
+            (k/wiki! :name "Wiki"
                      :input-dir "~/org/wiki" ; NOTE
                      :output-dir (concat output-dir "/wiki")
                      :preamble #'(lambda (entry) (k/site-nav 'wiki)))
             (k/group! :name "ksqsf.moe"
-                      :components '("k-Cicada" "k-wiki" "k-Chaos" "k-koishi" "css" "homepage" "k-about"))))
+                      :components '("k-Cicada" "k-Wiki" "k-Chaos" "k-koishi" "css" "homepage" "k-about"))))
 
 (k/setup!)
+
+
+(defun k/blog-projects ()
+  (remove-if-not #'k/blog!-p k/projects))
+
+(defun k/find-project (name)
+  (catch 'answer
+    (dolist (pj k/projects)
+      (when (string= (oref pj :name) name)
+        (throw 'answer pj)))))
+
+(defun k/choose-project (prompt type)
+  (let* ((projects (remove-if-not (intern (format "k/%s!-p" type)) k/projects))
+         (name (completing-read prompt
+                                (mapcar (lambda (obj) (oref obj :name))
+                                        projects)
+                                nil t)))
+    (k/find-project name)))
+
+(defun k/blog-new-post ()
+  (interactive)
+  (cl-destructuring-bind (_ _ _ day month year _ _ _) (decode-time)
+    (let* ((pj (k/choose-project "Blog: " 'blog))
+           (permalink (read-string "Permalink: "))
+           (post-dir (f-join (oref pj :input-dir)
+                             (number-to-string year)
+                             (format "%02d" month)
+                             (format "%02d" day)
+                             permalink))
+           (index-file (f-join post-dir "index.org")))
+      (make-directory post-dir t)
+      (find-file index-file))))
