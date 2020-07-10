@@ -28,6 +28,8 @@
 	 ("C-c c" . org-capture)
          ("C-c o" . find-org-file))
   :config
+  (setq org-return-follows-link t)
+
   (setq org-directory (expand-file-name "~/org"))
 
   ;; Agenda
@@ -79,11 +81,19 @@
            (file (completing-read "Org File: " files)))
       (find-file (expand-file-name file org-directory)))))
 
+(use-package org-tempo
+  :ensure nil
+  :after (org)
+  :config
+  (add-to-list 'org-tempo-keywords-alist '("ra" . "ROAM_ALIAS")))
+
 (use-package org-ref
   :after (org))
 
 (use-package org-download
-  :after (org))
+  :after (org)
+  :custom
+  (org-download-image-dir "./attachments"))
 
 ;;; CTeX support
 (with-eval-after-load 'org
