@@ -28,6 +28,8 @@
 	 ("C-c c" . org-capture)
          ("C-c o" . find-org-file))
   :config
+  (add-hook 'org-mode-hook #'valign-mode)
+
   (setq org-return-follows-link t)
 
   (setq org-directory (expand-file-name "~/org"))
