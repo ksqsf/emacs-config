@@ -8,6 +8,8 @@
 ;;; Most of the time, things like company will only be a burden...
 
 (setq-default indent-tabs-mode nil)
+(show-paren-mode t)
+(setq show-paren-delay 0)
 
 (use-package company
   :commands (company-mode))
