@@ -165,4 +165,17 @@
 ;; Auto insert
 (use-package autoinsert)
 
+;; Expand region
+(use-package expand-region
+  :bind (("C-=" . er/expand-region))
+  :config
+  (define-advice set-mark-command (:before-while (arg))
+    "Repeat C-SPC to expand region."
+    (interactive "P")
+    (if (eq last-command 'set-mark-command)
+        (progn
+          (er/expand-region 1)
+          nil)
+      t)))
+
 (provide 'prelude-core)
