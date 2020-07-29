@@ -157,6 +157,7 @@
 ;; dwim
 (global-set-key (kbd "M-l") #'downcase-dwim)
 (global-set-key (kbd "M-u") #'upcase-dwim)
+(global-set-key (kbd "M-c") #'capitalize-dwim)
 
 ;; Ripgrep
 (use-package ripgrep
