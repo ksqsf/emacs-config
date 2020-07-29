@@ -179,4 +179,13 @@
           nil)
       t)))
 
+;; C-w to kill word when region is inactive
+(defun k/kill-region-or-backward-word ()
+  (interactive)
+  (if (region-active-p)
+      (kill-region (region-beginning) (region-end))
+    (backward-kill-word 1)))
+(global-set-key (kbd "C-w") #'k/kill-region-or-backward-word)
+
+
 (provide 'prelude-core)
