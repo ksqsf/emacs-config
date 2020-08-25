@@ -187,5 +187,7 @@
     (backward-kill-word 1)))
 (global-set-key (kbd "C-w") #'k/kill-region-or-backward-word)
 
+;; Replace dabbrev-expand by hippie-expand
+(global-set-key (kbd "M-/") #'hippie-expand)
 
 (provide 'prelude-core)
