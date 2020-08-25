@@ -92,6 +92,11 @@
 
 (use-package org-roam-server
   :ensure t
+  :defer t
+  :after org-roam
+  :commands (org-roam-server-mode)
+  :bind (:map org-roam-mode-map
+              (("C-c n s" . org-roam-server)))
   :config
   (setq org-roam-server-host "127.0.0.1"
         org-roam-server-port 8080
@@ -101,6 +106,8 @@
         org-roam-server-network-arrows nil
         org-roam-server-network-label-truncate t
         org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+        org-roam-server-network-label-wrap-length 20)
+  (require 'org-protocol)
+  (require 'org-roam-protocol))
 
 (provide 'prelude-apps)
