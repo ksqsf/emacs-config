@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: cf
+# key: cf
+# --
+//! title: $1
+//! link: $2
+//! solved: $3
+//! tags: $4
+
+#include <cstdio>
+#include <cmath>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+#include <queue>
+#include <unordered_set>
+#include <unordered_map>
+#include <string>
+#include <cstring>
+#include <bitset>
+using namespace std;
+
+using ll = long long;
+using ld = long double;
+using uint = unsigned int;
+using ull = unsigned long long;
+using pii = pair<int,int>;
+const ld PI = acos(-1.0);
+
+#define all(x) (x).begin(),(x).end()
+#define car first
+#define cdr second
+#define forn(i,n) for(int i = 0; i < (n); ++i)
+#define clr(x) memset(x,0,sizeof(x))
+
+int main()
+{
+    return 0;
+}
