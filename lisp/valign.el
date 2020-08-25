@@ -2,7 +2,7 @@
 
 ;; Author: Yuan Fu <casouri@gmail.com>
 ;; URL: https://github.com/casouri/valign
-;; Version: 1.0.0
+;; Version: 2.0.0
 ;; Keywords: convenience
 ;; Package-Requires: ((emacs "26.0"))
 
@@ -287,7 +287,13 @@ Start from point, stop at LIMIT."
   "Return non-nil if point is in a table."
   (save-excursion
     (beginning-of-line)
-    (looking-at "[ \t]*|")))
+    (let ((face (plist-get (text-properties-at (point)) 'face)))
+      ;; Don’t align tables in org blocks.
+      (and (looking-at "[ \t]*|")
+           (not (and (consp face)
+                     (or (equal face '(org-block))
+                         (equal (plist-get face :inherit)
+                                '(org-block)))))))))
 
 (defun valign--beginning-of-table ()
   "Go backward to the beginning of the table at point.
