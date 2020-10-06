@@ -14,8 +14,8 @@
   (setq prelude/default-opener (if *is-a-mac* "open" "xdg-open"))
 
   (setq dired-guess-shell-alist-user
-        '(("\\.pdf\\'" prelude--default-opener)
-          ("\\.png\\'" prelude--default-opener))))
+        '(("\\.pdf\\'" prelude/default-opener)
+          ("\\.png\\'" prelude/default-opener))))
 
 (use-package dired-filter
   :after (dired)
