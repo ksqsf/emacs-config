@@ -122,6 +122,7 @@
 
 ;; Meaningful M-<, M->
 (use-package beginend
+  :disabled
   :defer 1
   :config
   (beginend-global-mode))
@@ -129,6 +130,7 @@
 ;; Mac is stupid
 (when *is-a-mac*
   (use-package exec-path-from-shell
+    :disabled
     :init
     (setq exec-path-from-shell-check-startup-files nil)
     (setq exec-path-from-shell-arguments '("-l" "--no-rcs"))

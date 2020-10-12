@@ -35,12 +35,13 @@
     (setq default-frame-alist '((tool-bar-lines . 0)))))
 
 ;; Mac-specific settings
-(when *is-a-mac*
-  (push '(ns-transparent-titlebar . t) default-frame-alist)
-  (push '(ns-appearance . dark) default-frame-alist))
+;; (when *is-a-mac*
+;;   (push '(ns-transparent-titlebar . t) default-frame-alist)
+;;   (push '(ns-appearance . dark) default-frame-alist))
 
 ;; Default theme
 (use-package srcery-theme
+  :disabled
   :config
   (load-theme 'srcery t)
   (set-face-attribute 'font-lock-comment-face nil :foreground "orange")
@@ -48,12 +49,11 @@
 
 ;; Mode line
 (use-package diminish
-  :defer 1
   :config
-  (diminish 'eldoc-mode)
-  (diminish 'auto-revert-mode))
+  (diminish 'eldoc-mode))
 
 (use-package doom-modeline
+  :disabled
   :hook ((after-init . doom-modeline-mode))
   :init
   (setq doom-modeline-minor-modes nil)
@@ -100,6 +100,7 @@
 
 ;; Dashboard
 (use-package dashboard
+  :disabled
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((projects . 5)

@@ -13,6 +13,7 @@
                                   (projectile-project-root))))))
 
 (use-package reftex
+  :defer t
   :hook (LaTeX-mode . reftex-mode)
   :config
   (setq reftex-plug-into-AUCTeX t))

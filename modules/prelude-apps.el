@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; things that don't fit elsewhere
 (use-package wakatime-mode
+  :disabled
   :commands (global-wakatime-mode)
   :defer 1
   :config
@@ -67,15 +68,14 @@
 
 ;; org-roam
 (use-package org-roam
-  :hook (after-init . org-roam-mode)
+  :defer t
   :custom (org-roam-directory "~/Documents/Roam")
-  :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n t" . org-roam-dailies-today)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n j" . org-roam-jump-to-index)
-               ("C-c n b" . org-roam-switch-to-buffer)
-               ("C-c n g" . org-roam-graph))
+  :bind (("C-c n l" . org-roam)
+         ("C-c n t" . org-roam-dailies-today)
+         ("C-c n f" . org-roam-find-file)
+         ("C-c n j" . org-roam-jump-to-index)
+         ("C-c n b" . org-roam-switch-to-buffer)
+         ("C-c n g" . org-roam-graph)
          :map org-mode-map
          (("C-c n i" . org-roam-insert)
           ("C-c n I" . org-roam-insert-immediate))))
@@ -91,7 +91,6 @@
   (deft-directory "~/Documents/Roam"))
 
 (use-package org-roam-server
-  :ensure t
   :defer t
   :after org-roam
   :commands (org-roam-server-mode)
