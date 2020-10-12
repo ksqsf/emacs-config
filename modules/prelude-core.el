@@ -100,6 +100,12 @@
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
         aw-scope 'frame))
 
+(use-package windmove
+  :bind (("A-<left>" . windmove-left)
+         ("A-<right>" . windmove-right)
+         ("A-<up>" . windmove-up)
+         ("A-<down>" . windmove-down)))
+
 ;; Recentf
 (use-package recentf
   :hook ((after-init . recentf-mode))
