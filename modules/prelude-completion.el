@@ -15,11 +15,17 @@
  ((eq prelude-completion-framework 'ivy+counsel)
 
   (use-package ivy
+    :diminish "ⓘ"
     :hook (after-init . ivy-mode)
     :config
     (setq ivy-use-virtual-buffers 'recentf)
     (setq ivy-height 10)
-    (setq ivy-fixed-height-minibuffer t))
+    (setq ivy-fixed-height-minibuffer t)
+
+    (define-key ivy-occur-mode-map (kbd "p") 'ivy-occur-previous-line)
+    (define-key ivy-occur-mode-map (kbd "n") 'ivy-occur-next-line)
+    (define-key ivy-occur-mode-map (kbd "f") 'forward-char)
+    (define-key ivy-occur-mode-map (kbd "b") 'backward-char))
 
   (use-package ivy-hydra
     :after ivy)
@@ -48,10 +54,10 @@
     (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display))))
 
   (use-package counsel
+    :diminish "ⓒ"
     :hook (ivy-mode . counsel-mode)
     :bind (;; ("C-s" . swiper-isearch)
            ;; ("C-r" . swiper-isearch-backward)
-           
            ("C-c C-r" . ivy-resume)
            ("C-c v p" . ivy-push-view)
            ("C-c v o" . ivy-pop-view)
