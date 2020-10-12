@@ -48,6 +48,7 @@
 (require 'prelude-lang-ml)
 (require 'prelude-lang-js)
 (require 'prelude-lang-haskell)
+(require 'prelude-lang-web)
 
 (require 'prelude-help)
 (require 'prelude-utils)
@@ -57,3 +58,4 @@
 (when (file-exists-p prelude-volatile-dir)
   (message "Loading volatile configuration files in %s..." prelude-volatile-dir)
   (mapc 'load (directory-files prelude-volatile-dir 't "^[^#\.].*el$")))
+
