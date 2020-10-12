@@ -198,4 +198,8 @@
 ;; Replace dabbrev-expand by hippie-expand
 (global-set-key (kbd "M-/") #'hippie-expand)
 
+;; auth sources
+(setq auth-sources
+    '((:source "~/.authinfo.gpg")))
+
 (provide 'prelude-core)
