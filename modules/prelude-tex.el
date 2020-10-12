@@ -10,10 +10,19 @@
                 (setq fill-column 80)
                 (setq TeX-master (expand-file-name
                                   "main.tex"
-                                  (projectile-project-root))))))
+                                  (projectile-project-root)))))
+
+  (use-package pdf-tools
+    :config
+    (pdf-loader-install))
+
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+        TeX-source-correlate-start-server t)
+  (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
+  (add-hook 'LaTeX-mode-hook #'visual-line-mode)
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
 (use-package reftex
-  :defer t
   :hook (LaTeX-mode . reftex-mode)
   :config
   (setq reftex-plug-into-AUCTeX t))
