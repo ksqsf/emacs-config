@@ -81,7 +81,12 @@
                                             nil
                                             "^[^\\.].*\\.org$")))
            (file (completing-read "Org File: " files)))
-      (find-file (expand-file-name file org-directory)))))
+      (find-file (expand-file-name file org-directory))))
+
+  ;; Fix cdlatex
+  (define-advice texmathp (:before-until () org-cdlatex-fix)
+    "In org-cdlatex-mode, call `org-inside-LaTeX-fragment-p'."
+    (and org-cdlatex-mode (org-inside-LaTeX-fragment-p))))
 
 (use-package org-tempo
   :ensure nil
