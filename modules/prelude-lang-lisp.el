@@ -5,6 +5,7 @@
 (setq inferior-lisp-program "ccl64")
 
 (use-package paredit
+  :diminish "Ⓟ"
   :hook ((lisp-mode emacs-lisp-mode lisp-interaction-mode) . paredit-mode)
   :config
   (add-hook 'lisp-interaction-mode-hook #'(lambda () (define-key paredit-mode-map "\C-j" nil))))
