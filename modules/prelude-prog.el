@@ -50,6 +50,12 @@
   (require 'dap-lldb))
 
 
+(use-package dumb-jump
+  :commands (dumb-jump-xref-activate)
+  :init
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+
+
 (defun prelude--enable-prog-features (&rest features)
   (dolist (feature features)
     (pcase feature
