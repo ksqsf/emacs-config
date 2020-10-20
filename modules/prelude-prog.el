@@ -20,8 +20,7 @@
   (setq company-box-icons-alist 'company-box-icons-all-the-icons))
 
 (use-package imenu
-  :bind (:map prog-mode-map
-	      ("C-c C-j" . imenu)))
+  :bind ("C-c i" . imenu))
 
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode)
