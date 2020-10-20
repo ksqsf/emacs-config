@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; things that don't fit elsewhere
 (use-package wakatime-mode
-  :disabled
   :commands (global-wakatime-mode)
   :defer 1
   :config
