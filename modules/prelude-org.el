@@ -35,10 +35,6 @@
   (setq org-directory (expand-file-name "~/org"))
 
   ;; Agenda
-  (setq org-agenda-files '("~/org/todo.org"
-			   "~/org/read.org"
-			   "~/org/research.org"
-			   "~/org/work.org"))
   (setq org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "WAIT(w@/!)"
 				      "OTHERS(o@/!)"
 				      "|" "DONE(d!)" "CANCELLED(c!)")))
