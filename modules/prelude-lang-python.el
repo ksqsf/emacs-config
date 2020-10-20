@@ -22,4 +22,7 @@
         elpy-rpc-virtualenv-path (no-littering-expand-var-file-name "elpy/rpc-venv")
         elpy-get-info-from-shell t))
 
+(use-package flycheck-mypy
+  :after python)
+
 (provide 'prelude-lang-python)
