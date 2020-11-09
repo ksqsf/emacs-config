@@ -5,10 +5,15 @@
 (setq inferior-lisp-program "ccl64")
 
 (use-package paredit
+  :disabled
   :diminish "Ⓟ"
   :hook ((lisp-mode emacs-lisp-mode lisp-interaction-mode) . paredit-mode)
   :config
   (add-hook 'lisp-interaction-mode-hook #'(lambda () (define-key paredit-mode-map "\C-j" nil))))
+
+(use-package parinfer
+  :diminish ""
+  :hook ((lisp-mode emacs-lisp-mode lisp-interaction-mode) . parinfer-mode))
 
 (eval-after-load 'scheme
   (setq scheme-program-name "mechanics"))
