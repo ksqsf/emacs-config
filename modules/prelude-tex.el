@@ -8,9 +8,7 @@
   (add-hook 'LaTeX-mode-hook
             #'(lambda ()
                 (setq fill-column 80)
-                (setq TeX-master (expand-file-name
-                                  "main.tex"
-                                  (projectile-project-root)))))
+                (setq TeX-master t)))
 
   (use-package pdf-tools
     :config
