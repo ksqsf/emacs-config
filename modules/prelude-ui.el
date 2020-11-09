@@ -33,11 +33,13 @@
             '((vertical-scroll-bars . nil))))
   (progn
     (setq default-frame-alist '((tool-bar-lines . 0)))))
+(add-to-list 'initial-frame-alist '(height . 55))
+(add-to-list 'initial-frame-alist '(width . 120))
 
 ;; Mac-specific settings
-;; (when *is-a-mac*
-;;   (push '(ns-transparent-titlebar . t) default-frame-alist)
-;;   (push '(ns-appearance . dark) default-frame-alist))
+(when *is-a-mac*
+  (push '(ns-transparent-titlebar . t) default-frame-alist)
+  (push '(ns-appearance . dark) default-frame-alist))
 
 ;; Default theme
 (use-package srcery-theme
@@ -109,5 +111,26 @@
   (setq dashboard-center-content t)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t))
+
+;; Cycle themes
+(defcustom prelude-themes
+  (list 'doom-monokai-pro) 
+  "Themes that you may want to use."
+  :group 'prelude)
+
+(defun cycle-theme ()
+  "Cycle around `prelude-themes'."
+  (interactive)
+  (require 'dash)
+  (if (> (length prelude-themes) 1)
+      (let ((next (car prelude-themes)))
+        (dolist (current custom-enabled-themes)
+          (disable-theme current))
+        (if (listp next)
+            (dolist (theme next)
+              (load-theme theme t))
+          (load-theme next t))
+        (setq prelude-themes (append (cdr prelude-themes)
+                                     (list (car prelude-themes)))))))
 
 (provide 'prelude-ui)
