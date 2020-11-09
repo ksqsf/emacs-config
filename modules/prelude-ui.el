@@ -33,8 +33,8 @@
             '((vertical-scroll-bars . nil))))
   (progn
     (setq default-frame-alist '((tool-bar-lines . 0)))))
-(add-to-list 'initial-frame-alist '(height . 55))
-(add-to-list 'initial-frame-alist '(width . 120))
+(add-to-list 'initial-frame-alist '(height . 50))
+(add-to-list 'initial-frame-alist '(width . 140))
 
 ;; Mac-specific settings
 (when *is-a-mac*
