@@ -23,6 +23,8 @@
         elpy-get-info-from-shell t))
 
 (use-package flycheck-mypy
-  :after python)
+  :after python
+  :config
+  (setq flycheck-python-mypy-args "--no-incremental"))
 
 (provide 'prelude-lang-python)
