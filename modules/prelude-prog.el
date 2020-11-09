@@ -10,9 +10,12 @@
 (setq-default indent-tabs-mode nil)
 (show-paren-mode t)
 (setq show-paren-delay 0)
+(setq tab-always-indent 'complete)
 
 (use-package company
-  :commands (company-mode))
+  :commands (company-mode)
+  :config
+  (setq company-idle-delay 0.3))
 
 (use-package company-box
   :hook (company-mode . company-box-mode)
