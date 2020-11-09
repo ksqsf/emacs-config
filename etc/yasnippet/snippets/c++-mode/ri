@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ri
+# key: ri
+# --
+int $1; scanf("%d", &$1);
