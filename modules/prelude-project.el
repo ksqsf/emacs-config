@@ -9,7 +9,7 @@
         (cond ((eq prelude-completion-framework 'ido-only) 'ido)
               ((eq prelude-completion-framework 'ivy+counsel) 'ivy)
               (t 'default)))
-  (setq projectile-switch-project-action #'projectile-dired)
+  (setq projectile-switch-project-action #'projectile-find-file)
   (projectile-mode +1)
   ;; (counsel-projectile-mode +1)
 
