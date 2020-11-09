@@ -108,4 +108,9 @@
   (require 'org-protocol)
   (require 'org-roam-protocol))
 
+(use-package treemacs
+  :commands (treemacs)
+  :config
+  (add-hook 'treemacs-mode-hook #'variable-pitch-mode))
+
 (provide 'prelude-apps)
