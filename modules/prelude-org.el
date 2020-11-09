@@ -29,6 +29,7 @@
          ("C-c o" . find-org-file))
   :config
   (add-hook 'org-mode-hook #'valign-mode)
+  (add-hook 'org-mode-hook #'org-indent-mode)
 
   (setq org-return-follows-link t)
 
