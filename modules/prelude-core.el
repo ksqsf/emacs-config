@@ -136,7 +136,6 @@
 ;; Mac is stupid
 (when *is-a-mac*
   (use-package exec-path-from-shell
-    :disabled
     :init
     (setq exec-path-from-shell-check-startup-files nil)
     (setq exec-path-from-shell-arguments '("-l" "--no-rcs"))
@@ -146,6 +145,7 @@
   (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
   (global-set-key (kbd "s-v") #'clipboard-yank)
   (global-set-key (kbd "s-w") #'delete-frame)
+  (global-set-key (kbd "s-s") #'save-buffer)
   (global-set-key (kbd "s-t") #'split-window-horizontally)
   (global-set-key (kbd "s-T") #'split-window-vertically)
   (global-set-key (kbd "s-o") #'ace-window)
