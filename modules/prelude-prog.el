@@ -40,6 +40,8 @@
   :commands (smartparens-mode))
 
 
+(setq read-process-output-max 409600)
+
 (use-package lsp-mode
   :commands (lsp lsp-mode))
 
