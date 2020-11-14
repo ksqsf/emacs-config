@@ -200,7 +200,7 @@
 (global-set-key (kbd "M-/") #'hippie-expand)
 
 ;; auth sources
-(setq auth-sources
-    '((:source "~/.authinfo.gpg")))
+(setq auth-sources '("~/.netrc"))
+
 
 (provide 'prelude-core)
