@@ -36,4 +36,8 @@ Foundations and typical Verilog files."
 ;; (add-to-list 'auto-mode-alist '("\\.v\\'" . coq-or-verilog-mode))
 (add-to-list 'auto-mode-alist '("\\.v\\'" . coq-mode))
 
+(use-package company-coq
+  :hook (coq-mode . company-coq-mode)
+  (setq company-coq-live-on-the-edge t))
+
 (provide 'prelude-lang-coq)
