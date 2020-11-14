@@ -15,7 +15,10 @@
 
   (setq dired-guess-shell-alist-user
         '(("\\.pdf\\'" prelude/default-opener)
-          ("\\.png\\'" prelude/default-opener))))
+          ("\\.png\\'" prelude/default-opener)))
+
+  (when *is-a-mac*
+    (setq dired-omit-files "\\`[.]?#\\|\\`[.][.]?\\'\\|\\.DS_Store\\|\\.localized")))
 
 (use-package dired-filter
   :after (dired)
@@ -35,7 +38,7 @@
            ("LaTeX"
             (extension "tex" "bib"))
            ("Code"
-            (extension "rs" "c" "cpp" "h" "hpp" "cc" "rb" "py" "el" "html" "js" "css" "jl" "rs" "m"))
+            (extension "rs" "c" "cpp" "h" "hpp" "cc" "rb" "py" "el" "html" "js" "css" "jl" "rs" "m" "v"))
            ("Text"
             (extension "md" "rst" "txt"))
            ("Org"
