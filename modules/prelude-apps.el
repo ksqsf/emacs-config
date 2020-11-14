@@ -48,9 +48,7 @@
 
 ;; telega
 (use-package telega
-  :commands (telega)
-  :config
-  )
+  :commands (telega))
 
 ;; google translate
 (use-package google-translate
