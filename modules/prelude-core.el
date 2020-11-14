@@ -202,5 +202,9 @@
 ;; auth sources
 (setq auth-sources '("~/.netrc"))
 
+;; swap C-h p and C-h P
+(global-set-key (kbd "C-h p") #'describe-package)
+(global-set-key (kbd "C-h P") #'finder-by-keyword)
+
 
 (provide 'prelude-core)
