@@ -176,8 +176,9 @@
 
 ;; Expand region
 (use-package expand-region
+  :commands (er/expand-region)
   :bind (("C-=" . er/expand-region))
-  :config
+  :init
   (define-advice set-mark-command (:before-while (arg))
     "Repeat C-SPC to expand region."
     (interactive "P")
