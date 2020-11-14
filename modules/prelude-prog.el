@@ -42,6 +42,9 @@
 
 (setq read-process-output-max 409600)
 
+(use-package eglot
+  :commands (eglot))
+
 (use-package lsp-mode
   :commands (lsp lsp-mode))
 
