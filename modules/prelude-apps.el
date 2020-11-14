@@ -2,7 +2,7 @@
 ;;; things that don't fit elsewhere
 (use-package wakatime-mode
   :commands (global-wakatime-mode)
-  :defer 1
+  :defer 3
   :config
   (global-wakatime-mode t))
 
