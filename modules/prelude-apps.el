@@ -175,7 +175,7 @@ The default workspace is specificied by `prelude-treemacs-default-workspace'"
   ;;                (not (eq ws (treemacs-current-workspace))))
   ;;       (-treemacs-switch-to-workspace ws))))
 
-  (add-hook 'treemacs-mode-hook #'variable-pitch-mode)
+  ;; (add-hook 'treemacs-mode-hook #'variable-pitch-mode)
   (add-hook 'projectile-after-switch-project-hook #'-treemacs-add-project-to-workspace-or-switch)
   ;; (add-hook 'buffer-list-update-hook #'-treemacs-locate-project-if-in-workspace)
 
