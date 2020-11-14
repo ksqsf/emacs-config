@@ -46,9 +46,6 @@
 (use-package speed-type
   :commands (speed-type-text speed-type-buffer))
 
-;; stack exchange
-(use-package sx)
-
 ;; telega
 (use-package telega
   :commands (telega)
