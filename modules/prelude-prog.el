@@ -23,7 +23,7 @@
   (setq company-box-icons-alist 'company-box-icons-all-the-icons))
 
 (use-package imenu
-  :bind ("C-c i" . imenu))
+  :bind ("C-c C-j" . imenu))
 
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode)
