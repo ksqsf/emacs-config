@@ -1,134 +1,134 @@
 * Venus Emacs
 
-  [[./venus.jpg]]
+[[./venus.jpg]]
 
-  Venus Emacs is a "slightly configured" Emacs flavor, made by
-  ksqsf. (It also hosts some packages that I have written for my own
-  convenience. See the last section.)
+Venus Emacs is a "slightly configured" Emacs flavor, made by
+ksqsf. (It also hosts some packages that I have written for my own
+convenience. See the last section.)
 
-  This configuration has been tested on macOS and Debian.
+This configuration has been tested on macOS and Debian.
 
-  NOTE: This configuration only targets Emacs 27.1.  No guarantee
-  about forward/backward compatibility.  You can comment out the first
-  paragraph in =init.el= if you do want to try.
+NOTE: This configuration only targets Emacs 27.1.  No guarantee about
+forward/backward compatibility.  You can comment out the first
+paragraph in =init.el= if you do want to try.
 
 ** Philosophy
 
-   My primary goals are
+My primary goals are
 
-   * Fast, and responsive
-   * Healthy, and easy on the eye
-   * Productive, and distraction-free
-   * Predictable
-   * Stable
-   * Maintainable codebase
-   * Prefer built-in functionality to third-party packages
+- Fast, and responsive
+- Healthy, and easy on the eye
+- Productive, and distraction-free
+- Predictable
+- Stable
+- Maintainable codebase
+- Prefer built-in functionality to third-party packages
 
 
-   I don't strive to achieve eye-candy and powerfulness, but they are
-   good, and may be considered in the future.
+I don't strive to achieve eye-candy and powerfulness, but they are
+good, and may be considered in the future.
 
 ** Structure
 
-  There are two kinds of configuration, Module and Volatile.  The
-  distinction is (in my mind) very successful.
+There are two kinds of configuration, Module and Volatile.  The
+distinction is (in my mind) very successful.
 
 *** Module
 
-    Modules make up the functionality and keybindings.  They are
-    stable and can be byte compiled safely and cleanly.  Ideally, they
-    use lexical scoping.
+Modules make up the functionality and keybindings.  They are stable
+and can be byte compiled safely and cleanly.  Ideally, they use
+lexical scoping.
 
 *** Volatile
 
-    Volatile configuration files are more fragile and personal.  They
-    are mainly temporary tests or (let's hope not) ugly hacks.  A
-    volatile Lisp file should never be byte compiled.  Typically, it's
-    dynamically scoped.
+Volatile configuration files are more fragile and personal.  They are
+mainly temporary tests or (let's hope not) ugly hacks.  A volatile
+Lisp file should never be byte compiled.  Typically, it's dynamically
+scoped.
 
 ** Fonts
 
-  The following fonts are "blessed" in this configuration.
+The following fonts are "blessed" in this configuration.
 
-  | Font         | Size | Usage                     |
-  |--------------+------+---------------------------|
-  | Fira Code    |   14 | General use (non-Chinese) |
-  | Iosevka Term |   14 | Tabular content           |
+| Font         | Size | Usage                     |
+|--------------+------+---------------------------|
+| Fira Code    |   14 | General use (non-Chinese) |
+| Iosevka Term |   14 | Tabular content           |
 
-  However, other fonts also seem to work well, like Monaco and Menlo.
+However, other fonts also seem to work well, like Monaco and Menlo.
 
 ** Better Defaults
 
-   These modifications are generally in =prelude-core.el= and
-   =prelude-ui.el=.
+These modifications are generally in =prelude-core.el= and
+=prelude-ui.el=.
 
-   User-*very*-visible modifications are listed here.
+User-*very*-visible modifications are listed here.
 
 *** Expand region
 
-    =C-SPC C-SPC= to expand the current region semantically.
+=C-SPC C-SPC= to expand the current region semantically.
 
 *** Themes
 
-    The default theme (too bright) was replaced by [[https://srcery-colors.github.io][Srcery]].
+The default theme (too bright) was replaced by [[https://srcery-colors.github.io][Srcery]].
 
 *** Zap up to char
 
-    =M-z= was assigned to =zap-up-to-char=.  You can easily achieve
-    what =zap-to-char= does with =M-z <char> C-d=.
+=M-z= was assigned to =zap-up-to-char=.  You can easily achieve what
+=zap-to-char= does with =M-z <char> C-d=.
 
-    At first, I thought =M-z t= and =M-z f= would be cool, but it
-    turned out to be a horrible idea, because one must stop to think
-    which key to press.
+At first, I thought =M-z t= and =M-z f= would be cool, but it turned
+out to be a horrible idea, because one must stop to think which key to
+press.
 
 *** Mode line
 
-    Doom mode line.
+Doom mode line.
 
 *** Quick Completion
 
-    I use Ivy and the Counsel family, as they tend to blend better
-    with other modern packages.
+I use Ivy and the Counsel family, as they tend to blend better
+with other modern packages.
 
-    Over the months, I've tried several other setups, like ido and
-    icomplete that comes with Emacs itself, and the configs are still
-    there, but will not receive updates as often as Ivy+Counsel.  Just
-    customize =prelude-completion-framework=, if you want to try.
+Over the months, I've tried several other setups, like ido and
+icomplete that comes with Emacs itself, and the configs are still
+there, but will not receive updates as often as Ivy+Counsel.  Just
+customize =prelude-completion-framework=, if you want to try.
 
 *** REPL
 
-    Many major modes support REPL, but their keybindings are often
-    very different.  The following keychords are adopted by Emacs
-    itself, so they are preferred when possible.
+Many major modes support REPL, but their keybindings are often
+very different.  The following keychords are adopted by Emacs
+itself, so they are preferred when possible.
 
-    | Key     | Function             |
-    |---------+----------------------|
-    | C-c C-c | Send buffer          |
-    | C-c C-l | Send file            |
-    | C-x C-e | Send this expression |
-    | C-M-x   | Send this function   |
+| Key     | Function             |
+|---------+----------------------|
+| C-c C-c | Send buffer          |
+| C-c C-l | Send file            |
+| C-x C-e | Send this expression |
+| C-M-x   | Send this function   |
 
 **** Haskell, Idris
 
-     Haskell-mode has Interactive Haskell mode supporting ghci.  Due
-     to Haskell's specialness, all you can do is =C-c C-l=.
+Haskell-mode has Interactive Haskell mode supporting ghci.  Due to
+Haskell's specialness, all you can do is =C-c C-l=.
 
 **** Python
 
-     Elpy defined a bunch of send functions, but they turn out to be
-     not so helpful.
+Elpy defined a bunch of send functions, but they turn out to be not so
+helpful.
 
 **** Coq
 
-     Coq is an interactive proof assistant, whose Emacs interface is
-     Proof General, which defines its own set of commands.
+Coq is an interactive proof assistant, whose Emacs interface is Proof
+General, which defines its own set of commands.
 
 ** Unlimited Lisp Works
-   This repo hosts some other Emacs Lisp works made by me for my own
-   convenience. It might be useful for you, too, so I made a list
-   here for better discoverability.
+This repo hosts some other Emacs Lisp works made by me for my own
+convenience. It might be useful for you, too, so I made a list here
+for better discoverability.
 
-   | Who       | Where                  | What                      |
-   |-----------+------------------------+---------------------------|
-   | pest-mode | github ksqsf/pest-mode | Major mode for Pest files |
-   | treefold  | ./lisp/treefold.el     | Fold any tree-like text   |
+| Who       | Where                  | What                      |
+|-----------+------------------------+---------------------------|
+| pest-mode | github ksqsf/pest-mode | Major mode for Pest files |
+| treefold  | ./lisp/treefold.el     | Fold any tree-like text   |
