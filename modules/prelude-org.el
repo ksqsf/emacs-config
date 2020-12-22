@@ -31,11 +31,11 @@
   (add-hook 'org-mode-hook #'valign-mode)
   (add-hook 'org-mode-hook #'org-indent-mode)
 
-  (setq org-return-follows-link t)
-
-  (setq org-directory (expand-file-name "~/org"))
+  (setq org-return-follows-link t
+        org-directory (expand-file-name "~/org"))
 
   ;; Agenda
+  (setq org-log-done 'time)
   (setq org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "WAIT(w@/!)"
 				      "OTHERS(o@/!)"
 				      "|" "DONE(d!)" "CANCELLED(c!)")))
