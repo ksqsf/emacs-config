@@ -58,4 +58,3 @@
 (when (file-exists-p prelude-volatile-dir)
   (message "Loading volatile configuration files in %s..." prelude-volatile-dir)
   (mapc 'load (directory-files prelude-volatile-dir 't "^[^#\.].*el$")))
-
