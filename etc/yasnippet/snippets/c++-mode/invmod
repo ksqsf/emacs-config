@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: invmod
+# key: invmod
+# --
+template<class T>
+T invmod(T a, T p) { return qpow<T>(a, p-2, p); }
