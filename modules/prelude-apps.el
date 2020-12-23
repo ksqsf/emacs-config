@@ -108,6 +108,13 @@
          ("M-0" . select-treemacs-window))
   :commands (treemacs)
   :config
+
+  (defun select-treemacs-window ()
+    (interactive)
+    (if-let ((win (treemacs-get-local-window)))
+        (select-window win)
+      (treemacs)))
+  
   ;; Add the name of the current workspace to the mode line
   (defun prelude-treemacs-mode-line ()
     '(" Treemacs " (:eval)))
