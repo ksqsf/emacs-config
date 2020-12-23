@@ -104,7 +104,8 @@
   (require 'org-roam-protocol))
 
 (use-package treemacs
-  :bind ("C-c t" . treemacs)
+  :bind (("C-c t" . treemacs)
+         ("M-0" . select-treemacs-window))
   :commands (treemacs)
   :config
   ;; Add the name of the current workspace to the mode line
