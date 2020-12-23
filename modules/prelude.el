@@ -35,7 +35,4 @@ The effect is yet to be experimented."
    (lambda ()
      (require feature))))
 
-(setq user-full-name "ksqsf"
-      user-mail-address "i@ksqsf.moe")
-
 (provide 'prelude)
