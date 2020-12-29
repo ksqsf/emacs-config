@@ -6,7 +6,8 @@
   :group 'prelude
   :type '(choice (const :tag "Icomplete+Ido" icomplete+ido)
                  (const :tag "Ido-only" ido)
-                 (const :tag "Ivy+Counsel" ivy+counsel)))
+                 (const :tag "Ivy+Counsel" ivy+counsel)
+                 (const :tag "Selectrum" selectrum)))
 
 (use-package flx)
 
@@ -31,7 +32,7 @@
     :after ivy)
 
   (use-package ivy-prescient
-    :after ivy)
+    :after counsel)
 
   (use-package ivy-rich
     :after ivy
@@ -64,6 +65,16 @@
            ("C-c v ." . ivy-switch-view))
     :config
     (use-package amx)))
+
+ ;; Selectrum
+ ((eq prelude-completion-framework 'selectrum)
+  (use-package selectrum
+    :hook (after-init . selectrum-mode)
+    :config
+    (use-package selectrum-prescient
+      :config
+      (selectrum-prescient-mode +1)
+      (prescient-persist-mode +1))))
 
  ;; Icomplete + Ido
  ((eq prelude-completion-framework 'icomplete+ido)
