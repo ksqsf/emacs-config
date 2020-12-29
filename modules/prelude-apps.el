@@ -184,7 +184,8 @@
   (use-package treemacs-projectile))
 
 (use-package pdf-tools
-  :init
-  (pdf-loader-install))
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  (pdf-tools-install))
 
 (provide 'prelude-apps)
