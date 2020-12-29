@@ -38,8 +38,9 @@
 
 ;; Mac-specific settings
 (when *is-a-mac*
-  (push '(ns-transparent-titlebar . t) default-frame-alist)
-  (push '(ns-appearance . dark) default-frame-alist))
+  (use-package ns-auto-titlebar
+    :init
+    (ns-auto-titlebar-mode)))
 
 ;; Default theme
 (use-package srcery-theme
