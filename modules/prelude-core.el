@@ -135,10 +135,12 @@
 
 ;; Mac is stupid
 (when *is-a-mac*
+  (setq default-directory "~/")
+  (setq command-line-default-directory "~/")
+
   (use-package exec-path-from-shell
     :init
-    (setq exec-path-from-shell-check-startup-files nil)
-    (setq exec-path-from-shell-arguments '("-l" "--no-rcs"))
+    (setq exec-path-from-shell-arguments '("-l"))
     :config
     (exec-path-from-shell-copy-envs '("PATH")))
 
