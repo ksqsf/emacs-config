@@ -183,4 +183,8 @@
 
   (use-package treemacs-projectile))
 
+(use-package pdf-tools
+  :init
+  (pdf-loader-install))
+
 (provide 'prelude-apps)

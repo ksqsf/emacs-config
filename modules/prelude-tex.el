@@ -10,10 +10,6 @@
                 (setq fill-column 80)
                 (setq TeX-master t)))
 
-  (use-package pdf-tools
-    :config
-    (pdf-loader-install))
-
   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
         TeX-source-correlate-start-server t)
   (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
