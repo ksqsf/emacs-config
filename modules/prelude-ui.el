@@ -76,6 +76,7 @@
 (use-package winum
   ;; M-0 is reserved for Treemacs
   ;; Treemacs will be moved here from apps soon
+  :hook ((after-init . winum-mode))
   :bind (("M-1" . winum-select-window-1)
          ("M-2" . winum-select-window-2)
          ("M-3" . winum-select-window-3)
