@@ -146,4 +146,8 @@
         (setq prelude-themes (append (cdr prelude-themes)
                                      (list (car prelude-themes)))))))
 
+;; valign
+(use-package valign
+  :commands (valign-mode))
+
 (provide 'prelude-ui)
