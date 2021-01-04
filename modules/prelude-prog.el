@@ -46,7 +46,10 @@
   :commands (eglot))
 
 (use-package lsp-mode
-  :commands (lsp lsp-mode))
+  :commands (lsp lsp-mode)
+  :config
+  (setq lsp-headerline-breadcrumb-enable nil
+        lsp-enable-snippet nil))
 
 (use-package lsp-ui
   :commands (lsp-ui-mode))
