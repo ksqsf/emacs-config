@@ -1,6 +1,9 @@
 # various files
 var/
 
+# eln
+eln-cache/
+
 # Backup
 *~
 backups
