@@ -9,7 +9,7 @@
 
 (setq-default indent-tabs-mode nil)
 (show-paren-mode t)
-(setq show-paren-delay 0)
+(setq show-paren-delay 0.0)
 (setq tab-always-indent 'complete)
 
 (use-package company
