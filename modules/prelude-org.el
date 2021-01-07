@@ -23,6 +23,7 @@
 ;; @ -> additional notes
 (use-package org
   :hook (org-mode . org-cdlatex-mode)
+  :hook (org-mode . visual-line-mode)
   :bind (("C-c a" . org-agenda)
 	 ("C-'" . org-cycle-agenda-files)
 	 ("C-c c" . org-capture)

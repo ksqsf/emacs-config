@@ -41,4 +41,3 @@
   (add-hook 'ibuffer-mode-hook #'(lambda () (ibuffer-switch-to-saved-filter-groups "Normal"))))
 
 (provide 'prelude-ibuffer)
-
