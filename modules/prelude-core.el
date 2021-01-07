@@ -138,6 +138,8 @@
   (setq default-directory "~/")
   (setq command-line-default-directory "~/")
 
+  (setq mac-command-modifier 'meta)
+
   (use-package exec-path-from-shell
     :init
     (setq exec-path-from-shell-arguments '("-l"))
