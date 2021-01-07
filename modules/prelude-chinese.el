@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
-;; Table font for perfect alignment.
 
+(setq word-wrap-by-category t)
+
+;; Table font for perfect alignment.
 ;; Warning: this may not work on different font settings.
 (with-eval-after-load 'org
   (set-face-font 'org-table "Iosevka Term-14")
