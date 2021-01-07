@@ -20,7 +20,7 @@
 (defun cargo-play (arg)
   (interactive "P")
   (let* ((release-flag (if arg "--release" ""))
-         (command (format "cargo play %s %s &" release-flag current-file)))
+         (command (format "cargo play %s %s &" release-flag (buffer-file-name))))
     (shell-command command "*Cargo Play*")))
 
 (provide 'prelude-lang-rust)
