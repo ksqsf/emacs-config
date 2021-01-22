@@ -137,6 +137,7 @@
 (when *is-a-mac*
   (setq default-directory "~/")
   (setq command-line-default-directory "~/")
+  (setenv "LC_ALL" "zh_CN.utf-8")
 
   (setq mac-command-modifier 'meta)
 
