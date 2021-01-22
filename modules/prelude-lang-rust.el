@@ -23,4 +23,31 @@
          (command (format "cargo play %s %s &" release-flag (buffer-file-name))))
     (shell-command command "*Cargo Play*")))
 
+(defun rust-show (flags mode)
+  (let* ((command (format "rustc %s -o /tmp/emacs-output %s" (mapconcat #'identity flags " ") (buffer-file-name)))
+         (buffer (get-buffer-create "*Rust Show*")))
+    (shell-command command " *Rust Show Output*")
+    (switch-to-buffer-other-window buffer)
+    (insert-file "/tmp/emacs-output")
+    (funcall mode)))
+
+(defun rust-show-mir (arg)
+  (interactive "P")
+  (let* ((opt-flag (if arg "-O" "")))
+    (rust-show (list opt-flag "--emit=mir") #'fundamental-mode)))
+
+(defun rust-show-asm (arg)
+  (interactive "P")
+  (let* ((opt-flag (if arg "-O" "")))
+    (rust-show (list opt-flag "--emit=asm") #'asm-mode)))
+
+(defun rust-show-llvm-ir (arg)
+  (interactive "P")
+  (let* ((opt-flag (if arg "-O" "")))
+    (rust-show (list opt-flag "--emit=llvm-ir") #'fundamental-mode)))
+
+(defun rust (arg)
+  (interactive "P")
+  (find-file "/tmp/play.rs"))
+
 (provide 'prelude-lang-rust)
