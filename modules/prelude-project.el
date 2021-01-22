@@ -9,9 +9,12 @@
         (cond ((eq prelude-completion-framework 'ido-only) 'ido)
               ((eq prelude-completion-framework 'ivy+counsel) 'ivy)
               (t 'default)))
+  (setq projectile-enable-caching nil)
   (setq projectile-switch-project-action #'projectile-find-file)
   (projectile-mode +1)
   ;; (counsel-projectile-mode +1)
+
+  (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm)
 
   ;; cmake
   (projectile-register-project-type 'cmake '("CMakeLists.txt")
