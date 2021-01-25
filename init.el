@@ -1,60 +1,18 @@
 ;;; -*- lexical-binding: t; -*-
-;; I don't support any version other than what I use.
-(when (version< emacs-version "27.1")
-  (warn "This configuration is only tested on Emacs 27.1"))
 
-;; Directories.
-(defvar prelude-lisp-dir (expand-file-name "lisp" user-emacs-directory)
-  "This directory contains third-party Lisp files.")
-(defvar prelude-modules-dir (expand-file-name "modules" user-emacs-directory)
-  "The directory contains all modules.")
-(defvar prelude-volatile-dir (expand-file-name "volatile" user-emacs-directory)
-  "This directory contains volatile configuration.  All Lisp
-  files are loaded automatically.  You shouldn't byte-compile
-  these Lisp files.  To disable a file, just change the extension
-  from .el to whatever else.")
+(defvar +dumped-load-path nil
+  "Not nil when using dump.")
 
-(add-to-list 'load-path prelude-lisp-dir)
-(add-to-list 'load-path prelude-modules-dir)
+(load (expand-file-name "custom.el" user-emacs-directory))
 
-;;; Set up autoloads from prelude-lisp-dir.
-(require 'prelude-loaddefs)
+(when +dumped-load-path
+  (setq load-path +dumped-load-path)
+  (setq warning-minimum-level :emergency)
+  (global-font-lock-mode t)
+  (transient-mark-mode t)
+  (message "Skipped startup"))
 
-;; Customization.
-;; (load custom-file)
+(unless +dumped-load-path
+  (load (expand-file-name "prelude-startup.el" user-emacs-directory)))
 
-;; Modules.
-(require 'prelude)
-(require 'prelude-package)
-(require 'prelude-benchmark)
-(require 'prelude-core)
-(require 'prelude-ui)
-(require 'prelude-completion)
-(require 'prelude-ibuffer)
-(require 'prelude-project)
-(require 'prelude-chinese)
-(require 'prelude-dired)
-(require 'prelude-git)
-(require 'prelude-tex)
-(require 'prelude-org)
-(require 'prelude-blog)
-
-(require 'prelude-prog)
-(require 'prelude-lang-lisp)
-(require 'prelude-lang-cc)
-(require 'prelude-lang-python)
-(require 'prelude-lang-rust)
-(require 'prelude-lang-coq)
-(require 'prelude-lang-ml)
-(require 'prelude-lang-js)
-(require 'prelude-lang-haskell)
-(require 'prelude-lang-web)
-
-(require 'prelude-help)
-(require 'prelude-utils)
-(require 'prelude-apps)
-
-;; Volatile.
-(when (file-exists-p prelude-volatile-dir)
-  (message "Loading volatile configuration files in %s..." prelude-volatile-dir)
-  (mapc 'load (directory-files prelude-volatile-dir 't "^[^#\.].*el$")))
+(provide 'init)
