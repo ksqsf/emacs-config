@@ -48,3 +48,6 @@ org-roam.db
 
 # Hey, Mac!
 .DS_Store
+
+# dump
+emacs.pdmp
