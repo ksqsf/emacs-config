@@ -43,12 +43,13 @@
     (ns-auto-titlebar-mode)))
 
 ;; Default theme
-(use-package srcery-theme
-  :disabled
+(use-package lab-themes
   :config
-  (load-theme 'srcery t)
-  (set-face-attribute 'font-lock-comment-face nil :foreground "orange")
-  (set-face-attribute 'font-lock-comment-delimiter-face nil :foreground "orange"))
+  (defun prelude-switch-theme (appearance)
+    (if (eq appearance 'dark)
+        (load-theme 'lab-dark t)
+      (load-theme 'lab-light t)))
+  (add-hook 'ns-ns-system-appearance-change-functions #'prelude-switch-theme))
 
 ;; Mode line
 (use-package diminish
@@ -56,7 +57,6 @@
   (diminish 'eldoc-mode))
 
 (use-package doom-modeline
-  :disabled
   :hook ((after-init . doom-modeline-mode))
   :init
   (setq doom-modeline-minor-modes nil)
@@ -101,7 +101,6 @@
 
 ;; Auto set margins
 (use-package perfect-margin
-  :disabled
   :quelpa (perfect-margin :fetcher github :repo "mpwang/perfect-margin")
   :custom
   (perfect-margin-visible-width 128)
@@ -172,6 +171,7 @@
   (global-ligature-mode t))
 
 ;; don't pop windows everywhere!
+;; 
 (use-package shackle
   :hook (after-init . shackle-mode)
   :custom
@@ -186,6 +186,8 @@
      (comint-mode          :select t :align t :size 0.4)
      (grep-mode            :select t :align t)
      (rg-mode              :select t :align t)
+     (ag-mode              :select t :align t)
+     ("*org-roam*"         :select nil :align t :inhibit-window-quit t :same t)
      ("*Flycheck errors*"         :select t   :align t :size 10)
      ("*Backtrace*"               :select t   :align t :size 15)
      ("*ydcv*"                    :select nil :align t :size 0.4)
@@ -197,6 +199,7 @@
      ("*Help*"                    :select t   :align t :size 0.3)
      ("*Occur*"                   :select t   :align right)
      ("\\*ivy-occur .*\\*"        :select t   :align right :regexp t)
-     ("\\*eldoc\\( for \\)?.*\\*" :select nil :align t :size 15 :regexp t))))
+     ("\\*eldoc\\( for \\)?.*\\*" :select nil :align t :size 15 :regexp t)
+     )))
 
 (provide 'prelude-ui)
