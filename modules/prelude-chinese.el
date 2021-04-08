@@ -1,5 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-
 (setq word-wrap-by-category t)
 
 ;; Table font for perfect alignment.
@@ -12,15 +11,19 @@
 (with-eval-after-load 'markdown
   (set-face-font 'markdown-table-face "Iosevka Term-14"))
 
+;; Fontset, we need a Serif font for variable pitch mode
+(when *is-a-mac*
+  (set-fontset-font t 'chinese-gbk "STSong"))
+
 ;; Hey, Org mode?
 
 (with-eval-after-load 'org
   (setq org-emphasis-regexp-components 
-      (list (concat " \t('\"{"            "[:alpha:]") 
-            (concat "- \t.,:!?;'\")}\\["  "[:alpha:]") 
-            " \t\r\n,\"'" 
-            "." 
-            1))
+        (list (concat " \t('\"{"            "[:alpha:]") 
+              (concat "- \t.,:!?;'\")}\\["  "[:alpha:]") 
+              " \t\r\n,\"'" 
+              "." 
+              1))
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
   (setcar (nthcdr 1 org-emphasis-regexp-components) "-[:space:].。,，:；!！?？;；'\")}\\")
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components))

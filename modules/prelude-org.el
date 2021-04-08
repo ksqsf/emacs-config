@@ -3,6 +3,7 @@
 ;; 1. prelude-tex: for cdlatex
 
 (use-package org-bullets
+  :disabled
   :hook (org-mode . org-bullets-mode))
 
 ;; Productivity Problems:
@@ -24,13 +25,17 @@
 (use-package org
   :hook (org-mode . org-cdlatex-mode)
   :hook (org-mode . visual-line-mode)
+  :hook (org-mode . variable-pitch-mode)
   :bind (("C-c a" . org-agenda)
 	 ("C-'" . org-cycle-agenda-files)
 	 ("C-c c" . org-capture)
          ("C-c o" . find-org-file))
   :config
-  (add-hook 'org-mode-hook #'valign-mode)
+  ;; (add-hook 'org-mode-hook #'valign-mode)
   (add-hook 'org-mode-hook #'org-indent-mode)
+
+  ;; Maybe prettify?
+  (setq org-hide-emphasis-markers t)
 
   (setq org-return-follows-link t
         org-directory (expand-file-name "~/org"))
@@ -115,4 +120,48 @@
 		 ("\\paragraph{%s}" . "\\paragraph*{%s}")
 		 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
+(defvar-local k/org-last-in-latex nil)
+
+(defun k/org-in-latex-fragment-p ()
+  "Returns non-nil when the point is inside a latex fragment."
+  (let* ((el (org-element-context))
+         (el-type (car el)))
+    (and (or (eq 'latex-fragment el-type) (eq 'latex-environment el-type))
+         (org-element-property :begin el))))
+
+(defun k/org-latex-auto-toggle ()
+  (ignore-errors
+    (let ((in-latex (k/org-in-latex-fragment-p)))
+      (if (and k/org-last-in-latex (not in-latex))
+          (progn (org-latex-preview)
+                 (setq k/org-last-in-latex nil)))
+
+      (when-let ((ovs (overlays-at (point))))
+        (when (->> ovs
+                   (--map (overlay-get it 'org-overlay-type))
+                   (--filter (equal it 'org-latex-overlay)))
+          ;; (org-latex-preview)
+          (make-thread #'(lambda () (thread-yield) (sit-for 0) (org-latex-preview)) "Async LaTeX fragment Preview")
+          (setq k/org-last-in-latex nil)))
+
+      (when in-latex
+        (setq k/org-last-in-latex t)))))
+
+(define-minor-mode org-latex-auto-toggle
+  "Automatic toggle latex overlay when cursor enter/leave."
+  nil
+  nil
+  nil
+  (if org-latex-auto-toggle
+      (add-hook 'post-command-hook #'k/org-latex-auto-toggle nil t)
+    (remove-hook 'post-command-hook #'k/org-latex-auto-toggle t)))
+
+(use-package org-latex-impatient
+  :hook (org-mode . org-latex-impatient-mode)
+  :init
+  (setq org-latex-impatient-tex2svg-bin
+        "~/node_modules/mathjax-node-cli/bin/tex2svg"))
+
 (provide 'prelude-org)
+
+
