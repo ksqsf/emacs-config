@@ -57,7 +57,7 @@
   (use-package counsel
     :diminish "ⓒ"
     :hook (ivy-mode . counsel-mode)
-    :bind (;; ("C-s" . swiper-isearch)
+    :bind (("M-s M-s" . swiper)
            ;; ("C-r" . swiper-isearch-backward)
            ("C-c C-r" . ivy-resume)
            ("C-c v p" . ivy-push-view)
