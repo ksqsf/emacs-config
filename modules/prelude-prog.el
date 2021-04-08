@@ -81,4 +81,9 @@
 (setq gdb-mi-decode-strings 'utf-8)
 
 
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(setq display-line-numbers-type 'relative
+      display-line-numbers-grow-only t)
+
+
 (provide 'prelude-prog)
