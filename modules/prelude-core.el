@@ -157,6 +157,9 @@
   (global-set-key (kbd "s-x") #'execute-extended-command)
   (global-set-key (kbd "s-n") #'make-frame-command)
 
+  ;; Mac will interpret the Insert key on a PC keyboard as Help
+  (define-key key-translation-map (kbd "<help>") (kbd "<insert>"))
+
   ;; macport feature: too slow!
   (setq mac-mouse-wheel-smooth-scroll nil))
 
