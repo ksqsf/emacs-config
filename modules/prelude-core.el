@@ -201,8 +201,9 @@
     (backward-kill-word 1)))
 (global-set-key (kbd "C-w") #'k/kill-region-or-backward-word)
 
-;; Replace dabbrev-expand by hippie-expand
-(global-set-key (kbd "M-/") #'hippie-expand)
+;; <del>Replace dabbrev-expand by hippie-expand</del>
+;; hippie-expand does too much
+;; (global-set-key (kbd "M-/") #'dabbrev-expand)
 
 ;; auth sources
 (setq auth-sources '("~/.netrc"))
@@ -210,6 +211,5 @@
 ;; swap C-h p and C-h P
 (global-set-key (kbd "C-h p") #'describe-package)
 (global-set-key (kbd "C-h P") #'finder-by-keyword)
-
 
 (provide 'prelude-core)
