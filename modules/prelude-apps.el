@@ -186,6 +186,11 @@
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
-  (pdf-tools-install))
+  (pdf-tools-install)
+
+  (use-package pdf-continuous-scroll-mode
+    :disabled                           ; This mode barely does anything useful
+    :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el")
+    :hook (pdf-view-mode . pdf-continuous-scroll-mode)))
 
 (provide 'prelude-apps)
