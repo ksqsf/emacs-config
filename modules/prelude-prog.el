@@ -87,4 +87,8 @@
       display-line-numbers-grow-only t)
 
 
+(global-set-key (kbd "C-c C-a") #'align)
+
+
+
 (provide 'prelude-prog)
