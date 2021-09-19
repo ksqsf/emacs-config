@@ -180,7 +180,8 @@
   :commands (ripgrep-regexp ripgrep-search-mode))
 
 ;; Auto insert
-(use-package autoinsert)
+(use-package autoinsert
+  :defer 1)
 
 ;; Expand region
 (use-package expand-region
