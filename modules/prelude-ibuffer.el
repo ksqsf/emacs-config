@@ -35,7 +35,9 @@
                     (name . "^\\*Apropos\\*$")))
            ("Custom" (or
                       (mode . customi-mode)
-                      (name . "^\\*Customize"))))))
+                      (name . "^\\*Customize")))
+           ("IRC" (or
+                   (mode . erc-mode))))))
   (setq ibuffer-show-empty-filter-groups nil
         ibuffer-default-sorting-mode 'filename/process)
   (add-hook 'ibuffer-mode-hook #'(lambda () (ibuffer-switch-to-saved-filter-groups "Normal"))))
