@@ -51,6 +51,7 @@
 (require 'prelude-lang-ml)
 (require 'prelude-lang-js)
 (require 'prelude-lang-haskell)
+(require 'prelude-lang-agda)
 (require 'prelude-lang-web)
 
 (require 'prelude-help)
