@@ -196,4 +196,9 @@
 (use-package dash-at-point
   :commands (dash-at-point)
   :bind (("C-c C-d" . dash-at-point)))
+
+(use-package erc
+  :config
+  (setq erc-server "irc.libera.chat"))
+
 (provide 'prelude-apps)
