@@ -1,8 +1,21 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Rust
 
+(defun rust-compile-command ()
+  "Set `compile-command' for rust(ic)-mode buffers."
+  (when buffer-file-name
+    (setq-local compile-command (concat "rustc "
+                                        (shell-quote-argument buffer-file-name)
+                                        " -o a.out && ./a.out"))))
+
+(use-package rust-mode
+  :mode ("\\.rs\\'" . rust-mode)
+  :hook (rust-mode . rust-compile-command))
+  
+  
 (use-package rustic
   :mode ("\\.rs\\'" . rustic-mode)
+  :hook (rustic-mode . rust-compile-command)
   :config
   (setq rustic-lsp-client 'lsp-mode
         rustic-lsp-server 'rust-analyzer
