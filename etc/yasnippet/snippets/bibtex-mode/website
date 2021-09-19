@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: website
+# key: web
+# --
+@misc{
+  title = {$1},
+  howpublished = {$2},
+  year = {$3}
+}

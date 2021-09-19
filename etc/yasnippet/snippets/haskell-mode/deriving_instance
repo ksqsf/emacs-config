@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: deriving_instance
+# key: di
+# --
+deriving instance 

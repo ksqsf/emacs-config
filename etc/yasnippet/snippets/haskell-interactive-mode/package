@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: package
+# key: p
+# --
+:set -package 

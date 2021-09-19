@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: script
+# key: s
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#!/usr/bin/env runghc
+{-# LANGUAGE PackageImports, OverloadedStrings #-}
+import "turtle" Turtle
+main = do
+  ${1:echo "it works"}
