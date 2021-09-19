@@ -193,4 +193,7 @@
     :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el")
     :hook (pdf-view-mode . pdf-continuous-scroll-mode)))
 
+(use-package dash-at-point
+  :commands (dash-at-point)
+  :bind (("C-c C-d" . dash-at-point)))
 (provide 'prelude-apps)
