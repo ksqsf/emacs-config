@@ -15,13 +15,18 @@
 (use-package company
   :commands (company-mode)
   :config
-  (setq company-idle-delay 0.3))
+  (setq company-idle-delay 0.0))
 
 (use-package company-box
   :hook (company-mode . company-box-mode)
   :config
   ;; WARNING: Don't use all-the-icons!!
   (setq company-box-icons-alist 'company-box-icons-idea))
+
+(use-package company-tabnine
+  :after company
+  :config
+  (add-to-list 'company-backends #'company-tabnine))
 
 (use-package imenu
   :bind ("C-c C-j" . imenu))
