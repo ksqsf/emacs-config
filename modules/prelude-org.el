@@ -23,9 +23,12 @@
 ;; ! -> timestamps
 ;; @ -> additional notes
 (use-package org
+  :defer 1
   :hook (org-mode . org-cdlatex-mode)
   :hook (org-mode . visual-line-mode)
-  :hook (org-mode . variable-pitch-mode)
+  :hook (org-mode . org-variable-pitch-minor-mode)
+                                        ; :hook (org-mode . org-starless-mode)
+                                        ; :hook (org-mode . org-padding-mode)
   :bind (("C-c a" . org-agenda)
 	 ("C-'" . org-cycle-agenda-files)
 	 ("C-c c" . org-capture)
@@ -42,8 +45,7 @@
 
   ;; Agenda
   (setq org-log-done 'time)
-  (setq org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "WAIT(w@/!)"
-				      "OTHERS(o@/!)"
+  (setq org-todo-keywords '((sequence "TODO(t!)" "GOAL(g!)"
 				      "|" "DONE(d!)" "CANCELLED(c!)")))
 
   ;; Capture
@@ -98,7 +100,7 @@
   (add-to-list 'org-tempo-keywords-alist '("ra" . "ROAM_ALIAS")))
 
 (use-package org-ref
-  :after (org))
+  :commands (org-ref))
 
 (use-package org-download
   :after (org)
@@ -162,6 +164,28 @@
   (setq org-latex-impatient-tex2svg-bin
         "~/node_modules/mathjax-node-cli/bin/tex2svg"))
 
+(use-package org-ql
+  :after (org)
+  :config
+  (setq org-agenda-custom-commands
+        '(("#" "Stuck Projects"
+           ((org-ql-block '(and (tags "project")
+                                (not (done))
+                                (not (descendants (todo "NEXT")))
+                                (not (descendants (scheduled))))
+                          ((org-ql-block-header "Stuck Projects"))))))))
+
+(use-package org-padding
+  :disabled
+  :quelpa (org-padding :repo "TonCherAmi/org-padding" :fetcher github)
+  :config
+  (setq org-padding-block-begin-line-padding '(2.0 . nil))
+  (setq org-padding-block-end-line-padding '(nil . 1.0))
+  (setq org-padding-heading-padding-alist
+        '((4.0 . 1.5) (3.0 . 0.5) (3.0 . 0.5) (3.0 . 0.5) (2.5 . 0.5) (2.0 . 0.5) (1.5 . 0.5) (0.5 . 0.5))))
+
+(use-package org-starless
+  :disabled
+  :quelpa (org-starless :repo "TonCherAmi/org-starless" :fetcher github))
+
 (provide 'prelude-org)
-
-

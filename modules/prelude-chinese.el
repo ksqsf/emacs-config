@@ -12,8 +12,8 @@
   (set-face-font 'markdown-table-face "Iosevka Term-14"))
 
 ;; Fontset, we need a Serif font for variable pitch mode
-(when *is-a-mac*
-  (set-fontset-font t 'chinese-gbk "STSong"))
+;; (when *is-a-mac*
+;;   (set-fontset-font t 'chinese-gbk "STSong"))
 
 ;; Hey, Org mode?
 

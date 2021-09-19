@@ -44,12 +44,18 @@
 
 ;; Default theme
 (use-package lab-themes
+  :disabled
   :config
   (defun prelude-switch-theme (appearance)
     (if (eq appearance 'dark)
         (load-theme 'lab-dark t)
       (load-theme 'lab-light t)))
   (add-hook 'ns-ns-system-appearance-change-functions #'prelude-switch-theme))
+
+;; (use-package bespoke-themes
+;;   :quelpa (bespoke-themes :fetcher github :repo "mclear-tools/bespoke-themes")
+;;   (bespoke-themes-visual-bell-config)
+;;   (load-theme 'bespoke-light t))
 
 ;; Mode line
 (use-package diminish
@@ -67,8 +73,8 @@
 (use-package winner
   :defer t
   :bind (:map winner-mode-map
-              ("C-c ," . winner-undo)
-              ("C-c ." . winner-redo))
+              ("C-c C-," . winner-undo)
+              ("C-c C-." . winner-redo))
   :init
   (defvar winner-dont-bind-my-keys t)
   (add-hook 'after-init-hook #'winner-mode))
@@ -101,6 +107,7 @@
 
 ;; Auto set margins
 (use-package perfect-margin
+  :disabled
   :quelpa (perfect-margin :fetcher github :repo "mpwang/perfect-margin")
   :custom
   (perfect-margin-visible-width 128)
@@ -176,7 +183,7 @@
   :hook (after-init . shackle-mode)
   :custom
   (shackle-default-size 0.5)
-  (shackle-default-alignment 'below)
+  (shackle-default-alignment 'right)
   (shackle-rules
    '((magit-log-mode       :select t :inhibit-window-quit t :same t)
      ("*quickrun*"         :select t :inhibit-window-quit t :same t)
@@ -201,5 +208,10 @@
      ("\\*ivy-occur .*\\*"        :select t   :align right :regexp t)
      ("\\*eldoc\\( for \\)?.*\\*" :select nil :align t :size 15 :regexp t)
      )))
+
+(use-package minimap
+  :disabled
+  :config
+  (setq minimap-window-location 'right))
 
 (provide 'prelude-ui)
