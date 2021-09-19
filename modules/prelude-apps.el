@@ -201,4 +201,13 @@
   :config
   (setq erc-server "irc.libera.chat"))
 
+(use-package gnus
+  :config
+  (setq gnus-select-method '(nntp "news.gmane.io"))
+  (setq gnus-thread-sort-functions
+        '(gnus-thread-sort-by-most-recent-number
+          gnus-thread-sort-by-subject
+          (not gnus-thread-sort-by-total-score)
+          gnus-thread-sort-by-most-recent-date)))
+
 (provide 'prelude-apps)
