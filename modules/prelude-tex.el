@@ -10,7 +10,7 @@
                 (setq fill-column 80)
                 (setq TeX-master t)))
 
-  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+  (setq ; TeX-view-program-selection '((output-pdf "PDF Tools"))
         TeX-source-correlate-start-server t)
   (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
   (add-hook 'LaTeX-mode-hook #'visual-line-mode)
