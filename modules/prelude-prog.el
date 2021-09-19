@@ -20,7 +20,8 @@
 (use-package company-box
   :hook (company-mode . company-box-mode)
   :config
-  (setq company-box-icons-alist 'company-box-icons-all-the-icons))
+  ;; WARNING: Don't use all-the-icons!!
+  (setq company-box-icons-alist 'company-box-icons-idea))
 
 (use-package imenu
   :bind ("C-c C-j" . imenu))
