@@ -180,6 +180,7 @@
   (use-package treemacs-projectile))
 
 (use-package pdf-tools
+  :disabled
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
   (pdf-tools-install)
