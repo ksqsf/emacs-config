@@ -123,6 +123,25 @@ helpful.
 Coq is an interactive proof assistant, whose Emacs interface is Proof
 General, which defines its own set of commands.
 
+*** Structured Editing
+
+Structured editing is a novel editing experience that operates on the
+level of "structures", be it expressions or statements.
+
+I use paredit for the Lisp family. My preferred keybindings are:
+
+| Key     | Function             |
+|---------+----------------------|
+| M-k     | Kill current         |
+| M-up    | Splice               |
+| M-left  | Slurp left           |
+| M-right | Slurp right          |
+| M-a     | Same level, backward |
+| M-e     | Same level, forward  |
+
+"Sentence" is the metaphor for "expression". Navigation by word is
+useful, so I won't override it.
+
 ** Unlimited Lisp Works
 This repo hosts some other Emacs Lisp works made by me for my own
 convenience. It might be useful for you, too, so I made a list here

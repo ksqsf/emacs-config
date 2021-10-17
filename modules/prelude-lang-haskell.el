@@ -38,7 +38,11 @@
         (lambda (args) (apply 'nix-shell-command (nix-current-sandbox) args)))
 
   (with-eval-after-load 'speedbar
-      (speedbar-add-supported-extension ".hs")))
+    (speedbar-add-supported-extension ".hs")))
+
+(use-package flycheck-haskell
+  :after haskell-mode
+  :hook (flycheck-mode-hook . flycheck-haskell-setup))
 
 (use-package w3m-haddock
   :ensure w3m
