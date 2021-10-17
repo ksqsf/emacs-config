@@ -111,4 +111,15 @@ If no data can be fetched, a default value (lts-14.20) is returned."
           (setq answer default))
         (setq *prelude--latest-stackage-lts-version* answer)))))
 
+(define-derived-mode haskell-iface-mode fundamental-mode "Haskell Iface"
+  "View the contents of Haskell interface files, by invoking 'ghc --show-iface'.
+
+This mode is not reliable: the ghc version will probably not match that of the file."
+  (delete-region (point-min) (point-max))
+  (call-process "ghc" nil t nil "--show-iface" (buffer-file-name))
+  (read-only-mode)
+  (set-buffer-modified-p nil)
+  (goto-char (point-min)))
+(add-to-list 'auto-mode-alist '("\\.hi\\'" . haskell-iface-mode))
+
 (provide 'prelude-lang-haskell)
