@@ -35,8 +35,6 @@
 ;; - Limited support for SyGuS
 
 ;;; Code:
-(require 'flycheck)
-
 (defgroup smtlib2 nil
   "SMTLib2 Mode"
   :group 'languages
@@ -135,7 +133,6 @@
   (when (fboundp 'sly-mode)
     (sly-mode -1)))
 
-;; Setup Syntax Checking
 ;; Command to run SMT solver on the whole buffer
 (defun smtlib2-execute-region ()
   "Pass optional header and region to a prover for noninteractive execution.
