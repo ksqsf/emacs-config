@@ -147,7 +147,9 @@ This repo hosts some other Emacs Lisp works made by me for my own
 convenience. It might be useful for you, too, so I made a list here
 for better discoverability.
 
-| Who       | Where                  | What                      |
-|-----------+------------------------+---------------------------|
-| pest-mode | github ksqsf/pest-mode | Major mode for Pest files |
-| treefold  | ./lisp/treefold.el     | Fold any tree-like text   |
+| Who          | Where                  | What                       |
+|--------------+------------------------+----------------------------|
+| pest-mode    | github ksqsf/pest-mode | Major mode for Pest files  |
+| treefold     | ./lisp/treefold.el     | Fold any tree-like text    |
+| smtlib2-mode | ./lisp/smtlib2-mode.el | Major mode for SMT scripts |
+
