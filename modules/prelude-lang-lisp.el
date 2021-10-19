@@ -33,4 +33,10 @@
   :commands (sly sly-mode)
   :mode (("\\.lisp\\'" . lisp-mode)))
 
+;; replace old z3-mode
+(use-package smtlib2-mode
+  :ensure nil
+  :mode (("\\.smt2?\\'" . smtlib2-mode)
+         ("\\.sygus2?\\'" . smtlib2-mode)))
+
 (provide 'prelude-lang-lisp)
