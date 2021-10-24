@@ -122,4 +122,15 @@ This mode is not reliable: the ghc version will probably not match that of the f
   (goto-char (point-min)))
 (add-to-list 'auto-mode-alist '("\\.hi\\'" . haskell-iface-mode))
 
+(defun new-cabal-project-tmp (package-name)
+  "Create a new cabal package under /tmp."
+  (interactive "sPackage name: ")
+  (let ((old-pwd default-directory))
+    (cd "/tmp")
+    (mkdir package-name t)
+    (cd (concat "/tmp/" package-name))
+    (shell-command "cabal init")
+    (cd old-pwd))
+  (find-file-other-window (concat "/tmp/" package-name "/app/Main.hs")))
+
 (provide 'prelude-lang-haskell)
