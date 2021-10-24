@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: data
+# key: d
+# --
+data $1 = $2
+  deriving (Show)

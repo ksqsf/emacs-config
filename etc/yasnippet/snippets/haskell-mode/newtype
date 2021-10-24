@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: newtype
+# key: nt
+# --
+newtype $1 = $2
