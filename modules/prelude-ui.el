@@ -14,6 +14,9 @@
 ;; Pixelwise resize
 (setq frame-resize-pixelwise t)
 
+;; A quick way to toggle maximized
+(global-set-key (kbd "C-M-<return>") #'toggle-frame-maximized)
+
 ;; Don't show useless UI elements
 (add-hook 'after-init-hook
           #'(lambda ()
@@ -177,37 +180,82 @@
                                        "\\\\" "://" "/\\" "\\/"))
   (global-ligature-mode t))
 
-;; don't pop windows everywhere!
-;; 
-(use-package shackle
-  :hook (after-init . shackle-mode)
-  :custom
-  (shackle-default-size 0.5)
-  (shackle-default-alignment 'right)
-  (shackle-rules
-   '((magit-log-mode       :select t :inhibit-window-quit t :same t)
-     ("*quickrun*"         :select t :inhibit-window-quit t :same t)
-     (profiler-report-mode :select t)
-     (apropos-mode         :select t :align t :size 0.3)
-     (help-mode            :select t :align t :size 0.4)
-     (comint-mode          :select t :align t :size 0.4)
-     (grep-mode            :select t :align t)
-     (rg-mode              :select t :align t)
-     (ag-mode              :select t :align t)
-     ("*org-roam*"         :select nil :align t :inhibit-window-quit t :same t)
-     ("*Flycheck errors*"         :select t   :align t :size 10)
-     ("*Backtrace*"               :select t   :align t :size 15)
-     ("*ydcv*"                    :select nil :align t :size 0.4)
-     ("*Shell Command Output*"    :select nil :align t :size 0.4)
-     ("*Async Shell Command*"     :select nil :align t :size 0.4)
-     ("*Org-Babel Error Output*"  :select nil :align t :size 0.3)
-     ("*package update results*"  :select nil :align t :size 10)
-     ("*Process List*"            :select t   :align t :size 0.3)
-     ("*Help*"                    :select t   :align t :size 0.3)
-     ("*Occur*"                   :select t   :align right)
-     ("\\*ivy-occur .*\\*"        :select t   :align right :regexp t)
-     ("\\*eldoc\\( for \\)?.*\\*" :select nil :align t :size 15 :regexp t)
-     )))
+;; prioritize vertical side windows
+(setq window-sides-vertical t)
+
+
+;; helper
+(defmacro buffer-is-major-mode (major-mode)
+  `(lambda (buffer alist)
+     (with-current-buffer buffer
+       (message "in buffer %s: %s" buffer major-mode)
+       (eql major-mode ,major-mode)))) ;; 'eq' does not work
+
+;; popups policy
+(setq
+ display-buffer-alist
+ `(;; Bottom Root
+   ("^\\*scratch\\*\\'"
+    (display-buffer-reuse-window
+     display-buffer-at-bottom
+     display-buffer-same-window))
+   ("^magit: .*"
+    (display-buffer-reuse-window
+     display-buffer-at-bottom)
+    (window-height . 0.4)
+    (dedicated . t))
+
+   ;; Right Side
+   ("^\\*[Hh]elp"
+    (display-buffer-reuse-window
+     display-buffer-in-side-window)
+    (side . right)
+    (window-height . 0.5)
+    (window-width . 72)
+    (slot . 0)
+    (dedicated . t))
+
+   ;; Bottom Side
+   ("^\\*compilation"
+    (display-buffer-reuse-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (window-height . 0.3)
+    (slot . 1)
+    (dedicated . t))
+   ("^\\*Backtrace\\*\\'"
+    (display-buffer-reuse-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (window-height . 0.3)
+    (slot . 1)
+    (dedicated . t))
+   (,(buffer-is-major-mode 'calc-mode)
+    (display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 1)
+    (dedicated . t))
+
+   ;; Below Selected
+   ("^\\*\\(\\(e?shell\\)\\|\\(vterm\\)\\)"
+    (display-buffer-below-selected)
+    (window-width . 72))
+   (,(buffer-is-major-mode 'haskell-interactive-mode)
+    (display-buffer-reuse-window
+     display-buffer-below-selected))
+   (,(buffer-is-major-mode 'inferior-python-mode)
+    (display-buffer-below-selected))
+
+   ;; Terminals
+   ("^\\*\\(.*-\\)?e?shell\\*"
+    nil
+    (inhibit-same-window . t)
+    (dedicated . t))
+   ("^\\*\\(.*-\\)?vterm\\*"
+    nil
+    (inhibit-same-window . t)
+    (dedicated . t))
+   ))
 
 (use-package minimap
   :disabled
