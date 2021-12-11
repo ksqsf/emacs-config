@@ -1,3 +1,6 @@
 [submodule "lisp/leetcode.el"]
 	path = lisp/leetcode.el
 	url = git@github.com:kaiwk/leetcode.el.git
+[submodule "lisp/emacs-application-framework"]
+	path = lisp/emacs-application-framework
+	url = https://github.com/emacs-eaf/emacs-application-framework.git

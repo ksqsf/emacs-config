@@ -207,4 +207,17 @@
           (not gnus-thread-sort-by-total-score)
           gnus-thread-sort-by-most-recent-date)))
 
+(use-package eaf
+  :disabled ;; Does not work...
+  :commands (eaf-open)
+  :load-path "lisp/emacs-application-framework"
+  :config
+  (require 'eaf-demo)
+  (require 'eaf-file-sender)
+  (require 'eaf-camera)
+  (require 'eaf-browser)
+  (require 'eaf-file-browser)
+  (require 'eaf-file-manager)
+  (require 'eaf-airshare))
+
 (provide 'prelude-apps)
