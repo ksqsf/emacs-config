@@ -183,6 +183,8 @@
 ;; prioritize vertical side windows
 (setq window-sides-vertical t)
 
+;; `C-x b' mimics `C-x 4 b'
+(setq switch-to-buffer-obey-display-actions t)
 
 ;; helper
 (defmacro buffer-is-major-mode (major-mode)
@@ -235,6 +237,8 @@
     (side . bottom)
     (slot . 1)
     (dedicated . t))
+   ("^HELM .*"
+    (display-buffer-at-bottom))
 
    ;; Below Selected
    ("^\\*\\(\\(e?shell\\)\\|\\(vterm\\)\\)"
@@ -257,8 +261,10 @@
     (dedicated . t))
    ))
 
+(put 'window-swap-states 'disabled t)
+
 (use-package minimap
-  :disabled
+  :commands (minimap-mode)
   :config
   (setq minimap-window-location 'right))
 
