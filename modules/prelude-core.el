@@ -92,7 +92,7 @@
 ;; Sorry, `other-window', but you are too weak!
 (use-package ace-window
   :bind (("M-o" . ace-window)
-         ("C-x o" . ace-window))
+         ("C-x o" . ace-swap-window))
   :config
   (custom-set-faces
    '(aw-leading-char-face
