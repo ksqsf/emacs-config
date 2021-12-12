@@ -2,7 +2,7 @@
 
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-buffer)
 
-(setq inferior-lisp-program "ccl64")
+(setq inferior-lisp-program "sbcl")
 
 (use-package paredit
   :diminish "Ⓟ"
@@ -29,7 +29,6 @@
   (run-scheme "/usr/local/scmutils/mit-scheme/bin/scheme --library /usr/local/scmutils/mit-scheme/lib"))
 
 (use-package sly
-  :disabled
   :commands (sly sly-mode)
   :mode (("\\.lisp\\'" . lisp-mode)))
 
