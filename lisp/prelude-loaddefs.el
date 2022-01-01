@@ -20,6 +20,13 @@ Turn calc into an editor for rendered LaTeX equations.
 
 ;;;***
 
+;;;### (autoloads nil "erc-sasl" "erc-sasl.el" (0 0 0 0))
+;;; Generated autoloads from erc-sasl.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "erc-sasl" '("erc-sasl-")))
+
+;;;***
+
 ;;;### (autoloads nil "gud-lldb" "gud-lldb.el" (0 0 0 0))
 ;;; Generated autoloads from gud-lldb.el
 
@@ -90,18 +97,6 @@ ARG is `toggle'; disable the mode otherwise.
 \(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treefold" '("treefold--")))
-
-;;;***
-
-;;;### (autoloads nil "valign" "valign.el" (24329 3014 231825 904000))
-;;; Generated autoloads from valign.el
-
-(autoload 'valign-mode "valign" "\
-Visually align Org tables.
-
-\(fn &optional ARG)" t nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "valign" '(#("valign-" 0 7 (face font-lock-function-name-face fontified t)))))
 
 ;;;***
 

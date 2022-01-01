@@ -58,6 +58,7 @@
 (require 'prelude-help)
 (require 'prelude-utils)
 (require 'prelude-apps)
+(require 'prelude-erc)
 
 ;; Volatile.
 (when (file-exists-p prelude-volatile-dir)
