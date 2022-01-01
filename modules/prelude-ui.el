@@ -11,11 +11,19 @@
   "Default frame alpha."
   :group 'prelude)
 
+(defcustom prelude-start-terminal-command
+  'vterm-mode
+  "A command to set up an empty buffer to be a terminal emulator."
+  :group 'prelude)
+
 ;; Pixelwise resize
 (setq frame-resize-pixelwise t)
 
 ;; A quick way to toggle maximized
 (global-set-key (kbd "C-M-<return>") #'toggle-frame-maximized)
+
+;; A quick way to toggle side windows
+(global-set-key (kbd "C-z") #'window-toggle-side-windows)
 
 ;; Don't show useless UI elements
 (add-hook 'after-init-hook
@@ -183,14 +191,10 @@
 ;; prioritize vertical side windows
 (setq window-sides-vertical t)
 
-;; `C-x b' mimics `C-x 4 b'
-(setq switch-to-buffer-obey-display-actions t)
-
 ;; helper
 (defmacro buffer-is-major-mode (major-mode)
   `(lambda (buffer alist)
      (with-current-buffer buffer
-       (message "in buffer %s: %s" buffer major-mode)
        (eql major-mode ,major-mode)))) ;; 'eq' does not work
 
 ;; popups policy
@@ -267,5 +271,23 @@
   :commands (minimap-mode)
   :config
   (setq minimap-window-location 'right))
+
+;; Dropdown terminal
+(defun drop-down-term ()
+  "Open a drop-down terminal in the same directory as the current file."
+  (interactive)
+  (require 'vterm)
+  (let ((buffer (get-buffer-create "*dd-term*"))
+        win)
+    (with-current-buffer buffer
+      (unless (derived-mode-p 'vterm-mode)
+        (funcall prelude-start-terminal-command)))
+    (setq win
+          (display-buffer-in-side-window
+           buffer
+           '((side . top)
+             (dedicated . t))))
+    (select-window win)))
+(defalias 'dd-term 'drop-down-term)
 
 (provide 'prelude-ui)
