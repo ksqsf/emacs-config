@@ -216,4 +216,8 @@
 (global-set-key (kbd "C-h p") #'describe-package)
 (global-set-key (kbd "C-h P") #'finder-by-keyword)
 
+;; jump instantly
+(use-package avy
+  :bind ("M-j" . avy-goto-char-timer))
+
 (provide 'prelude-core)
