@@ -54,19 +54,14 @@
     (ns-auto-titlebar-mode)))
 
 ;; Default theme
-(use-package lab-themes
-  :disabled
+(use-package ayu-theme
+  :defer t
   :config
   (defun prelude-switch-theme (appearance)
     (if (eq appearance 'dark)
         (load-theme 'lab-dark t)
       (load-theme 'lab-light t)))
   (add-hook 'ns-ns-system-appearance-change-functions #'prelude-switch-theme))
-
-;; (use-package bespoke-themes
-;;   :quelpa (bespoke-themes :fetcher github :repo "mclear-tools/bespoke-themes")
-;;   (bespoke-themes-visual-bell-config)
-;;   (load-theme 'bespoke-light t))
 
 ;; Mode line
 (use-package diminish
