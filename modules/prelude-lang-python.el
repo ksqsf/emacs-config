@@ -31,4 +31,7 @@
   :config
   (setq flycheck-python-mypy-args "--no-incremental"))
 
+(use-package lsp-pyright
+  :hook (python-mode . lsp))
+
 (provide 'prelude-lang-python)
