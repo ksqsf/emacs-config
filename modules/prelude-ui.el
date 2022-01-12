@@ -64,8 +64,8 @@
   :config
   (defun prelude-switch-theme (appearance)
     (if (eq appearance 'dark)
-        (load-theme 'lab-dark t)
-      (load-theme 'lab-light t)))
+        (load-theme 'ayu-dark t)
+      (load-theme 'ayu-light t)))
   (add-hook 'ns-ns-system-appearance-change-functions #'prelude-switch-theme))
 
 ;; Mode line
