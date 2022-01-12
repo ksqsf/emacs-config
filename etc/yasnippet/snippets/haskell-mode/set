@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: set
+# key: set
+# --
+import Data.Set (Set)
+import qualified Data.Set as Set

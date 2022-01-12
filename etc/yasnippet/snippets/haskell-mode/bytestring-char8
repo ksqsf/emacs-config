@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: bytestring-char8
+# key: bs8
+# --
+import Data.ByteString.Char8 (ByteString)
+import qualified Data.ByteString.Char8 as BS

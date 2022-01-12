@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: warnings
+# key: warnings
+# --
+{-# OPTIONS_GHC -Wall -Wcompat -Wincomplete-record-updates -Wredundant-constraints -Wno-unused-do-bind -Wno-orphans -Wno-name-shadowing -Wno-partial-type-signatures #-}

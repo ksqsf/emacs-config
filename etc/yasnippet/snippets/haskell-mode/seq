@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: seq
+# key: seq
+# --
+import Data.Sequence (Seq(..))
+import qualified Data.Sequence as Seq
