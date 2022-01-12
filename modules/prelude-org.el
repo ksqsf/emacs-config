@@ -24,9 +24,9 @@
 ;; @ -> additional notes
 (use-package org
   :defer 1
-  :hook (org-mode . org-cdlatex-mode)
+  ; :hook (org-mode . org-cdlatex-mode)
   :hook (org-mode . visual-line-mode)
-  :hook (org-mode . org-variable-pitch-minor-mode)
+  ; :hook (org-mode . org-variable-pitch-minor-mode)
                                         ; :hook (org-mode . org-starless-mode)
                                         ; :hook (org-mode . org-padding-mode)
   :bind (("C-c a" . org-agenda)
@@ -35,7 +35,7 @@
          ("C-c o" . find-org-file))
   :config
   ;; (add-hook 'org-mode-hook #'valign-mode)
-  (add-hook 'org-mode-hook #'org-indent-mode)
+  ; (add-hook 'org-mode-hook #'org-indent-mode)
 
   ;; Maybe prettify?
   (setq org-hide-emphasis-markers t)
