@@ -25,6 +25,11 @@
 ;; A quick way to toggle side windows
 (global-set-key (kbd "C-z") #'window-toggle-side-windows)
 
+;; Enable smooth scroll when it's available
+;; ... but it's still buggy.
+;; (when (fboundp 'pixel-scroll-precision-mode)
+;;   (pixel-scroll-precision-mode t))
+
 ;; Don't show useless UI elements
 (add-hook 'after-init-hook
           #'(lambda ()
