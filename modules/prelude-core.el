@@ -101,10 +101,10 @@
         aw-scope 'frame))
 
 (use-package windmove
-  :bind (("A-<left>" . windmove-left)
-         ("A-<right>" . windmove-right)
-         ("A-<up>" . windmove-up)
-         ("A-<down>" . windmove-down)))
+  :bind (("C-<left>" . windmove-left)
+         ("C-<right>" . windmove-right)
+         ("C-<up>" . windmove-up)
+         ("C-<down>" . windmove-down)))
 
 ;; Recentf
 (use-package recentf
