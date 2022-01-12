@@ -9,8 +9,26 @@
          ("<f8>" . haskell-navigate-imports))
   :hook (haskell-mode . yas-minor-mode)
   :hook (haskell-mode . interactive-haskell-mode)
+  :hook (haskell-mode . prelude--setup-haskell-prettify-symbols)
+  :hook (haskell-cabal-mode . yas-minor-mode)
   ;; :hook (haskell-mode . flyspell-prog-mode)
   :config
+
+  (defun prelude--setup-haskell-prettify-symbols ()
+    (setq prettify-symbols-alist
+          '(("\\" . ?λ)
+            ("forall" . ?∀)
+            ("\\/" . ?∨)
+            ("/\\" . ?∧)
+            (">-" . ?⤚)
+            ("-<" . ?⤙)
+            (">>-" . ?⤜)
+            ("-<<" . ?⤛)
+            ("[|" . 10214) ;; ⟦
+            ("|]" . 10215) ;; ⟧
+            ))
+    (prettify-symbols-mode))
+
   (defun hpack-after-save-hook ()
     (when (string= (buffer-name) "package.yaml")
       (start-process "hpack" " *hpack*" "hpack")))
