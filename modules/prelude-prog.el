@@ -24,6 +24,7 @@
   (setq company-box-icons-alist 'company-box-icons-idea))
 
 (use-package company-tabnine
+  :disabled  ;; Not very useful...
   :after company
   :config
   (add-to-list 'company-backends #'company-tabnine))
