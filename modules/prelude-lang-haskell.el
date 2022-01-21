@@ -7,6 +7,7 @@
   :bind (("C-c C-l" . haskell-process-load-or-reload)
          ("C-c C-f" . haskell-mode-format-imports)
          ("<f8>" . haskell-navigate-imports))
+  :hook (haskell-mode . lsp)
   :hook (haskell-mode . yas-minor-mode)
   :hook (haskell-mode . interactive-haskell-mode)
   :hook (haskell-mode . prelude--setup-haskell-prettify-symbols)
