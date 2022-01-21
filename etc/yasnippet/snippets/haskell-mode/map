@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: map
+# key: map
+# --
+import Data.Map (Map)
+import qualified Data.Map as Map

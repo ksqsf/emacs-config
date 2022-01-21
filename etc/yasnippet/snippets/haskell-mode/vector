@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: vector
+# key: vec
+# --
+import qualified Data.Vector as Vector
+import Data.Vector (Vector)
