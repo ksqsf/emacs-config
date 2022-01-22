@@ -220,4 +220,15 @@
   (require 'eaf-file-manager)
   (require 'eaf-airshare))
 
+(use-package go-translate
+  :commands (gts-do-translate)
+  :config
+  (setq gts-translate-list '(("en" "zh" "jp")))
+  (setq gts-default-translator
+        (gts-translator
+         :picker (gts-prompt-picker)
+         :engines (list (gts-google-engine) (gts-google-rpc-engine)
+                        (gts-bing-engine) )
+         :render (gts-buffer-render))))
+
 (provide 'prelude-apps)
