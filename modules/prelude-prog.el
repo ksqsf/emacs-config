@@ -14,6 +14,10 @@
 
 (use-package company
   :commands (company-mode)
+  :bind (:map company-active-map
+              (("<tab>" . company-complete-selection)
+               ("<return>" . nil)
+               ("RET" . nil)))
   :config
   (setq company-idle-delay 0.0))
 
