@@ -290,4 +290,13 @@
     (select-window win)))
 (defalias 'dd-term 'drop-down-term)
 
+(context-menu-mode +1)
+
+(setq context-menu-functions
+      '(context-menu-ffap
+        occur-context-menu
+        context-menu-region
+        context-menu-undo
+        context-menu-dictionary))
+
 (provide 'prelude-ui)
