@@ -290,6 +290,21 @@
     (select-window win)))
 (defalias 'dd-term 'drop-down-term)
 
+(use-package popper
+  :bind (("C-`" . popper-toggle-latest)
+         ("M-`" . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode))
+  (setq popper-group-function nil)
+  (popper-mode +1)
+  (popper-echo-mode +1))
+
 (context-menu-mode +1)
 
 (setq context-menu-functions
