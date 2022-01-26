@@ -250,6 +250,7 @@
     (window-width . 72))
    (,(buffer-is-major-mode 'haskell-interactive-mode)
     (display-buffer-reuse-window
+     display-buffer-at-bottom
      display-buffer-below-selected))
    (,(buffer-is-major-mode 'inferior-python-mode)
     (display-buffer-below-selected))
