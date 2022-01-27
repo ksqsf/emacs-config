@@ -60,7 +60,7 @@
 
 ;; Default theme
 (use-package ayu-theme
-  :defer t
+  :disabled
   :config
   (defun prelude-switch-theme (appearance)
     (if (eq appearance 'dark)
