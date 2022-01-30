@@ -5,7 +5,7 @@
   :bind ("C-c i" . erc-switch-to-buffer)
   :config
   (setq erc-autojoin-channels-alist
-        '(("libera.chat" "#linuxba" "#haskell" "#haskell-cn" "#linuxba" "#emacs")))
+        '(("libera.chat" "#haskell")))
   (require 'erc-sasl)
   (add-to-list 'erc-sasl-server-regexp-list ".*")
   (defun erc-login ()
