@@ -15,7 +15,8 @@
 
   (setq dired-guess-shell-alist-user
         '(("\\.pdf\\'" prelude/default-opener)
-          ("\\.png\\'" prelude/default-opener)))
+          ("\\.png\\'" prelude/default-opener)
+          ("\\.jpg\\'" prelude/default-opener)))
 
   (when *is-a-mac*
     (setq dired-omit-files "\\`[.]?#\\|\\`[.][.]?\\'\\|\\.DS_Store\\|\\.localized")))
