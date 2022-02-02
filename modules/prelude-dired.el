@@ -39,7 +39,7 @@
            ("LaTeX"
             (extension "tex" "bib"))
            ("Code"
-            (extension "rs" "c" "cpp" "h" "hpp" "cc" "rb" "py" "el" "html" "js" "css" "jl" "rs" "m" "v" "hs"))
+            (extension "rs" "c" "cpp" "h" "hpp" "cc" "rb" "py" "el" "html" "js" "css" "jl" "rs" "m" "v" "hs" "lhs" "pl"))
            ("Text"
             (extension "md" "rst" "txt"))
            ("Org"
