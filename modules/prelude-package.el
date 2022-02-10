@@ -7,8 +7,7 @@
 ;; Package Archive URL
 
 (setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
-                         ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")
-                         ("org" . "http://mirrors.ustc.edu.cn/elpa/org/")))
+                         ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")))
 (package-initialize)
 
 ;; use-package
