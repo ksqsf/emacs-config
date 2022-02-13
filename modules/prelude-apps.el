@@ -60,45 +60,6 @@
           (aref info 1)
         nil))))
 
-;; org-roam
-(use-package org-roam
-  :defer t
-  :custom (org-roam-directory "~/Documents/Roam")
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
-         :map org-mode-map
-         (("C-c n i" . org-roam-node-insert))))
-
-(use-package deft
-  :after org
-  :bind
-  ("C-c n d" . deft)
-  :custom
-  (deft-recursive t)
-  (deft-use-filter-string-for-filename t)
-  (deft-default-extension "org")
-  (deft-directory "~/Documents/Roam"))
-
-(use-package org-roam-server
-  :defer t
-  :after org-roam
-  :commands (org-roam-server-mode)
-  :bind (:map org-roam-mode-map
-              (("C-c n s" . org-roam-server)))
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8080
-        org-roam-server-export-inline-images t
-        org-roam-server-authenticate nil
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20)
-  (require 'org-protocol)
-  (require 'org-roam-protocol))
-
 (use-package treemacs
   :bind (("C-c t" . treemacs)
          ("M-0" . treemacs-select-window))

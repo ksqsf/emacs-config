@@ -315,4 +315,12 @@
         context-menu-undo
         context-menu-dictionary))
 
+(use-package mixed-pitch
+  :hook
+  (text-mode . mixed-pitch-mode)
+  :config
+  (dolist (i '(org-drawer org-special-keyword org-property-value))
+    (push i mixed-pitch-fixed-pitch-faces))
+  (set-face-attribute 'variable-pitch nil :font "Arial"))
+
 (provide 'prelude-ui)

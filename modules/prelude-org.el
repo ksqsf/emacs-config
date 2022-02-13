@@ -2,64 +2,48 @@
 ;; Recommends:
 ;; 1. prelude-tex: for cdlatex
 
-(use-package org-bullets
-  :disabled
-  :hook (org-mode . org-bullets-mode))
+(defvar k/roam-dir (expand-file-name "~/Documents/Roam"))
+(defvar k/zotlib-path (expand-file-name "~/Zotero/zotlib.bib"))
 
-;; Productivity Problems:
-;; 1. Trackable activities: I want to record my life.
-;; 2. Avoid procrastination.
-;; 3. Make better use of time.
-
-;; My workflow explained.
-;;
-;; TODO: Something to be done
-;; NEXT: I've begun working on it
-;; OTHERS: others are doing it but I'm keeping an eye
-;; WAIT: wait for preconditions to proceed
-
-;; Todo tracking
-;; See https://changelog.complete.org/archives/9877-emacs-3-more-on-org-mode
-;; ! -> timestamps
-;; @ -> additional notes
 (use-package org
-  :defer 1
-  ; :hook (org-mode . org-cdlatex-mode)
+  :defer t
+  :custom
+  (org-latex-preview-ltxpng-directory (no-littering-expand-var-file-name "org/ltxpng"))
+  :hook (org-mode . org-cdlatex-mode)
   :hook (org-mode . visual-line-mode)
-  ; :hook (org-mode . org-variable-pitch-minor-mode)
-                                        ; :hook (org-mode . org-starless-mode)
-                                        ; :hook (org-mode . org-padding-mode)
+  :hook (org-mode . prelude/set-line-spacing)
   :bind (("C-c a" . org-agenda)
 	 ("C-'" . org-cycle-agenda-files)
 	 ("C-c c" . org-capture)
          ("C-c o" . find-org-file))
   :config
   ;; (add-hook 'org-mode-hook #'valign-mode)
-  ; (add-hook 'org-mode-hook #'org-indent-mode)
 
   ;; Maybe prettify?
-  (setq org-hide-emphasis-markers t)
+  (setq org-startup-indented t
+        org-pretty-entities t
+        org-hide-emphasis-markers t
+        org-startup-with-inline-images t
+        org-image-actual-width '(300))
+  (use-package org-superstar
+    :hook (org-mode . org-superstar-mode)
+    :config
+    (setq org-superstar-special-todo-items t))
+  (defun prelude/set-line-spacing ()
+    (setq line-spacing 0.2))
+
+  ;; Auto toggle emphasis markers, like in Typora.
+  (use-package org-appear
+    :hook (org-mode . org-appear-mode))
 
   (setq org-return-follows-link t
         org-directory (expand-file-name "~/org"))
+  ;; Org-directory is not really used anymore: My notes are not managed by Org-roam.
 
-  ;; Agenda
-  (setq org-log-done 'time)
-  (setq org-todo-keywords '((sequence "TODO(t!)" "GOAL(g!)"
-				      "|" "DONE(d!)" "CANCELLED(c!)")))
-
-  ;; Capture
-  (setq org-capture-templates
-	'(("T" "未分类待办" entry (file+headline "~/org/todo.org" "未分类任务")
-           "* TODO %?\n  %i\n  %a")
-          ("t" "待办" entry (file+olp+datetree "~/org/todo.org" "今天")
-           "* TODO %?\n" :tree-type 'week)
-          ("n" "记笔记" plain (clock))
-          ("d" "今天做了什么？有什么感想？" entry (file+olp+datetree "~/org/diary.org")
-           "* %?")
-          ("r" "一些乱糟糟的思绪" entry (file+headline "~/org/capture.org" "随机垃圾"))
-          ("n" "任何东西的记录" entry (file+olp+datetree "~/org/notes.org")
-           "* %?")))
+  ;; Configs of Agenda and Capture have been removed!
+  ;;
+  ;; GTD has moved to TickTick, and capturing of random ideas should
+  ;; go into Org-roam (org-roam-dailies-capture-today) or Flomo.
 
   ;; Catch invisible edits!
   (setq org-catch-invisible-edits 'smart)
@@ -99,8 +83,41 @@
   :config
   (add-to-list 'org-tempo-keywords-alist '("ra" . "ROAM_ALIAS")))
 
+(use-package helm-bibtex
+  :after (org-ref)
+  :commands (helm-bibtex helm-bibtex-with-notes)
+  :config
+  (setq
+   bibtex-completion-notes-path k/roam-dir
+   bibtex-completion-bibliography k/zotlib-path
+   bibtex-completion-pdf-field "file"
+   bibtex-completion-notes-template-multiple-files
+   (concat
+    "#+TITLE: ${title}\n"
+    "#+ROAM_KEY: cite:${=key=}\n"
+    "* Notes\n"
+    ":PROPERTIES:\n"
+    ":Custom_ID: ${=key=}\n"
+    ":NOTER_DOCUMENT: ${file}\n"
+    ":AUTHOR: ${author-abbrev}\n"
+    ":JOURNAL: ${journaltitle}\n"
+    ":DATE: ${date}\n"
+    ":YEAR: ${year}\n"
+    ":DOI: ${doi}\n"
+    ":URL: ${url}\n"
+    ":END:\n\n")))
+
 (use-package org-ref
-  :commands (org-ref))
+  :commands (org-ref)
+  :config
+  (setq
+   org-ref-completion-library 'org-ref-ivy-cite
+   org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
+   org-ref-default-bibliography k/zotlib-path
+   org-ref-bibliography-notes (expand-file-name "bibnotes.org" k/roam-dir)
+   org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
+   org-ref-notes-directory k/roam-dir
+   org-ref-notes-function 'orb-edit-notes))
 
 (use-package org-download
   :after (org)
@@ -164,28 +181,84 @@
   (setq org-latex-impatient-tex2svg-bin
         "~/node_modules/mathjax-node-cli/bin/tex2svg"))
 
+;; As is said above, agenda is not used anymore.
+;; But this code is useful as an example, so I kept it.
 (use-package org-ql
+  :disabled
   :after (org)
   :config
-  (setq org-agenda-custom-commands
-        '(("#" "Stuck Projects"
-           ((org-ql-block '(and (tags "project")
-                                (not (done))
-                                (not (descendants (todo "NEXT")))
-                                (not (descendants (scheduled))))
-                          ((org-ql-block-header "Stuck Projects"))))))))
+  ;; (setq org-agenda-custom-commands
+  ;;       '(("#" "Stuck Projects"
+  ;;          ((org-ql-block '(and (tags "project")
+  ;;                               (not (done))
+  ;;                               (not (descendants (todo "NEXT")))
+  ;;                               (not (descendants (scheduled))))
+  ;;                         ((org-ql-block-header "Stuck Projects")))))))
+  )
 
-(use-package org-padding
-  :disabled
-  :quelpa (org-padding :repo "TonCherAmi/org-padding" :fetcher github)
+;; org-roam
+(use-package org-roam
+  :after org
+  :init (setq org-roam-v2-ack t)
+  :custom (org-roam-directory k/roam-dir)
+  :bind (("C-c n f" . org-roam-node-find)
+         ("C-c n r" . org-roam-node-random)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n t" . org-roam-dailies-goto-today)
+         ("C-c n c" . org-roam-dailies-capture-today)
+         :map org-mode-map
+         (("C-c n l" . org-roam-buffer-toggle)
+          ("C-c n i" . org-roam-node-insert)
+          ("C-c n o" . org-id-get-create)
+          ("C-c n a t" . org-roam-tag-add)
+          ("C-c n a a" . org-roam-alias-add)))
   :config
-  (setq org-padding-block-begin-line-padding '(2.0 . nil))
-  (setq org-padding-block-end-line-padding '(nil . 1.0))
-  (setq org-padding-heading-padding-alist
-        '((4.0 . 1.5) (3.0 . 0.5) (3.0 . 0.5) (3.0 . 0.5) (2.5 . 0.5) (2.0 . 0.5) (1.5 . 0.5) (0.5 . 0.5))))
+  (org-roam-db-autosync-mode t)
+  (setq org-roam-capture-templates
+        '(("d" "default" plain "%?"
+           :if-new
+           (file+head "${slug}.org"
+                      "#+title: ${title}\n#+date: %u\n#+lastmod: \n\n")
+           :immediate-finish t))
+        time-stamp-start "#\\+lastmod: [\t]*")
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (setq company-backends '(company-capf company-yasnippet company-dabbrev))
+              (company-mode t))))
 
-(use-package org-starless
-  :disabled
-  :quelpa (org-starless :repo "TonCherAmi/org-starless" :fetcher github))
+(use-package org-roam-bibtex
+  :after (org-roam)
+  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :config
+  (require 'org-ref))
+
+(use-package org-noter
+  :after (:any org pdf-view)
+  :config
+  (setq
+   ;; ~~The WM can handle splits~~ No it can't
+   ;; org-noter-notes-window-location 'other-frame
+   ;; Please stop opening frames
+   org-noter-always-create-frame nil
+   ;; I want to see the whole file
+   org-noter-hide-other nil
+   ;; Everything is relative to the main notes file
+   org-noter-notes-search-path (list org-roam-directory)))
+
+(use-package deft
+  :after org
+  :bind
+  ("C-c n d" . deft)
+  :custom
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org")
+  (deft-directory k/roam-dir)
+  (deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n")
+  (deft-use-filename-as-title t))
+
+(use-package org-roam-ui
+  :after (org-roam)
+  :commands (org-roam-ui-mode org-roam-ui-open))
 
 (provide 'prelude-org)
