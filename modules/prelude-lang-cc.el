@@ -35,7 +35,11 @@ Mode."
   (define-key c-mode-base-map (kbd "]") (double-tap-to-insert ?\)))
   (define-key c-mode-base-map (kbd "'") (double-tap-to-insert ?\"))
   (define-key c-mode-base-map (kbd "`") (double-tap-to-insert ?\"))
-  (define-key c-mode-base-map (kbd "RET") #'c-newline-and-indent))
+  (define-key c-mode-base-map (kbd "RET") #'c-newline-and-indent)
+
+  (use-package ccls
+    :config
+    (add-hook 'c-mode-common-hook #'lsp)))
 
 (use-package modern-cpp-font-lock
   :hook ((c++-mode-hook . modern-c++-font-lock-mode)))
