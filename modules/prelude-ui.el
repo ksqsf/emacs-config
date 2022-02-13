@@ -317,7 +317,9 @@
 
 (use-package mixed-pitch
   :hook
-  (text-mode . mixed-pitch-mode)
+  (org-mode . mixed-pitch-mode)
+  ;; We can't simply use text-mode here: Magit COMMIT_MSG is also
+  ;; text-mode.
   :config
   (dolist (i '(org-drawer org-special-keyword org-property-value))
     (push i mixed-pitch-fixed-pitch-faces))
