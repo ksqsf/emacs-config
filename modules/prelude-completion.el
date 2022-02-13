@@ -32,7 +32,7 @@
     :after ivy)
 
   (use-package ivy-prescient
-    :after counsel)
+    :hook (ivy-mode . ivy-prescient-mode))
 
   (use-package ivy-rich
     :after ivy
@@ -62,9 +62,7 @@
            ("C-c C-r" . ivy-resume)
            ("C-c v p" . ivy-push-view)
            ("C-c v o" . ivy-pop-view)
-           ("C-c v ." . ivy-switch-view))
-    :config
-    (use-package amx)))
+           ("C-c v ." . ivy-switch-view))))
 
  ;; Selectrum
  ((eq prelude-completion-framework 'selectrum)
