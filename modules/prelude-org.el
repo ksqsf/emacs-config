@@ -198,12 +198,14 @@
 
 ;; org-roam
 (use-package org-roam
-  :after org
+  :commands (org-roam-node-find
+             org-roam-node-random
+             org-roam-dailies-goto-today
+             org-roam-dailies-capture-today)
   :init (setq org-roam-v2-ack t)
   :custom (org-roam-directory k/roam-dir)
   :bind (("C-c n f" . org-roam-node-find)
          ("C-c n r" . org-roam-node-random)
-         ("C-c n g" . org-roam-graph)
          ("C-c n t" . org-roam-dailies-goto-today)
          ("C-c n c" . org-roam-dailies-capture-today)
          :map org-mode-map
