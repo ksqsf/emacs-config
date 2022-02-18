@@ -220,4 +220,7 @@
 (use-package avy
   :bind ("M-j" . avy-goto-char-timer))
 
+;;
+(setq show-paren-context-when-offscreen t)
+
 (provide 'prelude-core)
