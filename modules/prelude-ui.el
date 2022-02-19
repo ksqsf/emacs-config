@@ -259,6 +259,7 @@
 (use-package mixed-pitch
   :hook
   (org-mode . mixed-pitch-mode)
+  (markdown-mode . mixed-pitch-mode)
   ;; We can't simply use text-mode here: Magit COMMIT_MSG is also
   ;; text-mode.
   :config
