@@ -94,8 +94,6 @@
   (meow-setup)
   (meow-global-mode +1)
 
-  (setq meow-motion-remap-prefix "C-")
-
   (with-eval-after-load 'projectile
     (meow-leader-define-key (cons "p" projectile-command-map))))
 
