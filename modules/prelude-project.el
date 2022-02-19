@@ -2,6 +2,7 @@
 ;; Deal with the concept of `Project'
 
 (use-package projectile
+  :hook (after-init . projectile-mode)
   ;; Steal `C-x p' from project.el.
   :bind-keymap ("C-x p" . projectile-command-map)
 
@@ -16,9 +17,7 @@
   (projectile-register-project-type 'cmake '("CMakeLists.txt")
                                     :configure "cmake -Bbuild"
                                     :compile "cmake --build build"
-                                    :test "cd build && ctest")
-
-  (projectile-mode +1))
+                                    :test "cd build && ctest"))
 
 (use-package project
   :defer t
