@@ -2,8 +2,8 @@
 ;; Recommends:
 ;; 1. prelude-tex: for cdlatex
 
-(defvar k/roam-dir (expand-file-name "~/Documents/Roam"))
-(defvar k/zotlib-path (expand-file-name "~/Zotero/zotlib.bib"))
+(defvar k|roam-dir (expand-file-name "~/Documents/Roam"))
+(defvar k|zotlib-path (expand-file-name "~/Zotero/zotlib.bib"))
 
 (use-package org
   :defer t
@@ -50,7 +50,7 @@
 
   ;; Formulae preview
   (setq org-preview-latex-default-process 'dvisvgm)
-  (when (not *is-a-mac*)
+  (when (not k|mac)
     (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5)))
 
   ;; Babel
@@ -88,8 +88,8 @@
   :commands (helm-bibtex helm-bibtex-with-notes)
   :config
   (setq
-   bibtex-completion-notes-path k/roam-dir
-   bibtex-completion-bibliography k/zotlib-path
+   bibtex-completion-notes-path k|roam-dir
+   bibtex-completion-bibliography k|zotlib-path
    bibtex-completion-pdf-field "file"
    bibtex-completion-notes-template-multiple-files
    (concat
@@ -113,10 +113,10 @@
   (setq
    org-ref-completion-library 'org-ref-ivy-cite
    org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
-   org-ref-default-bibliography k/zotlib-path
-   org-ref-bibliography-notes (expand-file-name "bibnotes.org" k/roam-dir)
+   org-ref-default-bibliography k|zotlib-path
+   org-ref-bibliography-notes (expand-file-name "bibnotes.org" k|roam-dir)
    org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
-   org-ref-notes-directory k/roam-dir
+   org-ref-notes-directory k|roam-dir
    org-ref-notes-function 'orb-edit-notes))
 
 (use-package org-download
@@ -139,21 +139,21 @@
 		 ("\\paragraph{%s}" . "\\paragraph*{%s}")
 		 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
-(defvar-local k/org-last-in-latex nil)
+(defvar-local k|org-last-in-latex nil)
 
-(defun k/org-in-latex-fragment-p ()
+(defun k|org-in-latex-fragment-p ()
   "Returns non-nil when the point is inside a latex fragment."
   (let* ((el (org-element-context))
          (el-type (car el)))
     (and (or (eq 'latex-fragment el-type) (eq 'latex-environment el-type))
          (org-element-property :begin el))))
 
-(defun k/org-latex-auto-toggle ()
+(defun k|org-latex-auto-toggle ()
   (ignore-errors
-    (let ((in-latex (k/org-in-latex-fragment-p)))
-      (if (and k/org-last-in-latex (not in-latex))
+    (let ((in-latex (k|org-in-latex-fragment-p)))
+      (if (and k|org-last-in-latex (not in-latex))
           (progn (org-latex-preview)
-                 (setq k/org-last-in-latex nil)))
+                 (setq k|org-last-in-latex nil)))
 
       (when-let ((ovs (overlays-at (point))))
         (when (->> ovs
@@ -161,10 +161,10 @@
                    (--filter (equal it 'org-latex-overlay)))
           ;; (org-latex-preview)
           (make-thread #'(lambda () (thread-yield) (sit-for 0) (org-latex-preview)) "Async LaTeX fragment Preview")
-          (setq k/org-last-in-latex nil)))
+          (setq k|org-last-in-latex nil)))
 
       (when in-latex
-        (setq k/org-last-in-latex t)))))
+        (setq k|org-last-in-latex t)))))
 
 (define-minor-mode org-latex-auto-toggle
   "Automatic toggle latex overlay when cursor enter/leave."
@@ -172,8 +172,8 @@
   nil
   nil
   (if org-latex-auto-toggle
-      (add-hook 'post-command-hook #'k/org-latex-auto-toggle nil t)
-    (remove-hook 'post-command-hook #'k/org-latex-auto-toggle t)))
+      (add-hook 'post-command-hook #'k|org-latex-auto-toggle nil t)
+    (remove-hook 'post-command-hook #'k|org-latex-auto-toggle t)))
 
 (use-package org-latex-impatient
   :hook (org-mode . org-latex-impatient-mode)
@@ -203,7 +203,8 @@
              org-roam-dailies-goto-today
              org-roam-dailies-capture-today)
   :init (setq org-roam-v2-ack t)
-  :custom (org-roam-directory k/roam-dir)
+  :custom
+  (org-roam-directory k|roam-dir)
   :bind (("C-c n f" . org-roam-node-find)
          ("C-c n r" . org-roam-node-random)
          ("C-c n t" . org-roam-dailies-goto-today)
@@ -245,7 +246,7 @@
    ;; I want to see the whole file
    org-noter-hide-other nil
    ;; Everything is relative to the main notes file
-   org-noter-notes-search-path (list org-roam-directory)))
+   org-noter-notes-search-path (list k|roam-dir)))
 
 (use-package deft
   :after org
@@ -255,7 +256,7 @@
   (deft-recursive t)
   (deft-use-filter-string-for-filename t)
   (deft-default-extension "org")
-  (deft-directory k/roam-dir)
+  (deft-directory k|roam-dir)
   (deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n")
   (deft-use-filename-as-title t))
 

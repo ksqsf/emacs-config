@@ -1,7 +1,9 @@
 ;;; -*- lexical-binding: t; -*-
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(use-package js2-mode
+  :mode ((("\\.js\\'" "\\.jsx\\'") . js2-mode))
+  :init
+  (add-to-list 'interpreter-mode-alist '("node" . js2-mode)))
 
 (defun run-node ()
   (interactive)

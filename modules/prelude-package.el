@@ -4,11 +4,7 @@
 ;;; package.el:
 ;;; * No version pinning
 
-;; Package Archive URL
-
-(setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
-                         ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")))
-(package-initialize)
+;; Mirrors moved to early-init.el
 
 ;; use-package
 (unless (package-installed-p 'use-package)

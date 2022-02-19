@@ -14,23 +14,6 @@
             (lambda ()
               (company-mode t))))
 
-(use-package elpy
-  :disabled
-  :after (python)
-  :hook (python-mode . elpy-enable)
-  :config
-  ;; (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  ;; (add-hook 'elpy-mode-hook 'flycheck-mode)
-  (setq elpy-rpc-python-command "python3"
-        elpy-rpc-virtualenv-path (no-littering-expand-var-file-name "elpy/rpc-venv")
-        elpy-get-info-from-shell t))
-
-(use-package flycheck-mypy
-  :disabled
-  :after python
-  :config
-  (setq flycheck-python-mypy-args "--no-incremental"))
-
 (use-package lsp-pyright
   :hook (python-mode . lsp))
 

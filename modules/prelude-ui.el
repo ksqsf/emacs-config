@@ -53,26 +53,12 @@
 (add-to-list 'initial-frame-alist '(width . 140))
 
 ;; Mac-specific settings
-(when *is-a-mac*
+(when k|mac
   (use-package ns-auto-titlebar
     :init
     (ns-auto-titlebar-mode)))
 
-;; Default theme
-(use-package ayu-theme
-  :disabled
-  :config
-  (defun prelude-switch-theme (appearance)
-    (if (eq appearance 'dark)
-        (load-theme 'ayu-dark t)
-      (load-theme 'ayu-light t)))
-  (add-hook 'ns-ns-system-appearance-change-functions #'prelude-switch-theme))
-
 ;; Mode line
-(use-package diminish
-  :config
-  (diminish 'eldoc-mode))
-
 (use-package doom-modeline
   :hook ((after-init . doom-modeline-mode))
   :init
@@ -116,55 +102,6 @@
 (when (fboundp 'mac-auto-operator-composition-mode)
   (mac-auto-operator-composition-mode))
 
-;; Auto set margins
-(use-package perfect-margin
-  :disabled
-  :quelpa (perfect-margin :fetcher github :repo "mpwang/perfect-margin")
-  :custom
-  (perfect-margin-visible-width 128)
-  :config
-  (setq perfect-margin-ignore-regexps '("^minibuf"))
-  (perfect-margin-mode t)
-  (dolist (margin '("<left-margin> " "<right-margin> "))
-    (global-set-key (kbd (concat margin "<mouse-1>")) 'ignore)
-    (global-set-key (kbd (concat margin "<mouse-3>")) 'ignore)
-    (dolist (multiple '("" "double-" "triple-"))
-      (global-set-key (kbd (concat margin "<" multiple "wheel-up>")) 'mwheel-scroll)
-      (global-set-key (kbd (concat margin "<" multiple "wheel-down>")) 'mwheel-scroll))))
-
-;; Dashboard
-(use-package dashboard
-  :disabled
-  :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-items '((projects . 5)
-                          (bookmarks . 5)
-                          (recents . 5)))
-  (setq dashboard-center-content t)
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t))
-
-;; Cycle themes
-(defcustom prelude-themes
-  (list 'doom-monokai-pro) 
-  "Themes that you may want to use."
-  :group 'prelude)
-
-(defun cycle-theme ()
-  "Cycle around `prelude-themes'."
-  (interactive)
-  (require 'dash)
-  (if (> (length prelude-themes) 1)
-      (let ((next (car prelude-themes)))
-        (dolist (current custom-enabled-themes)
-          (disable-theme current))
-        (if (listp next)
-            (dolist (theme next)
-              (load-theme theme t))
-          (load-theme next t))
-        (setq prelude-themes (append (cdr prelude-themes)
-                                     (list (car prelude-themes)))))))
-
 ;; valign
 (use-package valign
   :commands (valign-mode))
@@ -192,7 +129,7 @@
 (setq window-sides-vertical t)
 
 ;; helper
-(defmacro buffer-is-major-mode (major-mode)
+(defmacro k|buffer-is-major-mode (major-mode)
   `(lambda (buffer alist)
      (with-current-buffer buffer
        (eql major-mode ,major-mode)))) ;; 'eq' does not work
@@ -236,7 +173,7 @@
     (window-height . 0.3)
     (slot . 1)
     (dedicated . t))
-   (,(buffer-is-major-mode 'calc-mode)
+   (,(k|buffer-is-major-mode 'calc-mode)
     (display-buffer-in-side-window)
     (side . bottom)
     (slot . 1)
@@ -248,11 +185,11 @@
    ("^\\*\\(\\(e?shell\\)\\|\\(vterm\\)\\)"
     (display-buffer-below-selected)
     (window-width . 72))
-   (,(buffer-is-major-mode 'haskell-interactive-mode)
+   (,(k|buffer-is-major-mode 'haskell-interactive-mode)
     (display-buffer-reuse-window
      display-buffer-at-bottom
      display-buffer-below-selected))
-   (,(buffer-is-major-mode 'inferior-python-mode)
+   (,(k|buffer-is-major-mode 'inferior-python-mode)
     (display-buffer-below-selected))
 
    ;; Terminals
@@ -263,11 +200,9 @@
    ("^\\*\\(.*-\\)?vterm\\*"
     nil
     (inhibit-same-window . t)
-    (dedicated . t))
-   ))
+    (dedicated . t))))
 
-(put 'window-swap-states 'disabled t)
-
+;; Minimap
 (use-package minimap
   :commands (minimap-mode)
   :config
@@ -277,7 +212,7 @@
 (defun drop-down-term ()
   "Open a drop-down terminal in the same directory as the current file."
   (interactive)
-  (require 'vterm)
+  (use-package vterm)
   (let ((buffer (get-buffer-create "*dd-term*"))
         win)
     (with-current-buffer buffer
@@ -289,8 +224,10 @@
            '((side . top)
              (dedicated . t))))
     (select-window win)))
+
 (defalias 'dd-term 'drop-down-term)
 
+;; Pop-up windows
 (use-package popper
   :bind (("C-`" . popper-toggle-latest)
          ("M-`" . popper-cycle)
@@ -310,12 +247,12 @@
 (context-menu-mode +1)
 (setq-default context-menu-functions
               '(context-menu-ffap
-                context-menu-hideshow
+                k|context-menu-hideshow
                 occur-context-menu
                 context-menu-region
                 context-menu-undo))
 
-(defun context-menu-hideshow (menu click)
+(defun k|context-menu-hideshow (menu click)
   "Populate MENU with `hideshow' commands."
   (define-key-after menu [hs-hide-block]
     '(menu-item "Hide block"

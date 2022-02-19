@@ -10,15 +10,12 @@
   ;; Intelligently guess the target directory.
   (setq dired-dwim-target t)
 
-  ;; Set a default value for certain types of files on !
-  (setq prelude/default-opener (if *is-a-mac* "open" "xdg-open"))
-
   (setq dired-guess-shell-alist-user
-        '(("\\.pdf\\'" prelude/default-opener)
-          ("\\.png\\'" prelude/default-opener)
-          ("\\.jpg\\'" prelude/default-opener)))
+        '(("\\.pdf\\'" k|default-opener)
+          ("\\.png\\'" k|default-opener)
+          ("\\.jpg\\'" k|default-opener)))
 
-  (when *is-a-mac*
+  (when k|mac
     (setq dired-omit-files "\\`[.]?#\\|\\`[.][.]?\\'\\|\\.DS_Store\\|\\.localized")))
 
 (use-package dired-filter

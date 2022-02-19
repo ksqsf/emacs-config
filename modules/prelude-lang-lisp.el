@@ -1,8 +1,20 @@
 ;;; -*- lexical-binding: t; -*-
 
+;;
+;; Emacs Lisp
+;;
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-buffer)
 
+
+;;
+;; Common Lisp
+;;
+
 (setq inferior-lisp-program "sbcl")
+
+(use-package sly
+  :commands (sly sly-mode)
+  :mode (("\\.lisp\\'" . lisp-mode)))
 
 (use-package paredit
   :diminish "Ⓟ"
@@ -17,22 +29,17 @@
   (add-hook 'lisp-interaction-mode-hook #'(lambda () (define-key paredit-mode-map "\C-j" nil))))
 
 (eval-after-load 'scheme
-  (setq scheme-program-name "mechanics"))
+  (setq scheme-program-name "racket"))
 
 (use-package geiser
   :mode (("\\.ss\\'" . geiser-mode))
   :config
-  (setq geiser-default-implementation 'chez))
+  (setq geiser-default-implementation 'racket))
 
-(defun mechanics ()
-  (interactive)
-  (run-scheme "/usr/local/scmutils/mit-scheme/bin/scheme --library /usr/local/scmutils/mit-scheme/lib"))
 
-(use-package sly
-  :commands (sly sly-mode)
-  :mode (("\\.lisp\\'" . lisp-mode)))
-
-;; replace old z3-mode
+;;
+;; My own SMTLib mode
+;;
 (use-package smtlib2-mode
   :ensure nil
   :mode (("\\.smt2?\\'" . smtlib2-mode)

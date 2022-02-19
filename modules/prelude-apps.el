@@ -28,7 +28,7 @@
 
   (alert-add-rule :status '(buried)
 		  :mode 'eshell-mode
-		  :style (if *is-a-mac*
+		  :style (if k|mac
 			     'osx-notifier
 			   'notifications))
 

@@ -12,7 +12,7 @@
   (set-face-font 'markdown-table-face "Iosevka Term-14"))
 
 ;; Fontset, we need a Serif font for variable pitch mode
-;; (when *is-a-mac*
+;; (when k|mac
 ;;   (set-fontset-font t 'chinese-gbk "STSong"))
 
 ;; Hey, Org mode?
@@ -34,7 +34,7 @@
 
 ;; Overwrite the builtin version, to stop `join-line' (alias of
 ;; `delete-indentation') insert whitespace between CJK characters.
-(define-advice fixup-whitespace (:override ())
+(define-advice k|fixup-whitespace (:override ())
   (interactive "*")
   (save-excursion
     (delete-horizontal-space)
@@ -47,7 +47,6 @@
 ;; Pinyin support for Ivy
 ;; Shamelessly stolen from Centaur Emacs
 (use-package pinyinlib
-  :if (eq prelude-completion-framework 'ivy+counsel)
   :commands pinyinlib-build-regexp-string
   :after ivy
   :init

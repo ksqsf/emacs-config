@@ -3,8 +3,18 @@
 (use-package proof-general
   :commands (coq-mode)
   :hook ((coq-mode . yas-minor-mode))
-  :init
-  (setq proof-splash-enable nil))
+  :mode ("\\.v\\'" . coq-mode)
+  :custom
+  (proof-splash-enable nil))
+
+(use-package company-coq
+  :hook (coq-mode . company-coq-mode)
+  (setq company-coq-live-on-the-edge t))
+
+
+;;
+;; The following code is historic.
+;;
 
 ;; Resolve Coq and Verilog
 (defvar coq-or-verilog-mode--regexp "\\(?:\\(Theorem\\|Ltac\\|Example\\|Lemma\\|Axiom\\)[ 	]\\).+:")
@@ -33,11 +43,7 @@ Foundations and typical Verilog files."
       (coq-mode)
     (verilog-mode)))
 
+;; I don't write Verilog anymore!!
 ;; (add-to-list 'auto-mode-alist '("\\.v\\'" . coq-or-verilog-mode))
-(add-to-list 'auto-mode-alist '("\\.v\\'" . coq-mode))
-
-(use-package company-coq
-  :hook (coq-mode . company-coq-mode)
-  (setq company-coq-live-on-the-edge t))
 
 (provide 'prelude-lang-coq)

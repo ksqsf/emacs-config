@@ -3,13 +3,8 @@
 ;;; likely everyone wants them, thus the name "core".
 
 ;; GC less conservative.  No more frequently than every 50 MiB.
-(setq gc-cons-threshold most-positive-fixnum)
 (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 50 1024 1024))))
 (add-hook 'focus-out-hook #'garbage-collect)
-
-;; Stop Emacs littering init.el
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(add-hook 'after-init-hook #'(lambda () (load custom-file)))
 
 ;; No-littering
 (use-package no-littering
@@ -30,6 +25,9 @@
 ;; Don't show messages that I don't read
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
+
+;; Delete the selected region when press <del>
+(setq delete-active-region t)
 
 ;; f2. 2C-mode can be invoked using C-x 6
 (global-set-key (kbd "<f2>") #'follow-mode)
@@ -111,7 +109,7 @@
   :hook ((after-init . recentf-mode))
   :config
   (setq recentf-auto-cleanup 'never)
-  (run-with-idle-timer 30 t #'(lambda () (with-suppressed-message (recentf-save-list))))
+  (run-with-idle-timer 30 t #'(lambda () (k|with-suppressed-message (recentf-save-list))))
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
@@ -134,7 +132,7 @@
   (beginend-global-mode))
 
 ;; Mac is stupid
-(when *is-a-mac*
+(when k|mac
   (setq default-directory "~/")
   (setq command-line-default-directory "~/")
   (setenv "LC_ALL" "zh_CN.utf-8")
@@ -205,10 +203,6 @@
     (backward-kill-word 1)))
 (global-set-key (kbd "C-w") #'k/kill-region-or-backward-word)
 
-;; <del>Replace dabbrev-expand by hippie-expand</del>
-;; hippie-expand does too much
-;; (global-set-key (kbd "M-/") #'dabbrev-expand)
-
 ;; auth sources
 (setq auth-sources '("~/.netrc"))
 
@@ -222,5 +216,8 @@
 
 ;;
 (setq show-paren-context-when-offscreen t)
+
+;;
+(global-set-key (kbd "C-c C-a") #'align)
 
 (provide 'prelude-core)

@@ -27,12 +27,6 @@
   ;; WARNING: Don't use all-the-icons!!
   (setq company-box-icons-alist 'company-box-icons-idea))
 
-(use-package company-tabnine
-  :disabled  ;; Not very useful...
-  :after company
-  :config
-  (add-to-list 'company-backends #'company-tabnine))
-
 (use-package imenu
   :bind ("C-c C-j" . imenu))
 
@@ -42,6 +36,7 @@
   (yas-reload-all))
 
 (use-package hl-todo
+  :hook (prog-mode . hl-todo-mode)
   :commands (hl-todo-mode))
 
 (use-package rainbow-delimiters
@@ -78,15 +73,6 @@
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
 
-(defun prelude--enable-prog-features (&rest features)
-  (dolist (feature features)
-    (pcase feature
-      (`:company (company-mode))
-      (`:yasnippet (yas-minor-mode))
-      (`:hl-todo (hl-todo-mode))
-      (`:smartparens (smartparens-mode)))))
-
-
 ;;; GDB
 ;; Refer to https://debbugs.gnu.org/cgi/bugreport.cgi?bug=33548
 (setq gdb-mi-decode-strings 'utf-8)
@@ -95,10 +81,6 @@
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (setq display-line-numbers-type 'relative
       display-line-numbers-grow-only t)
-
-
-(global-set-key (kbd "C-c C-a") #'align)
-
 
 
 (provide 'prelude-prog)

@@ -1,106 +1,66 @@
 ;;; -*- lexical-binding: t; -*-
 
-(defcustom prelude-completion-framework
-  'ivy+counsel
-  "The completion framework for narrowing selections."
-  :group 'prelude
-  :type '(choice (const :tag "Icomplete+Ido" icomplete+ido)
-                 (const :tag "Ido-only" ido)
-                 (const :tag "Ivy+Counsel" ivy+counsel)
-                 (const :tag "Selectrum" selectrum)))
-
-(use-package flx)
-
-(cond
- ;; Ivy + counsel
- ((eq prelude-completion-framework 'ivy+counsel)
-
-  (use-package ivy
-    :diminish "ⓘ"
-    :hook (after-init . ivy-mode)
+(use-package selectrum
+  :hook (after-init . selectrum-mode)
+  :config
+  (use-package selectrum-prescient
     :config
-    (setq ivy-use-virtual-buffers 'recentf)
-    (setq ivy-height 10)
-    (setq ivy-fixed-height-minibuffer t)
+    (selectrum-prescient-mode +1)
+    (prescient-persist-mode +1)))
 
-    (define-key ivy-occur-mode-map (kbd "p") 'ivy-occur-previous-line)
-    (define-key ivy-occur-mode-map (kbd "n") 'ivy-occur-next-line)
-    (define-key ivy-occur-mode-map (kbd "f") 'forward-char)
-    (define-key ivy-occur-mode-map (kbd "b") 'backward-char))
+(use-package consult
+  :bind
+  ;; ctl-x-map
+  (("C-x M-:" . consult-complex-command)
+   ("C-x b" . consult-buffer)
+   ("C-x 4 b" . consult-buffer-other-window)
+   ("C-x 5 b" . consult-buffer-other-frame)
+   ("C-x r b" . consult-bookmark)
+   
+   ;; goto-map
+   ("M-g e" . consult-compile-error)
+   ("M-g f" . consult-flymake)
+   ("M-g g" . consult-goto-line)
+   ("M-g M-g" . consult-goto-line)
+   ("M-g o" . consult-outline)
+   ("M-g m" . consult-mark)
+   ("M-g k" . consult-global-mark)
+   ("M-g i" . consult-imenu)
+   ("M-g I" . consult-imenu-multi)
+   
+   ;; search-map
+   ("M-s d" . consult-find)
+   ("M-s D" . consult-locate)
+   ("M-s g" . consult-grep)
+   ("M-s G" . consult-git-grep)
+   ("M-s r" . consult-ripgrep)
+   ("M-s L" . consult-line-multi)
+   ("M-s m" . consult-multi-occur)
+   ("M-s k" . consult-keep-lines)
+   ("M-s u" . consult-focus-lines)
 
-  (use-package ivy-hydra
-    :after ivy)
+   ;; isearch related
+   ("M-s e" . consult-isearch-history)
+   :map isearch-mode-map
+   ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+   ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+   ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+   ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+   )
+  
+  :hook
+  (completion-list-mode . consult-preview-at-point-mode)
 
-  (use-package ivy-prescient
-    :hook ((ivy-mode . ivy-prescient-mode)
-           (ivy-prescient-mode . prescient-persist-mode)))
+  :init
 
-  (use-package ivy-rich
-    :after ivy
-    :hook (ivy-mode . ivy-rich-mode)
-    :config
-    (setq ivy-rich-parse-remote-buffer nil)
-    (use-package all-the-icons-ivy-rich
-      :config
-      (setq all-the-icons-ivy-rich-icon-size 0.80)
-      (all-the-icons-ivy-rich-mode 1)))
+  (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
 
-  (use-package ivy-posframe
-    :disabled                           ; Doesn't work well with ivy-rich
-    :after ivy
-    :hook (ivy-mode . ivy-posframe-mode)
-    :config
-    (setq ivy-posframe-parameters
-          '((left-fringe . 8)
-            (right-fringe . 8)))
-    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display))))
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
 
-  (use-package counsel
-    :diminish "ⓒ"
-    :hook (ivy-mode . counsel-mode)
-    :bind (("M-s M-s" . swiper)
-           ;; ("C-r" . swiper-isearch-backward)
-           ("C-c C-r" . ivy-resume)
-           ("C-c v p" . ivy-push-view)
-           ("C-c v o" . ivy-pop-view)
-           ("C-c v ." . ivy-switch-view))))
-
- ;; Selectrum
- ((eq prelude-completion-framework 'selectrum)
-  (use-package selectrum
-    :hook (after-init . selectrum-mode)
-    :config
-    (use-package selectrum-prescient
-      :config
-      (selectrum-prescient-mode +1)
-      (prescient-persist-mode +1))))
-
- ;; Icomplete + Ido
- ((eq prelude-completion-framework 'icomplete+ido)
-  (setq ido-use-virtual-buffers t)
-  (ido-mode 1)
-  (setq icomplete-max-delay-chars 0
-        icomplete-in-buffer t
-        icomplete-show-matches-on-no-input t
-        icomplete-delay-completions-threshold 30000)
-  (icomplete-mode 1))
-
- ;; Ido
- ((eq prelude-completion-framework 'ido)
-  (use-package flx-ido
-    :after ido
-    :config
-    (flx-ido-mode 1))
-  (use-package ido-grid-mode
-    :after ido)
-  (use-package ido-completing-read+
-    :config
-    (ido-ubiquitous-mode 1))
-  (use-package amx
-    :config
-    (setq amx-backend 'ido)
-    (amx-mode 1))
-  (ido-mode 1)))
+  :config
+  (setq consult-narrow-key "<")
+  )
 
 (use-package minibuffer
   :ensure nil

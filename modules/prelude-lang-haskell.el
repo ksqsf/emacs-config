@@ -10,12 +10,12 @@
   :hook (haskell-mode . lsp)
   :hook (haskell-mode . yas-minor-mode)
   :hook (haskell-mode . interactive-haskell-mode)
-  :hook (haskell-mode . prelude--setup-haskell-prettify-symbols)
+  :hook (haskell-mode . k|setup-haskell-prettify-symbols)
   :hook (haskell-cabal-mode . yas-minor-mode)
   ;; :hook (haskell-mode . flyspell-prog-mode)
   :config
 
-  (defun prelude--setup-haskell-prettify-symbols ()
+  (defun k|setup-haskell-prettify-symbols ()
     (setq prettify-symbols-alist
           '(("\\" . ?λ)
             ("forall" . ?∀)
@@ -30,10 +30,10 @@
             ))
     (prettify-symbols-mode))
 
-  (defun hpack-after-save-hook ()
+  (defun k|hpack-after-save ()
     (when (string= (buffer-name) "package.yaml")
       (start-process "hpack" " *hpack*" "hpack")))
-  (add-hook 'after-save-hook #'hpack-after-save-hook)
+  (add-hook 'after-save-hook #'k|hpack-after-save)
 
   (with-eval-after-load 'align
     (add-to-list 'align-rules-list
@@ -107,18 +107,18 @@
   (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
   (add-hook 'haskell-mode-hook 'dante-mode))
 
-(defvar *prelude--latest-stackage-lts-version* nil
-  "Cached value for stackage lts version.")
-(defvar *prelude--stack-proc* nil)
-
-(defun prelude--get-latest-stackage-lts-version ()
+(defvar k|latest-stackage-lts nil
+  "Cached value of stackage LTS snapshot version.")
+(defvar k|stack-proc nil)
+(defun k|get-latest-stackage-lts ()
   "Returns the latest version of the Stackage LTS resolver.
 
 This data is fetched from 'stack ls snapshots --resolver remote'.
 If no data can be fetched, a default value (lts-14.20) is returned."
-  (if *prelude--latest-stackage-lts-version*
-      *prelude--latest-stackage-lts-version*
-    (let ((default "lts-14.20") answer)
+  (if k|latest-stackage-lts
+      k|latest-stackage-lts
+    (let ((default "lts-18.25")
+          answer)
       (with-temp-buffer
         (message "Fetching version from stack...")
         (call-process "stack" nil (current-buffer) nil
@@ -128,7 +128,7 @@ If no data can be fetched, a default value (lts-14.20) is returned."
             (setq answer (match-string-no-properties 1))
           (warn "Unable to get the version number! Returning a default value: %s" default)
           (setq answer default))
-        (setq *prelude--latest-stackage-lts-version* answer)))))
+        (setq k|latest-stackage-lts answer)))))
 
 (define-derived-mode haskell-iface-mode fundamental-mode "Haskell Iface"
   "View the contents of Haskell interface files, by invoking 'ghc --show-iface'.
@@ -139,6 +139,7 @@ This mode is not reliable: the ghc version will probably not match that of the f
   (read-only-mode)
   (set-buffer-modified-p nil)
   (goto-char (point-min)))
+
 (add-to-list 'auto-mode-alist '("\\.hi\\'" . haskell-iface-mode))
 
 (defun new-cabal-project-tmp (package-name)

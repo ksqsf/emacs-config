@@ -3,8 +3,8 @@
 
 (use-package benchmark-init
   :init
+  (benchmark-init/activate)
   (add-hook 'after-init #'(lambda () (benchmark-init/deactivate)))
-  :config
-  (benchmark-init/activate))
+  )
 
 (provide 'prelude-benchmark)
