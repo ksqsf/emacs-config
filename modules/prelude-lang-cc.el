@@ -4,6 +4,7 @@
 (defvar c-newline-and-indent-regexp "\\s)")
 
 (use-package cc-mode
+  :ensure nil
   :defer t
   :config
   (defun c-newline-and-indent ()

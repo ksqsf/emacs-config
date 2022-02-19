@@ -1,9 +1,11 @@
 ;;; ERC
 
 (use-package erc
+  :ensure nil
   :commands (erc)
   :bind ("C-c i" . erc-switch-to-buffer)
   :config
+  (setq erc-server "irc.libera.chat")
   (setq erc-autojoin-channels-alist
         '(("libera.chat" "#haskell")))
   (require 'erc-sasl)

@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 (use-package python
+  :ensure nil
   :defer t
   :init
   (setq doom-modeline-env-python-executable "python3")

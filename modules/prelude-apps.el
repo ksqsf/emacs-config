@@ -155,11 +155,8 @@
   :commands (dash-at-point)
   :bind (("C-c C-d" . dash-at-point)))
 
-(use-package erc
-  :config
-  (setq erc-server "irc.libera.chat"))
-
 (use-package gnus
+  :ensure nil
   :config
   (setq gnus-select-method '(nntp "news.gmane.io"))
   (setq gnus-thread-sort-functions

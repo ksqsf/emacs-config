@@ -17,6 +17,7 @@
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
 (use-package reftex
+  :ensure nil
   :hook (LaTeX-mode . reftex-mode)
   :config
   (setq reftex-plug-into-AUCTeX t))

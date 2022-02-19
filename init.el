@@ -25,8 +25,8 @@
 (load custom-file)
 
 ;; Modules.
-(require 'prelude-common)
 (require 'prelude-package)
+(require 'prelude-common)
 
 ;; (require 'prelude-benchmark)
 (require 'prelude-core)

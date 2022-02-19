@@ -3,6 +3,7 @@
 
 (use-package projectile
   :hook (after-init . projectile-mode)
+
   ;; Steal `C-x p' from project.el.
   :bind-keymap ("C-x p" . projectile-command-map)
 
@@ -21,6 +22,7 @@
 
 (use-package project
   :defer t
+  :ensure nil
   :config
   (defun project-shell ()
   "Start an inferior shell in the current project's root directory.

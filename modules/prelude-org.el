@@ -7,6 +7,7 @@
 
 (use-package org
   :defer t
+  :ensure nil
   :custom
   (org-latex-preview-ltxpng-directory (no-littering-expand-var-file-name "org/ltxpng"))
   :hook (org-mode . org-cdlatex-mode)
@@ -168,9 +169,7 @@
 
 (define-minor-mode org-latex-auto-toggle
   "Automatic toggle latex overlay when cursor enter/leave."
-  nil
-  nil
-  nil
+  nil nil nil
   (if org-latex-auto-toggle
       (add-hook 'post-command-hook #'k|org-latex-auto-toggle nil t)
     (remove-hook 'post-command-hook #'k|org-latex-auto-toggle t)))

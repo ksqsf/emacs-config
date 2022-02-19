@@ -2,6 +2,7 @@
 ;; ibuffer is chosen in favor of list-buffers in core.el
 
 (use-package ibuffer
+  :ensure nil
   :commands (ibuffer ibuffer-switch-to-saved-filter-groups)
   :config
   (setq ibuffer-saved-filter-groups
