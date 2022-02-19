@@ -306,15 +306,37 @@
   (popper-mode +1)
   (popper-echo-mode +1))
 
+;; Enable context menu
 (context-menu-mode +1)
+(setq-default context-menu-functions
+              '(context-menu-ffap
+                context-menu-hideshow
+                occur-context-menu
+                context-menu-region
+                context-menu-undo))
 
-(setq context-menu-functions
-      '(context-menu-ffap
-        occur-context-menu
-        context-menu-region
-        context-menu-undo
-        context-menu-dictionary))
+(defun context-menu-hideshow (menu click)
+  "Populate MENU with `hideshow' commands."
+  (define-key-after menu [hs-hide-block]
+    '(menu-item "Hide block"
+                (lambda (click) (interactive "e")
+                  (save-excursion
+                    (mouse-set-point click)
+                    (hs-hide-block)))))
+  (define-key-after menu [hs-show-block]
+    '(menu-item "Show block"
+                (lambda (click) (interactive "e")
+                  (save-excursion
+                    (mouse-set-point click)
+                    (hs-show-block)))))
+  (define-key-after menu [hs-separator]
+    menu-bar-separator)
+  menu)
 
+;; Hideshow
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
+;; Provide mixed-pitch faces
 (use-package mixed-pitch
   :hook
   (org-mode . mixed-pitch-mode)
