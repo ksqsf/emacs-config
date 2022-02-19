@@ -1,21 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
 
-(defcustom prelude-ui-accent-color
-  "brown2"
-  "Accent color of UI elements. This affects the mode line."
-  :group 'prelude
-  :type '(color))
-
-(defcustom prelude-ui-frame-alpha       ; TODO
-  0.92
-  "Default frame alpha."
-  :group 'prelude)
-
-(defcustom prelude-start-terminal-command
-  'vterm-mode
-  "A command to set up an empty buffer to be a terminal emulator."
-  :group 'prelude)
-
 ;; Pixelwise resize
 (setq frame-resize-pixelwise t)
 
@@ -62,9 +46,7 @@
 (use-package doom-modeline
   :hook ((after-init . doom-modeline-mode))
   :init
-  (setq doom-modeline-minor-modes nil)
-  :config
-  (set-face-attribute 'doom-modeline-bar nil :background prelude-ui-accent-color))
+  (setq doom-modeline-minor-modes nil))
 
 ;; I'm the winner ;-)
 (use-package winner
@@ -217,7 +199,7 @@
         win)
     (with-current-buffer buffer
       (unless (derived-mode-p 'vterm-mode)
-        (funcall prelude-start-terminal-command)))
+        (vterm-mode)))
     (setq win
           (display-buffer-in-side-window
            buffer
