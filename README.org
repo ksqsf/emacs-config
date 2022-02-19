@@ -6,9 +6,9 @@ Venus Emacs is a "slightly configured" Emacs flavor, made by
 ksqsf. (It also hosts some packages that I have written for my own
 convenience. See the last section.)
 
-This configuration has been tested on macOS and Debian.
+This configuration has been tested on macOS.
 
-NOTE: This configuration only targets Emacs 27.1.  No guarantee about
+NOTE: This configuration only targets Emacs 28.1.  No guarantee about
 forward/backward compatibility.  You can comment out the first
 paragraph in =init.el= if you do want to try.
 
@@ -50,12 +50,10 @@ scoped.
 
 The following fonts are "blessed" in this configuration.
 
-| Font         | Size | Usage                     |
-|--------------+------+---------------------------|
-| Fira Code    |   14 | General use (non-Chinese) |
-| Iosevka Term |   14 | Tabular content           |
-
-However, other fonts also seem to work well, like Monaco and Menlo.
+| Font                 | Size | Usage                     |
+|----------------------+------+---------------------------|
+| (Any monospace font) |   14 | General use (non-Chinese) |
+| Iosevka Term         |   14 | Tabular content           |
 
 ** Better Defaults
 
@@ -64,13 +62,15 @@ These modifications are generally in =prelude-core.el= and
 
 User-*very*-visible modifications are listed here.
 
+*** Modal editing
+
+By default, [[https://github.com/meow-edit/meow][Meow]] is used to provide modal editing experience. See
+=prelude-meow.el= for custom keybindings, especially ones in the leader
+map.
+
 *** Expand region
 
 =C-SPC C-SPC= to expand the current region semantically.
-
-*** Themes
-
-The default theme (too bright) was replaced by [[https://srcery-colors.github.io][Srcery]].
 
 *** Zap up to char
 
@@ -87,13 +87,7 @@ Doom mode line.
 
 *** Quick Completion
 
-I use Ivy and the Counsel family, as they tend to blend better
-with other modern packages.
-
-Over the months, I've tried several other setups, like ido and
-icomplete that comes with Emacs itself, and the configs are still
-there, but will not receive updates as often as Ivy+Counsel.  Just
-customize =prelude-completion-framework=, if you want to try.
+I use Selectrum and Consult ecosystem.
 
 *** REPL
 
