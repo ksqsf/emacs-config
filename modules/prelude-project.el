@@ -8,7 +8,7 @@
   :bind-keymap ("C-x p" . projectile-command-map)
 
   :config
-  (setq projectile-completion-system 'default)
+  (setq projectile-completion-system 'auto)
   (setq projectile-enable-caching nil)
   (setq projectile-switch-project-action #'projectile-find-file)
 
