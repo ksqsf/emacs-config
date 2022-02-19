@@ -347,4 +347,9 @@
     (push i mixed-pitch-fixed-pitch-faces))
   (set-face-attribute 'variable-pitch nil :font "Arial"))
 
+;; I don't really like which-key, but it's helpful when it's
+;; helpful...  *wink*
+(use-package which-key
+  :hook (after-init . which-key-mode))
+
 (provide 'prelude-ui)
