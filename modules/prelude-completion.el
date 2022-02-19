@@ -8,6 +8,22 @@
     (selectrum-prescient-mode +1)
     (prescient-persist-mode +1)))
 
+(use-package marginalia
+  :after (selectrum)
+  :config
+  (marginalia-mode))
+
+(use-package embark
+  :bind
+  (("C-," . embark-act)
+   ("C-." . embark-dwim)
+   ("C-h B" . embark-bindings))
+  :config
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
 (use-package consult
   :bind
   ;; ctl-x-map
@@ -59,8 +75,13 @@
         xref-show-definitions-function #'consult-xref)
 
   :config
-  (setq consult-narrow-key "<")
-  )
+  (setq consult-narrow-key "<"))
+
+(use-package embark-consult
+  :after (embark consult)
+  :demand t
+  :hook
+  (embark-consult-mode . consult-preview-at-point-mode))
 
 (use-package minibuffer
   :ensure nil
