@@ -32,7 +32,8 @@
     :after ivy)
 
   (use-package ivy-prescient
-    :hook (ivy-mode . ivy-prescient-mode))
+    :hook ((ivy-mode . ivy-prescient-mode)
+           (ivy-prescient-mode . prescient-persist-mode)))
 
   (use-package ivy-rich
     :after ivy
