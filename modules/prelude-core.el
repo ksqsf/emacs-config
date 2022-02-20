@@ -214,10 +214,17 @@
 (use-package avy
   :bind ("M-j" . avy-goto-char-timer))
 
-;;
+;; show-paren-mode
 (setq show-paren-context-when-offscreen t)
 
-;;
+;; align
 (global-set-key (kbd "C-c C-a") #'align)
+
+;; enable yasnippet everywhere
+(use-package yasnippet
+  :commands (yas-global-mode yas-minor-mode)
+  :hook (after-init . yas-global-mode)
+  :config
+  (yas-reload-all))
 
 (provide 'prelude-core)

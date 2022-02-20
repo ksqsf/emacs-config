@@ -8,10 +8,8 @@
          ("C-c C-f" . haskell-mode-format-imports)
          ("<f8>" . haskell-navigate-imports))
   :hook (haskell-mode . lsp)
-  :hook (haskell-mode . yas-minor-mode)
   :hook (haskell-mode . interactive-haskell-mode)
   :hook (haskell-mode . k|setup-haskell-prettify-symbols)
-  :hook (haskell-cabal-mode . yas-minor-mode)
   ;; :hook (haskell-mode . flyspell-prog-mode)
   :config
 

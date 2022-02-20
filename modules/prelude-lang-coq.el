@@ -2,7 +2,6 @@
 
 (use-package proof-general
   :commands (coq-mode)
-  :hook ((coq-mode . yas-minor-mode))
   :mode ("\\.v\\'" . coq-mode)
   :custom
   (proof-splash-enable nil))

@@ -1,6 +1,5 @@
 (use-package nix-mode
   :mode (".nix\\'" . nix-mode)
-  :hook (nix-mode . yas-minor-mode)
   :bind (("C-c C-n" . nix/update-config)
          ("C-c C-m" . nix/update-home)))
 
