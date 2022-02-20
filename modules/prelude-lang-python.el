@@ -8,14 +8,16 @@
   (setq python-shell-interpreter "python3")
   (setq gud-pdb-command-name "python3 -m pdb")
   (setq python-shell-interpreter-args "-i")
+  :hook
+  (python-mode . k|lsp-ensure)
+  (python-mode . company-mode)
   :bind (:map python-mode-map
               ("C-x C-e" . python-shell-send-statement))
   :config
   (add-hook 'inferior-python-mode-hook
             (lambda ()
-              (company-mode t))))
-
-(use-package lsp-pyright
-  :hook (python-mode . lsp))
+              (company-mode t)))
+  (when (eq k|lsp 'lsp)
+    (use-package lsp-pyright)))
 
 (provide 'prelude-lang-python)

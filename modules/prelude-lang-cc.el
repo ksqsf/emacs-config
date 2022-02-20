@@ -28,21 +28,21 @@ Mode."
                           (c-mode . "k&r")
                           (c++-mode . "stroustrup")
                           (other . "gnu")))
+  (add-hook 'c-mode-common-hook #'k|lsp-ensure)
+  (add-hook 'c-mode-common-hook #'company-mode)
   (add-hook 'c-mode-common-hook #'subword-mode)
+  (add-hook 'c-mode-common-hook #'smartparens-mode)
   (add-hook 'c-mode-common-hook #'(lambda () (rainbow-mode 0)))
   (define-key c-mode-map (kbd "<f5>") #'compile)
   (define-key c++-mode-map (kbd "<f5>") #'compile)
-  (define-key c-mode-base-map (kbd "[") (k|double-tap-to-insert ?\())
-  (define-key c-mode-base-map (kbd "]") (k|double-tap-to-insert ?\)))
-  (define-key c-mode-base-map (kbd "'") (k|double-tap-to-insert ?\"))
   (define-key c-mode-base-map (kbd "`") (k|double-tap-to-insert ?\"))
   (define-key c-mode-base-map (kbd "RET") #'c-newline-and-indent)
 
   (use-package ccls
     :config
-    (add-hook 'c-mode-common-hook #'lsp)))
+    (setq ccls-sem-highlight-method 'font-lock)))
 
 (use-package modern-cpp-font-lock
-  :hook ((c++-mode-hook . modern-c++-font-lock-mode)))
+  :hook ((c++-mode . modern-c++-font-lock-mode)))
 
 (provide 'prelude-lang-cc)

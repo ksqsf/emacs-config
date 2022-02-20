@@ -4,7 +4,7 @@
 (use-package rustic
   :mode ("\\.rs\\'" . rustic-mode)
   :config
-  (setq rustic-lsp-client 'lsp-mode
+  (setq rustic-lsp-client k|lsp
         rustic-lsp-server 'rust-analyzer
         rustic-analyzer-command '("~/.local/bin/rust-analyzer"))
   (define-key rustic-mode-map (kbd "[") (k|double-tap-to-insert ?\())

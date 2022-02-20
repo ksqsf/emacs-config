@@ -7,11 +7,11 @@
   :bind (("C-c C-l" . haskell-process-load-or-reload)
          ("C-c C-f" . haskell-mode-format-imports)
          ("<f8>" . haskell-navigate-imports))
-  :hook (haskell-mode . lsp)
   :hook (haskell-mode . interactive-haskell-mode)
   :hook (haskell-mode . k|setup-haskell-prettify-symbols)
-  ;; :hook (haskell-mode . flyspell-prog-mode)
   :config
+
+  (add-hook 'haskell-mode-hook #'k|lsp-ensure)
 
   (defun k|setup-haskell-prettify-symbols ()
     (setq prettify-symbols-alist
@@ -140,7 +140,13 @@ This mode is not reliable: the ghc version will probably not match that of the f
 
 (add-to-list 'auto-mode-alist '("\\.hi\\'" . haskell-iface-mode))
 
-(defun new-cabal-project-tmp (package-name)
+(defun haskell ()
+  (interactive)
+  (find-file "/tmp/Main.hs")
+  (when (= 0 (- (point-max) (point-min)))
+    (insert "module Main where\n\nmain = undefined\n\n")))
+
+(defun cabal (package-name)
   "Create a new cabal package under /tmp."
   (interactive "sPackage name: ")
   (let ((old-pwd default-directory))
@@ -148,6 +154,8 @@ This mode is not reliable: the ghc version will probably not match that of the f
     (mkdir package-name t)
     (cd (concat "/tmp/" package-name))
     (shell-command "cabal init")
+    (with-temp-buffer
+      (write-file ".projectile" nil))
     (cd old-pwd))
   (find-file-other-window (concat "/tmp/" package-name "/app/Main.hs")))
 

@@ -19,7 +19,7 @@
                ("<return>" . nil)
                ("RET" . nil)))
   :config
-  (setq company-idle-delay 0.0))
+  (setq company-idle-delay 0.15))
 
 (use-package company-box
   :hook (company-mode . company-box-mode)
@@ -43,19 +43,35 @@
   :commands (smartparens-mode))
 
 
-(setq read-process-output-max 409600)
+(setq read-process-output-max (* 1024 1024))
 
 (use-package eglot
-  :commands (eglot))
+  :commands (eglot eglot-ensure)
+  :config
+  (setq eglot-confirm-server-initiated-edits nil
+        eglot-autoreconnect 60
+        eglot-autoshutdown t))
 
+;;
+;; lsp-mode is powerful and cool!  but it has severe performance
+;; problems. not lsp-mode but emacs itself is to blame.
+;;
 (use-package lsp-mode
   :commands (lsp lsp-mode)
   :config
   (setq lsp-headerline-breadcrumb-enable nil
-        lsp-enable-snippet nil))
+        lsp-enable-snippet t
+        lsp-lens-enable nil))
 
 (use-package lsp-ui
   :commands (lsp-ui-mode))
+
+(defvar k|lsp 'lsp)  ;; lsp or eglot
+
+(defun k|lsp-ensure ()
+  (if (eq k|lsp 'lsp)
+      (lsp)
+    (eglot-ensure)))
 
 
 (use-package dap-mode
