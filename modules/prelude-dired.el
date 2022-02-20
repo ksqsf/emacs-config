@@ -70,4 +70,8 @@
   (dired-rainbow-define vc          "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
   (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*"))
 
+(use-package all-the-icons-dired
+  :after (dired)
+  :init (all-the-icons-dired-mode 1))
+
 (provide 'prelude-dired)
