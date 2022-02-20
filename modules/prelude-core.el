@@ -2,8 +2,8 @@
 ;;; This file modifies some of the essential behaviors of Emacs, and
 ;;; likely everyone wants them, thus the name "core".
 
-;; GC less conservative.  No more frequently than every 50 MiB.
-(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 50 1024 1024))))
+;; GC less conservative.  No more frequently than every 100 MiB.
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 100 1024 1024))))
 (add-hook 'focus-out-hook #'garbage-collect)
 
 ;; No-littering
