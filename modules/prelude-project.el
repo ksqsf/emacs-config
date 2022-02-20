@@ -12,13 +12,7 @@
   (setq projectile-enable-caching nil)
   (setq projectile-switch-project-action #'projectile-find-file)
 
-  (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm)
-
-  ;; cmake
-  (projectile-register-project-type 'cmake '("CMakeLists.txt")
-                                    :configure "cmake -Bbuild"
-                                    :compile "cmake --build build"
-                                    :test "cd build && ctest"))
+  (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm))
 
 (use-package project
   :defer t
