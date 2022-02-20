@@ -94,6 +94,15 @@
   (meow-setup)
   (meow-global-mode +1)
 
+  ;; For some modes, use insert mode
+  (with-eval-after-load 'vterm
+    (add-hook 'vterm-mode-hook #'meow-insert-mode))
+  (with-eval-after-load 'comint
+    (add-hook 'comint-mode-hook #'meow-insert-mode))
+  (with-eval-after-load 'eshell
+    (add-hook 'eshell-mode-hook #'meow-insert-mode))
+
+  ;; SPC p
   (with-eval-after-load 'projectile
     (meow-leader-define-key (cons "p" projectile-command-map))))
 
