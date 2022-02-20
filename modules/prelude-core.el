@@ -28,6 +28,10 @@
 
 ;; Delete the selected region when press <del>
 (setq delete-active-region t)
+(delete-selection-mode t)
+
+;; Disable fancy features when the file is too large
+(global-so-long-mode t)
 
 ;; f2. 2C-mode can be invoked using C-x 6
 (global-set-key (kbd "<f2>") #'follow-mode)
@@ -226,5 +230,8 @@
   :hook (after-init . yas-global-mode)
   :config
   (yas-reload-all))
+
+;; save buffers when focus out
+(add-hook 'focus-out-hook #'(lambda () (save-some-buffers t)))
 
 (provide 'prelude-core)
