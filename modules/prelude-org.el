@@ -211,10 +211,13 @@
          :map org-mode-map
          (("C-c n l" . org-roam-buffer-toggle)
           ("C-c n i" . org-roam-node-insert)
-          ("C-c n o" . org-id-get-create)
+          ("C-c n o" . k|org-get-copy-id)
           ("C-c n a t" . org-roam-tag-add)
           ("C-c n a a" . org-roam-alias-add)))
   :config
+  (defun k|org-get-copy-id ()
+    (interactive)
+    (kill-new (org-id-get-create)))
   (org-roam-db-autosync-mode t)
   (setq org-roam-capture-templates
         '(("d" "default" plain "%?"
