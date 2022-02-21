@@ -61,7 +61,12 @@
   :config
   (setq lsp-headerline-breadcrumb-enable nil
         lsp-enable-snippet t
-        lsp-lens-enable nil))
+        lsp-lens-enable nil)
+
+  ;; *DANGER*: It warns that you shouldn't use this unless you know
+  ;; the internals of lsp-mode.
+  ;; その時はその時だ
+  (setq lsp-auto-guess-root t))
 
 (use-package lsp-ui
   :commands (lsp-ui-mode))
