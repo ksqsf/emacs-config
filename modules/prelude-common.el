@@ -29,5 +29,7 @@ double consecutive occurrences of that character with TO-CHAR."
       "open"
     "xdg-open"))
 
+(require 'cl-lib)
+
 (provide 'prelude-common)
 

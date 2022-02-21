@@ -274,4 +274,35 @@
 (use-package which-key
   :hook (after-init . which-key-mode))
 
+;; `delete-other-windows' will signal an error when the current window
+;; is a side window.  Hack it so it display the current buffer in a
+;; main window.
+(defun k|window-is-side (&optional win)
+  "Returns non-nil iff WIN is a side window.
+
+WIN means the current window if it is nil."
+  (window-parameter win 'window-side))
+
+(defun k|first-main-window ()
+  "Returns the first window that is not a side window.
+
+The existence of such windows is guaranteed by Emacs."
+  ;; dash.el is much better:
+  ;; (--first (not (k|window-is-side win)) (window-list))
+  (cl-loop for win in (window-list)
+           if (not (k|window-is-side win))
+           return win))
+
+(defun k|delete-other-windows ()
+  "`delete-other-windows' that supports side windows."
+  (interactive)
+  (if (k|window-is-side)
+      (let ((buf (current-buffer))
+            (win (k|first-main-window)))
+        (delete-other-windows win)
+        (switch-to-buffer buf))
+    (delete-other-windows)))
+
+(global-set-key (kbd "C-x 1") #'k|delete-other-windows)
+
 (provide 'prelude-ui)
