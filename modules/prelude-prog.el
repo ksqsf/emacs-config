@@ -71,7 +71,7 @@
 (use-package lsp-ui
   :commands (lsp-ui-mode))
 
-(defvar k|lsp 'lsp)  ;; lsp or eglot
+(defvar k|lsp 'eglot)  ;; lsp or eglot
 
 (defun k|lsp-ensure ()
   (if (eq k|lsp 'lsp)
