@@ -32,6 +32,14 @@ Modified to run vterm instead of shell."
          (shell-buffer (get-buffer default-project-shell-name)))
     (if (and shell-buffer (not current-prefix-arg))
         (pop-to-buffer-same-window shell-buffer)
-      (vterm-other-window (generate-new-buffer-name default-project-shell-name))))))
+      (vterm-other-window (generate-new-buffer-name default-project-shell-name)))))
+
+  ;; project.el should respect .projectile files
+  (defun k|project-override (dir)
+    (let ((override (locate-dominating-file dir ".projectile")))
+    (if override
+      (cons 'vc override)
+      nil)))
+  (add-hook 'project-find-functions #'k|project-override))
 
 (provide 'prelude-project)
