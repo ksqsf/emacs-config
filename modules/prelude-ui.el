@@ -50,12 +50,7 @@
 
   ;; projectile undesirably resolves symlinks. This is a workaround.
   (when k|mac
-    (use-package find-file-in-project
-      :defer t
-      :commands (ffip-project-root)
-      :config
-      (add-to-list 'ffip-project-file ".projectile"))
-    (setq doom-modeline-project-detection 'ffip)))
+    (setq doom-modeline-project-detection 'project)))
 
 ;; I'm the winner ;-)
 (use-package winner
