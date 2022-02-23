@@ -34,6 +34,9 @@
 ;; - Highlighting for more commands
 ;; - Limited support for SyGuS
 
+(eval-when-compile
+  (require 'cl-lib))
+
 ;;; Code:
 (defgroup smtlib2 nil
   "SMTLib2 Mode"
@@ -110,11 +113,8 @@
            (define-sort 1)
            (ite 2)
            (synth-fun 3))))
-  (dolist (el l)
-    (put (car el) 'common-lisp-indent-function
-         (if (symbolp (cdr el))
-             (get (cdr el) 'common-lisp-indent-function)
-           (car (cdr el))))))
+  (cl-loop for (keyword indent) in l
+           do  (put keyword 'common-lisp-indent-function indent)))
 
 
 ;; mode-command and utility functions
