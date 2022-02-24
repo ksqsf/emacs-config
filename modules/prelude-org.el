@@ -264,6 +264,32 @@
 
 (use-package org-roam-ui
   :after (org-roam)
-  :commands (org-roam-ui-mode org-roam-ui-open))
+  :commands (org-roam-ui-mode org-roam-ui-open)
+  :config
+  ;; pull in fix from
+  ;; https://github.com/org-roam/org-roam-ui/pull/214
+  (defun org-roam-ui--on-msg-open-node (data)
+  "Open a node when receiving DATA from the websocket."
+  (let* ((id (alist-get 'id data))
+          (node (org-roam-node-from-id id))
+          (pos (org-roam-node-point node))
+          (buf (find-file-noselect (org-roam-node-file node))))
+    (run-hook-with-args 'org-roam-ui-before-open-node-functions id)
+    (unless (window-live-p org-roam-ui--window)
+      (if-let ((windows (window-list))
+               (or-windows (seq-filter
+                            (lambda (window)
+                              (org-roam-buffer-p
+                               (window-buffer window))) windows))
+               (newest-window (car
+                               (seq-sort-by
+                                #'window-use-time #'> or-windows))))
+          (setq org-roam-ui--window newest-window)
+        (split-window-horizontally)
+        (setq org-roam-ui--window (frame-selected-window))))
+    (set-window-buffer org-roam-ui--window buf)
+    (select-window org-roam-ui--window)
+    (goto-char pos)
+    (run-hook-with-args 'org-roam-ui-after-open-node-functions id))))
 
 (provide 'prelude-org)
