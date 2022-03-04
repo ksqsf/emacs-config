@@ -21,15 +21,13 @@
   ;; (add-hook 'org-mode-hook #'valign-mode)
 
   ;; Maybe prettify?
-  (setq org-startup-indented t
+  (setq org-startup-indented nil
         org-pretty-entities t
         org-hide-emphasis-markers t
         org-startup-with-inline-images t
         org-image-actual-width '(300))
-  (use-package org-superstar
-    :hook (org-mode . org-superstar-mode)
-    :config
-    (setq org-superstar-special-todo-items t))
+  (use-package org-modern
+    :hook (org-mode . org-modern-mode))
   (defun prelude/set-line-spacing ()
     (setq line-spacing 0.2))
 
@@ -77,6 +75,10 @@
   (define-advice texmathp (:before-until () org-cdlatex-fix)
     "In org-cdlatex-mode, call `org-inside-LaTeX-fragment-p'."
     (and org-cdlatex-mode (org-inside-LaTeX-fragment-p))))
+
+(use-package worf
+  :disabled
+  :hook (org-mode . worf-mode))
 
 (use-package org-tempo
   :ensure nil
@@ -228,8 +230,7 @@
         time-stamp-start "#\\+lastmod: [\t]*")
   (add-hook 'org-mode-hook
             (lambda ()
-              (setq company-backends '(company-capf company-yasnippet company-dabbrev))
-              (company-mode t))))
+              (setq company-backends '(company-capf company-yasnippet company-dabbrev)))))
 
 (use-package org-roam-bibtex
   :after (org-roam)
