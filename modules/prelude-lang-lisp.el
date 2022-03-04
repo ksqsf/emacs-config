@@ -17,12 +17,17 @@
   :mode (("\\.lisp\\'" . lisp-mode)))
 
 (eval-after-load 'scheme
-  (setq scheme-program-name "racket"))
+  (setq scheme-program-name "guile"))
 
 (use-package geiser
-  :mode (("\\.ss\\'" . geiser-mode))
+  :mode (("\\.ss\\'" . scheme-mode))
+  :hook ((scheme-mode . turn-on-geiser-mode)
+         (geiser-repl-mode . electric-pair-local-mode))
+  :custom
+  (geiser-default-implementation nil)
   :config
-  (setq geiser-default-implementation 'racket))
+  (use-package geiser-guile)
+  (use-package geiser-racket))
 
 
 ;;
