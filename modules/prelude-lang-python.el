@@ -10,13 +10,12 @@
   (setq python-shell-interpreter-args "-i")
   :hook
   (python-mode . k|lsp-ensure)
-  (python-mode . company-mode)
   :bind (:map python-mode-map
               ("C-x C-e" . python-shell-send-statement))
   :config
-  (add-hook 'inferior-python-mode-hook
-            (lambda ()
-              (company-mode t)))
+  ;; (add-hook 'inferior-python-mode-hook
+  ;;           (lambda ()
+  ;;             (company-mode t)))
   (when (eq k|lsp 'lsp)
     (use-package lsp-pyright)))
 

@@ -12,20 +12,20 @@
 (setq show-paren-delay 0.0)
 (setq tab-always-indent 'complete)
 
-(use-package company
-  :commands (company-mode)
-  :bind (:map company-active-map
-              (("<tab>" . company-complete-selection)
-               ("<return>" . nil)
-               ("RET" . nil)))
-  :config
-  (setq company-idle-delay 0.15))
+;; (use-package company
+;;   :commands (company-mode)
+;;   :bind (:map company-active-map
+;;               (("<tab>" . company-complete-selection)
+;;                ("<return>" . nil)
+;;                ("RET" . nil)))
+;;   :config
+;;   (setq company-idle-delay 0.15))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode)
-  :config
-  ;; WARNING: Don't use all-the-icons!!
-  (setq company-box-icons-alist 'company-box-icons-idea))
+;; (use-package company-box
+;;   :hook (company-mode . company-box-mode)
+;;   :config
+;;   ;; WARNING: Don't use all-the-icons!!
+;;   (setq company-box-icons-alist 'company-box-icons-idea))
 
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode)

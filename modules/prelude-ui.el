@@ -309,4 +309,12 @@ The existence of such windows is guaranteed by Emacs."
 
 (global-set-key (kbd "C-x 1") #'k|delete-other-windows)
 
+;; UI for *completions* and capf
+(use-package corfu
+  :hook (after-init . corfu-global-mode)
+  :custom
+  (corfu-auto t)
+  (corfu-quit-no-match t)
+  (corfu-preview-current t))
+
 (provide 'prelude-ui)

@@ -29,7 +29,7 @@ Mode."
                           (c++-mode . "stroustrup")
                           (other . "gnu")))
   (add-hook 'c-mode-common-hook #'k|lsp-ensure)
-  (add-hook 'c-mode-common-hook #'company-mode)
+  ;; (add-hook 'c-mode-common-hook #'company-mode)
   (add-hook 'c-mode-common-hook #'subword-mode)
   (add-hook 'c-mode-common-hook #'smartparens-mode)
   (add-hook 'c-mode-common-hook #'(lambda () (rainbow-mode 0)))

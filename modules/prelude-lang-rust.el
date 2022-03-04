@@ -9,7 +9,7 @@
         rustic-analyzer-command '("~/.local/bin/rust-analyzer"))
   (define-key rustic-mode-map (kbd "[") (k|double-tap-to-insert ?\())
   (define-key rustic-mode-map (kbd "]") (k|double-tap-to-insert ?\)))
-  (add-hook 'rustic-mode-hook #'company-mode)
+  ;; (add-hook 'rustic-mode-hook #'company-mode)
   (add-hook 'rustic-mode-hook #'subword-mode)
   (add-hook 'rustic-mode-hook #'electric-pair-mode)
 
