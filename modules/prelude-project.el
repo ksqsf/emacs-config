@@ -9,8 +9,9 @@
 
   :config
   (setq projectile-completion-system 'auto)
-  (setq projectile-enable-caching nil)
-  (setq projectile-switch-project-action #'projectile-find-file)
+  (setq projectile-enable-caching t)
+  (setq projectile-switch-project-action #'projectile-commander)
+  (setq projectile-find-dir-includes-top-level t)
 
   (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm))
 
