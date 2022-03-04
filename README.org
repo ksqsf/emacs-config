@@ -62,12 +62,6 @@ These modifications are generally in =prelude-core.el= and
 
 User-*very*-visible modifications are listed here.
 
-*** Modal editing
-
-By default, [[https://github.com/meow-edit/meow][Meow]] is used to provide modal editing experience. See
-=prelude-meow.el= for custom keybindings, especially ones in the leader
-map.
-
 *** Expand region
 
 =C-SPC C-SPC= to expand the current region semantically.

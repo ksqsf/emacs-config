@@ -32,7 +32,8 @@
 (require 'prelude-core)
 (require 'prelude-ui)
 
-(require 'prelude-meow)
+;; (require 'prelude-meow)
+;; (require 'prelude-evil)
 ;; (require 'prelude-nix)
 
 (require 'prelude-completion)
