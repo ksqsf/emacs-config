@@ -234,6 +234,10 @@
 ;; save buffers when focus out
 (add-hook 'focus-out-hook #'(lambda () (save-some-buffers t)))
 
+;; Enable on-the-fly editing enhancements
+(electric-indent-mode +1)
+(electric-pair-mode +1)
+
 ;; Enable orderless completion style
 (use-package orderless
   :custom
