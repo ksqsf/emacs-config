@@ -6,7 +6,8 @@
   :config
   (setq rustic-lsp-client k|lsp
         rustic-lsp-server 'rust-analyzer
-        rustic-analyzer-command '("~/.local/bin/rust-analyzer"))
+        rustic-analyzer-command '("rust-analyzer")
+        rustic-enable-detached-file-support t)
   (define-key rustic-mode-map (kbd "[") (k|double-tap-to-insert ?\())
   (define-key rustic-mode-map (kbd "]") (k|double-tap-to-insert ?\)))
   ;; (add-hook 'rustic-mode-hook #'company-mode)
