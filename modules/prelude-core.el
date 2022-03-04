@@ -234,4 +234,10 @@
 ;; save buffers when focus out
 (add-hook 'focus-out-hook #'(lambda () (save-some-buffers t)))
 
+;; Enable orderless completion style
+(use-package orderless
+  :custom
+  (completion-styles '(orderless flex))
+  (orderless-component-separator " +\\|[-/]"))
+
 (provide 'prelude-core)
