@@ -51,8 +51,8 @@
 
   ;; Formulae preview
   (setq org-preview-latex-default-process 'dvisvgm)
-  (when (not k|mac)
-    (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5)))
+  (when k|mac
+    (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 
   ;; Babel
   (org-babel-do-load-languages
