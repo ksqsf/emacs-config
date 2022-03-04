@@ -16,18 +16,6 @@
   :commands (sly sly-mode)
   :mode (("\\.lisp\\'" . lisp-mode)))
 
-(use-package paredit
-  :diminish "Ⓟ"
-  :hook ((lisp-mode emacs-lisp-mode lisp-interaction-mode) . paredit-mode)
-  :bind (("M-<right>" . paredit-forward-slurp-sexp)
-         ("M-<left>" . paredit-backward-slurp-sexp)
-         ("M-<up>" . paredit-splice-sexp-killing-backward)
-         ("M-k" . paredit-kill)
-         ("M-a" . paredit-backward)
-         ("M-e" . paredit-forward))
-  :config
-  (add-hook 'lisp-interaction-mode-hook #'(lambda () (define-key paredit-mode-map "\C-j" nil))))
-
 (eval-after-load 'scheme
   (setq scheme-program-name "racket"))
 
