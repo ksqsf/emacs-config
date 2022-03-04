@@ -37,7 +37,9 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl))
+(eval-when-compile
+  (require 'cl)
+  (require 'erc-backend))
 
 (defvar erc-sasl-use-sasl t
   "Set to nil to disable SASL auth")
@@ -51,8 +53,8 @@
 current session"
   (and erc-sasl-use-sasl
        (boundp 'erc-session-server)
-       (loop for re in erc-sasl-server-regexp-list
-             thereis (integerp (string-match re erc-session-server)))))
+       (cl-loop for re in erc-sasl-server-regexp-list
+                thereis (integerp (string-match re erc-session-server)))))
 
 (define-erc-response-handler (CAP)
   "Client capability framework is used to request SASL auth, need
