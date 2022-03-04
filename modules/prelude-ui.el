@@ -165,6 +165,9 @@
     (dedicated . t))
    ("^HELM .*"
     (display-buffer-at-bottom))
+   ("-quickrun\\*"
+    nil
+    nil)
 
    ;; Below Selected
    ("^\\*\\(\\(e?shell\\)\\|\\(vterm\\)\\)"
@@ -214,10 +217,11 @@
 
 ;; Pop-up windows
 (use-package popper
+  :defer 1
   :bind (("C-`" . popper-toggle-latest)
          ("M-`" . popper-cycle)
          ("C-M-`" . popper-toggle-type))
-  :init
+  :config
   (setq popper-reference-buffers
         '("\\*Messages\\*"
           "Output\\*$"
