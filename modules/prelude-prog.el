@@ -71,12 +71,17 @@
 (use-package lsp-ui
   :commands (lsp-ui-mode))
 
+(defvar k|auto-lsp t
+  "Whether to start lsp automatically on all supported languages.")
 (defvar k|lsp 'eglot)  ;; lsp or eglot
 
 (defun k|lsp-ensure ()
-  (if (eq k|lsp 'lsp)
-      (lsp)
-    (eglot-ensure)))
+  (catch 'foo
+    (when (not k|auto-lsp)
+      (throw 'foo nil))
+    (if (eq k|lsp 'lsp)
+        (lsp)
+      (eglot-ensure))))
 
 
 (use-package dap-mode
