@@ -31,7 +31,7 @@ Mode."
   (add-hook 'c-mode-common-hook #'k|lsp-ensure)
   ;; (add-hook 'c-mode-common-hook #'company-mode)
   (add-hook 'c-mode-common-hook #'subword-mode)
-  (add-hook 'c-mode-common-hook #'smartparens-mode)
+  ;; (add-hook 'c-mode-common-hook #'smartparens-mode)
   (add-hook 'c-mode-common-hook #'(lambda () (rainbow-mode 0)))
   (define-key c-mode-map (kbd "<f5>") #'compile)
   (define-key c++-mode-map (kbd "<f5>") #'compile)
@@ -40,7 +40,10 @@ Mode."
 
   (use-package ccls
     :config
-    (setq ccls-sem-highlight-method 'font-lock)))
+    (setq ccls-sem-highlight-method 'font-lock)
+    (with-eval-after-load 'eglot
+      (add-to-list 'eglot-server-programs '(c++-mode . ("ccls")))
+      (add-to-list 'eglot-server-programs '(c-mode . ("ccls"))))))
 
 (use-package modern-cpp-font-lock
   :hook ((c++-mode . modern-c++-font-lock-mode)))
