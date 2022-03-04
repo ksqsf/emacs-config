@@ -130,6 +130,28 @@ I use paredit for the Lisp family. My preferred keybindings are:
 "Sentence" is the metaphor for "expression". Navigation by word is
 useful, so I won't override it.
 
+*** LSP
+
+I've fully embraced LSP! (Used to be a skeptic.)
+
+- =eglot= as the LSP client. (Easier to hack than =lsp-mode=.)
+- =corfu= as the universal completion frontend.
+
+
+"Blessed" LSP servers:
+
+| Language | Server        | Integration  |
+|----------+---------------+--------------|
+| Haskell  | [[https://github.com/haskell/haskell-language-server][HLS]]           | (not needed) |
+| Rust     | [[https://github.com/rust-analyzer/rust-analyzer][rust-analyzer]] | [[https://github.com/brotzeit/rustic][Rustic]]       |
+| C/C++    | [[https://github.com/MaskRay/ccls][ccls]]          | (not needed) |
+| Python   | [[https://github.com/microsoft/pyright][PyRight]]       | (not needed) |
+| LaTeX    | [[https://github.com/latex-lsp/texlab][texlab]]        | (not needed) |
+
+These servers can be installed via Homebrew or Nix.  Eglot is
+intelligent enough to work with any server without special
+configuration.
+
 ** Unlimited Lisp Works
 This repo hosts some other Emacs Lisp works made by me for my own
 convenience. It might be useful for you, too, so I made a list here
