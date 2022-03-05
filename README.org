@@ -25,8 +25,9 @@ My primary goals are
 - Prefer built-in functionality to third-party packages
 
 
-I don't strive to achieve eye-candy and powerfulness, but they are
-good, and may be considered in the future.
++I don't strive to achieve eye-candy and powerfulness, but they are
+good, and may be considered in the future.+ I think my Emacs now is
+beautiful AND powerful! ( ^ ω ^ )
 
 ** Structure
 
