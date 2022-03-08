@@ -1,12 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
-(use-package selectrum
-  :hook (after-init . selectrum-mode)
-  :config
-  (use-package selectrum-prescient
-    :config
-    (selectrum-prescient-mode +1)
-    (prescient-persist-mode +1)))
+(use-package vertico
+  :hook (after-init . vertico-mode)
+  :hook (vertico-mode . vertico-reverse-mode))
 
 (use-package marginalia
   :after (selectrum)
@@ -94,6 +90,7 @@
   (setq read-file-name-completion-ignore-case t)
   (setq completion-styles '(basic partial-completion flex))
   (setq completion-category-defaults nil)
-  (setq completions-format 'vertical))
+  (setq completions-format 'vertical)
+  (setq-default completion-at-point-functions ))
 
 (provide 'prelude-completion)
