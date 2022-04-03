@@ -238,10 +238,5 @@
 (electric-indent-mode +1)
 (electric-pair-mode +1)
 
-;; Enable orderless completion style
-(use-package orderless
-  :custom
-  (completion-styles '(orderless flex))
-  (orderless-component-separator " +\\|[-/]"))
 
 (provide 'prelude-core)

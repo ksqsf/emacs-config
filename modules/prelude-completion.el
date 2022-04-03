@@ -87,9 +87,19 @@
   (setq enable-recursive-minibuffers t)
   (setq read-buffer-completion-ignore-case t)
   (setq read-file-name-completion-ignore-case t)
-  (setq completion-styles '(basic partial-completion flex))
   (setq completion-category-defaults nil)
   (setq completions-format 'vertical)
   (setq-default completion-at-point-functions ))
+
+;; Enable orderless completion style
+(use-package orderless
+  :custom
+  (completion-styles '(orderless))
+  (orderless-component-separator " +\\|[-/]")
+  (orderless-matching-styles
+   '(orderless-literal
+     orderless-prefixes
+     orderless-initialism
+     orderless-regexp)))
 
 (provide 'prelude-completion)
