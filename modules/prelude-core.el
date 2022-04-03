@@ -241,5 +241,8 @@
 ;; One dot = One sentence.
 (setq sentence-end-double-space nil)
 
+;; Replace isearch with ctrlf.
+(use-package ctrlf
+  :hook (after-init . ctrlf-mode))
 
 (provide 'prelude-core)
