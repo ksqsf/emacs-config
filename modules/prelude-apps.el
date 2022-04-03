@@ -138,7 +138,11 @@
   ;; (add-hook 'projectile-after-switch-project-hook #'-treemacs-add-project-to-workspace-or-switch)
   ;; (add-hook 'buffer-list-update-hook #'-treemacs-locate-project-if-in-workspace)
 
-  (use-package treemacs-projectile))
+  (use-package treemacs-projectile)
+
+  (use-package treemacs-all-the-icons
+    :config
+    (treemacs-load-theme "all-the-icons")))
 
 (use-package pdf-tools
   :disabled
