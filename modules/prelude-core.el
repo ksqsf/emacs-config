@@ -238,5 +238,8 @@
 (electric-indent-mode +1)
 (electric-pair-mode +1)
 
+;; One dot = One sentence.
+(setq sentence-end-double-space nil)
+
 
 (provide 'prelude-core)
