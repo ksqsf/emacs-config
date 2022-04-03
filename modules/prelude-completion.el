@@ -1,8 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 (use-package vertico
-  :hook (after-init . vertico-mode)
-  :hook (vertico-mode . vertico-reverse-mode))
+  :hook (after-init . vertico-mode))
 
 (use-package marginalia
   :after (selectrum)
@@ -84,7 +83,7 @@
   :ensure nil
   :config
   (setq read-answer-short t)
-  (setq resize-mini-windows t)
+  (setq resize-mini-windows 'grow-only)
   (setq enable-recursive-minibuffers t)
   (setq read-buffer-completion-ignore-case t)
   (setq read-file-name-completion-ignore-case t)
