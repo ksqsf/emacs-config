@@ -24,10 +24,10 @@ double consecutive occurrences of that character with TO-CHAR."
        (self-insert-command cnt))))
 
 (defconst k|default-opener
-  "The default file opener on the current system. (No Windows support.)"
   (if k|mac
       "open"
-    "xdg-open"))
+    "xdg-open")
+  "The default file opener on the current system. (No Windows support.)")
 
 (require 'cl-lib)
 
