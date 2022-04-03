@@ -321,4 +321,11 @@ The existence of such windows is guaranteed by Emacs."
   (corfu-quit-no-match t)
   (corfu-preview-current t))
 
+(use-package kind-icon
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default)
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
 (provide 'prelude-ui)
