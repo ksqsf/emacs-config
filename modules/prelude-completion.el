@@ -4,7 +4,7 @@
   :hook (after-init . vertico-mode))
 
 (use-package marginalia
-  :after (selectrum)
+  :after (vertico)
   :config
   (marginalia-mode))
 
