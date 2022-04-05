@@ -242,8 +242,9 @@
 ;; One dot = One sentence.
 (setq sentence-end-double-space nil)
 
-;; Replace isearch with ctrlf.
-(use-package ctrlf
-  :hook (after-init . ctrlf-mode))
+;; Enhance isearch.
+(use-package anzu
+  :config
+  (global-anzu-mode))
 
 (provide 'prelude-core)
