@@ -44,6 +44,7 @@
 
 ;; Mode line
 (use-package doom-modeline
+  :disabled
   :hook ((after-init . doom-modeline-mode))
   :init
   (setq doom-modeline-minor-modes nil)
@@ -51,6 +52,13 @@
   ;; projectile undesirably resolves symlinks. This is a workaround.
   (when k|mac
     (setq doom-modeline-project-detection 'project)))
+
+(use-package moody
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode)
+  (moody-replace-eldoc-minibuffer-message-function))
 
 ;; I'm the winner ;-)
 (use-package winner
@@ -109,6 +117,7 @@
                                        "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
                                        "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
                                        "\\\\" "://" "/\\" "\\/"))
+  (ligature-set-ligatures 'markdown-mode '("[ ]" "[X]"))
   (global-ligature-mode t))
 
 ;; prioritize vertical side windows
@@ -264,6 +273,7 @@
 
 ;; Hideshow
 (add-hook 'prog-mode-hook #'hs-minor-mode)
+(diminish 'hs-minor-mode "")
 
 ;; Provide mixed-pitch faces
 (use-package mixed-pitch
@@ -280,6 +290,7 @@
 ;; I don't really like which-key, but it's helpful when it's
 ;; helpful...  *wink*
 (use-package which-key
+  :diminish ""
   :hook (after-init . which-key-mode))
 
 ;; `delete-other-windows' will signal an error when the current window

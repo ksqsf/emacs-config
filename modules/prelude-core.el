@@ -227,6 +227,7 @@
 
 ;; enable yasnippet everywhere
 (use-package yasnippet
+  :diminish (yas-minor-mode . "")
   :commands (yas-global-mode yas-minor-mode)
   :hook (after-init . yas-global-mode)
   :config
@@ -244,6 +245,7 @@
 
 ;; Enhance isearch.
 (use-package anzu
+  :diminish ""
   :config
   (global-anzu-mode))
 
