@@ -14,7 +14,9 @@
 
 (use-package sly
   :commands (sly sly-mode)
-  :mode (("\\.lisp\\'" . lisp-mode)))
+  :mode (("\\.lisp\\'" . lisp-mode))
+  :config
+  (remove-hook 'lisp-mode-hook 'sly-editing-mode))
 
 (eval-after-load 'scheme
   (setq scheme-program-name "guile"))
