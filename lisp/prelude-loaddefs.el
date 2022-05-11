@@ -23,7 +23,7 @@ Turn calc into an editor for rendered LaTeX equations.
 ;;;### (autoloads nil "erc-sasl" "erc-sasl.el" (0 0 0 0))
 ;;; Generated autoloads from erc-sasl.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "erc-sasl" '("erc-sasl-")))
+(register-definition-prefixes "erc-sasl" '("erc-sasl-"))
 
 ;;;***
 
@@ -59,6 +59,27 @@ If ARG is greater than zero then this mode will be turned on.
 \(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "highlight-tail" '("highlight-tail-")))
+
+;;;***
+
+;;;### (autoloads nil "lojban" "lojban.el" "f9c2450063fd9c4de58979c0f25806a4")
+;;; Generated autoloads from lojban.el
+
+(autoload 'zbalermorna-setup "lojban" "\
+Set up composition rules for zbalermonrna." t nil)
+
+(autoload 'lojban-setup "lojban" "\
+Set up the Lojban language environment." t nil)
+
+(set-language-info-alist "Lojban" '((charset unicode) (coding-system utf-8) (coding-priority utf-8) (input-method . "zbalermorna") (documentation . "Using the zbalermorna script and its associated input method.") (sample-text . "         ") (setup-function . lojban-setup)))
+
+;;;### (autoloads "actual autoloads are elsewhere" "lojban" "lojban.el"
+;;;;;;  (25211 64602 822025 743000))
+;;; Generated autoloads from lojban.el
+
+(register-definition-prefixes "lojban" '("zbalermorna-"))
+
+;;;***
 
 ;;;***
 
