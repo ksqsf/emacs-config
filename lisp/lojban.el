@@ -29,14 +29,40 @@
 ;;    https://github.com/jackhumbert/zbalermorna/tree/master/fonts/.
 ;;
 ;;    (OPTIONAL) If you have other fonts that conflict with
-;;    zbalermorna codepoints, consider using `zbalermorna-font-setup'.
+;;    zbalermorna codepoints, consider using setting
+;;    `zbalermorna-font'.
 ;;
 ;; 2. Call `zbalermorna-setup', or use <C-x RET l> and choose Lojban,
 ;;    at least once.
 
+;; To globally enable zbalermorna, consider adding config to your init
+;; file:
+;;
+;;     (require 'lojban)
+;;     (setq zbalermorna-font "Crisa")
+;;     (zbalermorna-setup)
+
 ;;; Code:
 
 (require 'quail)
+
+(defgroup 'lojban nil
+  "The customization group for Lojban, a logical language.")
+
+(defcustom zbalermorna-font ""
+  "The default font used for zbalermona. If empty, the font will be
+chosen by Emacs automatically.
+
+The change immediately takes effect after you modify it using the
+Custom interface."
+  :type 'string
+  :group 'lojban
+  :set 'zbalermorna--set-font)
+
+(defun zbalermorna--set-font (symbol value)
+  (set-default symbol value)
+  (when (not (string-empty-p value))
+    (zbalermorna-font-setup value)))
 
 (quail-define-package
  "zbalermorna" "Lojban" "" t
@@ -93,6 +119,10 @@ Example: (zbalermorna-font-setup \"Crisa\")"
 (defun zbalermorna-setup ()
   "Set up composition rules for zbalermonrna."
   (interactive)
+
+  (when (not (string= zbalermorna-font ""))
+    (zbalermorna-font-setup zbalermorna-font))
+
   (dolist (v '(? ? ? ? ? ? ? ? ?))
     (put-char-code-property v 'canonical-combining-class (encode-composition-rule '(tc . bc))))
 
