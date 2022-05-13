@@ -326,7 +326,7 @@ The existence of such windows is guaranteed by Emacs."
 
 ;; UI for *completions* and capf
 (use-package corfu
-  :hook (after-init . corfu-global-mode)
+  :hook (after-init . global-corfu-mode)
   :custom
   (corfu-auto t)
   (corfu-quit-no-match t)
