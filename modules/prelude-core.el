@@ -104,6 +104,7 @@
         aw-scope 'frame))
 
 (use-package windmove
+  :ensure nil
   :bind (("C-<left>" . windmove-left)
          ("C-<right>" . windmove-right)
          ("C-<up>" . windmove-up)
@@ -111,6 +112,7 @@
 
 ;; Recentf
 (use-package recentf
+  :ensure nil
   :hook ((after-init . recentf-mode))
   :config
   (setq recentf-auto-cleanup 'never)
@@ -185,6 +187,7 @@
 
 ;; Auto insert
 (use-package autoinsert
+  :ensure nil
   :defer 1)
 
 ;; Expand region
