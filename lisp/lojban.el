@@ -46,8 +46,21 @@
 
 (require 'quail)
 
-(defgroup 'lojban nil
+(defun zbalermorna-font-setup (font-family)
+  "Specify FONT-FAMILY to be used for the Unicode range of zbalermorna.
+
+The fonts can be downloaded from https://github.com/jackhumbert/zbalermorna/tree/master/fonts/.
+
+Example: (zbalermorna-font-setup \"Crisa\")"
+  (set-fontset-font t '(#xed80 . #xedbf) font-family))
+
+(defgroup lojban nil
   "The customization group for Lojban, a logical language.")
+
+(defun zbalermorna--set-font (symbol value)
+  (set-default symbol value)
+  (when (not (string-empty-p value))
+    (zbalermorna-font-setup value)))
 
 (defcustom zbalermorna-font ""
   "The default font used for zbalermona. If empty, the font will be
@@ -58,11 +71,6 @@ Custom interface."
   :type 'string
   :group 'lojban
   :set 'zbalermorna--set-font)
-
-(defun zbalermorna--set-font (symbol value)
-  (set-default symbol value)
-  (when (not (string-empty-p value))
-    (zbalermorna-font-setup value)))
 
 (quail-define-package
  "zbalermorna" "Lojban" "" t
@@ -107,23 +115,15 @@ ligatures. The input method will not generate this character.")
  ("q" 60842)
  ("w" 60843))
 
-(defun zbalermorna-font-setup (font-family)
-  "Specify FONT-FAMILY to be used for the Unicode range of zbalermorna.
-
-The fonts can be downloaded from https://github.com/jackhumbert/zbalermorna/tree/master/fonts/.
-
-Example: (zbalermorna-font-setup \"Crisa\")"
-  (set-fontset-font t '(#xed80 . #xedbf) font-family))
-
 ;;;###autoload
 (defun zbalermorna-setup ()
-  "Set up composition rules for zbalermonrna."
+  "Set up the composition rules for zbalermonrna."
   (interactive)
 
   (when (not (string= zbalermorna-font ""))
     (zbalermorna-font-setup zbalermorna-font))
 
-  (dolist (v '(? ? ? ? ? ? ? ? ?))
+  (dolist (v (number-sequence #xeda0 #xeda9))
     (put-char-code-property v 'canonical-combining-class (encode-composition-rule '(tc . bc))))
 
   (let* ((c "\\([\uED80-\uED97]\\|\uEDAA\\|\uEDAB\\)")
@@ -131,12 +131,10 @@ Example: (zbalermorna-font-setup \"Crisa\")"
          (dot "\uED89")
          (h "\uED8A")
          (pattern1 (concat c v))
-         (pattern2 (concat v h v))
-         (pattern3 (concat v h v v)))
+         (pattern2 (concat v h v)))
     (set-char-table-range
      composition-function-table '(#xeda0 . #xeda9)
-     (list (vector pattern3 3 #'compose-gstring-for-graphic)
-           (vector pattern2 2 #'compose-gstring-for-graphic)
+     (list (vector pattern2 2 #'compose-gstring-for-graphic)
            (vector pattern1 1 #'compose-gstring-for-graphic)
            [nil 0 font-shape-gstring]))))
 
