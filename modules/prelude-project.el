@@ -9,7 +9,7 @@
 
   :config
   (setq projectile-completion-system 'auto)
-  (setq projectile-enable-caching t)
+  (setq projectile-enable-caching nil)
   (setq projectile-switch-project-action #'projectile-commander)
   (setq projectile-find-dir-includes-top-level t)
 
