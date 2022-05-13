@@ -72,17 +72,33 @@
 (use-package lsp-ui
   :commands (lsp-ui-mode))
 
+(use-package lsp-bridge
+  :load-path "lisp/lsp-bridge/"
+  :commands (lsp-bridge-mode)
+  :config
+  (require 'lsp-bridge-orderless)
+  (require 'lsp-bridge-icon))
+
 (defvar k|auto-lsp t
   "Whether to start lsp automatically on all supported languages.")
-(defvar k|lsp 'eglot)  ;; lsp or eglot
+(defvar k|lsp 'lsp-bridge
+  "The LSP client to use.
+
+One of `lsp-mode', `eglot', or `lsp-bridge'.")
 
 (defun k|lsp-ensure ()
+  (interactive)
   (catch 'foo
-    (when (not k|auto-lsp)
-      (throw 'foo nil))
-    (if (eq k|lsp 'lsp)
-        (lsp)
-      (eglot-ensure))))
+    (cond ((not k|auto-lsp)
+           (throw 'foo nil))
+          ((eq k|lsp 'lsp-bridge)
+           (lsp-bridge-mode)
+           ;; Let lsp-bridge control when popups should be displayed.
+           (setq corfu-auto nil))
+          ((eq k|lsp 'lsp-mode)
+           (lsp))
+          ((eq k|lsp 'eglot)
+           (eglot-ensure)))))
 
 
 (use-package dap-mode

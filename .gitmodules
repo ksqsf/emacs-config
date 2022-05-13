@@ -4,3 +4,6 @@
 [submodule "lisp/emacs-application-framework"]
 	path = lisp/emacs-application-framework
 	url = https://github.com/emacs-eaf/emacs-application-framework.git
+[submodule "lisp/lsp-bridge"]
+	path = lisp/lsp-bridge
+	url = https://github.com/manateelazycat/lsp-bridge
