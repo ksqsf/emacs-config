@@ -50,7 +50,8 @@
   :config
   (setq eglot-confirm-server-initiated-edits nil
         eglot-autoreconnect 60
-        eglot-autoshutdown t))
+        eglot-autoshutdown t)
+  (fset #'eglot--snippet-expansion-fn #'ignore))
 
 ;;
 ;; lsp-mode is powerful and cool!  but it has severe performance
