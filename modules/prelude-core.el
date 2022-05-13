@@ -210,7 +210,7 @@
 (global-set-key (kbd "C-w") #'k/kill-region-or-backward-word)
 
 ;; auth sources
-(setq auth-sources '("~/.netrc"))
+(setq auth-sources '("~/.authinfo" "~/.netrc"))
 
 ;; swap C-h p and C-h P
 (global-set-key (kbd "C-h p") #'describe-package)
