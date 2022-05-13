@@ -209,7 +209,7 @@
 (defun drop-down-term ()
   "Open a drop-down terminal in the same directory as the current file."
   (interactive)
-  (use-package vterm)
+  (use-package vterm :ensure t)
   (let ((buffer (get-buffer-create "*dd-term*"))
         win)
     (with-current-buffer buffer
@@ -236,7 +236,8 @@
           "Output\\*$"
           "\\*Async Shell Command\\*"
           help-mode
-          compilation-mode))
+          compilation-mode
+          interactive-haskell-mode))
   (setq popper-group-function nil)
   (popper-mode +1)
   (popper-echo-mode +1))
