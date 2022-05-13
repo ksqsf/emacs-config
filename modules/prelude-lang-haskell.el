@@ -153,10 +153,10 @@ This mode is not reliable: the ghc version will probably not match that of the f
     (cd "/tmp")
     (mkdir package-name t)
     (cd (concat "/tmp/" package-name))
-    (shell-command "cabal init")
+    (shell-command "cabal init --lib --minimal --overwrite")
     (with-temp-buffer
       (write-file ".projectile" nil))
     (cd old-pwd))
-  (find-file-other-window (concat "/tmp/" package-name "/app/Main.hs")))
+  (find-file (concat "/tmp/" package-name "/src/MyLib.hs")))
 
 (provide 'prelude-lang-haskell)
