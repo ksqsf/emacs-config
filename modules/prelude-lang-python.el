@@ -5,9 +5,9 @@
   :defer t
   :init
   (setq doom-modeline-env-python-executable "python3")
-  (setq python-shell-interpreter "python3")
+  (setq python-shell-interpreter "ipython3")
+  (setq python-shell-interpreter-args "--simple-prompt")
   (setq gud-pdb-command-name "python3 -m pdb")
-  (setq python-shell-interpreter-args "-i")
   :hook
   (python-mode . k|lsp-ensure)
   :bind (:map python-mode-map
