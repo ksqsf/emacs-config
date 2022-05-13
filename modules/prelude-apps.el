@@ -160,16 +160,6 @@
   :commands (dash-at-point)
   :bind (("C-c C-d" . dash-at-point)))
 
-(use-package gnus
-  :ensure nil
-  :config
-  (setq gnus-select-method '(nntp "news.gmane.io"))
-  (setq gnus-thread-sort-functions
-        '(gnus-thread-sort-by-most-recent-number
-          gnus-thread-sort-by-subject
-          (not gnus-thread-sort-by-total-score)
-          gnus-thread-sort-by-most-recent-date)))
-
 (use-package eaf
   :disabled ;; Does not work...
   :commands (eaf-open)
