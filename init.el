@@ -60,6 +60,7 @@
 
 (require 'prelude-help)
 (require 'prelude-os)
+(require 'prelude-mail)
 (require 'prelude-apps)
 (require 'prelude-erc)
 

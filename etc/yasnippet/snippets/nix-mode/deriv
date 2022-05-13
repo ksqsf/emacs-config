@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: deriv
+# key: deriv
+# --
+{ pkgs ? import <nixpkgs> {} }:
+with pkgs; stdenv.mkDerivation {
+  pname = "$1";
+  version = "$2";
+  src = ./.;
+  buildInputs = [ $3 ];
+}
