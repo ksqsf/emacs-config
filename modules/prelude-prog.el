@@ -66,7 +66,7 @@
 
 (defvar k|auto-lsp t
   "Whether to start lsp automatically on all supported languages.")
-(defvar k|lsp 'lsp-bridge
+(defvar k|lsp 'eglot
   "The LSP client to use.
 
 One of `lsp-mode', `eglot', or `lsp-bridge'.")
