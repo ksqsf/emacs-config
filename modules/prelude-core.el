@@ -60,10 +60,11 @@
 (defalias 'list-buffers 'ibuffer)
 
 ;; Better undo
+(use-package vundo
+  :bind
+  ("C-x u" . vundo))
 (use-package undohist)
-(use-package undo-propose)
 (global-set-key (kbd "C-?") #'undo-only)
-(global-set-key (kbd "C-x u") #'undo-propose)
 (add-hook 'after-init-hook
           #'(lambda ()
               (require 'undohist)
