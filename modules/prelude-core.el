@@ -249,9 +249,9 @@
 (setq sentence-end-double-space nil)
 
 ;; Enhance isearch.
-(use-package anzu
-  :diminish ""
-  :config
-  (global-anzu-mode))
+(use-package isearch
+  :ensure nil
+  :custom
+  (isearch-lazy-count t))
 
 (provide 'prelude-core)
