@@ -153,10 +153,29 @@ This mode is not reliable: the ghc version will probably not match that of the f
     (cd "/tmp")
     (mkdir package-name t)
     (cd (concat "/tmp/" package-name))
-    (shell-command "cabal init --lib --minimal --overwrite")
     (with-temp-buffer
-      (write-file ".projectile" nil))
+      (insert "cabal-version: 2.4\n")
+      (insert (concat "name: " package-name "\n"))
+      (insert "version: 0.1.0.0
+library
+  default-language: Haskell2010
+  exposed-modules:
+    Lib
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints\n")
+      (insert "  build-depends: base, text, bytestring, array, directory, filepath, rio, unliftio\n")
+      (write-file (concat package-name ".cabal")))
+    (async-shell-command "git init")
     (cd old-pwd))
-  (find-file (concat "/tmp/" package-name "/src/MyLib.hs")))
+  (find-file (concat "/tmp/" package-name "/Lib.hs"))
+  (delete-region (point-min) (point-max))
+  (insert "{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
+module Lib where
+
+import RIO
+
+run :: IO ()
+run = runSimpleApp $ do
+  pure ()"))
 
 (provide 'prelude-lang-haskell)
