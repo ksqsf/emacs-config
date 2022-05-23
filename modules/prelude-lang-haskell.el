@@ -84,26 +84,11 @@
   
   (add-hook 'w3m-display-hook 'w3m-haddock-display))
 
-(defun pointfree (expr)
-  "Get the point-free version of EXPR from http://pointfree.io/."
-  (interactive))
-
-;; https://github.com/digital-asset/ghcide
-;; https://github.com/haskell/haskell-ide-engine#using-hie-with-emacs
-(use-package lsp-haskell
-  :disabled
-  :hook (haskell-mode . lsp)
-  :config
-  (setq lsp-haskell-process-path-hie "hie-wrapper"))
-
-(use-package dante
-  :disabled ;; not very useful. haskell-interactive-mode is good enough.
-  :after haskell-mode
-  :commands 'dante-mode
-  :init
-  (add-hook 'haskell-mode-hook 'flymake-mode)
-  (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
-  (add-hook 'haskell-mode-hook 'dante-mode))
+(use-package ormolu
+ :hook (haskell-mode . ormolu-format-on-save-mode)
+ :bind
+ (:map haskell-mode-map
+   ("C-c C-f" . ormolu-format-buffer)))
 
 (defvar k|latest-stackage-lts nil
   "Cached value of stackage LTS snapshot version.")
