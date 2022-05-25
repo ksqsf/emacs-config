@@ -3,6 +3,28 @@
 ;;; Code:
 
 
+;;;### (autoloads nil "bionic-reading" "bionic-reading.el" "0eb53cb76de4b1134cf085eeae83cd79")
+;;; Generated autoloads from bionic-reading.el
+
+(autoload 'bionic-word "bionic-reading" "\
+Bionicify the word at point" t nil)
+
+(autoload 'bionic-buffer "bionic-reading" "\
+Bionicify all the visible parts of the current buffer." t nil)
+
+(autoload 'bionic-debuffer "bionic-reading" "\
+Undo the bionicification." t nil)
+
+;;;### (autoloads "actual autoloads are elsewhere" "bionic-reading"
+;;;;;;  "bionic-reading.el" (25228 41402 861039 669000))
+;;; Generated autoloads from bionic-reading.el
+
+(register-definition-prefixes "bionic-reading" '("bionic-overlays"))
+
+;;;***
+
+;;;***
+
 ;;;### (autoloads nil "calctex" "calctex.el" (0 0 0 0))
 ;;; Generated autoloads from calctex.el
 

@@ -26,8 +26,10 @@
 
 ;;; Code:
 
-(defvar-local bionic-overlays nil)
+(defvar-local bionic-overlays nil
+  "The overlays for bionicification in the current buffer.")
 
+;;;###autoload
 (defun bionic-word ()
   "Bionicify the word at point"
   (interactive)
@@ -50,6 +52,7 @@
         (push ov bionic-overlays)))
      (t nil))))
 
+;;;###autoload
 (defun bionic-buffer ()
   "Bionicify all the visible parts of the current buffer."
   (interactive)
@@ -62,6 +65,7 @@
           (bionic-word))
       (forward-to-word 1))))
 
+;;;###autoload
 (defun bionic-debuffer ()
   "Undo the bionicification."
   (interactive)
