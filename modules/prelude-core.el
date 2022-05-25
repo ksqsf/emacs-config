@@ -245,8 +245,9 @@
 (electric-indent-mode +1)
 (electric-pair-mode +1)
 
-;; One dot = One sentence.
-(setq sentence-end-double-space nil)
+;; Follow US English conventions by default.  This is required for
+;; anything to be included in official Emacs distribution.
+(setq sentence-end-double-space t)
 
 ;; Enhance isearch.
 (use-package isearch
