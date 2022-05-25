@@ -4,7 +4,7 @@
 (setq frame-resize-pixelwise t)
 
 ;; A quick way to toggle maximized
-(global-set-key (kbd "C-M-<return>") #'toggle-frame-maximized)
+(global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
 
 ;; A quick way to toggle side windows
 (global-set-key (kbd "C-z") #'window-toggle-side-windows)
