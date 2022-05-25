@@ -64,12 +64,15 @@
   (require 'lsp-bridge-orderless)
   (require 'lsp-bridge-icon))
 
-(defvar k|auto-lsp t
-  "Whether to start lsp automatically on all supported languages.")
-(defvar k|lsp 'eglot
+(defcustom k|auto-lsp nil
+  "Whether to start lsp automatically on all supported languages."
+  :group 'prelude)
+
+(defcustom k|lsp 'eglot
   "The LSP client to use.
 
-One of `lsp-mode', `eglot', or `lsp-bridge'.")
+One of `lsp-mode', `eglot', or `lsp-bridge'."
+  :group 'prelude)
 
 (defun k|lsp-ensure ()
   (interactive)
@@ -81,7 +84,7 @@ One of `lsp-mode', `eglot', or `lsp-bridge'.")
            ;; Let lsp-bridge control when popups should be displayed.
            (setq corfu-auto nil))
           ((eq k|lsp 'lsp-mode)
-           (lsp))
+           (lsp-deferred))
           ((eq k|lsp 'eglot)
            (eglot-ensure)))))
 
