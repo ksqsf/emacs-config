@@ -32,6 +32,15 @@ The documentation is built if necessary."
          (command (format "cargo play %s %s &" release-flag (buffer-file-name))))
     (shell-command command "*Cargo Play*")))
 
+(defun cargo (package-name)
+  "Create a new cargo package under /tmp."
+  (interactive "sPackage name: ")
+  (let ((old-pwd default-directory))
+    (cd "/tmp")
+    (shell-command (concat "cargo new " package-name))
+    (cd old-pwd))
+  (find-file (concat "/tmp/" package-name "/src/main.rs")))
+
 (defun rust-show (flags mode)
   (let* ((command (format "rustc %s -o /tmp/emacs-output %s" (mapconcat #'identity flags " ") (buffer-file-name)))
          (buffer (get-buffer-create "*Rust Show*")))
