@@ -147,15 +147,14 @@ library
   exposed-modules:
     Lib
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints\n")
-      (insert "  build-depends: base, text, bytestring, array, directory, filepath, rio, unliftio\n")
+      (insert "  default-extensions: NoImplicitPrelude OverloadedStrings\n")
+      (insert "  build-depends: base, text, bytestring, array, vector, stm, async, directory, filepath, rio, unliftio, microlens-platform\n")
       (write-file (concat package-name ".cabal")))
     (async-shell-command "git init")
     (cd old-pwd))
   (find-file (concat "/tmp/" package-name "/Lib.hs"))
   (delete-region (point-min) (point-max))
-  (insert "{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-module Lib where
+  (insert "module Lib where
 
 import RIO
 
