@@ -184,4 +184,8 @@
                         (gts-bing-engine) )
          :render (gts-buffer-render))))
 
+;; epub reader
+(use-package nov
+  :commands (nov-mode))
+
 (provide 'prelude-apps)
