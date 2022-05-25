@@ -1,5 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 
+(use-package helpful
+  :bind (("C-h f" . helpful-function)
+         ("C-h v" . helpful-variable)))
+
 ;; Add a "Remove" button to the advice list
 ;; Credit: https://emacs-china.org/t/advice/7566
 (add-hook 'help-mode-hook 'cursor-sensor-mode)
