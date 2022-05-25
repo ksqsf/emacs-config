@@ -11,12 +11,13 @@
 (with-eval-after-load 'markdown
   (set-face-font 'markdown-table-face "Iosevka Term-14"))
 
-;; Fontset, we need a Serif font for variable pitch mode
-;; (when k|mac
-;;   (set-fontset-font t 'chinese-gbk "STSong"))
+(defconst +font-family-list (font-family-list)
+  "A cache of the list of known font families on startup.")
+
+(when (member "LXGW WenKai" +font-family-list)
+  (set-fontset-font t 'chinese-gbk "LXGW WenKai"))
 
 ;; Hey, Org mode?
-
 (with-eval-after-load 'org
   (setq org-emphasis-regexp-components 
         (list (concat " \t('\"{"            "[:alpha:]") 
