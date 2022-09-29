@@ -14,8 +14,10 @@
 (defconst +font-family-list (font-family-list)
   "A cache of the list of known font families on startup.")
 
-(when (member "LXGW WenKai" +font-family-list)
-  (set-fontset-font t 'chinese-gbk "LXGW WenKai"))
+;; Use 落霞孤鹜 font.
+;;
+;; (when (member "LXGW WenKai" +font-family-list)
+;;   (set-fontset-font t 'chinese-gbk "LXGW WenKai"))
 
 ;; Hey, Org mode?
 (with-eval-after-load 'org
