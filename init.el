@@ -32,7 +32,7 @@
 (require 'prelude-core)
 (require 'prelude-ui)
 
-;; (require 'prelude-meow)
+(require 'prelude-meow)
 ;; (require 'prelude-evil)
 ;; (require 'prelude-nix)
 
@@ -71,5 +71,6 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'list-timers 'disabled nil)
-
 (put 'window-swap-states 'disabled t)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
