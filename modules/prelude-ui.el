@@ -279,6 +279,7 @@
 
 ;; Provide mixed-pitch faces
 (use-package mixed-pitch
+  :disabled
   :hook
   (org-mode . mixed-pitch-mode)
   (markdown-mode . mixed-pitch-mode)
