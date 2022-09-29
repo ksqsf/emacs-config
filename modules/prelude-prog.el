@@ -36,6 +36,11 @@
   (setq eglot-confirm-server-initiated-edits nil
         eglot-autoreconnect 60
         eglot-autoshutdown t)
+
+  ;; By default, turn off event logging for performance.
+  (advice-add 'jsonrpc--log-event :around
+              (lambda (_orig-func &rest _)))
+
   (fset #'eglot--snippet-expansion-fn #'ignore))
 
 ;;
