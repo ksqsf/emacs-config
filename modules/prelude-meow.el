@@ -91,20 +91,36 @@
    '("'" . repeat)
    '("<escape>" . ignore)))
 
+;; OK, before you ask me why I don't enable meow on startup, let me explain.
+;;
+;; 1. I'm so accustomed to Emacs default keybindings, and they've
+;;    become my second nature.  I seldom feel that my speed of editing
+;;    is limited.
+;;
+;; 2. However, meow has really good features: beacon, for example.
+;;
+;; 3. Sometimes, a separate editing mode is needed. For example, I
+;;    always wanted good keybindings for structured editing, which are
+;;    perfect fit as a "mode".
+;;
+;; Conclusion: it would be silly for me to enable meow by default.
+;; Whenever I need it, just it's just a M-x away.
 (use-package meow
   :demand t
-  :hook (after-init . meow-global-mode)
+  :commands (meow-mode meow-global-mode)
   :config
   (meow-setup)
-  (meow-global-mode +1)
 
   (dolist (pair
-           '((vterm-mode . insert)
+           '((fundamental-mode . insert)  ;; insert-mode by default
+             (prog-mode . insert)
+             (text-mode . insert)
+             (vterm-mode . insert)
              (eshell-mode . insert)
              (shell-mode . insert)
              (comint-mode . insert)
-             (magit-mode . motion)
-             (magit-diff-mode . motion)))
+             (magit-mode . insert)
+             (magit-diff-mode . insert)))
     (add-to-list 'meow-mode-state-list pair))
 
   ;; SPC p
