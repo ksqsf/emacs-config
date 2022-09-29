@@ -111,4 +111,11 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
       display-line-numbers-grow-only t)
 
 
+(use-package copilot
+  :disabled
+  :hook (prog-mode . copilot-mode)
+  :quelpa (copilot :fetcher github :repo "zerolfx/copilot.el")
+  :bind (("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+
 (provide 'prelude-prog)
