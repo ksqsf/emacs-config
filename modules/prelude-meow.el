@@ -23,6 +23,10 @@
    '("9" . meow-digit-argument)
    '("0" . meow-digit-argument)
    '("/" . meow-keypad-describe-key)
+   '("H" . windmove-left)
+   '("J" . windmove-down)
+   '("K" . windmove-up)
+   '("L" . windmove-right)
    '("?" . meow-cheatsheet))
   (meow-normal-define-key
    '("0" . meow-expand-0)
@@ -94,13 +98,14 @@
   (meow-setup)
   (meow-global-mode +1)
 
-  ;; For some modes, use insert mode
-  (with-eval-after-load 'vterm
-    (add-hook 'vterm-mode-hook #'meow-insert-mode))
-  (with-eval-after-load 'comint
-    (add-hook 'comint-mode-hook #'meow-insert-mode))
-  (with-eval-after-load 'eshell
-    (add-hook 'eshell-mode-hook #'meow-insert-mode))
+  (dolist (pair
+           '((vterm-mode . insert)
+             (eshell-mode . insert)
+             (shell-mode . insert)
+             (comint-mode . insert)
+             (magit-mode . motion)
+             (magit-diff-mode . motion)))
+    (add-to-list 'meow-mode-state-list pair))
 
   ;; SPC p
   (with-eval-after-load 'projectile
