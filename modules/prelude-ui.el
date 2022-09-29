@@ -342,4 +342,56 @@ The existence of such windows is guaranteed by Emacs."
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
+;; Some more fonts...
+(custom-theme-set-faces
+ 'user
+ '(default ((t (:family "PragmataPro Liga" :height 140))))
+ '(variable-pitch ((t (:family "Bookerly" :height 1.0))))
+ '(mode-line ((t (:inherit variable-pitch))))
+ '(mode-line-inactive ((t (:inherit variable-pitch))))
+ '(treemacs-file-face ((t (:inherit variable-pitch))))
+ '(treemacs-root-face ((t (:inherit variable-pitch))))
+ '(treemacs-directory-face ((t (:inherit variable-pitch))))
+ '(treemacs-directory-collapsed-face ((t (:inherit variable-pitch))))
+ '(treemacs-git-ignored-face ((t (:inherit variable-pitch)))))
+
+;; Preferred dark and light themes.
+(defcustom prelude-enable-switch-dark-light nil
+  "Whether automatically switch the current theme to match the
+system's dark or light variant."
+  :group 'prelude)
+(defcustom prelude-theme-package 'one-themes
+  "The package that defines `prelude-dark-theme' and `prelude-light-theme'."
+  :group 'prelude)
+(defcustom prelude-dark-theme 'one-dark
+  "Preferred dark theme."
+  :group 'prelude)
+(defcustom prelude-light-theme 'one-light
+  "Preferred light theme."
+  :group 'prelude)
+
+(defun prelude-switch-light-dark (appearance)
+  (catch 'foo
+    (when (not prelude-enable-switch-dark-light)
+      (throw 'foo nil))
+    (when (not (package-installed-p prelude-theme-package))
+      (package-install prelude-theme-package))
+    (when (not (featurep prelude-theme-package))
+      (require prelude-theme-package))
+    (cond
+     ((eq appearance 'dark)
+      (disable-theme prelude-light-theme)
+      (enable-theme prelude-dark-theme))
+     ((eq appearance 'light)
+      (disable-theme prelude-dark-theme)
+      (enable-theme prelude-light-theme)))))
+
+(add-hook 'ns-system-appearance-change-functions #'prelude-switch-light-dark)
+
+;; vterm
+(use-package vterm
+  :commands (vterm)
+  :config
+  (define-key vterm-mode-map (kbd "C-c C-x") #'vterm-send-C-x))
+
 (provide 'prelude-ui)
