@@ -51,3 +51,6 @@ org-roam.db
 
 # dump
 emacs.pdmp
+
+# rime
+librime/
