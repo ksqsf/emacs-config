@@ -15,6 +15,6 @@ In most cases, this means the current directory of the current buffer."
   (k|with-suppressed-message
     (shell-command (format "%s %s" k|default-opener (shell-quote-argument (expand-file-name default-directory))))))
 
-(global-set-key (kbd "C-c d") #'open-directory-here)
+(keymap-global-set "C-c d" #'open-directory-here)
 
 (provide 'prelude-os)

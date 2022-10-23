@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-(global-set-key (kbd "C-x C-j") #'dired-jump)
+(keymap-global-set "C-x C-j" #'dired-jump)
 
 (with-eval-after-load 'dired
   ;; Search file names when point is at a file name; Search unlimitedly
