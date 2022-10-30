@@ -4,10 +4,10 @@
 (setq frame-resize-pixelwise t)
 
 ;; A quick way to toggle maximized
-(keymap-global-set "C-M-<return>" #'toggle-frame-fullscreen)
+(global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
 
 ;; A quick way to toggle side windows
-(keymap-global-set "C-z" #'window-toggle-side-windows)
+(global-set-key (kbd "C-z") #'window-toggle-side-windows)
 
 ;; Enable smooth scroll when it's available
 ;; ... but it's still buggy.
@@ -325,7 +325,7 @@ The existence of such windows is guaranteed by Emacs."
         (switch-to-buffer buf))
     (delete-other-windows)))
 
-(keymap-global-set "C-x 1" #'k|delete-other-windows)
+(global-set-key (kbd "C-x 1") #'k|delete-other-windows)
 
 ;; UI for *completions* and capf
 (use-package corfu

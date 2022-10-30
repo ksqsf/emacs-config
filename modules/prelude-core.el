@@ -34,20 +34,20 @@
 (global-so-long-mode t)
 
 ;; f2. 2C-mode can be invoked using C-x 6
-(keymap-global-set "<f2>" #'follow-mode)
+(global-set-key (kbd "<f2>") #'follow-mode)
 
 ;; f11
-(keymap-global-set "<f11>" #'toggle-frame-fullscreen)
+(global-set-key (kbd "<f11>") #'toggle-frame-fullscreen)
 
 ;; Show column number
 (column-number-mode t)
 
 ;; zap chars
-(keymap-global-unset "M-z")
-(keymap-global-set "M-z" #'zap-up-to-char)
+(global-unset-key (kbd "M-z"))
+(global-set-key (kbd "M-z") #'zap-up-to-char)
 
 ;; C-z is too easy to hit, and you can use C-x z instead
-(keymap-global-unset "C-z")
+(global-unset-key (kbd "C-z"))
 
 ;; Auto revert
 (global-auto-revert-mode)
@@ -64,7 +64,7 @@
   :bind
   ("C-x u" . vundo))
 (use-package undohist)
-(keymap-global-set "C-?" #'undo-only)
+(global-set-key (kbd "C-?") #'undo-only)
 (add-hook 'after-init-hook
           #'(lambda ()
               (require 'undohist)
@@ -129,7 +129,7 @@
   (interactive)
   (with-isearch-suspended (recursive-edit)))
 
-(keymap-global-set "s-x" #'exit-recursive-edit)
+(global-set-key (kbd "s-x") #'exit-recursive-edit)
 (define-key isearch-mode-map (kbd "s-r") #'isearch-open-recursive-edit)
 
 ;; Meaningful M-<, M->
@@ -154,15 +154,15 @@
     :config
     (exec-path-from-shell-copy-envs '("PATH")))
 
-  (keymap-global-set "s-c" #'clipboard-kill-ring-save)
-  (keymap-global-set "s-v" #'clipboard-yank)
-  (keymap-global-set "s-w" #'delete-frame)
-  (keymap-global-set "s-s" #'save-buffer)
-  (keymap-global-set "s-t" #'split-window-horizontally)
-  (keymap-global-set "s-T" #'split-window-vertically)
-  (keymap-global-set "s-o" #'ace-window)
-  (keymap-global-set "s-x" #'execute-extended-command)
-  (keymap-global-set "s-n" #'make-frame-command)
+  (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
+  (global-set-key (kbd "s-v") #'clipboard-yank)
+  (global-set-key (kbd "s-w") #'delete-frame)
+  (global-set-key (kbd "s-s") #'save-buffer)
+  (global-set-key (kbd "s-t") #'split-window-horizontally)
+  (global-set-key (kbd "s-T") #'split-window-vertically)
+  (global-set-key (kbd "s-o") #'ace-window)
+  (global-set-key (kbd "s-x") #'execute-extended-command)
+  (global-set-key (kbd "s-n") #'make-frame-command)
 
   ;; Mac will interpret the Insert key on a PC keyboard as Help
   (define-key key-translation-map (kbd "<help>") (kbd "<insert>"))
@@ -171,17 +171,16 @@
   (setq mac-mouse-wheel-smooth-scroll nil))
 
 ;; Disable keys I don't use.
-(keymap-global-unset "C-x C-n")
+(global-unset-key (kbd "C-x C-n"))
 
 ;; Jump
-(keymap-global-set "M-]" #'forward-paragraph)
-(keymap-global-set "M-[" #'backward-paragraph)
+(global-set-key (kbd "M-]") #'forward-paragraph)
+(global-set-key (kbd "M-[") #'backward-paragraph)
 
 ;; dwim
-(keymap-global-set "M-l" #'downcase-dwim)
-(keymap-global-set "M-l" #'downcase-dwim)
-(keymap-global-set "M-u" #'upcase-dwim)
-(keymap-global-set "M-c" #'capitalize-dwim)
+(global-set-key (kbd "M-l") #'downcase-dwim)
+(global-set-key (kbd "M-u") #'upcase-dwim)
+(global-set-key (kbd "M-c") #'capitalize-dwim)
 
 ;; Ripgrep
 (use-package ripgrep
@@ -212,14 +211,14 @@
   (if (region-active-p)
       (kill-region (region-beginning) (region-end))
     (backward-kill-word 1)))
-(keymap-global-set "C-w" #'k/kill-region-or-backward-word)
+(global-set-key (kbd "C-w") #'k/kill-region-or-backward-word)
 
 ;; auth sources
 (setq auth-sources '("~/.authinfo" "~/.netrc"))
 
 ;; swap C-h p and C-h P
-(keymap-global-set "C-h p" #'describe-package)
-(keymap-global-set "C-h P" #'finder-by-keyword)
+(global-set-key (kbd "C-h p") #'describe-package)
+(global-set-key (kbd "C-h P") #'finder-by-keyword)
 
 ;; jump instantly
 (use-package avy
@@ -229,7 +228,7 @@
 (setq show-paren-context-when-offscreen t)
 
 ;; align
-(keymap-global-set "C-c C-a" #'align)
+(global-set-key (kbd "C-c C-a") #'align)
 
 ;; enable yasnippet everywhere
 (use-package yasnippet
