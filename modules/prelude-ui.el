@@ -333,7 +333,12 @@ The existence of such windows is guaranteed by Emacs."
   :custom
   (corfu-auto t)
   (corfu-quit-no-match t)
-  (corfu-preview-current t))
+  (corfu-preview-current t)
+
+  :config
+  (use-package corfu-doc
+    :config
+    (define-key corfu-map (kbd "M-d") #'corfu-doc-toggle)))
 
 (use-package kind-icon
   :after corfu
