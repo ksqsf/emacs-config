@@ -54,6 +54,7 @@
     (setq doom-modeline-project-detection 'project)))
 
 (use-package moody
+  :disabled  ;; disabled because I think Monokai + Default Modeline is good enough.
   :config
   (setq x-underline-at-descent-line t)
   (moody-replace-mode-line-buffer-identification)
@@ -350,7 +351,7 @@ The existence of such windows is guaranteed by Emacs."
 ;; Some more fonts...
 (custom-theme-set-faces
  'user
- '(default ((t (:family "PragmataPro Liga" :height 140))))
+ '(default ((t (:family "Hasklig" :height 140))))
  '(variable-pitch ((t (:family "Bookerly" :height 1.0))))
  '(mode-line ((t (:inherit variable-pitch))))
  '(mode-line-inactive ((t (:inherit variable-pitch))))
