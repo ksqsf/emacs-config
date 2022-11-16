@@ -29,6 +29,6 @@ date: %s
   (let ((files (reverse (directory-files blog-posts-dir
                                          nil
                                          "^[^\\.].*\\.md$"))))
-    (find-file (ivy-read "Post: " files))))
+    (find-file (completing-read "Post: " files))))
 
 (provide 'prelude-blog)
