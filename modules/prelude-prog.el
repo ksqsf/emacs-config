@@ -123,4 +123,12 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
   :bind (("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 
+(use-package citre
+  :hook (c-mode-common . citre-mode))
+
+
+(use-package quickrun
+  :defer t)
+
+
 (provide 'prelude-prog)
