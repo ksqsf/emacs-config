@@ -230,6 +230,9 @@
 ;; align
 (global-set-key (kbd "C-c C-a") #'align)
 
+;; diminish
+(use-package diminish)
+
 ;; enable yasnippet everywhere
 (use-package yasnippet
   :diminish (yas-minor-mode . "")
@@ -254,7 +257,6 @@
   :ensure nil
   :custom
   (isearch-lazy-count t))
-
 ;; Sublime-like multiple cursors.
 (use-package multiple-cursors
   :commands (mc/add-cursor-on-click)
