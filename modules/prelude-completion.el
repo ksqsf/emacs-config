@@ -7,7 +7,6 @@
   (define-key vertico-map "\d" #'vertico-directory-delete-char)
   (define-key vertico-map "\M-\d" #'vertico-directory-delete-word)
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
-
   (vertico-mouse-mode +1))
 
 (use-package marginalia
@@ -72,8 +71,6 @@
 
   :init
 
-  (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
-
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
 
@@ -112,14 +109,14 @@
 ;; Additional capf.
 (use-package cape
   :commands (cape-file cape-dabbrev cape-keyword cape-symbol cape-line cape-tex cape-rfc1345)
-  :config
+  :init
   (add-to-list 'completion-at-point-functions #'cape-file)
   ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-  ;;(add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
   ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
   ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
-  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
   ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
   ;;(add-to-list 'completion-at-point-functions #'cape-dict)
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
