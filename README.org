@@ -6,9 +6,11 @@ Venus Emacs is a "slightly configured" Emacs flavor, made by
 ksqsf. (It also hosts some packages that I have written for my own
 convenience. See the last section.)
 
+** Supported Platforms
+
 This configuration has been tested on macOS.
 
-NOTE: This configuration only targets Emacs 28.1.  No guarantee about
+NOTE: This configuration only targets Emacs 29.  No guarantee about
 forward/backward compatibility.  You can comment out the first
 paragraph in =init.el= if you do want to try.
 
