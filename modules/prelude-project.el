@@ -13,7 +13,8 @@
   (setq projectile-switch-project-action #'projectile-commander)
   (setq projectile-find-dir-includes-top-level t)
 
-  (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm))
+  (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm)
+  (define-key projectile-command-map (kbd "s s") #'projectile-ripgrep))
 
 (use-package project
   :defer t
