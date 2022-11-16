@@ -194,4 +194,8 @@
   (default-input-method "rime")
   (rime-librime-root "~/.emacs.d/librime/dist"))
 
+;; debbugs
+(use-package debbugs
+  :defer t)
+
 (provide 'prelude-apps)
