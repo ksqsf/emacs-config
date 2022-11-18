@@ -1,10 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 
 (use-package magit
-  :commands (magit-status)
-  :bind (("C-x g" . magit-status)))
+  :defer t
+  :bind (("C-c g" . magit-file-dispatch)))
 
 (use-package forge
-  :after magit)
+  :after magit
+  :defer t)
 
 (provide 'prelude-git)
