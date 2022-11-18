@@ -4,6 +4,8 @@
 (use-package ibuffer
   :ensure nil
   :commands (ibuffer ibuffer-switch-to-saved-filter-groups)
+  :hook (ibuffer-mode . (lambda () (ibuffer-switch-to-saved-filter-groups "Normal")))
+  :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
   :config
   (setq ibuffer-saved-filter-groups
         '(("Normal"
@@ -41,9 +43,8 @@
                    (mode . erc-mode))))))
   (setq ibuffer-show-empty-filter-groups nil
         ibuffer-default-sorting-mode 'filename/process)
-  (add-hook 'ibuffer-mode-hook #'(lambda () (ibuffer-switch-to-saved-filter-groups "Normal")))
 
   (use-package all-the-icons-ibuffer
-    :init (all-the-icons-ibuffer-mode 1)))
+    :commands (all-the-icons-ibuffer-mode)))
 
 (provide 'prelude-ibuffer)
