@@ -162,9 +162,13 @@
 
 (use-package eaf
   :disabled ;; Does not work...
-  :commands (eaf-open)
   :load-path "lisp/emacs-application-framework"
+  :custom
+  (eaf-browser-continue-where-left-off t)
+  (eaf-browser-enable-adblocker t)
+  (browse-url-browser-function 'eaf-open-browser)
   :config
+  (defalias 'browse-web #'eaf-open-browser)
   (require 'eaf-demo)
   (require 'eaf-file-sender)
   (require 'eaf-camera)
