@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package helpful
-  :bind (("C-h f" . helpful-function)
+  :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)))
 
 ;; Add a "Remove" button to the advice list
