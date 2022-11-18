@@ -40,7 +40,10 @@
                       (mode . customi-mode)
                       (name . "^\\*Customize")))
            ("IRC" (or
-                   (mode . erc-mode))))))
+                   (mode . erc-mode)))
+           ("Telega" (or
+                      (mode . telega-root-mode)
+                      (mode . telega-chat-mode))))))
   (setq ibuffer-show-empty-filter-groups nil
         ibuffer-default-sorting-mode 'filename/process)
 
