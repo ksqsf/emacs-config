@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t; -*-
 
+(use-package prescient
+  :config
+  (prescient-persist-mode))
+
 (use-package vertico
   :hook (after-init . vertico-mode)
   :config
@@ -7,7 +11,11 @@
   (define-key vertico-map "\d" #'vertico-directory-delete-char)
   (define-key vertico-map "\M-\d" #'vertico-directory-delete-word)
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
-  (vertico-mouse-mode +1))
+  (vertico-mouse-mode +1)
+
+  (use-package vertico-prescient
+    :config
+    (vertico-prescient-mode)))
 
 (use-package marginalia
   :after (vertico)

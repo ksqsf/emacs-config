@@ -339,7 +339,9 @@ The existence of such windows is guaranteed by Emacs."
   :config
   (use-package corfu-doc
     :config
-    (define-key corfu-map (kbd "M-d") #'corfu-doc-toggle)))
+    (define-key corfu-map (kbd "M-d") #'corfu-doc-toggle))
+
+  (use-package corfu-prescient))
 
 (use-package kind-icon
   :after corfu
