@@ -47,7 +47,8 @@
             (extension "jpg" "jpeg" "webp" "png" "bmp" "gif" "tiff" "xcf"))))))
 
 (use-package all-the-icons-dired
-  :after (dired)
-  :init (all-the-icons-dired-mode 1))
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+
 
 (provide 'prelude-dired)
