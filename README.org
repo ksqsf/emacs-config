@@ -81,11 +81,15 @@ press.
 
 *** Mode line
 
-Doom mode line.
+Any of the following looks pretty good:
+
+- Default
+- Doom mode line
+- Moody
 
 *** Quick Completion
 
-I use Selectrum and Consult ecosystem.
+I use Vertico.
 
 *** REPL
 
