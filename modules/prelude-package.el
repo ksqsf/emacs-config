@@ -7,6 +7,7 @@
 ;; Mirrors moved to early-init.el
 
 ;; use-package
+(require 'package)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
