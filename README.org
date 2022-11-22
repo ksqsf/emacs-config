@@ -8,7 +8,8 @@ convenience. See the last section.)
 
 ** Supported Platforms
 
-This configuration has been tested on macOS.
+This configuration is mainly developed on macOS.  It also works on
+Linux and Windows (for the most part).
 
 NOTE: This configuration only targets Emacs 29.  No guarantee about
 forward/backward compatibility.  You can comment out the first
