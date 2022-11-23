@@ -96,4 +96,11 @@
                  #'ivy--regex-pinyin))))
      ivy-re-builders-alist)))
 
+;; use rime for search
+(use-package rime-regexp
+  :load-path "lisp/rime-regexp.el"
+  :after (rime)
+  :config
+  (rime-regexp-mode 1))
+
 (provide 'prelude-chinese)
