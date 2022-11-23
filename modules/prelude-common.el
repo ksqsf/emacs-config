@@ -10,6 +10,7 @@
     `(with-temp-message (or (current-message) "") ,@body)))
 
 (defconst k|mac (eq system-type 'darwin))
+(defconst k|windows (eq system-type 'windows-nt))
 
 (defmacro k|double-tap-to-insert (to-char)
   "Create a function suitable for key binding.  It replaces
@@ -24,9 +25,9 @@ double consecutive occurrences of that character with TO-CHAR."
        (self-insert-command cnt))))
 
 (defconst k|default-opener
-  (if k|mac
-      "open"
-    "xdg-open")
+  (cond (k|mac     "open")
+        (k|windows "start")
+        (t         "xdg-open"))
   "The default file opener on the current system. (No Windows support.)")
 
 (require 'cl-lib)
