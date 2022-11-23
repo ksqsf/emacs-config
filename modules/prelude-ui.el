@@ -399,6 +399,9 @@ system's dark or light variant."
 ;; vterm
 (use-package vterm
   :commands (vterm)
+  :bind (:map vterm-mode-map
+              ("C-c C-x" . vterm-send-C-x)
+              ("C-c C-t" . vterm-copy-mode))
   :config
   (define-key vterm-mode-map (kbd "C-c C-x") #'vterm-send-C-x))
 
