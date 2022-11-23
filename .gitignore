@@ -54,3 +54,12 @@ emacs.pdmp
 
 # rime
 librime/
+
+# tree-sitter
+tree-sitter/
+
+# gnus
+newsrc.eld
+
+# cache
+.cache/
