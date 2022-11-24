@@ -14,7 +14,8 @@
   (setq projectile-find-dir-includes-top-level t)
 
   (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm)
-  (define-key projectile-command-map (kbd "s s") #'projectile-ripgrep))
+  (define-key projectile-command-map (kbd "s s") #'projectile-ripgrep)
+  (define-key projectile-command-map (kbd "s a") #'projectile-ag))
 
 (use-package project
   :defer t
