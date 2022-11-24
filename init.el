@@ -36,6 +36,7 @@
 ;; (require 'prelude-evil)
 ;; (require 'prelude-nix)
 
+(require 'prelude-search)
 (require 'prelude-completion)
 (require 'prelude-ibuffer)
 (require 'prelude-project)
