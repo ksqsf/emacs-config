@@ -26,7 +26,10 @@
   :bind
   (("C-," . embark-act)
    ("C-." . embark-dwim)
-   ("C-h B" . embark-bindings))
+   ("C-h B" . embark-bindings)
+   :map minibuffer-mode-map
+   ("C-c C-o" . embark-export)  ;; This is the default binding of Ivy-Occur
+   )
   :config
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
