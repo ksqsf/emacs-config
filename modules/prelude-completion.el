@@ -4,6 +4,16 @@
   :config
   (prescient-persist-mode))
 
+(use-package orderless
+  :custom
+  (completion-styles '(orderless prescient))
+  (orderless-component-separator " +\\|[-/]")
+  (orderless-matching-styles
+   '(orderless-literal
+     orderless-prefixes
+     orderless-initialism
+     orderless-regexp)))
+
 (use-package vertico
   :hook (after-init . vertico-mode)
   :config
@@ -11,11 +21,7 @@
   (define-key vertico-map "\d" #'vertico-directory-delete-char)
   (define-key vertico-map "\M-\d" #'vertico-directory-delete-word)
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
-  (vertico-mouse-mode +1)
-
-  (use-package vertico-prescient
-    :config
-    (vertico-prescient-mode)))
+  (vertico-mouse-mode +1))
 
 (use-package marginalia
   :after (vertico)
@@ -105,17 +111,6 @@
   (setq completion-category-defaults nil)
   (setq completions-format 'vertical)
   (setq-default completion-at-point-functions ))
-
-;; Enable orderless completion style
-(use-package orderless
-  :custom
-  (completion-styles '(orderless))
-  (orderless-component-separator " +\\|[-/]")
-  (orderless-matching-styles
-   '(orderless-literal
-     orderless-prefixes
-     orderless-initialism
-     orderless-regexp)))
 
 ;; Additional capf.
 (use-package cape
