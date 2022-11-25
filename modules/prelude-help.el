@@ -50,16 +50,24 @@
                    'follow-link t))))
             (setq ad-index (1+ ad-index))))))))
 
+(defvar Info-special-url-format
+  '(("hyperbole" . "https://www.gnu.org/software/hyperbole/man/hyperbole.html#%s")
+    ("magit" . "https://magit.vc/manual/magit.html#%s")
+    ("forge" . "https://magit.vc/manual/forge.html#%s")
+    ("org" . "https://orgmode.org/manual/%s.html")
+    ("org-roam" . "https://www.orgroam.com/manual.html#%s"))
+  "`Info-get-online-url' defaults to GNU's official manual URL base.
+%s will be replaced by the node name.")
+
 (defun Info-get-online-url ()
   (let* ((file (file-name-sans-extension
 	        (file-name-nondirectory Info-current-file)))
-         (node Info-current-node)
-         (node (string-replace " " "-" node))
+         (node (string-replace " " "-" Info-current-node))
          (node (if (string= node "Top") "index"
                  node))
-         (url (format
-               "https://www.gnu.org/software/emacs/manual/html_node/%s/%s.html"
-               file node)))
+         (url-base (or (cdr (assoc file Info-special-url-format #'equal))
+                       (format "https://www.gnu.org/software/emacs/manual/html_node/%s/%%s.html" file)))
+         (url (format url-base node)))
     url))
 
 (defun Info-copy-online-url ()
