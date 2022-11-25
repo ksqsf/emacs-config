@@ -54,15 +54,26 @@
   '(("hyperbole" . "https://www.gnu.org/software/hyperbole/man/hyperbole.html#%s")
     ("magit" . "https://magit.vc/manual/magit.html#%s")
     ("forge" . "https://magit.vc/manual/forge.html#%s")
+    ("transient" . "https://magit.vc/manual/transient.html#%s")
     ("org" . "https://orgmode.org/manual/%s.html")
-    ("org-roam" . "https://www.orgroam.com/manual.html#%s"))
+    ("org-roam" . "https://www.orgroam.com/manual.html#%s")
+    ("orderless" . "https://elpa.gnu.org/packages/doc/orderless.html#%s"))
   "`Info-get-online-url' defaults to GNU's official manual URL base.
 %s will be replaced by the node name.")
 
 (defun Info-get-online-url ()
   (let* ((file (file-name-sans-extension
 	        (file-name-nondirectory Info-current-file)))
-         (node (string-replace " " "-" Info-current-node))
+         (node (mapconcat (lambda (ch)
+                            (if (or (< ch 32)        ; ^@^A-^Z^[^\^]^^^-
+                                    (<= 33 ch 47)    ; !"#$%&'()*+,-./
+                                    (<= 58 ch 64)    ; :;<=>?@
+                                    (<= 91 ch 96)    ; [\]_`
+                                    (<= 123 ch 127)) ; {|}~ DEL
+                                (format "_00%x" ch)
+                              (char-to-string ch)))
+                          Info-current-node ""))
+         (node (string-replace " " "-" node))
          (node (if (string= node "Top") "index"
                  node))
          (url-base (or (cdr (assoc file Info-special-url-format #'equal))
