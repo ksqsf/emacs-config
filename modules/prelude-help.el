@@ -62,7 +62,7 @@
                file node)))
     url))
 
-(defun Info-copy-online-url (&optional nocopy)
+(defun Info-copy-online-url ()
   "Put the online url of the current Info node into the kill ring.
 
 This command is only meaningful for the official manuals, and it
@@ -73,7 +73,7 @@ does not work in TOC nodes."
     (message "%s" url)))
 
 (defun Info-copy-markdown-link ()
-  "Put a markdown link to the online manual.
+  "Put a markdown link to the online manual into the kill ring.
 
 The link is obtained as if it was returned from
 `Info-copy-online-url', and the label
