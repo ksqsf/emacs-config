@@ -98,7 +98,7 @@
 
 ;; use rime for search
 (use-package rime-regexp
-  :load-path "lisp/rime-regexp.el"
+  :load-path "lisp/rime-regexp"
   :after (rime)
   :config
   (rime-regexp-mode 1))

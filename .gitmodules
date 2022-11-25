@@ -7,3 +7,6 @@
 [submodule "lisp/lsp-bridge"]
 	path = lisp/lsp-bridge
 	url = https://github.com/manateelazycat/lsp-bridge
+[submodule "lisp/rime-regexp"]
+	path = lisp/rime-regexp
+	url = https://github.com/colawithsauce/rime-regexp.el.git
