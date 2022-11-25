@@ -50,4 +50,48 @@
                    'follow-link t))))
             (setq ad-index (1+ ad-index))))))))
 
+(defun Info-get-online-url ()
+  (let* ((file (file-name-sans-extension
+	        (file-name-nondirectory Info-current-file)))
+         (node Info-current-node)
+         (node (string-replace " " "-" node))
+         (node (if (string= node "Top") "index"
+                 node))
+         (url (format
+               "https://www.gnu.org/software/emacs/manual/html_node/%s/%s.html"
+               file node)))
+    url))
+
+(defun Info-copy-online-url (&optional nocopy)
+  "Put the online url of the current Info node into the kill ring.
+
+This command is only meaningful for the official manuals, and it
+does not work in TOC nodes."
+  (interactive)
+  (let ((url (Info-get-online-url)))
+    (kill-new url)
+    (message "%s" url)))
+
+(defun Info-copy-markdown-link ()
+  "Put a markdown link to the online manual.
+
+The link is obtained as if it was returned from
+`Info-copy-online-url', and the label
+`Info-copy-current-node-name'."
+  (interactive)
+  (let* ((file (file-name-sans-extension
+	        (file-name-nondirectory Info-current-file)))
+         (node Info-current-node)
+         (url (Info-get-online-url))
+         (md-link (format "[(%s) %s](%s)" file node url)))
+    (kill-new md-link)
+    (message "%s" md-link)))
+
+(use-package info
+  :ensure nil
+  :bind (:map
+         Info-mode-map
+         ("C" . Info-copy-online-url)
+         ("C-c C-c" . Info-copy-markdown-link)))
+
 (provide 'prelude-help)
