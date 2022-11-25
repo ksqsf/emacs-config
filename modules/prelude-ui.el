@@ -149,18 +149,18 @@
     (display-buffer-reuse-window
      display-buffer-in-side-window)
     (side . right)
-    (window-height . 0.5)
-    (window-width . 72)
+    (window-height . 0.4)
+    (window-width . 80)
     (slot . 0)
     (dedicated . t))
 
    ;; Bottom Side
    ("^\\*compilation"
     (display-buffer-reuse-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (window-height . 0.3)
-    (slot . 1)
+     display-buffer-pop-up-window)
+    ;; (side . bottom)
+    ;; (window-height . 0.3)
+    ;; (slot . 1)
     (dedicated . t))
    ("^\\*Backtrace\\*\\'"
     (display-buffer-reuse-window
@@ -176,14 +176,17 @@
     (dedicated . t))
    ("^HELM .*"
     (display-buffer-at-bottom))
-   ("-quickrun\\*"
-    nil
+   ("\\*helm .*"
+    (display-buffer-at-bottom))
+   ("\\*quickrun\\*"
+    (display-buffer-reuse-window
+     display-buffer-pop-up-window)
     nil)
 
    ;; Below Selected
-   ("^\\*\\(\\(e?shell\\)\\|\\(vterm\\)\\)"
-    (display-buffer-below-selected)
-    (window-width . 72))
+   ;; ("^\\*\\(\\(e?shell\\)\\|\\(vterm\\)\\)"
+   ;;  (display-buffer-below-selected)
+   ;;  (window-width . 72))
    (,(k|buffer-is-major-mode 'haskell-interactive-mode)
     (display-buffer-reuse-window
      display-buffer-at-bottom
@@ -193,12 +196,14 @@
 
    ;; Terminals
    ("^\\*\\(.*-\\)?e?shell\\*"
-    nil
-    (inhibit-same-window . t)
+    (display-buffer-reuse-window
+     display-buffer-below-selected)
+    (inhibit-same-window . nil)
     (dedicated . t))
-   ("^\\*\\(.*-\\)?vterm\\*"
-    nil
-    (inhibit-same-window . t)
+   ("^\\*vterm"
+    (display-buffer-reuse-window
+     display-buffer-below-selected)
+    (inhibit-same-window . nil)
     (dedicated . t))))
 
 ;; Minimap
