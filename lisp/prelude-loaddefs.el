@@ -63,6 +63,19 @@ it is disabled.
 
 ;;;***
 
+;;;### (autoloads nil "clipmgr" "clipmgr.el" (0 0 0 0))
+;;; Generated autoloads from clipmgr.el
+
+(autoload 'clipmgr-start "clipmgr" nil t)
+
+(autoload 'clipmgr-stop "clipmgr" nil t)
+
+(autoload 'clipmgr-select "clipmgr" nil t)
+
+(register-definition-prefixes "clipmgr" '("clip"))
+
+;;;***
+
 ;;;### (autoloads nil "erc-sasl" "erc-sasl.el" (0 0 0 0))
 ;;; Generated autoloads from erc-sasl.el
 
