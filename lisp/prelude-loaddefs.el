@@ -127,6 +127,23 @@ Set up the Lojban language environment." t)
 
 ;;;***
 
+;;;### (autoloads nil "region-mark" "region-mark.el" (0 0 0 0))
+;;; Generated autoloads from region-mark.el
+
+(autoload 'rm-set "region-mark" "\
+Mark a region for quick references to both pointers of the region.
+
+Only one region can be marked in a buffer.
+
+\(fn BEG END)" t)
+
+(autoload 'rm-clear "region-mark" "\
+Clear the marked region." t)
+
+(register-definition-prefixes "region-mark" '("rm-"))
+
+;;;***
+
 ;;;### (autoloads nil "rfcview" "rfcview.el" (0 0 0 0))
 ;;; Generated autoloads from rfcview.el
 
