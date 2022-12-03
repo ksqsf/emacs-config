@@ -102,7 +102,7 @@ The link is obtained as if it was returned from
 	        (file-name-nondirectory Info-current-file)))
          (node Info-current-node)
          (url (Info-get-online-url))
-         (md-link (format "[(%s) %s](%s)" file node url)))
+         (md-link (format "[(info \"(%s) %s\")](%s)" file node url)))
     (kill-new md-link)
     (message "%s" md-link)))
 
