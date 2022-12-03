@@ -37,9 +37,21 @@
         eglot-autoreconnect 60
         eglot-autoshutdown t)
 
-  ;; By default, turn off event logging for performance.
-  (advice-add 'jsonrpc--log-event :around
-              (lambda (_orig-func &rest _)))
+  (defvar prelude--eglot-enable-debug nil
+    "Non-nil when JSON-RPC logging is enabled.
+
+Use `k|toggle-eglot-debug' to change this value.")
+
+  (defun prelude--jsonrpc-ignore-log (orig-func &rest _))
+
+  (defun k|toggle-eglot-debug ()
+    (interactive)
+    (if prelude--eglot-enable-debug
+        (progn
+          (advice-remove 'jsonrpc--log-event 'prelude--jsonrpc-ignore-log)
+          (setq prelude--eglot-enable-debug nil))
+      (advice-add 'jsonrpc--log-event :around 'prelude--jsonrpc-ignore-log)
+      (setq prelude--eglot-enable-debug t)))
 
   (fset #'eglot--snippet-expansion-fn #'ignore))
 
