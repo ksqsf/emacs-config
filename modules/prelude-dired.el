@@ -3,6 +3,9 @@
 (global-set-key (kbd "C-x C-j") #'dired-jump)
 
 (with-eval-after-load 'dired
+  ;; Since Emacs 29, Dired supports file DnD on X windows, and NS.
+  (setq dired-mouse-drag-files t)
+
   ;; Search file names when point is at a file name; Search unlimitedly
   ;; otherwise.
   (setq dired-isearch-filenames 'dwim)
