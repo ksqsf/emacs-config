@@ -20,13 +20,14 @@
 ;;;###autoload
 (defun clipmgr-select ()
   (interactive)
-  (unless (ring-empty-p clip-ring)
-    (ivy-read "Select a clip to restore: "
-              (cl-loop for it in (ring-elements clip-ring)
-                       collect (cons (cdr (assoc 'STRING it)) it))
-              :action (lambda (selection)
-                        (let ((clip (cdr selection)))
-                          (clipmgr--restore clip))))))
+  (when (ring-empty-p clip-ring)
+    (error "The clip ring is empty."))
+  (ivy-read "Select a clip to restore: "
+            (cl-loop for it in (ring-elements clip-ring)
+                     collect (cons (cdr (assoc 'STRING it)) it))
+            :action (lambda (selection)
+                      (let ((clip (cdr selection)))
+                        (clipmgr--restore clip)))))
 
 (defun clipmgr--current-clip ()
   (let ((targets (gui-get-selection 'CLIPBOARD 'TARGETS)))
