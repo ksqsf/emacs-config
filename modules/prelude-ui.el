@@ -176,7 +176,7 @@
     (dedicated . t))
    ("^HELM .*"
     (display-buffer-at-bottom))
-   ("\\*helm .*"
+   ("\\*[Hh]elm.*"
     (display-buffer-at-bottom))
    ("\\*quickrun\\*"
     (display-buffer-reuse-window
@@ -336,16 +336,12 @@ The existence of such windows is guaranteed by Emacs."
 ;; UI for *completions* and capf
 (use-package corfu
   :hook (after-init . global-corfu-mode)
+  :hook (corfu-mode . corfu-popupinfo-mode)
   :custom
   (corfu-auto t)
   (corfu-quit-no-match t)
   (corfu-preview-current t)
-
   :config
-  (use-package corfu-doc
-    :config
-    (define-key corfu-map (kbd "M-d") #'corfu-doc-toggle))
-
   (use-package corfu-prescient))
 
 (use-package kind-icon
