@@ -131,4 +131,11 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
   :defer t)
 
 
+(defun comint-use-persistent-input-history (filename)
+  "Enable persistent input history in a Comint buffer.
+The history is stored in FILENAME."
+  (setq comint-input-ring-file-name filename)
+  (comint-read-input-ring t))
+
+
 (provide 'prelude-prog)

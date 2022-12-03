@@ -9,6 +9,7 @@
          ("<f8>" . haskell-navigate-imports))
   :hook (haskell-mode . interactive-haskell-mode)
   :hook (haskell-mode . k|setup-haskell-prettify-symbols)
+  :hook (inferior-haskell-mode . (lambda () (comint-use-persistent-input-history "~/.ghc/ghci_history")))
   :config
 
   (add-hook 'haskell-mode-hook #'k|lsp-ensure)
