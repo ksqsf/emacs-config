@@ -8,10 +8,11 @@
   (setq erc-server "irc.libera.chat")
   (setq erc-autojoin-channels-alist
         '(("libera.chat" "#haskell")))
+
   (require 'erc-sasl)
-  (add-to-list 'erc-sasl-server-regexp-list ".*")
+  (add-to-list 'erc-sasl-server-regexp-list "irc\\.libera\\.chat")
   (defun erc-login ()
-    "Perform user authentication at the IRC server."
+    "Perform user authentication at the IRC server. (PATCHED)"
     (erc-log (format "login: nick: %s, user: %s %s %s :%s"
                      (erc-current-nick)
                      (user-login-name)
@@ -23,7 +24,7 @@
       (message "Logging in without password"))
     (when (and (featurep 'erc-sasl) (erc-sasl-use-sasl-p))
       (erc-server-send "CAP REQ :sasl"))
-    (erc-server-send (format "NICK %s" erc-nick))
+    (erc-server-send (format "NICK %s" (erc-current-nick)))
     (erc-server-send
      (format "USER %s %s %s :%s"
              ;; hacked - S.B.
