@@ -115,6 +115,8 @@
 (use-package recentf
   :ensure nil
   :hook ((after-init . recentf-mode))
+  :custom
+  (recentf-max-saved-items 500)
   :config
   (setq recentf-auto-cleanup 'never)
   (run-with-idle-timer 30 t #'(lambda () (k|with-suppressed-message (recentf-save-list))))
