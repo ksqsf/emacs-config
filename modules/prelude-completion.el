@@ -6,7 +6,7 @@
 
 (use-package orderless
   :custom
-  (completion-styles '(orderless prescient))
+  (completion-styles '(prescient orderless))
   (orderless-component-separator " +\\|[-/]")
   (orderless-matching-styles
    '(orderless-literal
