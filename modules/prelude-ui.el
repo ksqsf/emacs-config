@@ -406,4 +406,30 @@ system's dark or light variant."
   :config
   (define-key vterm-mode-map (kbd "C-c C-x") #'vterm-send-C-x))
 
+;; FIXME: Side windows?
+(defun window-lift ()
+  "Lift the selected window to replace its parent in the window tree."
+  (interactive)
+  (let ((sibling (or (window-prev-sibling)
+                     (window-next-sibling)))
+        (keymap (let ((keymap (make-sparse-keymap)))
+                  (define-key keymap (kbd "1") #'window-enlarge)
+                  keymap)))
+    ;; In the following configuration
+    ;;
+    ;; |-----|-----|
+    ;; | W1  |     |
+    ;; |-----| W3  |
+    ;; | W2  |     |
+    ;; |-----|-----|
+    ;;
+    ;; If W3 is selected, it's prev-sibling won't be a leaf.
+    (when (and sibling
+               (not (and (window-buffer sibling)
+                         (minibufferp (window-buffer sibling)))))
+      (set-transient-map keymap t nil nil 0.5)
+      (delete-window sibling))))
+
+;; (global-set-key (kbd "C-x 1") #'window-lift)  ;; Not ready yet.
+
 (provide 'prelude-ui)
