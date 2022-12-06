@@ -15,7 +15,14 @@
 
   (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm)
   (define-key projectile-command-map (kbd "s s") #'projectile-ripgrep)
-  (define-key projectile-command-map (kbd "s a") #'projectile-ag))
+  (define-key projectile-command-map (kbd "s a") #'projectile-ag)
+
+  ;; Support for Citre (a u-ctags frontend).
+  (advice-add 'projectile-regenerate-tags :around
+              (lambda (orig &rest args)
+                (if citre-mode
+                    (citre-update-this-tags-file)
+                  (apply orig args)))))
 
 (use-package project
   :defer t
