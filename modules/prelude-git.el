@@ -2,24 +2,32 @@
 
 (use-package magit
   :defer t
+  :custom
+  (magit-clone-set-remote.pushDefault t)
+  (magit-clone-default-directory (expand-file-name (expand-file-name "src/Clone/" (getenv "HOME"))))
   :bind (("C-c g" . magit-file-dispatch)))
 
 (use-package forge
   :after magit
-  :defer t)
+  :defer t
+  :config
+  (setq forge-owned-accounts '(("ksqsf" . (remote-name "personal")))))
 
-;; Streamline the process of contributing to GitHub repositories.
-;; Doesn't seem to work.
-;; Will write one using the Native Messaging API soon(TM).
-;; https://developer.chrome.com/docs/apps/nativeMessaging/
-;;
 ;; (require 'org-protocol)
-;; (add-to-list 'org-protocol-protocol-alist
-;;              '(("git-clone"
-;;                 :protocol "git-clone"
-;;                 :function git-clone-protocol-handler)))
-;; (defun git-clone-protocol-handler (url)
-;;   (message "OK!!")
-;;   (magit-clone-regular url "~/src/Clone/" nil))
+
+;; (setq org-protocol-protocol-alist
+;;       '(("git-clone"
+;;          :protocol "git-clone"
+;;          :function org-protocol-git-clone)))
+
+;; (defvar org-protocol-git-clone-directory 
+;;   "Default directory for `org-protocol-git-clone`.")
+
+;; (defun org-protocol-git-clone (info)
+;;   "Process an org-protocol://git-clone style url with INFO."
+;;   (let ((url (plist-get info :url)))
+;;     (message "%s" url)
+;;     (vc-git-clone url org-protocol-git-clone-directory nil))
+;;   nil)
 
 (provide 'prelude-git)
