@@ -11,7 +11,8 @@ convenience. See the last section.)
 This configuration is mainly developed on macOS.  It also works on
 Linux and Windows (for the most part).
 
-NOTE: This configuration only targets Emacs 29.  No guarantee about
+NOTE: This configuration only targets Emacs 29.  (For one thing, it
+relies on the bundled =use-package=.)  No guarantee about
 forward/backward compatibility.  You can comment out the first
 paragraph in =init.el= if you do want to try.
 

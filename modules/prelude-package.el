@@ -7,11 +7,7 @@
 ;; Mirrors moved to early-init.el
 
 ;; use-package
-(require 'package)
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package)
-  (require 'use-package))
+(require 'use-package)
 (setq use-package-always-ensure t)      ; All packages used have to be installed
 
 ;; quelpa
