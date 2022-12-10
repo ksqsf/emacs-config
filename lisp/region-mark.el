@@ -27,14 +27,18 @@
 
 (defvar-local rm-overlay nil
   "The overlay used by region-mark.")
-(defvar-local rm-left nil
-  "The pointer to the beginning of the marked region.
 
-`nil' when no region is marked.")
-(defvar-local rm-right nil
-  "The pointer to the end of the marked region.
+(defun rm-left ()
+  "The pointer to the beginning of the marked region."
+  (if rm-overlay
+      (overlay-start rm-overlay)
+    (user-error "No region marked.")))
 
-`nil' when no region is marked.")
+(defun rm-right ()
+  "The pointer to the end of the marked region."
+  (if rm-overlay
+      (overlay-end rm-overlay)
+    (user-error "No region marked.")))
 
 ;;;###autoload
 (defun rm-set (beg end)
