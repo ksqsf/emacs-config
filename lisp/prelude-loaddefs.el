@@ -83,6 +83,22 @@ it is disabled.
 
 ;;;***
 
+;;;### (autoloads nil "fish-protector" "fish-protector.el" (0 0 0
+;;;;;;  0))
+;;; Generated autoloads from fish-protector.el
+
+(autoload 'fish-protector-start "fish-protector" nil t)
+
+(autoload 'fish-protector-stop "fish-protector" nil t)
+
+(autoload 'fish-protector-reset "fish-protector" nil t)
+
+(autoload 'fish-protector-show-stats "fish-protector" nil t)
+
+(register-definition-prefixes "fish-protector" '("fp-"))
+
+;;;***
+
 ;;;### (autoloads nil "fluidsynth" "fluidsynth.el" (0 0 0 0))
 ;;; Generated autoloads from fluidsynth.el
 

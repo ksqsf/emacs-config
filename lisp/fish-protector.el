@@ -4,10 +4,6 @@
 
 ;; 魚之護衛者 Fish Protector tries to protect your fish by monitoring
 ;; your use of non-focus buffers.
-;;
-;; If you spent too much time in said buffers, Fish Protector
-;; automatically informs you AND kills these buffers (using
-;; preconfigured policies).
 
 (defvar fp-alist nil)
 
@@ -15,16 +11,19 @@
 (defvar fp--timetable (make-hash-table))
 (defvar fp--callbacks (make-hash-table))
 
+;;;###autoload
 (defun fp-start ()
   (interactive)
   (unless fp--timer
     (setq fp--timer (run-with-timer nil 1 'fp--tick))))
 
+;;;###autoload
 (defun fp-stop ()
   (interactive)
   (cancel-timer fp--timer)
   (setq fp--timer nil))
 
+;;;###autoload
 (defun fp-reset ()
   (interactive)
   (clrhash fp--timetable)
@@ -32,6 +31,7 @@
     (fp-stop)
     (fp-start)))
 
+;;;###autoload
 (defun fp-show-stats ()
   (interactive)
   (with-current-buffer (get-buffer-create "*fish-protector*")
@@ -40,6 +40,15 @@
                (insert (format "%s\t%d\n" group time)))
              fp--timetable)
     (pop-to-buffer (current-buffer))))
+
+(defun fp-alert (message)
+  (let ((buf (get-buffer-create "*fish-protector-alert*")))
+    (with-current-buffer buf
+      (insert "-----\n")
+      (insert message)
+      (insert "\n-----\n\n")
+      (display-buffer (current-buffer))
+      (goto-char (point-max)))))
 
 (defun fp-add-reach-limit (group limit-secs callback)
   (cl-assert (and (symbolp group)
@@ -124,15 +133,6 @@
     ;; Arbitrary predicates
     (`(pred ,p)
      (funcall p buffer))))
-
-(defun fp-alert (message)
-  (let ((buf (get-buffer-create "*fish-protector-alert*")))
-    (with-current-buffer buf
-      (insert "-----\n")
-      (insert message)
-      (insert "\n-----\n\n")
-      (display-buffer (current-buffer))
-      (goto-char (point-max)))))
 
 ;;;
 ;;; FIXME: To be removed
