@@ -54,7 +54,10 @@ This function returns nil if it cannot parse REMOTE."
          (commit (magit-rev-parse "--short" "HEAD"))
          (user/repo (github-parse-remote-url remote-url))
          (relative-path (file-relative-name buffer-file-name (vc-git-root buffer-file-name)))
-         (url (format "https://github.com/%s/%s/blob/%s/%s#L%d" (car user/repo) (cdr user/repo) commit relative-path (line-number-at-pos))))
+         (locator (if (use-region-p)
+                      (format "L%d,L%d" (line-number-at-pos (use-region-beginning)) (line-number-at-pos (use-region-end)))
+                    (format "L%d" (line-number-at-pos))))
+         (url (format "https://github.com/%s/%s/blob/%s/%s#%s" (car user/repo) (cdr user/repo) commit relative-path locator)))
     (kill-new url)
     (message "%s" url)))
 
