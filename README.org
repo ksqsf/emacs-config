@@ -173,3 +173,7 @@ for better discoverability.
 | smtlib2-mode   | ./lisp/smtlib2-mode.el   | Major mode for SMT scripts         |
 | lojban         | ./lisp/lojban.el         | Zbalermorna input and rendering    |
 | bionic-reading | ./lisp/bionic-reading.el | A (sort of) bionic reader in Emacs |
+| clipboard      | ./lisp/clipboard.el      | clipboard inspector                |
+| clipmgr        | ./lisp/clipmgr.el        | (WIP) a clipboard manager          |
+| region-mark    | ./lisp/region-mark.el    |                                    |
+| fish-protector | ./lisp/fish-protector.el | 魚の護衛者                           |
