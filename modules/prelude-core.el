@@ -259,9 +259,16 @@
   :ensure nil
   :custom
   (isearch-lazy-count t))
+
 ;; Sublime-like multiple cursors.
 (use-package multiple-cursors
   :commands (mc/add-cursor-on-click)
   :bind ("A-<mouse-1>" . mc/add-cursor-on-click))
+
+;; Graphical Emacs should serve as a daemon.
+(use-package server
+  :if window-system
+  :init
+  (add-hook 'after-init-hook 'server-start t))
 
 (provide 'prelude-core)
