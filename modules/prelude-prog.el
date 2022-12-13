@@ -150,4 +150,11 @@ The history is stored in FILENAME."
   (comint-read-input-ring t))
 
 
+;;
+;; debugging support
+;;
+(use-package dap-mode
+  :defer t)
+
+
 (provide 'prelude-prog)
