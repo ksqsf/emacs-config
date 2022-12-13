@@ -73,6 +73,8 @@
           (when (> new limit)
             (funcall cb new)))))))
 
+;; Test this file: (fp--group-rule-match-p '(project ".emacs.d"))
+
 (defun fp--group-rule-match-p (rule &optional buffer)
   (setq buffer (or buffer (current-buffer)))
   (pcase-exhaustive rule
@@ -81,23 +83,19 @@
     ('nil nil)
 
     ;; (and rules...)
-    ((and (pred listp)
-          (app car 'and))
+    (`(and . ,rules)
      (catch 'foo
-       (let ((rules (cdr rule)))
-         (dolist (rule rules)
-           (unless (fp--group-rule-match-p rule buffer)
-             (throw 'foo nil))))
+       (dolist (rule rules)
+         (unless (fp--group-rule-match-p rule buffer)
+           (throw 'foo nil)))
        t))
 
     ;; (or rules...)
-    ((and (pred listp)
-          (app car 'or))
+    (`(or . ,rules)
      (catch 'foo
-       (let ((rules (cdr rule)))
-         (dolist (rule rules)
-           (when (fp--group-rule-match-p rule buffer)
-             (throw 'foo t))))
+       (dolist (rule rules)
+         (when (fp--group-rule-match-p rule buffer)
+           (throw 'foo t)))
        nil))
 
     ;; Major modes
@@ -133,26 +131,6 @@
     ;; Arbitrary predicates
     (`(pred ,p)
      (funcall p buffer))))
-
-;;;
-;;; FIXME: To be removed
-;;;
-(setq fp-alist
-      '((:telega . (or (mode telega-root-mode)
-                       (mode telega-chat-mode)))
-        (:emacs . (project "\\.emacs\\.d"))))
-
-(fp--group-rule-match-p '(:telega . (or (mode telega-root-mode)
-                       (mode telega-chat-mode))))
-
-(fp-add-reach-limit :telega
-                    (* 30 60)
-                    (lambda (cur-sec)
-                      (if (> cur-sec (* 60 60))
-                          (progn
-                            (kill-buffer "*Telega Root*")
-                            (fp-alert "Hard limit of Telega reached!"))
-                        (fp-alert "Soft limit of Telega reached! Please go away from Telega!!"))))
 
 (provide 'fish-protector)
 ;;; fish-protector.el ends here
