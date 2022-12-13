@@ -63,8 +63,11 @@ Use `k|toggle-eglot-debug' to change this value.")
   :commands (lsp lsp-mode)
   :config
   (setq lsp-headerline-breadcrumb-enable nil
-        lsp-enable-snippet t
-        lsp-lens-enable nil)
+        lsp-enable-snippet t)
+
+  ;; LSP lens performs poorly on older Emacs versions.
+  ;; Emacs 29 introduced noverlay -- which make overlays exponentially faster.
+  (setq lsp-lens-enable (not (version< emacs-version "29")))
 
   ;; *DANGER*: It warns that you shouldn't use this unless you know
   ;; the internals of lsp-mode.
