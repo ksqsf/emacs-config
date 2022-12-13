@@ -46,8 +46,8 @@
 (global-unset-key (kbd "M-z"))
 (global-set-key (kbd "M-z") #'zap-up-to-char)
 
-;; C-z is too easy to hit, and you can use C-x z instead
-(global-unset-key (kbd "C-z"))
+;; Remap repeat to C-z.
+(global-set-key (kbd "C-z") #'repeat)
 
 ;; Auto revert
 (global-auto-revert-mode)
@@ -270,5 +270,12 @@
   :if window-system
   :init
   (add-hook 'after-init-hook 'server-start t))
+
+;; Give the scratch buffer a shortcut.
+(global-set-key (kbd "C-x C-n") #'scratch-buffer)
+
+;; Reverse yank-pop.  By default, it is C-u M-y, but it's not as
+;; intuitive.  The "Shift reverse" metaphor seems well established.
+(global-set-key (kbd "M-Y") #'(lambda () (interactive) (yank-pop -1)))
 
 (provide 'prelude-core)

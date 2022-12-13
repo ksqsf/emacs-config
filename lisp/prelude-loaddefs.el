@@ -6,6 +6,14 @@
 ;;; Code:
 
 
+;;;### (autoloads nil "apple-docs" "apple-docs.el" (0 0 0 0))
+;;; Generated autoloads from apple-docs.el
+
+(autoload 'counsel-apple-search "apple-docs" "\
+Ivy interface for dynamically querying apple.com docs." t)
+
+;;;***
+
 ;;;### (autoloads nil "bionic-reading" "bionic-reading.el" (0 0 0
 ;;;;;;  0))
 ;;; Generated autoloads from bionic-reading.el

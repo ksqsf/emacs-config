@@ -6,9 +6,6 @@
 ;; A quick way to toggle maximized
 (global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
 
-;; A quick way to toggle side windows
-(global-set-key (kbd "C-z") #'window-toggle-side-windows)
-
 ;; Enable smooth scroll when it's available
 ;; ... but it's still buggy.
 ;; (when (fboundp 'pixel-scroll-precision-mode)
@@ -403,6 +400,8 @@ system's dark or light variant."
   :bind (:map vterm-mode-map
               ("C-c C-x" . vterm-send-C-x)
               ("C-c C-t" . vterm-copy-mode))
+  :custom
+  (vterm-always-compile-module t)
   :config
   (define-key vterm-mode-map (kbd "C-c C-x") #'vterm-send-C-x))
 
@@ -413,7 +412,7 @@ system's dark or light variant."
   (let ((sibling (or (window-prev-sibling)
                      (window-next-sibling)))
         (keymap (let ((keymap (make-sparse-keymap)))
-                  (define-key keymap (kbd "1") #'window-enlarge)
+                  (define-key keymap (kbd "1") #'window-lift)
                   keymap)))
     ;; In the following configuration
     ;;

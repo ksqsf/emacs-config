@@ -49,6 +49,7 @@
 
 ;; telega
 (use-package telega
+  :disabled
   :commands (telega))
 
 ;; google translate
