@@ -64,7 +64,7 @@
 (require 'prelude-os)
 (require 'prelude-mail)
 (require 'prelude-apps)
-(require 'prelude-erc)
+(require 'prelude-irc)
 
 ;; Volatile.
 (when (file-exists-p prelude-volatile-dir)
