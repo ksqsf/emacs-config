@@ -351,7 +351,7 @@ The existence of such windows is guaranteed by Emacs."
 ;; Some more fonts...
 (custom-theme-set-faces
  'user
- '(default ((t (:family "Hasklig" :height 140))))
+ ;; '(default ((t (:family "Hasklig" :height 140))))
  '(variable-pitch ((t (:family "Bookerly" :height 1.0))))
  '(mode-line ((t (:inherit variable-pitch))))
  '(mode-line-inactive ((t (:inherit variable-pitch))))

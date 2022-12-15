@@ -59,19 +59,20 @@
   (remhash group fp--callbacks))
 
 (defun fp--tick ()
-  (let ((buf-group (catch 'found
+  (when (selected-frame)
+    (let ((buf-group (catch 'found
                        (dolist (rule fp-alist)
                          (when (fp--group-rule-match-p (cdr rule) (current-buffer))
                            (throw 'found (car rule)))))))
-    (when buf-group
-      (let* ((old (gethash buf-group fp--timetable 0))
-             (new (1+ old)))
-        (puthash buf-group new fp--timetable)
-        (let* ((limit/cb (gethash buf-group fp--callbacks (cons most-positive-fixnum 'ignore)))
-               (limit (car limit/cb))
-               (cb (cdr limit/cb)))
-          (when (> new limit)
-            (funcall cb new)))))))
+      (when buf-group
+        (let* ((old (gethash buf-group fp--timetable 0))
+               (new (1+ old)))
+          (puthash buf-group new fp--timetable)
+          (let* ((limit/cb (gethash buf-group fp--callbacks (cons most-positive-fixnum 'ignore)))
+                 (limit (car limit/cb))
+                 (cb (cdr limit/cb)))
+            (when (> new limit)
+              (funcall cb new))))))))
 
 ;; Test this file: (fp--group-rule-match-p '(project ".emacs.d"))
 
