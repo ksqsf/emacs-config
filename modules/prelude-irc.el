@@ -22,4 +22,4 @@
   :config
   (add-to-list 'erc-modules 'sasl))
 
-(provide 'prelude-erc)
+(provide 'prelude-irc)
