@@ -20,6 +20,7 @@
   (erc-sasl-user "ksqsf")
   (erc-sasl-auth-source-function 'erc-sasl-auth-source-password-as-host)
   :config
-  (add-to-list 'erc-modules 'sasl))
+  (add-to-list 'erc-modules 'sasl)
+  (defalias 'erc 'erc-tls))
 
 (provide 'prelude-irc)
