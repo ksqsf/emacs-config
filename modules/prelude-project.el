@@ -6,6 +6,7 @@
 
   ;; Steal `C-x p' from project.el.
   :bind-keymap ("C-x p" . projectile-command-map)
+  :bind-keymap ("H-p" . projectile-command-map)
 
   :config
   (setq projectile-completion-system 'auto)

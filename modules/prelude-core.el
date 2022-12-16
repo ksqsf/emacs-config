@@ -148,23 +148,27 @@
   (setenv "LC_ALL" "zh_CN.utf-8")
   (setenv "LANG" "zh_CN.utf-8")
 
-  (setq mac-command-modifier 'meta)
-
   (use-package exec-path-from-shell
     :init
     (setq exec-path-from-shell-arguments '("-l"))
     :config
     (exec-path-from-shell-copy-envs '("PATH")))
 
-  (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
-  (global-set-key (kbd "s-v") #'clipboard-yank)
-  (global-set-key (kbd "s-w") #'delete-frame)
-  (global-set-key (kbd "s-s") #'save-buffer)
-  (global-set-key (kbd "s-t") #'split-window-horizontally)
-  (global-set-key (kbd "s-T") #'split-window-vertically)
-  (global-set-key (kbd "s-o") #'ace-window)
-  (global-set-key (kbd "s-x") #'execute-extended-command)
-  (global-set-key (kbd "s-n") #'make-frame-command)
+  ;; prefer Hyper because Super is already polluted.
+  (setopt ns-right-command-modifier 'hyper)
+  (setopt ns-alternate-modifier 'hyper)
+
+  (global-set-key (kbd "H-t") tab-prefix-map)
+
+  ;; (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
+  ;; (global-set-key (kbd "s-v") #'clipboard-yank)
+  ;; (global-set-key (kbd "s-w") #'delete-frame)
+  ;; (global-set-key (kbd "s-s") #'save-buffer)
+  ;; (global-set-key (kbd "s-t") #'split-window-horizontally)
+  ;; (global-set-key (kbd "s-T") #'split-window-vertically)
+  ;; (global-set-key (kbd "s-o") #'ace-window)
+  ;; (global-set-key (kbd "s-x") #'execute-extended-command)
+  ;; (global-set-key (kbd "s-n") #'make-frame-command)
 
   ;; Mac will interpret the Insert key on a PC keyboard as Help
   (define-key key-translation-map (kbd "<help>") (kbd "<insert>"))
