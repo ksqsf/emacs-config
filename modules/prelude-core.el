@@ -2,7 +2,7 @@
 ;;; This file modifies some of the essential behaviors of Emacs, and
 ;;; likely everyone wants them, thus the name "core".
 
-(setq confirm-kill-emacs t)
+(setq confirm-kill-emacs 'yes-or-no-p)
 
 ;; GC less conservative.  No more frequently than every 100 MiB.
 (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 100 1024 1024))))
@@ -157,8 +157,9 @@
     (exec-path-from-shell-copy-envs '("PATH")))
 
   ;; prefer Hyper because Super is already polluted.
-  (setopt ns-right-command-modifier 'hyper)
-  (setopt ns-alternate-modifier 'hyper)
+  (setq ns-right-command-modifier 'hyper)
+  (setq ns-alternate-modifier 'hyper)
+  (setq ns-command-modifier 'meta)
 
   (global-set-key (kbd "H-t") tab-prefix-map)
 
