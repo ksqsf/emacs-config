@@ -293,4 +293,18 @@
     (goto-char pos)
     (run-hook-with-args 'org-roam-ui-after-open-node-functions id))))
 
+;; For logseq-open-in-emacs, see https://github.com/ksqsf/logseq-open-in-emacs
+(use-package org-protocol
+  :defer t
+  :ensure org
+  :config
+  (add-to-list 'org-protocol-protocol-alist
+               '("org-find-file" :protocol "find-file" :function org-protocol-find-file :kill-client nil))
+  (defun org-protocol-find-file (fname)
+    "Process org-protocol://find-file?path= style URL."
+    (let ((f (plist-get (org-protocol-parse-parameters fname nil '(:path)) :path)))
+      (find-file f)
+      (raise-frame)
+      (select-frame-set-input-focus (selected-frame)))))
+
 (provide 'prelude-org)
