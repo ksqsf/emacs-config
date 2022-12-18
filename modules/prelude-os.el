@@ -17,6 +17,11 @@ In most cases, this means the current directory of the current buffer."
 
 (global-set-key (kbd "C-c d") #'open-directory-here)
 
+(when k|mac
+  (defun dic ()
+    (interactive)
+    (shell-command-to-string
+     (format "open dict://%s" (word-at-point)))))
 
 ;;
 ;; Recenter the frame on startup.
