@@ -8,11 +8,14 @@
   :bind-keymap ("C-x p" . projectile-command-map)
   :bind-keymap ("H-p" . projectile-command-map)
 
+  :custom
+  (projectile-completion-system 'auto)
+  (projectile-switch-project-action #'projectile-commander)
+  (projectile-find-dir-includes-top-level t)
+  (projectile-enable-caching nil)  ; Projectile will save a cache file, which is
+                                   ; slow for large projects.
+
   :config
-  (setq projectile-completion-system 'auto)
-  (setq projectile-enable-caching t)
-  (setq projectile-switch-project-action #'projectile-commander)
-  (setq projectile-find-dir-includes-top-level t)
 
   (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm)
   (define-key projectile-command-map (kbd "s s") #'projectile-ripgrep)
