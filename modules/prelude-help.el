@@ -62,6 +62,9 @@
 %s will be replaced by the node name.")
 
 (defun Info-get-online-url ()
+  "Get the online URL of this manual node.
+
+If a region is active, it is considered text anchor.  This feature is incomplete."
   (let* ((file (file-name-sans-extension
 	        (file-name-nondirectory Info-current-file)))
          (node (mapconcat (lambda (ch)
@@ -79,10 +82,23 @@
          (url-base (or (cdr (assoc file Info-special-url-format #'equal))
                        (format "https://www.gnu.org/software/emacs/manual/html_node/%s/%%s.html" file)))
          (url (format url-base node)))
-    url))
+    (if (not (use-region-p))
+        url
+      (let* ((selected (buffer-substring-no-properties (region-beginning) (region-end)))
+             (text-anchor (mapconcat (lambda (ch)
+                                       (if (or (= ch 10)
+                                               (= ch 8220) (= ch 8221))
+                                           ""
+                                         (if (= ch ?-)
+                                             "%2D"
+                                           (char-to-string ch))))
+                                     selected)))
+        (format "%s#:~:text=%s" url (url-encode-url text-anchor))))))
 
 (defun Info-copy-online-url ()
   "Put the online url of the current Info node into the kill ring.
+
+If a region is active, it is considered text anchor.
 
 This command is only meaningful for the official manuals, and it
 does not work in TOC nodes."
