@@ -1,7 +1,5 @@
 (use-package nix-mode
-  :mode (".nix\\'" . nix-mode)
-  :bind (("C-c C-n" . nix/update-config)
-         ("C-c C-m" . nix/update-home)))
+  :mode (".nix\\'" . nix-mode))
 
 (defun nix-shell-vterm ()
   "Start nix-shell here."
