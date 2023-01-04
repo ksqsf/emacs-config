@@ -129,4 +129,9 @@ The link is obtained as if it was returned from
          ("C" . Info-copy-online-url)
          ("C-c C-c" . Info-copy-markdown-link)))
 
+(use-package info-colors
+  :after (info)
+  :defer t
+  :hook (Info-selection . info-colors-fontify-node))
+
 (provide 'prelude-help)
