@@ -26,7 +26,17 @@
               (lambda (orig &rest args)
                 (if citre-mode
                     (citre-update-this-tags-file)
-                  (apply orig args)))))
+                  (apply orig args))))
+
+  ;; Register project types
+  (projectile-register-project-type
+   'xmake
+   '("xmake.lua")
+   :configure "xmake config"
+   :compile "xmake build"
+   :run "xmake run"
+   :install "xmake install"
+   :package "xmake package"))
 
 (use-package project
   :defer t
