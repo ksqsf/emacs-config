@@ -300,10 +300,22 @@
   :config
   (add-to-list 'org-protocol-protocol-alist
                '("org-find-file" :protocol "find-file" :function org-protocol-find-file :kill-client nil))
+
+  (defun org-protocol-find-file-fix-wsl-path (path)
+    "Change Windows-style paths to WSL-style paths if inside WSL."
+    (if (not (string-match-p "-[Mm]icrosoft" operating-system-release))
+        path
+      (save-match-data
+        (if (/= 0 (string-match "^\\([a-zA-Z]\\):\\(/.*\\)" path))
+            path
+          (let ((volume (match-string-no-properties 1 path))
+                (abspath (match-string-no-properties 2 path)))
+            (format "/mnt/%s%s" (downcase volume) abspath))))))
+
   (defun org-protocol-find-file (fname)
     "Process org-protocol://find-file?path= style URL."
     (let ((f (plist-get (org-protocol-parse-parameters fname nil '(:path)) :path)))
-      (find-file f)
+      (find-file (org-protocol-find-file-fix-wsl-path f))
       (raise-frame)
       (select-frame-set-input-focus (selected-frame)))))
 
