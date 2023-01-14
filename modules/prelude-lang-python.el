@@ -7,6 +7,7 @@
   (setq doom-modeline-env-python-executable "python3")
   (setq python-shell-interpreter "ipython3")
   (setq python-shell-interpreter-args "--simple-prompt")
+  (setq python-shell-dedicated t)
   (setq gud-pdb-command-name "python3 -m pdb")
   :hook
   (python-mode . k|lsp-ensure)
