@@ -330,24 +330,6 @@ The existence of such windows is guaranteed by Emacs."
 
 (global-set-key (kbd "C-x 1") #'k|delete-other-windows)
 
-;; UI for *completions* and capf
-(use-package corfu
-  :hook (after-init . global-corfu-mode)
-  :hook (corfu-mode . corfu-popupinfo-mode)
-  :custom
-  (corfu-auto t)
-  (corfu-quit-no-match t)
-  (corfu-preview-current t)
-  :config
-  (use-package corfu-prescient))
-
-(use-package kind-icon
-  :after corfu
-  :custom
-  (kind-icon-default-face 'corfu-default)
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
-
 ;; Some more fonts...
 (custom-theme-set-faces
  'user

@@ -12,6 +12,33 @@
 (setq show-paren-delay 0.0)
 (setq tab-always-indent 'complete)
 
+;; (use-package company
+;;   :hook (after-init . global-company-mode)
+;;   :config
+;;   (use-package company-posframe
+;;     :config
+;;     (company-posframe-mode))
+;;   (use-package company-tabnine
+;;     :config
+;;     (add-to-list 'company-backends #'company-tabnine)))
+
+(use-package corfu
+  :hook (after-init . global-corfu-mode)
+  :hook (corfu-mode . corfu-popupinfo-mode)
+  :custom
+  (corfu-auto t)
+  (corfu-quit-no-match t)
+  (corfu-preview-current t)
+  :config
+  (use-package corfu-prescient))
+
+(use-package kind-icon
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default)
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode)
   :config
