@@ -1,7 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
-;; Pixelwise resize
+;; Frame resize
 (setq frame-resize-pixelwise t)
+(setq frame-inhibit-implied-resize t)
 
 ;; A quick way to toggle maximized
 (global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
@@ -232,7 +233,7 @@
 (use-package popper
   :defer 1
   :bind (("C-`" . popper-toggle-latest)
-         ("M-`" . popper-cycle)
+         ;; ("M-`" . popper-cycle)
          ("C-M-`" . popper-toggle-type))
   :config
   (setq popper-reference-buffers
@@ -385,7 +386,8 @@ system's dark or light variant."
   :custom
   (vterm-always-compile-module t)
   :config
-  (define-key vterm-mode-map (kbd "C-c C-x") #'vterm-send-C-x))
+  (define-key vterm-mode-map (kbd "C-c C-x") #'vterm-send-C-x)
+  (add-hook 'vterm-mode-hook 'goto-address-mode))
 
 ;; FIXME: Side windows?
 (defun window-lift ()
