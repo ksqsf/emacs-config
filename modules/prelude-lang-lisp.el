@@ -4,6 +4,7 @@
 ;; Emacs Lisp
 ;;
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-buffer)
+(define-key emacs-lisp-mode-map (kbd "M-<up>") #'raise-sexp)
 
 
 ;;
