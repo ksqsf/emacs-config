@@ -68,4 +68,8 @@ The documentation is built if necessary."
   (interactive "P")
   (find-file "/tmp/play.rs"))
 
+(use-package pest-mode
+  :load-path "lisp/pest-mode"
+  :mode ("\\.pest\\'" . pest-mode))
+
 (provide 'prelude-lang-rust)
