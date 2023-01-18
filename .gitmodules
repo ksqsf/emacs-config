@@ -10,3 +10,9 @@
 [submodule "lisp/rime-regexp"]
 	path = lisp/rime-regexp
 	url = https://github.com/colawithsauce/rime-regexp.el.git
+[submodule "lisp/pest-mode"]
+	path = lisp/pest-mode
+	url = git@github.com:ksqsf/pest-mode.git
+[submodule "lisp/tabnine-capf"]
+	path = lisp/tabnine-capf
+	url = https://github.com/50ways2sayhard/tabnine-capf.git
