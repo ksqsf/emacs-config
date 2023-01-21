@@ -155,7 +155,8 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (setq display-line-numbers-type 'relative
-      display-line-numbers-grow-only t)
+      display-line-numbers-grow-only t
+      display-line-numbers-width 4)
 
 
 (use-package copilot
