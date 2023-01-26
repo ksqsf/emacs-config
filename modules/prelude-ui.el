@@ -42,7 +42,6 @@
 
 ;; Mode line
 (use-package doom-modeline
-  :disabled
   :hook ((after-init . doom-modeline-mode))
   :init
   (setq doom-modeline-minor-modes nil)
@@ -52,12 +51,16 @@
     (setq doom-modeline-project-detection 'project)))
 
 (use-package moody
-  :disabled  ;; disabled because I think Monokai + Default Modeline is good enough.
+  :disabled
   :config
+  (defun prelude-activate-moody (&optional disactivate)
+    "If DISACTIVATE is t, moody is disabled."
+    (setq arg (or disactivate nil))
+    (moody-replace-mode-line-buffer-identification arg)
+    (moody-replace-vc-mode arg)
+    (moody-replace-eldoc-minibuffer-message-function arg))
   (setq x-underline-at-descent-line t)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode)
-  (moody-replace-eldoc-minibuffer-message-function))
+  (prelude-activate-moody t))
 
 ;; I'm the winner ;-)
 (use-package winner
