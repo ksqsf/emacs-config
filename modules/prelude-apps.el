@@ -159,7 +159,8 @@
 
 (use-package dash-at-point
   :commands (dash-at-point)
-  :bind (("C-c C-d" . dash-at-point)))
+  :bind (:map embark-symbol-map
+         ("d" . dash-at-point)))
 
 (use-package eaf
   :disabled ;; Does not work...
