@@ -295,7 +295,7 @@
 
 ;; For logseq-open-in-emacs, see https://github.com/ksqsf/logseq-open-in-emacs
 (use-package org-protocol
-  :defer t
+  :defer 10
   :ensure org
   :config
   (add-to-list 'org-protocol-protocol-alist
