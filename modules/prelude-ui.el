@@ -334,13 +334,11 @@ The existence of such windows is guaranteed by Emacs."
 
 (global-set-key (kbd "C-x 1") #'k|delete-other-windows)
 
-;; Some more fonts...
+;; Custom fonts
 (custom-theme-set-faces
  'user
  ;; '(default ((t (:family "Hasklig" :height 140))))
  '(variable-pitch ((t (:family "Bookerly" :height 1.0))))
- '(mode-line ((t (:inherit variable-pitch))))
- '(mode-line-inactive ((t (:inherit variable-pitch))))
  '(treemacs-file-face ((t (:inherit variable-pitch))))
  '(treemacs-root-face ((t (:inherit variable-pitch))))
  '(treemacs-directory-face ((t (:inherit variable-pitch))))
