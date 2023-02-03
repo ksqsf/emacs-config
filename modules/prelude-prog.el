@@ -193,4 +193,12 @@ The history is stored in FILENAME."
   :bind ("C-c i" . symbol-overlay-put))
 
 
+;; show git diff info in fringe
+(use-package diff-hl
+  :hook (prog-mode . diff-hl-mode)
+  :hook (dired-mode . diff-hl-dired-mode)
+  :config
+  (diff-hl-margin-mode))
+
+
 (provide 'prelude-prog)
