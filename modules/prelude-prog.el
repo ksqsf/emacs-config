@@ -188,4 +188,9 @@ The history is stored in FILENAME."
   :defer t)
 
 
+(use-package symbol-overlay
+  :hook (prog-mode . symbol-overlay-mode)
+  :bind ("C-c i" . symbol-overlay-put))
+
+
 (provide 'prelude-prog)
