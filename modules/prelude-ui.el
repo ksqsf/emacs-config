@@ -416,4 +416,11 @@ system's dark or light variant."
 
 ;; (global-set-key (kbd "C-x 1") #'window-lift)  ;; Not ready yet.
 
+(use-package dashboard
+  :config
+  (setq dashboard-items '((recents . 5)
+                          (projects . 5)
+                          (registers . 2))))
+
+(setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
 (provide 'prelude-ui)
