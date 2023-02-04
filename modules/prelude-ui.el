@@ -423,4 +423,8 @@ system's dark or light variant."
                           (registers . 2))))
 
 (setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
+
+(use-package hl-line
+  :hook (after-init . global-hl-line-mode))
+
 (provide 'prelude-ui)
