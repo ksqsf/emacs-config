@@ -23,6 +23,11 @@
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
   (vertico-mouse-mode +1))
 
+(use-package vertico-posframe
+  :after vertico
+  :config
+  (vertico-posframe-mode))
+
 (use-package marginalia
   :after (vertico)
   :config
