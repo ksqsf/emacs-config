@@ -23,11 +23,10 @@
    '("9" . meow-digit-argument)
    '("0" . meow-digit-argument)
    '("/" . meow-keypad-describe-key)
-   '("H" . windmove-left)
-   '("J" . windmove-down)
-   '("K" . windmove-up)
-   '("L" . windmove-right)
-   '("?" . meow-cheatsheet))
+   '("?" . meow-cheatsheet)
+   '("p" . projectile-command-map)
+   '("s" . save-buffer)
+   '("t" . "C-x t"))
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)
@@ -108,23 +107,16 @@
 (use-package meow
   :demand t
   :commands (meow-mode meow-global-mode)
+  :hook (after-init . meow-global-mode)
   :config
   (meow-setup)
 
-  (dolist (pair
-           '((fundamental-mode . insert)  ;; insert-mode by default
-             (prog-mode . insert)
-             (text-mode . insert)
-             (vterm-mode . insert)
-             (eshell-mode . insert)
-             (shell-mode . insert)
-             (comint-mode . insert)
-             (magit-mode . insert)
-             (magit-diff-mode . insert)))
-    (add-to-list 'meow-mode-state-list pair))
+  (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
 
-  ;; SPC p
-  (with-eval-after-load 'projectile
-    (meow-leader-define-key (cons "p" projectile-command-map))))
+  (add-hook 'meow-normal-mode-hook #'corfu-quit)
+
+  ;; If cursor-type is nil, don't do anything about the cursor.
+  ;; Needed by treemacs.
+  (add-to-list 'meow-update-cursor-functions-alist (cons 'meow--cursor-null-p (lambda ()))))
 
 (provide 'prelude-meow)
