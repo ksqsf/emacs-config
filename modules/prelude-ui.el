@@ -427,4 +427,12 @@ system's dark or light variant."
 (use-package hl-line
   :hook (after-init . global-hl-line-mode))
 
+;;
+
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
+(setq display-line-numbers-type 'relative
+      display-line-numbers-grow-only t
+      display-line-numbers-width 4)
+
 (provide 'prelude-ui)
