@@ -68,6 +68,8 @@
   :commands (treemacs)
   :config
 
+  (setq treemacs-is-never-other-window t)
+
   ;; Add the name of the current workspace to the mode line
   (defun prelude-treemacs-mode-line ()
     '(" Treemacs " (:eval)))
@@ -141,6 +143,8 @@
   ;; (add-hook 'buffer-list-update-hook #'-treemacs-locate-project-if-in-workspace)
 
   (use-package treemacs-projectile)
+
+  (use-package treemacs-tab-bar)
 
   (use-package treemacs-all-the-icons
     :config
