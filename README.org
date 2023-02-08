@@ -55,17 +55,17 @@ scoped.
 
 The following fonts are "blessed" in this configuration.
 
-| Font                 | Size | Usage                     |
-|----------------------+------+---------------------------|
-| (Any monospace font) |   14 | General use (non-Chinese) |
-| Iosevka Term         |   14 | Tabular content           |
+| Font                 | Point | Usage                         |
+|----------------------+-------+-------------------------------|
+| (Any monospace font) |    14 | General use (non-Chinese)     |
+| Sarasa Mono          |    14 | For perfect Chinese alignment |
 
 ** Better Defaults
 
 These modifications are generally in =prelude-core.el= and
 =prelude-ui.el=.
 
-User-*very*-visible modifications are listed here.
+User-visible modifications are listed here.
 
 *** Expand region
 
@@ -125,7 +125,10 @@ General, which defines its own set of commands.
 Structured editing is a novel editing experience that operates on the
 level of "structures", be it expressions or statements.
 
-I use paredit for the Lisp family. My preferred keybindings are:
+I use paredit for the Lisp family.  For tree-sitter-enabled major
+modes, use combobulate-mode.
+
+My preferred keybindings are:
 
 | Key     | Function             |
 |---------+----------------------|
