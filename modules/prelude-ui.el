@@ -420,7 +420,9 @@ system's dark or light variant."
   :config
   (setq dashboard-items '((recents . 5)
                           (projects . 5)
-                          (registers . 2))))
+                          (registers . 2)))
+  (setq dashboard-center-content t)
+  (setq dashboard-banner-logo-title "Happy Hacking!"))
 
 (setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
 
