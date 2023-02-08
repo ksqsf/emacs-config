@@ -285,4 +285,23 @@
 ;; intuitive.  The "Shift reverse" metaphor seems well established.
 (global-set-key (kbd "M-Y") #'(lambda () (interactive) (yank-pop -1)))
 
+;; find file at point
+(use-package ffap
+  :ensure nil
+  :config
+  (defun ffap-line ()
+    "Like `ffap' but also guesses the target line.
+
+Useful for reading Python exception traces."
+    (interactive)
+    (let ((current-line (buffer-substring (line-beginning-position) (line-end-position)))
+          line-no)
+      (save-match-data
+        (if (string-match "line \\([0-9]+\\)" current-line 0)
+            (setq line-no (string-to-number (match-string 1 current-line)))
+          (string-match "\\([0-9]+\\)" current-line 0)
+          (setq line-no (string-to-number (match-string 1 current-line)))))
+      (ffap)
+      (when line-no
+        (goto-line line-no)))))
 (provide 'prelude-core)
