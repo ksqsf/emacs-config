@@ -151,7 +151,6 @@
     (treemacs-load-theme "all-the-icons")))
 
 (use-package pdf-tools
-  :disabled
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
   (pdf-tools-install)
