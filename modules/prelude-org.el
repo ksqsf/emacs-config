@@ -13,6 +13,7 @@
   :hook (org-mode . org-cdlatex-mode)
   :hook (org-mode . visual-line-mode)
   :hook (org-mode . prelude/set-line-spacing)
+  :hook (org-mode . org-indent-mode)
   :bind (("C-c a" . org-agenda)
 	 ("C-'" . org-cycle-agenda-files)
 	 ("C-c c" . org-capture)
@@ -27,6 +28,7 @@
         org-startup-with-inline-images t
         org-image-actual-width '(300))
   (use-package org-modern
+    :disabled
     :hook (org-mode . org-modern-mode))
   (defun prelude/set-line-spacing ()
     (setq line-spacing 0.2))
