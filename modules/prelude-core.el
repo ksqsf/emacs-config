@@ -304,4 +304,10 @@ Useful for reading Python exception traces."
       (ffap)
       (when line-no
         (goto-line line-no)))))
+
+(use-package dabbrev
+  :ensure nil
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode))
+
 (provide 'prelude-core)
