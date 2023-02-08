@@ -197,4 +197,24 @@ The history is stored in FILENAME."
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
 
+;; structural navigation and editing
+;; depends on emacs 29 treesit.el
+(use-package combobulate
+  :quelpa (combobulate :fetcher github :repo "mickeynp/combobulate")
+  :preface
+  (dolist (mapping '((python-mode . python-ts-mode)
+                     (css-mode . css-ts-mode)
+                     (typescript-mode . tsx-ts-mode)
+                     (js-mode . js-ts-mode)
+                     (css-mode . css-ts-mode)
+                     (yaml-mode . yaml-ts-mode)))
+    (add-to-list 'major-mode-remap-alist mapping))
+  :hook ((python-ts-mode . combobulate-mode)
+         (js-ts-mode . combobulate-mode)
+         (css-ts-mode . combobulate-mode)
+         (yaml-ts-mode . combobulate-mode)
+         (typescript-ts-mode . combobulate-mode)
+         (tsx-ts-mode . combobulate-mode)))
+
+
 (provide 'prelude-prog)
