@@ -97,7 +97,13 @@
         xref-show-definitions-function #'consult-xref)
 
   :config
-  (setq consult-narrow-key "<"))
+  (setq consult-narrow-key "<")
+
+  ;; vertico-posframe overlaps with the matched line.
+  (defun k|recenter-around-top ()
+    "Equivalent to `recenter-top-bottom' with argument 0.2."
+    (recenter (round (* 0.2 (window-height))) t))
+  (setq consult-after-jump-hook '(k|recenter-around-top)))
 
 (use-package embark-consult
   :after (embark consult)
