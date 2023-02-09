@@ -429,6 +429,11 @@ system's dark or light variant."
 (use-package hl-line
   :hook (after-init . global-hl-line-mode))
 
+(use-package solaire-mode
+  :hook (after-init . solaire-global-mode)
+  :config
+  (solaire-global-mode +1))
+
 ;;
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
