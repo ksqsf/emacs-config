@@ -1,0 +1,11 @@
+(defun frame-enter-animation (&optional frame from to)
+  (interactive)
+  (setq from (or from 0))
+  (setq to (or to 100))
+  (dolist (i (number-sequence from to))
+    (message "%s" i)
+    (let ((alpha (* i 0.01)))
+      (set-frame-parameter frame 'alpha alpha)
+      (sit-for 0.001))))
+
+;; (frame-enter-animation nil 0 97)
