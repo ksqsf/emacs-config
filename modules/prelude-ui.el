@@ -204,6 +204,7 @@
    ("^\\*vterm"
     (display-buffer-reuse-window
      display-buffer-below-selected)
+    (window-height . 0.37)
     (inhibit-same-window . nil)
     (dedicated . t))))
 
