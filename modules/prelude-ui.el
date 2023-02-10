@@ -425,15 +425,31 @@ system's dark or light variant."
   (setq dashboard-center-content t)
   (setq dashboard-banner-logo-title "Happy Hacking!"))
 
-(setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
+(use-package tab-bar
+  :ensure nil
+  :hook (after-init . tab-bar-mode)
+  :config
+  (setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
+
+  (with-eval-after-load 'all-the-icons
+    ;; the low-res icons are soooo ugly!!
+    ;; the proper way to do this is perhaps defining tab-bar-* icons before loading tab-bar
+    ;; but all-the-icons has another definition for 'define-icon'.
+    ;; so let's do it this way until all-the-icons remove that definition.
+    (setq tab-bar-new-button (all-the-icons-material "add")
+          tab-bar-back-button (all-the-icons-faicon "chevron-left")
+          tab-bar-forward-button (all-the-icons-faicon "chevron-right")))
+  ;; we can't use all-the-icons for the close button because its face
+  ;; gets overwritten by tab-bar's format function.
+  (setq tab-bar-close-button-show t)
+  (setq tab-bar-close-button (propertize " ⨉" 'close-tab t))
+  (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab)))
 
 (use-package hl-line
   :hook (after-init . global-hl-line-mode))
 
 (use-package solaire-mode
-  :hook (after-init . solaire-global-mode)
-  :config
-  (solaire-global-mode +1))
+  :hook (after-init . solaire-global-mode))
 
 ;;
 
