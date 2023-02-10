@@ -28,18 +28,18 @@
 (require 'prelude-package)
 (require 'prelude-common)
 
-;; (require 'prelude-benchmark)
+(require 'prelude-benchmark)
 (require 'prelude-core)
 (require 'prelude-ui)
+(require 'prelude-project)
+(require 'prelude-completion)
 
 ;; (require 'prelude-meow)
 ;; (require 'prelude-evil)
 (require 'prelude-nix)
 
 (require 'prelude-search)
-(require 'prelude-completion)
 (require 'prelude-ibuffer)
-(require 'prelude-project)
 (require 'prelude-chinese)
 (require 'prelude-dired)
 (require 'prelude-git)
