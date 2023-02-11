@@ -167,7 +167,11 @@
                          logseq.Git.saveIgnoreFile
                          logseq.Git.loadIgnoreFile
                          logseq.Git.execCommand)
-  "List of symbols of Logseq plugin APIs.")
+  "List of symbols of Logseq plugin APIs.
+
+Each symbol corresponds to two Lisp functions.
+- logseq.Editor.getBlock uses the default `logseq' instance.
+- logseq.Editor.getBlock. has an additional argument to use a custom `logseq' instance.")
 
 (dolist (api logseq--apis)
   (defalias api
@@ -180,12 +184,12 @@
        (logseq--call ,(symbol-name api) args :logseq logseq))))
 
 (define-minor-mode logseq-query-mode
-  "Edit and run simple queries."
+  "Edit and run Logseq queries."
   :keymap (let ((keymap (make-sparse-keymap)))
-            (define-key keymap (kbd "C-c C-c") 'logseq-query-run)
+            (define-key keymap (kbd "C-c C-c") 'logseq-run-query-dwim)
             keymap))
 
-(defun logseq-query-run ()
+(defun logseq-run-simple-query ()
   "Run the query in this buffer and display the results in *logseq-query*."
   (interactive)
   (let ((query (buffer-string)))
@@ -194,5 +198,35 @@
       (erase-buffer)
       (insert (json-serialize (logseq.DB.q query)))
       (json-pretty-print-buffer-ordered))))
+
+(defun logseq-run-advanced-query ()
+  "Run the query in this buffer and display the results in *logseq-query*."
+  (interactive)
+  (let ((query (buffer-string)))
+    (display-buffer (get-buffer-create "*logseq-query*"))
+    (with-current-buffer "*logseq-query*"
+      (erase-buffer)
+      (insert (json-serialize (logseq.DB.datascriptQuery query)))
+      (json-pretty-print-buffer-ordered))))
+
+(defun logseq-run-query-dwim ()
+  "Run the query in this buffer and display the results in *logseq-query*."
+  (interactive)
+  ;; look at the first non-whitespace character
+  ;; if it's (, it is a simple query, otherwise an advanced query.
+  (save-excursion
+    (skip-chars-forward " \t\n\r")
+    (if (looking-at-p "(")
+        (logseq-run-simple-query)
+      (logseq-run-advanced-query))))
+
+(defconst logseq-advanced-query-skeleton "[:find (pull ?block [*])
+ :where
+ [?block :block/name ?pagename]]")
+
+(defun logseq-advanced-query-insert-skeleton ()
+  "Insert a skeleton of the advanced query."
+  (interactive)
+  (insert logseq-advanced-query-skeleton))
 
 (provide 'logseq)
