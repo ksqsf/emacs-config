@@ -215,11 +215,11 @@ Each symbol corresponds to two Lisp functions.
   (interactive)
   ;; look at the first non-whitespace character
   ;; if it's (, it is a simple query, otherwise an advanced query.
-  (save-excursion
-    (skip-chars-forward " \t\n\r")
-    (if (looking-at-p "(")
-        (logseq-run-simple-query)
-      (logseq-run-advanced-query))))
+  (if (save-excursion
+        (skip-chars-forward " \t\n\r")
+        (looking-at-p "("))
+      (logseq-run-simple-query)
+    (logseq-run-advanced-query)))
 
 (defconst logseq-advanced-query-skeleton "[:find (pull ?block [*])
  :where
