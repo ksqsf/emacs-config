@@ -19,7 +19,10 @@
           ("\\.jpg\\'" k|default-opener)))
 
   (when k|mac
-    (setq dired-omit-files "\\`[.]?#\\|\\`[.][.]?\\'\\|\\.DS_Store\\|\\.localized")))
+    (setq dired-omit-files "\\`[.]?#\\|\\`[.][.]?\\'\\|\\.DS_Store\\|\\.localized"))
+
+  ;; revisiting an existing Dired buffer always reverts it
+  (setq dired-auto-revert-buffer t))
 
 (use-package dired-filter
   :after (dired)

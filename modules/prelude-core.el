@@ -10,6 +10,11 @@
 (use-package gcmh
   :hook (after-init . gcmh-mode))
 
+;; auto revert everything, including dired
+(global-auto-revert-mode)
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
 ;; No-littering
 (use-package no-littering
   :config
