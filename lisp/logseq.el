@@ -187,6 +187,7 @@ Each symbol corresponds to two Lisp functions.
   "Edit and run Logseq queries."
   :keymap (let ((keymap (make-sparse-keymap)))
             (define-key keymap (kbd "C-c C-c") 'logseq-run-query-dwim)
+            (define-key keymap (kbd "C-c C-i") 'logseq-advanced-query-insert-skeleton)
             keymap))
 
 (defun logseq-run-simple-query ()
