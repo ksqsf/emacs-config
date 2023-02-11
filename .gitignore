@@ -63,3 +63,6 @@ newsrc.eld
 
 # cache
 .cache/
+
+# triples
+triples.db

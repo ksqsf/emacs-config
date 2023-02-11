@@ -235,6 +235,7 @@
 
 ;; Pop-up windows
 (use-package popper
+  :disabled
   :defer 1
   :bind (("C-`" . popper-toggle-latest)
          ;; ("M-`" . popper-cycle)
