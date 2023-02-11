@@ -50,9 +50,9 @@
                  :data (json-encode `(("method" . ,method) ("args" . ,(seq-into args 'vector))))
                  :complete 'ignore))
          (data (request-response-data resp)))
-    (condition-case nil
-        (json-parse-string  data)
-      (json-error data))))
+    (if (string-prefix-p "application/json" (request-response-header resp "Content-Type"))
+        (json-parse-string data)
+      data)))
 
 (defconst logseq--apis '(logseq.settings
                          logseq.updateSettings
