@@ -176,7 +176,7 @@ Each symbol corresponds to two Lisp functions.
 (dolist (api logseq--apis)
   (defalias api
     `(lambda (&rest args)
-       ,(format "Call Logseq API %s using the default Logseq instance LOGSEQ." (symbol-name api))
+       ,(format "Call Logseq API %s using the default Logseq instance." (symbol-name api))
        (logseq--call ,(symbol-name api) args)))
   (defalias (intern (format "%s." (symbol-name api)))
     `(lambda (logseq &rest args)
