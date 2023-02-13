@@ -1,3 +1,41 @@
+;;; logseq.el --- Interface to Logseq remote API     -*- lexical-binding: t; -*-
+
+;; Author: ksqsf <i@ksqsf.moe>
+;; URL: https://github.com/ksqsf/logseq
+;; Version: 0.1
+;; Package-Requires: ((emacs "27") request)
+
+;; Copyright (C) 2023  ksqsf
+
+;;; Commentary:
+
+;; This module provides (1) a complete wrapper to Logseq remote API
+;; and (2) commands to quickly issue queries.
+
+;; For each API, there will be two functions.
+;;   1. (apiName  arg1 arg2 ...)
+;;   2. (apiName. logseq-instance arg1 arg2 ...)
+;; For example:
+;;   1. (logseq.DB.q query-str)
+;;   2. (logseq.DB.q. logseq-instance query-str)
+;;
+;; logseq-instance can be constructed with 'make-logseq'.
+;;
+;; The first variant uses the default instance constructed from user
+;; options in the customization group 'logseq'.
+
+;; 'logseq-query-mode' provides a quick way to query logseq graphs
+;; inside Emacs.  It is very useful for writing complex queries.
+;;
+;; 1. In any buffer, say *scratch*, activate 'logseq-query-mode'.
+;; 2. Write your queries, either advanced or simple.
+;;    You can use 'C-c C-i' to insert a template.
+;; 3. 'C-c C-c' (or 'logseq-run-query-dwim') to issue your query.
+;;    The results will be nicely formatted and dispalyed in
+;;    *logseq-query*.
+
+;;; Code:
+
 (require 'json)
 (require 'request)
 
@@ -7,20 +45,17 @@
 (defcustom logseq-default-host "127.0.0.1"
   "The default host used when no `logseq' instance is provided."
   :group 'logseq
-  :type 'string
-  :set 'logseq--update-default-instance)
+  :type 'string)
 
 (defcustom logseq-default-port 12315
   "The default port used when no `logseq' instance is provided."
   :group 'logseq
-  :type 'integer
-  :set 'logseq--update-default-instance)
+  :type 'integer)
 
 (defcustom logseq-default-token ""
   "The default token used when no `logseq' instance is provided."
   :group 'logseq
-  :type 'string
-  :set 'logseq--update-default-instance)
+  :type 'string)
 
 (cl-defstruct (logseq (:type vector))
   "A Logseq instance holds information for future API calls."
@@ -28,20 +63,25 @@
   (port 12315)
   token)
 
-(defvar logseq--default (make-logseq :host logseq-default-host
-                                     :port logseq-default-port
-                                     :token logseq-default-token))
+(defvar logseq--default nil
+  "The default logseq instance.  Should only by set by
+`with-logseq'.")
 
-(defun logseq--update-default-instance (symbol value)
-  "Update `logseq--default' after the user options are changed."
-  (setq logseq--default (make-logseq :host logseq-default-host
-                                     :port logseq-default-port
-                                     :token logseq-default-token))
-  (set-default-toplevel-value symbol value))
+(defun logseq-default ()
+  (or logseq--default
+      (make-logseq :host logseq-default-host
+                   :port logseq-default-port
+                   :token logseq-default-token)))
+
+(defmacro with-logseq (logseq &rest forms)
+  "Temporarily set the default instance to LOGSEQ."
+  (declare (indent 1))
+  `(let ((logseq--default logseq))
+     ,@forms))
 
 (cl-defun logseq--call (method args &key logseq)
   "Initiate HTTP request for METHOD with arguments ARGS."
-  (setq logseq (or logseq logseq--default))
+  (setq logseq (or logseq (logseq-default)))
   (let* ((resp (request (format "http://%s:%d/api" (logseq-host logseq) (logseq-port logseq))
                  :sync t
                  :type "POST"
@@ -200,14 +240,34 @@ Each symbol corresponds to two Lisp functions.
       (insert (json-serialize (logseq.DB.q query)))
       (json-pretty-print-buffer-ordered))))
 
+(defun logseq--collect-sexps (&optional start count)
+  "Collect COUNT sexps (string reps) as a list.
+
+If COUNT is nil, read until end of buffer."
+  (let (last)
+    (setq last (or start (point)))
+    (cl-loop while (or (null count) (> count 0))
+             do (forward-sexp)
+             until (= last (point))
+             for str = (string-trim (buffer-substring last (point)))
+             until (string= "" str)
+             collect str
+             do (setq last (point))
+             do (when count (cl-decf count)))))
+
 (defun logseq-run-advanced-query ()
-  "Run the query in this buffer and display the results in *logseq-query*."
+  "Run the query in this buffer and display the results in *logseq-query*.
+
+The first sexp should be the query.  Any sexp following it will
+be considered an input."
   (interactive)
-  (let ((query (buffer-string)))
+  (let* ((query-end (scan-sexps (point-min) 1))
+         (query (buffer-substring (point-min) query-end))
+         (inputs (logseq--collect-sexps query-end)))
     (display-buffer (get-buffer-create "*logseq-query*"))
     (with-current-buffer "*logseq-query*"
       (erase-buffer)
-      (insert (json-serialize (logseq.DB.datascriptQuery query)))
+      (insert (json-serialize (apply 'logseq.DB.datascriptQuery query inputs)))
       (json-pretty-print-buffer-ordered))))
 
 (defun logseq-run-query-dwim ()
@@ -231,3 +291,4 @@ Each symbol corresponds to two Lisp functions.
   (insert logseq-advanced-query-skeleton))
 
 (provide 'logseq)
+;;; logseq.el ends here
