@@ -22,6 +22,7 @@
 ;; use Emacs to kill a word, the old clipboard data will be lost.
 ;; 1024 seems large enough.
 (setq save-interprogram-paste-before-kill 1024)
+(setq kill-do-not-save-duplicates t)
 
 ;; No-littering
 (use-package no-littering
