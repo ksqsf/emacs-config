@@ -17,6 +17,11 @@
 (when auto-revert-use-notify
   (setq auto-revert-avoid-polling t))
 
+;; Save clipboard before changing the kill state.  The typical
+;; scenario is that, if you copy something from other programs, then
+;; use Emacs to kill a word, the old clipboard data will be lost.
+;; 1024 seems large enough.
+(setq save-interprogram-paste-before-kill 1024)
 
 ;; No-littering
 (use-package no-littering
