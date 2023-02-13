@@ -1,7 +1,7 @@
 ;;; logseq.el --- Interface to Logseq remote API     -*- lexical-binding: t; -*-
 
 ;; Author: ksqsf <i@ksqsf.moe>
-;; URL: https://github.com/ksqsf/logseq
+;; URL: https://github.com/ksqsf/emacs-config
 ;; Version: 0.1
 ;; Package-Requires: ((emacs "27") request)
 
