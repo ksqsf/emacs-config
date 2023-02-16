@@ -223,6 +223,7 @@ Each symbol corresponds to two Lisp functions.
        ,(format "Call Logseq API %s using the supplied Logseq instance LOGSEQ." (symbol-name api))
        (logseq--call ,(symbol-name api) args :logseq logseq))))
 
+;;;###autoload
 (define-minor-mode logseq-query-mode
   "Edit and run Logseq queries."
   :keymap (let ((keymap (make-sparse-keymap)))
@@ -244,16 +245,18 @@ Each symbol corresponds to two Lisp functions.
   "Collect COUNT sexps (string reps) as a list.
 
 If COUNT is nil, read until end of buffer."
-  (let (last)
-    (setq last (or start (point)))
-    (cl-loop while (or (null count) (> count 0))
-             do (forward-sexp)
-             until (= last (point))
-             for str = (string-trim (buffer-substring last (point)))
-             until (string= "" str)
-             collect str
-             do (setq last (point))
-             do (when count (cl-decf count)))))
+  (save-excursion
+    (let (last)
+      (setq last (or start (point)))
+      (goto-char last)
+      (cl-loop while (or (null count) (> count 0))
+               do (forward-sexp)
+               until (= last (point))
+               for str = (string-trim (buffer-substring last (point)))
+               until (string= "" str)
+               collect str
+               do (setq last (point))
+               do (when count (cl-decf count))))))
 
 (defun logseq-run-advanced-query ()
   "Run the query in this buffer and display the results in *logseq-query*.
@@ -261,15 +264,17 @@ If COUNT is nil, read until end of buffer."
 The first sexp should be the query.  Any sexp following it will
 be considered an input."
   (interactive)
-  (let* ((query-end (scan-sexps (point-min) 1))
-         (query (buffer-substring (point-min) query-end))
-         (inputs (logseq--collect-sexps query-end)))
-    (display-buffer (get-buffer-create "*logseq-query*"))
-    (with-current-buffer "*logseq-query*"
-      (erase-buffer)
-      (insert (json-serialize (apply 'logseq.DB.datascriptQuery query inputs)))
-      (json-pretty-print-buffer-ordered))))
+  (save-excursion
+    (let* ((query-end (scan-sexps (point-min) 1))
+           (query (buffer-substring (point-min) query-end))
+           (inputs (logseq--collect-sexps query-end)))
+      (display-buffer (get-buffer-create "*logseq-query*"))
+      (with-current-buffer "*logseq-query*"
+        (erase-buffer)
+        (insert (json-serialize (apply 'logseq.DB.datascriptQuery query inputs)))
+        (json-pretty-print-buffer-ordered)))))
 
+;;;###autoload
 (defun logseq-run-query-dwim ()
   "Run the query in this buffer and display the results in *logseq-query*."
   (interactive)
@@ -285,6 +290,7 @@ be considered an input."
  :where
  [?block :block/name ?pagename]]")
 
+;;;###autoload
 (defun logseq-advanced-query-insert-skeleton ()
   "Insert a skeleton of the advanced query."
   (interactive)

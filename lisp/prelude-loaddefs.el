@@ -84,13 +84,6 @@ it is disabled.
 
 ;;;***
 
-;;;### (autoloads nil "erc-sasl" "erc-sasl.el" (0 0 0 0))
-;;; Generated autoloads from erc-sasl.el
-
-(register-definition-prefixes "erc-sasl" '("erc-sasl-"))
-
-;;;***
-
 ;;;### (autoloads nil "fish-protector" "fish-protector.el" (0 0 0
 ;;;;;;  0))
 ;;; Generated autoloads from fish-protector.el
@@ -104,6 +97,13 @@ it is disabled.
 (autoload 'fish-protector-show-stats "fish-protector" nil t)
 
 (register-definition-prefixes "fish-protector" '("fp-"))
+
+;;;***
+
+;;;### (autoloads nil "flashback" "flashback.el" (0 0 0 0))
+;;; Generated autoloads from flashback.el
+
+(register-definition-prefixes "flashback" '("flashback-"))
 
 ;;;***
 
@@ -146,6 +146,38 @@ If ARG is greater than zero then this mode will be turned on.
 \(fn &optional ARG)" t)
 
 (register-definition-prefixes "highlight-tail" '("highlight-tail-"))
+
+;;;***
+
+;;;### (autoloads nil "logseq" "logseq.el" (0 0 0 0))
+;;; Generated autoloads from logseq.el
+
+(autoload 'logseq-query-mode "logseq" "\
+Edit and run Logseq queries.
+
+This is a minor mode.  If called interactively, toggle the
+`Logseq-Query mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `logseq-query-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t)
+
+(autoload 'logseq-run-query-dwim "logseq" "\
+Run the query in this buffer and display the results in *logseq-query*." t)
+
+(autoload 'logseq-advanced-query-insert-skeleton "logseq" "\
+Insert a skeleton of the advanced query." t)
+
+(register-definition-prefixes "logseq" '("logseq-" "with-logseq"))
 
 ;;;***
 
