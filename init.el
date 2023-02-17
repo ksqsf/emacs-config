@@ -17,12 +17,14 @@
 (add-to-list 'load-path prelude-lisp-dir)
 (add-to-list 'load-path prelude-modules-dir)
 
+;; Replace Emacs paths early -- before doing anything.
+(use-package no-littering
+  :config
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
 ;;; Set up autoloads from prelude-lisp-dir.
 (require 'prelude-loaddefs)
-
-;; Customization.
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file t)
 
 ;; Modules.
 (require 'prelude-package)
@@ -52,13 +54,14 @@
 (require 'prelude-lang-cc)
 (require 'prelude-lang-python)
 (require 'prelude-lang-rust)
-(require 'prelude-lang-coq)
+;; (require 'prelude-lang-coq)
 (require 'prelude-lang-ml)
 (require 'prelude-lang-js)
 (require 'prelude-lang-haskell)
-(require 'prelude-lang-agda)
+;; (require 'prelude-lang-agda)
 (require 'prelude-lang-web)
-(require 'prelude-lang-zig)
+;; (require 'prelude-lang-zig)
+(require 'prelude-lang-misc)
 
 (require 'prelude-help)
 (require 'prelude-os)
@@ -70,6 +73,10 @@
 (when (file-exists-p prelude-volatile-dir)
   (message "Loading volatile configuration files in %s..." prelude-volatile-dir)
   (mapc 'load (directory-files prelude-volatile-dir 't "^[^#\.].*el$")))
+
+;; Customization.
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file t)
 
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'list-timers 'disabled nil)

@@ -142,11 +142,14 @@
   ;; (add-hook 'projectile-after-switch-project-hook #'-treemacs-add-project-to-workspace-or-switch)
   ;; (add-hook 'buffer-list-update-hook #'-treemacs-locate-project-if-in-workspace)
 
-  (use-package treemacs-projectile)
+  (use-package treemacs-projectile
+    :demand t)
 
-  (use-package treemacs-tab-bar)
+  (use-package treemacs-tab-bar
+    :demand t)
 
   (use-package treemacs-all-the-icons
+    :demand t
     :config
     (treemacs-load-theme "all-the-icons")))
 
@@ -199,6 +202,7 @@
 
 ;; rime
 (use-package rime
+  :disabled
   :custom
   (default-input-method "rime")
   (rime-librime-root "~/.emacs.d/librime/dist"))

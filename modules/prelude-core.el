@@ -4,11 +4,8 @@
 
 (setq confirm-kill-emacs 'yes-or-no-p)
 
-;; GC less conservative.  No more frequently than every 100 MiB.
-(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 100 1024 1024))))
+;; GC.
 (add-hook 'focus-out-hook #'garbage-collect)
-(use-package gcmh
-  :hook (after-init . gcmh-mode))
 
 ;; auto revert everything, including dired.
 (global-auto-revert-mode)
@@ -23,12 +20,6 @@
 ;; 1024 seems large enough.
 (setq save-interprogram-paste-before-kill 1024)
 (setq kill-do-not-save-duplicates t)
-
-;; No-littering
-(use-package no-littering
-  :config
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 ;; Move backups away
 (setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory))))

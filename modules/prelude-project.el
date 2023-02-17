@@ -9,17 +9,19 @@
   :bind-keymap ("H-p" . projectile-command-map)
 
   :custom
+  (projectile-auto-discover nil)
   (projectile-completion-system 'auto)
   (projectile-switch-project-action #'projectile-dired)
   (projectile-find-dir-includes-top-level t)
   (projectile-enable-caching nil)  ; Projectile will save a cache file, which is
                                    ; slow for large projects.
 
-  :config
+  :bind (:map projectile-command-map
+              ("x x" . projectile-run-vterm)
+              ("s s" . projectile-ripgrep)
+              ("s a" . projectile-ag))
 
-  (define-key projectile-command-map (kbd "x x") #'projectile-run-vterm)
-  (define-key projectile-command-map (kbd "s s") #'projectile-ripgrep)
-  (define-key projectile-command-map (kbd "s a") #'projectile-ag)
+  :config
 
   ;; Support for Citre (a u-ctags frontend).
   (advice-add 'projectile-regenerate-tags :around

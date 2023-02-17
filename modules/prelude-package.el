@@ -12,7 +12,7 @@
 ;; quelpa
 (use-package quelpa
   :ensure t
-  :after (no-littering)
+  :demand t
   :init
   (setq quelpa-update-melpa-p nil)
   (setq quelpa-upgrade-p nil)
@@ -23,6 +23,7 @@
         quelpa-persistent-cache-file (no-littering-expand-var-file-name "quelpa/cache")))
 (use-package quelpa-use-package
   :ensure t
+  :demand t
   :init
   (quelpa-use-package-activate-advice))
 

@@ -24,12 +24,12 @@
   (vertico-mouse-mode +1))
 
 (use-package vertico-posframe
-  :after vertico
+  :hook (vertico-mode . vertico-posframe-mode)
   :config
-  (vertico-posframe-mode))
+  (setq vertico-posframe-border-width 3))
 
 (use-package marginalia
-  :after (vertico)
+  :hook (after-init . marginalia-mode)
   :config
   (marginalia-mode))
 
@@ -107,7 +107,6 @@
 
 (use-package embark-consult
   :after (embark consult)
-  :demand t
   :hook
   (embark-consult-mode . consult-preview-at-point-mode))
 
