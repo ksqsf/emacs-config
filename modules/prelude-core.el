@@ -5,7 +5,10 @@
 (setq confirm-kill-emacs 'yes-or-no-p)
 
 ;; GC.
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 1000 1024 1024))))
 (add-hook 'focus-out-hook #'garbage-collect)
+(use-package gcmh
+  :hook (after-init . gcmh-mode))
 
 ;; auto revert everything, including dired.
 (global-auto-revert-mode)
@@ -159,6 +162,7 @@
   (setenv "LANG" "zh_CN.utf-8")
 
   (use-package exec-path-from-shell
+    :demand t
     :init
     (setq exec-path-from-shell-arguments '("-l"))
     :config

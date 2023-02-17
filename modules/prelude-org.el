@@ -55,6 +55,7 @@
     (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 
   ;; Babel
+  (use-package ob-rust :demand t)
   (org-babel-do-load-languages
    'org-babel-load-languages '((C . t)
                                (emacs-lisp . t)

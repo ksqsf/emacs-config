@@ -86,7 +86,7 @@
 
 ;; Eye candy icons
 (use-package all-the-icons
-  :defer t)
+  :demand t)
 
 ;; Rainbow
 (use-package rainbow-mode
@@ -425,7 +425,7 @@ system's dark or light variant."
 
 (use-package tab-bar
   :ensure nil
-  :after (all-the-icons)
+  :demand t
   :hook (after-init . tab-bar-mode)
   :hook (after-init . tab-bar-history-mode)
   :config

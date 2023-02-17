@@ -30,6 +30,5 @@
 
 ;; Set up use-package for user config
 (setq use-package-always-ensure t)  ; All packages used have to be installed
-(setq use-package-always-defer t)   ; It should be safe
 
 (provide 'prelude-package)
