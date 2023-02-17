@@ -179,6 +179,9 @@
   (setq ns-command-modifier 'meta)
 
   (global-set-key (kbd "H-t") tab-prefix-map)
+  (global-set-key (kbd "H-n") #'tab-new)
+  (global-set-key (kbd "H-w") #'tab-close)
+  (global-set-key (kbd "H-z") #'tab-undo)
 
   ;; (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
   ;; (global-set-key (kbd "s-v") #'clipboard-yank)
