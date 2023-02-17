@@ -8,15 +8,12 @@
 (global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
 
 ;; Enable smooth scroll when it's available
-;; ... but it's still buggy.
-;; (when (fboundp 'pixel-scroll-precision-mode)
-;;   (pixel-scroll-precision-mode t))
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode t))
 
 ;; Don't show useless UI elements
-(add-hook 'after-init-hook
-          #'(lambda ()
-              (menu-bar-mode 1)
-              (tool-bar-mode 0)))
+(menu-bar-mode 1)
+(tool-bar-mode -1)
 
 ;; My vendor settings!
 ;; 1. Choose a better background color (thanks to Xah Lee)
@@ -337,15 +334,15 @@ The existence of such windows is guaranteed by Emacs."
 (global-set-key (kbd "C-x 1") #'k|delete-other-windows)
 
 ;; Custom fonts
-(custom-theme-set-faces
- 'user
+(custom-set-faces
  ;; '(default ((t (:family "Hasklig" :height 140))))
  '(variable-pitch ((t (:family "Bookerly" :height 1.0))))
- '(treemacs-file-face ((t (:inherit variable-pitch))))
- '(treemacs-root-face ((t (:inherit variable-pitch))))
- '(treemacs-directory-face ((t (:inherit variable-pitch))))
- '(treemacs-directory-collapsed-face ((t (:inherit variable-pitch))))
- '(treemacs-git-ignored-face ((t (:inherit variable-pitch)))))
+ ;; '(treemacs-file-face ((t (:inherit variable-pitch))))
+ ;; '(treemacs-root-face ((t (:inherit variable-pitch))))
+ ;; '(treemacs-directory-face ((t (:inherit variable-pitch))))
+ ;; '(treemacs-directory-collapsed-face ((t (:inherit variable-pitch))))
+ ;; '(treemacs-git-ignored-face ((t (:inherit variable-pitch))))
+ )
 
 ;; Preferred dark and light themes.
 (defcustom prelude-enable-switch-dark-light nil
@@ -428,18 +425,19 @@ system's dark or light variant."
 
 (use-package tab-bar
   :ensure nil
+  :after (all-the-icons)
   :hook (after-init . tab-bar-mode)
+  :hook (after-init . tab-bar-history-mode)
   :config
   (setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
 
-  (with-eval-after-load 'all-the-icons
-    ;; the low-res icons are soooo ugly!!
-    ;; the proper way to do this is perhaps defining tab-bar-* icons before loading tab-bar
-    ;; but all-the-icons has another definition for 'define-icon'.
-    ;; so let's do it this way until all-the-icons remove that definition.
-    (setq tab-bar-new-button (all-the-icons-material "add")
-          tab-bar-back-button (all-the-icons-faicon "chevron-left")
-          tab-bar-forward-button (all-the-icons-faicon "chevron-right")))
+  ;; the low-res icons are soooo ugly!!
+  ;; the proper way to do this is perhaps defining tab-bar-* icons before loading tab-bar
+  ;; but all-the-icons has another definition for 'define-icon'.
+  ;; so let's do it this way until all-the-icons remove that definition.
+  (setq tab-bar-new-button (all-the-icons-material "add")
+        tab-bar-back-button (all-the-icons-faicon "chevron-left")
+        tab-bar-forward-button (all-the-icons-faicon "chevron-right"))
   ;; we can't use all-the-icons for the close button because its face
   ;; gets overwritten by tab-bar's format function.
   (setq tab-bar-close-button-show t)
