@@ -8,10 +8,10 @@
 
 ;; use-package
 (require 'use-package)
-(setq use-package-always-ensure t)      ; All packages used have to be installed
 
 ;; quelpa
 (use-package quelpa
+  :ensure t
   :after (no-littering)
   :init
   (setq quelpa-update-melpa-p nil)
@@ -21,8 +21,13 @@
         quelpa-melpa-dir (no-littering-expand-var-file-name "quelpa/melpa/")
         quelpa-packages-dir (no-littering-expand-var-file-name "quelpa/packages/")
         quelpa-persistent-cache-file (no-littering-expand-var-file-name "quelpa/cache")))
-(use-package quelpa-use-package)
+(use-package quelpa-use-package
+  :ensure t
+  :init
+  (quelpa-use-package-activate-advice))
 
-(quelpa-use-package-activate-advice)    ; Don't consult melpa when :quelpa is found
+;; Set up use-package for user config
+(setq use-package-always-ensure t)  ; All packages used have to be installed
+(setq use-package-always-defer t)   ; It should be safe
 
 (provide 'prelude-package)
