@@ -21,10 +21,11 @@
         quelpa-melpa-dir (no-littering-expand-var-file-name "quelpa/melpa/")
         quelpa-packages-dir (no-littering-expand-var-file-name "quelpa/packages/")
         quelpa-persistent-cache-file (no-littering-expand-var-file-name "quelpa/cache")))
+
 (use-package quelpa-use-package
   :ensure t
   :demand t
-  :init
+  :config
   (quelpa-use-package-activate-advice))
 
 ;; Set up use-package for user config
