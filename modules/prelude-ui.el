@@ -16,9 +16,6 @@
 (tool-bar-mode -1)
 
 ;; My vendor settings!
-;; 1. Choose a better background color (thanks to Xah Lee)
-;; 2. Better default size
-;;
 ;; I strongly advise you write equivalent settings in your ~/.Xresources!
 (setq default-frame-alist nil)
 (setq initial-frame-alist nil)
@@ -450,12 +447,21 @@ system's dark or light variant."
 (use-package solaire-mode
   :hook (after-init . solaire-global-mode))
 
-;;
 
+;; line numbers
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 (setq display-line-numbers-type 'relative
       display-line-numbers-grow-only t
       display-line-numbers-width 4)
+
+
+;; toggle mwheel horizontal scroll when toggling truncate-lines
+(advice-add 'toggle-truncate-lines :after '+enable-horizontal-scroll)
+(defun +enable-horizontal-scroll (&rest _)
+  (if truncate-lines
+      (progn (setq mouse-wheel-tilt-scroll t)
+             (setq mouse-wheel-flip-direction t))
+    (setq mouse-wheel-tilt-scroll nil)))
 
 (provide 'prelude-ui)
