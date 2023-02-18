@@ -192,7 +192,10 @@
   (define-key key-translation-map (kbd "<help>") (kbd "<insert>"))
 
   ;; macport feature: too slow!
-  (setq mac-mouse-wheel-smooth-scroll nil))
+  (setq mac-mouse-wheel-smooth-scroll nil)
+
+  ;; mitigate tearing
+  (setq recenter-redisplay t))
 
 ;; Disable keys I don't use.
 (global-unset-key (kbd "C-x C-n"))
