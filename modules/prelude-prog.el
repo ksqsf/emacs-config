@@ -59,6 +59,7 @@
 
 (use-package eglot
   :commands (eglot eglot-ensure)
+  :hook (eglot . eglot-inlay-hints-mode)
   :config
   (setq eglot-confirm-server-initiated-edits nil
         eglot-autoreconnect 60
