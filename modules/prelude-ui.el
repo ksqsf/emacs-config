@@ -464,4 +464,8 @@ system's dark or light variant."
              (setq mouse-wheel-flip-direction t))
     (setq mouse-wheel-tilt-scroll nil)))
 
+
+(use-package page-break-lines
+  :hook (prog-mode . page-break-lines-mode))
+
 (provide 'prelude-ui)
