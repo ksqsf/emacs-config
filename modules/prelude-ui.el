@@ -15,18 +15,7 @@
 (menu-bar-mode 1)
 (tool-bar-mode -1)
 
-;; My vendor settings!
-;; I strongly advise you write equivalent settings in your ~/.Xresources!
-(setq default-frame-alist nil)
-(setq initial-frame-alist nil)
-(if (display-graphic-p)
-    (progn
-      (setq default-frame-alist
-            '((vertical-scroll-bars . nil))))
-  (progn
-    (setq default-frame-alist '((tool-bar-lines . 0)))))
-(add-to-list 'default-frame-alist '(height . 50))
-(add-to-list 'default-frame-alist '(width . 120))
+;; NOTE: {initial,default}-buffer-alist is moved to early-init.el
 
 ;; Mac-specific settings
 (when k|mac
