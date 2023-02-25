@@ -71,8 +71,7 @@
          ("M-9" . winum-select-window-9)))
 
 ;; Eye candy icons
-(use-package all-the-icons
-  :demand t)
+(use-package all-the-icons)
 
 ;; Rainbow
 (use-package rainbow-mode
@@ -401,7 +400,6 @@ system's dark or light variant."
 
 (use-package tab-bar
   :ensure nil
-  :demand t
   :hook (after-init . tab-bar-mode)
   :hook (after-init . tab-bar-history-mode)
   :config
