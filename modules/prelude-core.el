@@ -42,6 +42,11 @@
 (setq delete-active-region t)
 (delete-selection-mode t)
 
+;; Scroll: avoid surprises (try to make scrolling "continous")
+(setq scroll-conservatively most-positive-fixnum) ; Never recenters
+(setq scroll-margin 1)
+(setq scroll-preserve-screen-position t)
+
 ;; Disable fancy features when the file is too large
 (global-so-long-mode t)
 
