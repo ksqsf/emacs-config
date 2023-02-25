@@ -59,6 +59,9 @@
 (defvar leitner-decks (make-hash-table)
   "Known decks in the Leitner system.")
 
+(defvar leitner-updated nil
+  "Non-nil if there is new progress.")
+
 ;;;###autoload
 (defmacro leitner-defdeck (id name &rest plist)
   "Define a Leitner deck with the id ID and human-readable name NAME."
@@ -101,18 +104,22 @@
   (with-temp-buffer
     (insert (prin1-to-string leitner-decks))
     (write-file leitner-decks-file))
-  (leitner-revert-menu))
+  (leitner-clear-modified))
 
 ;;;###autoload
 (defun leitner-load ()
   "Load the learning progress."
   (interactive)
+  (when leitner-updated
+    (user-error "Refuse to load because you haven't saved your progress so far!"))
   (condition-case err
       (progn
         (setq saved-decks (read (with-temp-buffer
                                   (insert-file-contents leitner-decks-file)
                                   (buffer-string))))
         (setq leitner-decks (ht-merge leitner-decks saved-decks))
+        (leitner-clear-modified)
+        (leitner-revert-menu)
         (message "Loading succeeded; there are %d known decks" (hash-table-count leitner-decks)))
     ('error (message "Couldn't load from the decks file due to %s" err))))
 
@@ -164,11 +171,21 @@
       (leitner-review-show-next-card))
     (display-buffer buf)))
 
+(defmacro leitner-eval-in-menu-buffer-when-its-alive (&rest forms)
+  `(let ((buf (get-buffer "*Leitner Menu*")))
+     (when (buffer-live-p buf)
+       (with-current-buffer buf
+         ,@forms))))
+
 (defun leitner-revert-menu ()
-  (let ((buf (get-buffer "*Leitner Menu*")))
-    (when (buffer-live-p buf)
-      (with-current-buffer buf
-        (revert-buffer)))))
+  (leitner-eval-in-menu-buffer-when-its-alive
+   (revert-buffer)))
+
+(defun leitner-set-modified ()
+  (setq leitner-updated t))
+
+(defun leitner-clear-modified ()
+  (setq leitner-updated nil))
 
 
 (defvar leitner-review-mode-map
@@ -212,6 +229,7 @@
   (put-text-property (1- (point-max)) (point-max) 'rear-nonsticky t)
   (put-text-property (point-min) (point-max) 'intangible t)
   (put-text-property (point-min) (point-max) 'read-only t)
+  (set-buffer-modified-p nil)
   (goto-char (point-max)))
 
 (defun leitner-review-get-answer ()
@@ -226,6 +244,7 @@
     (if (string= ground-truth (leitner-review-get-answer))
         (leitner-review-succeed)
       (leitner-review-fail)))
+  (leitner-set-modified)
   (leitner-review-show-next-card))
 
 (defun leitner-review-succeed ()
