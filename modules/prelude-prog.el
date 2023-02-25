@@ -107,10 +107,7 @@ Use `k|toggle-eglot-debug' to change this value.")
 
 (use-package lsp-bridge
   :load-path "lisp/lsp-bridge/"
-  :commands (lsp-bridge-mode)
-  :config
-  (require 'lsp-bridge-orderless)
-  (require 'lsp-bridge-icon))
+  :commands (global-lsp-bridge-mode lsp-bridge-mode))
 
 (defcustom k|auto-lsp nil
   "Whether to start lsp automatically on all supported languages."
