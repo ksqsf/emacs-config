@@ -21,7 +21,38 @@
   (define-key vertico-map "\d" #'vertico-directory-delete-char)
   (define-key vertico-map "\M-\d" #'vertico-directory-delete-word)
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
-  (vertico-mouse-mode +1))
+  (vertico-mouse-mode +1)
+
+  ;; Configure how vertico is displayed on a per-category or
+  ;; per-command basis.
+  (setq vertico-multiform-commands
+        '((consult-imenu buffer indexed)
+          (consult-line buffer)
+          (consult-line-multi buffer)))
+  (setq vertico-multiform-categories
+        '((consult-grep buffer)))
+  (vertico-multiform-mode t)
+
+  ;; Emacs requires the point to be always in the view.  When the
+  ;; point is near the modeline, pressing e.g. M-x will cause a
+  ;; recenter, which is annoying.
+  (defun +move-point-to-the-beginning-of-the-window ()
+    (dolist (win (window-list))
+      (let ((buf (window-buffer)))
+        (with-current-buffer buf
+          (unless (minibufferp)
+            (goto-char (window-start win))
+            (push-mark))))))
+  (defun +restore-saved-point ()
+    (dolist (win (window-list))
+      (let ((buf (window-buffer)))
+        (unless (minibufferp)
+          (with-current-buffer buf
+          (pop-mark))))))
+  ;; Unfortunately, this does not work yet.
+  ;; (add-hook 'minibuffer-setup-hook #'+move-point-to-the-beginning-of-the-window)
+  ;; (add-hook 'minibuffer-exit-hook #'+restore-saved-point)
+  )
 
 (use-package vertico-posframe
   :hook (vertico-mode . vertico-posframe-mode)
@@ -75,7 +106,6 @@
    ("M-s r" . consult-ripgrep)
    ("M-s l" . consult-line)
    ("M-s L" . consult-line-multi)
-   ("M-s m" . consult-multi-occur)
    ("M-s k" . consult-keep-lines)
    ("M-s u" . consult-focus-lines)
 
