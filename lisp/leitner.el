@@ -251,7 +251,7 @@
   (message "You are right!")
   (cl-incf leitner-streak)
   (cl-incf (leitner-card-success-count leitner-card))
-  (let ((n (min 10 (leitner-card-success-count leitner-card))))
+  (let ((n (leitner-card-success-count leitner-card)))
     (leitner-deck-move-after leitner-deck n)))
 
 (defun leitner-review-fail ()
