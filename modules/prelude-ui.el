@@ -109,12 +109,6 @@
 ;; prioritize vertical side windows
 (setq window-sides-vertical t)
 
-;; helper
-(defmacro k|buffer-is-major-mode (major-mode)
-  `(lambda (buffer alist)
-     (with-current-buffer buffer
-       (eql major-mode ,major-mode)))) ;; 'eq' does not work
-
 ;; popups policy
 (setq display-buffer-alist
  `(;; Bottom Root
@@ -139,7 +133,7 @@
     (dedicated . t))
 
    ;; Bottom Side
-   ("^\\*compilation"
+   ("^\\*.*-compilation\\*"
     (display-buffer-reuse-window
      display-buffer-pop-up-window)
     ;; (side . bottom)
@@ -151,11 +145,6 @@
      display-buffer-in-side-window)
     (side . bottom)
     (window-height . 0.3)
-    (slot . 1)
-    (dedicated . t))
-   (,(k|buffer-is-major-mode 'calc-mode)
-    (display-buffer-in-side-window)
-    (side . bottom)
     (slot . 1)
     (dedicated . t))
    ("^HELM .*"
@@ -171,11 +160,11 @@
    ;; ("^\\*\\(\\(e?shell\\)\\|\\(vterm\\)\\)"
    ;;  (display-buffer-below-selected)
    ;;  (window-width . 72))
-   (,(k|buffer-is-major-mode 'haskell-interactive-mode)
+   ((derived-mode . haskell-interactive-mode)
     (display-buffer-reuse-window
      display-buffer-at-bottom
      display-buffer-below-selected))
-   (,(k|buffer-is-major-mode 'inferior-python-mode)
+   ((derived-mode . inferior-python-mode)
     (display-buffer-below-selected))
 
    ;; Terminals
@@ -189,6 +178,18 @@
      display-buffer-below-selected)
     (window-height . 0.37)
     (inhibit-same-window . nil)
+    (dedicated . t))
+
+   ;; Telega
+   ((derived-mode . telega-root-mode)
+    (display-buffer-in-side-window)
+    (window-width . 0.35)
+    (side . right)
+    (slot . 0))
+   ((derived-mode . telega-chat-mode)
+    (display-buffer-reuse-mode-window
+     display-buffer-at-bottom)
+    (mode . telega-chat-mode)
     (dedicated . t))))
 
 ;; Minimap
@@ -318,17 +319,6 @@ The existence of such windows is guaranteed by Emacs."
     (delete-other-windows)))
 
 (global-set-key (kbd "C-x 1") #'k|delete-other-windows)
-
-;; Custom fonts
-(custom-set-faces
- ;; '(default ((t (:family "Hasklig" :height 140))))
- '(variable-pitch ((t (:family "Bookerly" :height 1.0))))
- ;; '(treemacs-file-face ((t (:inherit variable-pitch))))
- ;; '(treemacs-root-face ((t (:inherit variable-pitch))))
- ;; '(treemacs-directory-face ((t (:inherit variable-pitch))))
- ;; '(treemacs-directory-collapsed-face ((t (:inherit variable-pitch))))
- ;; '(treemacs-git-ignored-face ((t (:inherit variable-pitch))))
- )
 
 ;; Preferred dark and light themes.
 (defcustom prelude-enable-switch-dark-light nil
