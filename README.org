@@ -181,3 +181,4 @@ for better discoverability.
 | region-mark    | ./lisp/region-mark.el    |                                    |
 | fish-protector | ./lisp/fish-protector.el | 魚の護衛者                           |
 | logseq         | ./lisp/logseq.el         | Logseq HTTP API                    |
+| leitner        | ./lisp/leitner.el        | The Leitner system (a kind of SRS) |
