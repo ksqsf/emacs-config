@@ -55,6 +55,7 @@
   )
 
 (use-package vertico-posframe
+  :disabled
   :hook (vertico-mode . vertico-posframe-mode)
   :config
   (setq vertico-posframe-border-width 3))
