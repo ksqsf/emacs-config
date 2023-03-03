@@ -1,71 +1,37 @@
-# various files
-var/
-
-# eln
-eln-cache/
-
-# Backup
-*~
-backups
-
-# Byte-compiled files
-*.elc
-
-# Swap files
-\#*\#
-
-# Filesets
-filesets-cache.el
-
-# Desktop
-SessionDesktop.el
-.emacs.desktop
-.emacs.desktop.lock
-
-# ELPA
-elpa/
-
-# Local customizations
+# Local customizations or private files
 custom.el
-
-# Sessions
-session.*
-
-# erc
 .ercrc.el
-
-# what's this?
-network-security.data
-
-# game records (keep it to me!)
 games/
-
-# secret files
 volatile/*-priv.el
-
-# org roam
 org-roam.db
-
-# Hey, Mac!
-.DS_Store
-
-# dump
-emacs.pdmp
-
-# rime
-librime/
-
-# tree-sitter
-tree-sitter/
-
-# gnus
 newsrc.eld
-
-# cache
-.cache/
-
-# triples
 triples.db
 
+# Caches
+var/
+.cache/
+eln-cache/
+*.elc
+filesets-cache.el
+SessionDesktop.el
+.emacs.desktop
+elpa/
+session.*
+ede-projects.el
+
+# Locks
+.emacs.desktop.lock
+
+# Backup or swap files
+*~
+backups
+\#*\#
+
+# OS-specific
+.DS_Store
+
+# Other binary blobs
+librime/
+tree-sitter/
 codeium/
 dump/
