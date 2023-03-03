@@ -43,7 +43,6 @@
 (delete-selection-mode t)
 
 ;; Scroll: avoid surprises (try to make scrolling "continous")
-(setq scroll-conservatively most-positive-fixnum) ; Never recenters
 (setq scroll-margin 1)
 (setq scroll-preserve-screen-position t)
 
