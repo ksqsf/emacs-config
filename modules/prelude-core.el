@@ -199,7 +199,11 @@
   (setq mac-mouse-wheel-smooth-scroll nil)
 
   ;; mitigate tearing
-  (setq recenter-redisplay t))
+  (setq recenter-redisplay t)
+
+  ;; Prefer GNU ls to Darwin's ls
+  (when (executable-find "gls")
+    (setq insert-directory-program "gls")))
 
 ;; Disable keys I don't use.
 (global-unset-key (kbd "C-x C-n"))
