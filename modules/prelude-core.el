@@ -350,4 +350,8 @@ Useful for reading Python exception traces."
   :config
   (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode))
 
+(defun sudoedit ()
+  "Edit the current file using Sudo."
+  (interactive)
+  (find-file (concat "/sudo::" buffer-file-name)))
 (provide 'prelude-core)
