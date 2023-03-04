@@ -4,7 +4,6 @@
   (setq to (or to 100))
   (setq inc (or inc 1))
   (dolist (i (number-sequence from to inc))
-    (message "%s" i)
     (let ((alpha (* i 0.01)))
       (set-frame-parameter frame 'alpha alpha)
       (sit-for 0.001))))
