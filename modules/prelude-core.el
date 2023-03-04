@@ -359,6 +359,8 @@ Useful for reading Python exception traces."
 (use-package adaptive-wrap
   :init
   (setq adaptive-wrap-extra-indent 2)
-  (adaptive-wrap-prefix-mode t))
+  (define-globalized-minor-mode global-adaptive-wrap-prefix-mode adaptive-wrap-prefix-mode adaptive-wrap-prefix-mode)
+  (global-adaptive-wrap-prefix-mode t))
+
 
 (provide 'prelude-core)
