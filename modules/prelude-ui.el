@@ -400,9 +400,7 @@ system's dark or light variant."
 
 (use-package tab-bar
   :ensure nil
-  :hook (after-init . tab-bar-mode)
-  :hook (after-init . tab-bar-history-mode)
-  :config
+  :init
   (setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
 
   ;; the low-res icons are soooo ugly!!
@@ -416,7 +414,10 @@ system's dark or light variant."
   ;; gets overwritten by tab-bar's format function.
   (setq tab-bar-close-button-show t)
   (setq tab-bar-close-button (propertize " ⨉" 'close-tab t))
-  (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab)))
+  (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab))
+
+  (tab-bar-mode t)
+  (tab-bar-history-mode t))
 
 (use-package hl-line
   :hook (after-init . global-hl-line-mode))
