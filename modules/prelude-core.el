@@ -354,4 +354,11 @@ Useful for reading Python exception traces."
   "Edit the current file using Sudo."
   (interactive)
   (find-file (concat "/sudo::" buffer-file-name)))
+
+(global-visual-line-mode t)
+(use-package adaptive-wrap
+  :init
+  (setq adaptive-wrap-extra-indent 2)
+  (adaptive-wrap-prefix-mode t))
+
 (provide 'prelude-core)
