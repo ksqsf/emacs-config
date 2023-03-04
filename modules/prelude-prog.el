@@ -188,11 +188,13 @@ The history is stored in FILENAME."
 ;; show git diff info in fringe
 (use-package diff-hl
   :hook (prog-mode . diff-hl-mode)
-  :hook (dired-mode . diff-hl-dired-mode)
+  ;; diff-hl-dired-mode is buggy.
+  ;; :hook (dired-mode . diff-hl-dired-mode)
   :config
   (diff-hl-margin-mode)
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (setq diff-hl-disable-on-remote t))
 
 
 ;; structural navigation and editing
