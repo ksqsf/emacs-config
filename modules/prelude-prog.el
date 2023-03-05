@@ -12,6 +12,8 @@
 (setq show-paren-delay 0.0)
 (setq tab-always-indent 'complete)
 
+(add-hook 'prog-mode-hook 'turn-on-adaptive-wrap)
+
 ;; (use-package company
 ;;   :hook (after-init . global-company-mode)
 ;;   :config

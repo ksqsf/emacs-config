@@ -355,12 +355,12 @@ Useful for reading Python exception traces."
   (interactive)
   (find-file (concat "/sudo::" buffer-file-name)))
 
-(global-visual-line-mode t)
 (use-package adaptive-wrap
   :init
   (setq adaptive-wrap-extra-indent 2)
-  (define-globalized-minor-mode global-adaptive-wrap-prefix-mode adaptive-wrap-prefix-mode adaptive-wrap-prefix-mode)
-  (global-adaptive-wrap-prefix-mode t))
+  (defun turn-on-adaptive-wrap ()
+    (setq-local word-wrap t)
+    (adaptive-wrap-prefix-mode t)))
 
 
 (provide 'prelude-core)
