@@ -362,5 +362,7 @@ Useful for reading Python exception traces."
     (setq-local word-wrap t)
     (adaptive-wrap-prefix-mode t)))
 
+;; Save positions in files
+(toggle-save-place-globally)
 
 (provide 'prelude-core)
