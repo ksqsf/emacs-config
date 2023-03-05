@@ -362,7 +362,26 @@ system's dark or light variant."
   (vterm-always-compile-module t)
   :config
   (define-key vterm-mode-map (kbd "C-c C-x") #'vterm-send-C-x)
-  (add-hook 'vterm-mode-hook 'goto-address-mode))
+  (add-hook 'vterm-mode-hook 'goto-address-mode)
+
+  ;; Integration with desktop-save-mode
+  (defvar vterm-persist-buffer-contents t
+    "When t, desktop-save-mode also saves the buffer contents.")
+  (defun vterm-save-desktop-buffer (desktop-dirname)
+    (cons
+     (desktop-file-name default-directory desktop-dirname)
+     (if vterm-persist-buffer-contents (buffer-string) "")))
+  (defun vterm-restore-desktop-buffer (filename buffer-name misc)
+    "MISC is the saved return value of `desktop-save-vterm'."
+    (let ((default-directory (car misc)))
+      (require 'vterm)
+      (with-current-buffer (get-buffer-create buffer-name)
+        (when vterm-persist-buffer-contents
+          (insert (cdr misc))
+          (insert "\n\n"))
+        (vterm-mode))))
+  (add-to-list 'desktop-buffer-mode-handlers '(vterm-mode . vterm-restore-desktop-buffer))
+  (add-hook 'vterm-mode-hook #'(lambda () (setq-local desktop-save-buffer 'vterm-save-desktop-buffer))))
 
 ;; FIXME: Side windows?
 (defun window-lift ()
