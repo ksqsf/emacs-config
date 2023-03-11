@@ -1,27 +1,15 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Rust
 
-(use-package rustic
-  :mode ("\\.rs\\'" . rustic-mode)
-  :config
-  (setq rustic-lsp-client k|lsp
-        rustic-lsp-server 'rust-analyzer
-        rustic-analyzer-command '("rust-analyzer")
-        rustic-enable-detached-file-support t)
-  (define-key rustic-mode-map (kbd "[") (k|double-tap-to-insert ?\())
-  (define-key rustic-mode-map (kbd "]") (k|double-tap-to-insert ?\)))
-  ;; (add-hook 'rustic-mode-hook #'company-mode)
-  (add-hook 'rustic-mode-hook #'subword-mode)
-  (add-hook 'rustic-mode-hook #'electric-pair-mode)
+(use-package rust-mode
+  :mode ("\\.rs\\'" . rust-mode)
+  :hook (rust-mode . eglot-ensure)
+  :hook (rust-mode . subword-mode)
+  :hook (rust-mode . electric-pair-mode)
+  :hook (rust-mode . cargo-minor-mode))
 
-  ;; fix a bug
-  (defun rustic-cargo-doc ()
-    "Open the documentation for the current project in a browser.
-The documentation is built if necessary."
-    (interactive)
-    (if (y-or-n-p "Open docs for dependencies as well?")
-        (shell-command (concat (rustic-cargo-bin) " doc --open"))
-      (shell-command (concat (rustic-cargo-bin) " doc --open --no-deps")))))
+(use-package cargo
+  :defer t)
 
 (use-package ob-rust
   :after org)
