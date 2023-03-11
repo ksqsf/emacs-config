@@ -16,10 +16,15 @@
   (projectile-enable-caching nil)  ; Projectile will save a cache file, which is
                                    ; slow for large projects.
 
+  ;; Emulate project.el keybindings
   :bind (:map projectile-command-map
+              ("f" . projectile-find-file)
+              ("g" . projectile-ripgrep)
+              ("s" . projectile-run-vterm)
               ("x x" . projectile-run-vterm)
-              ("s s" . projectile-ripgrep)
-              ("s a" . projectile-ag))
+              ;; ("s s" . projectile-ripgrep)
+              ;; ("s a" . projectile-ag)
+              )
 
   :config
 
