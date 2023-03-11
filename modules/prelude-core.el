@@ -5,10 +5,8 @@
 (setq confirm-kill-emacs 'yes-or-no-p)
 
 ;; GC.
-(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 1000 1024 1024))))
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 32 1024 1024))))
 (add-hook 'focus-out-hook #'garbage-collect)
-(use-package gcmh
-  :hook (after-init . gcmh-mode))
 
 ;; auto revert everything, including dired.
 (global-auto-revert-mode)
@@ -76,6 +74,7 @@
 (defalias 'list-buffers 'ibuffer)
 
 ;; Better undo
+(setq undo-limit (* 1024 1024))
 (use-package vundo
   :bind
   ("C-x u" . vundo))
