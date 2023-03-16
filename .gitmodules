@@ -16,3 +16,6 @@
 [submodule "lisp/tabnine-capf"]
 	path = lisp/tabnine-capf
 	url = https://github.com/50ways2sayhard/tabnine-capf.git
+[submodule "lisp/mind-wave"]
+	path = lisp/mind-wave
+	url = https://github.com/manateelazycat/mind-wave.git

@@ -211,4 +211,7 @@
 (use-package debbugs
   :defer t)
 
+(use-package mind-wave
+  :load-path "lisp/mind-wave")
+
 (provide 'prelude-apps)

@@ -1,37 +1,38 @@
 # Local customizations or private files
-custom.el
 .ercrc.el
+custom.el
 games/
-volatile/*-priv.el
-org-roam.db
+mind-wave/
 newsrc.eld
+org-roam.db
 triples.db
+volatile/*-priv.el
 
 # Caches
-var/
-.cache/
-eln-cache/
 *.elc
-filesets-cache.el
-SessionDesktop.el
+.cache/
 .emacs.desktop
-elpa/
-session.*
+SessionDesktop.el
 ede-projects.el
+eln-cache/
+elpa/
+filesets-cache.el
+session.*
+var/
 
 # Locks
 .emacs.desktop.lock
 
 # Backup or swap files
 *~
-backups
 \#*\#
+backups
 
 # OS-specific
 .DS_Store
 
 # Other binary blobs
-librime/
-tree-sitter/
 codeium/
 dump/
+librime/
+tree-sitter/
