@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
+
 (use-package magit
   :defer t
+  :bind (("C-x g" . magit-status))
   :custom
   (magit-clone-set-remote.pushDefault t)
   (magit-clone-default-directory (expand-file-name (expand-file-name "src/Clone/" (getenv "HOME"))))
