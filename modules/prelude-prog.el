@@ -183,6 +183,7 @@ The history is stored in FILENAME."
 
 
 (use-package symbol-overlay
+  :diminish ""
   :hook (prog-mode . symbol-overlay-mode)
   :bind ("C-c i" . symbol-overlay-put))
 

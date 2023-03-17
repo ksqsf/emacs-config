@@ -267,7 +267,8 @@
 
 ;; Hideshow
 (add-hook 'prog-mode-hook #'hs-minor-mode)
-(diminish 'hs-minor-mode "")
+(with-eval-after-load 'hideshow
+  (diminish 'hs-minor-mode ""))
 
 ;; Provide mixed-pitch faces
 (use-package mixed-pitch

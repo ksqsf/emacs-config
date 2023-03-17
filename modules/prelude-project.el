@@ -3,6 +3,7 @@
 
 (use-package projectile
   :hook (after-init . projectile-mode)
+  :diminish ""
 
   ;; Steal `C-x p' from project.el.
   :bind-keymap ("C-x p" . projectile-command-map)
