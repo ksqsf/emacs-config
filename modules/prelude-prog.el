@@ -44,7 +44,8 @@
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode)
   :config
-  (yas-reload-all))
+  (use-package yasnippet-snippets)
+  (yasnippet-snippets-initialize))
 
 (use-package hl-todo
   :hook (prog-mode . hl-todo-mode)
