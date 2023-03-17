@@ -14,8 +14,8 @@
   (projectile-completion-system 'auto)
   (projectile-switch-project-action #'projectile-dired)
   (projectile-find-dir-includes-top-level t)
-  (projectile-enable-caching nil)  ; Projectile will save a cache file, which is
-                                   ; slow for large projects.
+  (projectile-enable-caching nil)       ; Projectile will save a cache file, which is
+                                        ; slow for large projects.
 
   ;; Emulate project.el keybindings
   :bind (:map projectile-command-map

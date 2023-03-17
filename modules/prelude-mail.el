@@ -13,7 +13,7 @@
   (gnus-interactive-exit 'quiet)
   (gnus-inhibit-startup-message t)
   (gnus-select-method '(nnnil ""))
-  (gnus-secondary-select-methods '((nntp "gmane" (nntp-address "news.gmane.io"))
+  (gnus-secondary-select-methods '((nntp "news.gmane.io")
                                    (nntp "nntp.lore.kernel.org")
                                    (nnimap "GMail"
                                            (nnimap-inbox "INBOX")
