@@ -476,4 +476,8 @@ system's dark or light variant."
   (let ((v (frame-parameter nil 'undecorated)))
     (set-frame-parameter nil 'undecorated (not v))))
 
+
+(use-package rotate
+  :defer t)
+
 (provide 'prelude-ui)
