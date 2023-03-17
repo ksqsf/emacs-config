@@ -466,4 +466,14 @@ system's dark or light variant."
 (use-package page-break-lines
   :hook (prog-mode . page-break-lines-mode))
 
+
+(defun set-frame-alpha (alpha)
+  (interactive "sAlpha: ")
+  (set-frame-parameter nil 'alpha (string-to-number alpha)))
+
+(defun toggle-frame-decorated ()
+  (interactive)
+  (let ((v (frame-parameter nil 'undecorated)))
+    (set-frame-parameter nil 'undecorated (not v))))
+
 (provide 'prelude-ui)
