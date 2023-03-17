@@ -202,6 +202,7 @@ The history is stored in FILENAME."
 ;; structural navigation and editing
 ;; depends on emacs 29 treesit.el
 (use-package combobulate
+  :disabled
   :defer t
   :quelpa (combobulate :fetcher github :repo "mickeynp/combobulate")
   :preface
