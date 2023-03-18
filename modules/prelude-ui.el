@@ -179,6 +179,11 @@
     (inhibit-same-window . nil)
     (dedicated . t))
 
+   ;; Magit
+   ((derived-mode . magit-status-mode)
+    (display-buffer-reuse-window
+     display-buffer-at-bottom))
+
    ;; Telega
    ((derived-mode . telega-root-mode)
     (display-buffer-in-side-window)
