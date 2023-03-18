@@ -47,7 +47,7 @@
             (push-mark))))))
   (defun +restore-saved-point ()
     (dolist (win (window-list))
-      (let ((buf (window-buffer)))
+      (let ((buf (window-buffer win)))
         (unless (minibufferp)
           (with-current-buffer buf
           (pop-mark))))))

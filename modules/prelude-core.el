@@ -242,7 +242,7 @@
                 node-end (treesit-node-end node))))
       (set-mark node-end)
       (goto-char node-start)))
-  (define-advice set-mark-command (:before-while (arg))
+  (define-advice set-mark-command (:before-while (_arg))
     "Repeat C-SPC to expand region."
     (interactive "P")
     (if (eq last-command 'set-mark-command)
@@ -327,6 +327,7 @@
 ;; find file at point
 (use-package ffap
   :ensure nil
+  :commands (ffap-line)
   :config
   (defun ffap-line ()
     "Like `ffap' but also guesses the target line.
@@ -342,7 +343,8 @@ Useful for reading Python exception traces."
           (setq line-no (string-to-number (match-string 1 current-line)))))
       (ffap)
       (when line-no
-        (goto-line line-no)))))
+        (goto-char (point-min))
+        (forward-line (1- line-no))))))
 
 (use-package dabbrev
   :ensure nil

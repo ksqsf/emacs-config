@@ -100,6 +100,7 @@
 (use-package rime-regexp
   :load-path "lisp/rime-regexp"
   :after (rime)
+  :commands (rime-regexp-mode)
   :config
   (rime-regexp-mode 1))
 

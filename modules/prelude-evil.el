@@ -1,12 +1,15 @@
 ;;; -*- lexical-binding: t; -*-
 
 (use-package evil
-  :hook (after-init . evil-mode)
+  :demand t
+  :init
+  (setq evil-want-keybinding nil)
   :config
-  (setq evil-undo-system 'undo-redo))
+  (setq evil-undo-system 'undo-redo)
+  (evil-mode t))
 
 (use-package evil-collection
-  :after evil
+  :after (evil)
   :config
   (evil-collection-init))
 

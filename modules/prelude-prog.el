@@ -71,7 +71,7 @@
 
 Use `k|toggle-eglot-debug' to change this value.")
 
-  (defun prelude--jsonrpc-ignore-log (orig-func &rest _))
+  (defun prelude--jsonrpc-ignore-log (_orig-func &rest _))
 
   (defun k|toggle-eglot-debug ()
     (interactive)
@@ -113,13 +113,15 @@ Use `k|toggle-eglot-debug' to change this value.")
 
 (defcustom k|auto-lsp nil
   "Whether to start lsp automatically on all supported languages."
-  :group 'prelude)
+  :group 'prelude
+  :type 'boolean)
 
 (defcustom k|lsp 'eglot
   "The LSP client to use.
 
 One of `lsp-mode', `eglot', or `lsp-bridge'."
-  :group 'prelude)
+  :group 'prelude
+  :type 'symbol)
 
 (defun k|lsp-ensure ()
   (interactive)

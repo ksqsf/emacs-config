@@ -329,16 +329,20 @@ The existence of such windows is guaranteed by Emacs."
 (defcustom prelude-enable-switch-dark-light nil
   "Whether automatically switch the current theme to match the
 system's dark or light variant."
-  :group 'prelude)
+  :group 'prelude
+  :type 'boolean)
 (defcustom prelude-theme-package 'one-themes
   "The package that defines `prelude-dark-theme' and `prelude-light-theme'."
-  :group 'prelude)
+  :group 'prelude
+  :type 'symbol)
 (defcustom prelude-dark-theme 'one-dark
   "Preferred dark theme."
-  :group 'prelude)
+  :group 'prelude
+  :type 'symbol)
 (defcustom prelude-light-theme 'one-light
   "Preferred light theme."
-  :group 'prelude)
+  :group 'prelude
+  :type 'symbol)
 
 (defun prelude-switch-light-dark (appearance)
   (catch 'foo
@@ -362,22 +366,20 @@ system's dark or light variant."
 (use-package vterm
   :commands (vterm)
   :bind (:map vterm-mode-map
-              ("C-c C-x" . vterm-send-C-x)
               ("C-c C-t" . vterm-copy-mode))
   :custom
   (vterm-always-compile-module t)
+  :hook (vterm-mode . goto-address-mode)
   :config
-  (define-key vterm-mode-map (kbd "C-c C-x") #'vterm-send-C-x)
-  (add-hook 'vterm-mode-hook 'goto-address-mode)
 
   ;; Integration with desktop-save-mode
   (defvar vterm-persist-buffer-contents t
     "When t, desktop-save-mode also saves the buffer contents.")
-  (defun vterm-save-desktop-buffer (desktop-dirname)
+  (defun vterm-save-desktop-buffer (dirname)
     (cons
-     (desktop-file-name default-directory desktop-dirname)
+     (desktop-file-name default-directory dirname)
      (if vterm-persist-buffer-contents (buffer-string) "")))
-  (defun vterm-restore-desktop-buffer (filename buffer-name misc)
+  (defun vterm-restore-desktop-buffer (_filename buffer-name misc)
     "MISC is the saved return value of `desktop-save-vterm'."
     (let ((default-directory (car misc)))
       (require 'vterm)
@@ -416,6 +418,7 @@ system's dark or light variant."
 ;; (global-set-key (kbd "C-x 1") #'window-lift)  ;; Not ready yet.
 
 (use-package dashboard
+  :commands (dashboard-refresh-buffer)
   :config
   (setq dashboard-items '((recents . 5)
                           (projects . 5)
@@ -425,7 +428,11 @@ system's dark or light variant."
 
 (use-package tab-bar
   :ensure nil
-  :init
+  :demand t
+  :config
+  (tab-bar-mode t)
+  (tab-bar-history-mode t)
+
   (setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
 
   ;; the low-res icons are soooo ugly!!
@@ -439,10 +446,7 @@ system's dark or light variant."
   ;; gets overwritten by tab-bar's format function.
   (setq tab-bar-close-button-show t)
   (setq tab-bar-close-button (propertize " ⨉" 'close-tab t))
-  (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab))
-
-  (tab-bar-mode t)
-  (tab-bar-history-mode t))
+  (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab)))
 
 (use-package hl-line
   :hook (after-init . global-hl-line-mode))

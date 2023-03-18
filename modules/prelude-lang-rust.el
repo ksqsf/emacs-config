@@ -34,7 +34,7 @@
          (buffer (get-buffer-create "*Rust Show*")))
     (shell-command command " *Rust Show Output*")
     (switch-to-buffer-other-window buffer)
-    (insert-file "/tmp/emacs-output")
+    (insert-file-contents "/tmp/emacs-output")
     (funcall mode)))
 
 (defun rust-show-mir (arg)
@@ -52,7 +52,7 @@
   (let* ((opt-flag (if arg "-O" "")))
     (rust-show (list opt-flag "--emit=llvm-ir") #'fundamental-mode)))
 
-(defun rust (arg)
+(defun rust (_arg)
   (interactive "P")
   (find-file "/tmp/play.rs"))
 

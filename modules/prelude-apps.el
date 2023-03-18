@@ -11,6 +11,7 @@
 ;; stolen from https://blog.hoetzel.info/post/eshell-notifications/
 (use-package alert
   :after (eshell)
+  :commands (eshell-command-alert)
   :config
   (when (fboundp 'mac-do-applescript)
     (define-advice alert-osx-notifier-notify (:override (info))
@@ -19,6 +20,12 @@
 				  (alert-encode-string (plist-get info :title))))
       (alert-message-notify info)))
 
+  (alert-add-rule :status '(buried)
+		  :mode 'eshell-mode
+		  :style (if k|mac
+			     'osx-notifier
+			   'notifications))
+
   (defun eshell-command-alert (process status)
     (let* ((cmd (process-command process))
 	   (buffer (process-buffer process))
@@ -26,13 +33,6 @@
       (if (string-prefix-p "finished" status)
 	  (alert msg :buffer buffer :severity 'normal)
 	(alert msg :buffer buffer :severity 'urgent))))
-
-  (alert-add-rule :status '(buried)
-		  :mode 'eshell-mode
-		  :style (if k|mac
-			     'osx-notifier
-			   'notifications))
-
   (add-hook 'eshell-kill-hook #'eshell-command-alert))
 
 ;; cabon now sh
@@ -100,7 +100,7 @@
   (defun -treemacs-get-or-create-workspace (name)
     (or (--first (string= name (treemacs-workspace->name it))
                  treemacs--workspaces)
-        (let (res (-treemacs-create-workspace name))
+        (let ((res (-treemacs-create-workspace name)))
           (if (equal (car res) 'success)
               (cdr res)
             (error "Couldn't create workspace")))))
@@ -165,6 +165,9 @@
 
 (use-package dash-at-point
   :commands (dash-at-point)
+  :after (embark)
+  :preface
+  (defvar embark-symbol-map)
   :bind (:map embark-symbol-map
          ("d" . dash-at-point)))
 
@@ -186,7 +189,7 @@
   (require 'eaf-airshare))
 
 (use-package go-translate
-  :commands (gts-do-translate)
+  :commands (gts-do-translate gts-buffer-render gts-bing-engine gts-google-rpc-engine gts-google-engine)
   :config
   (setq gts-translate-list '(("en" "zh" "jp")))
   (setq gts-default-translator

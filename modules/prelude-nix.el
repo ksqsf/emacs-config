@@ -7,7 +7,7 @@
   (let ((vterm (vterm "*nix-shell*")))
     (with-current-buffer vterm
       (vterm-send-string "nix-shell")
-      (vterm-send-right))))
+      (vterm-send-return))))
 
 (defvar k|nix t
   "Indicate that the system is managed by Nix, so that we can leverage Nix power. 
@@ -25,6 +25,6 @@ If it's enabled, some programming environments may benefit from nix-shell.")
     (delete-region (point-min) (point-max))
     (start-process "nix" "*nix*" "nix-env" "-iA" "nixpkgs.myMac")
     (display-buffer "*nix*")
-    (beginning-of-buffer)))
+    (goto-char (point-min))))
 
 (provide 'prelude-nix)

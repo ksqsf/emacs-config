@@ -64,7 +64,8 @@
 (defun Info-get-online-url ()
   "Get the online URL of this manual node.
 
-If a region is active, it is considered text anchor.  This feature is incomplete."
+If a region is active, it is considered text anchor.  This
+feature is incomplete."
   (let* ((file (file-name-sans-extension
 	        (file-name-nondirectory Info-current-file)))
          (node (mapconcat (lambda (ch)

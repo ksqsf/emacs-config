@@ -8,7 +8,7 @@ The number of dashes is determined by the MOUDLE line."
   (let ((width (save-excursion
                  (goto-char (point-min))
                  (re-search-forward "-+ ?MODULE")
-                 (- (point-at-eol) (point-at-bol)))))
+                 (- (pos-eol) (pos-bol)))))
     (insert (make-string width ?-))))
 
 (use-package tla-tools

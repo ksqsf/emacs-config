@@ -58,7 +58,7 @@ of the box `(w h)' inside the box `(cw ch)'."
 (defun ct/frame-center (&optional frame)
   "Center a frame on the screen."
   (interactive)
-  (let* ((frame (or (and (boundp 'frame) frame) (selected-frame)))
+  (let* ((frame (or frame (selected-frame)))
          (center (ct/frame-get-center frame)))
     (apply 'set-frame-position (flatten-list (list frame center)))))
 

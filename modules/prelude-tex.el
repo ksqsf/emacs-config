@@ -3,6 +3,7 @@
 (use-package tex
   :ensure auctex
   :mode (("\\.tex\\'" . LaTeX-mode))
+  :commands (TeX-revert-document-buffer TeX-PDF-mode TeX-source-correlate-mode)
   :config
   (setq-default TeX-engine 'xetex)
   (add-hook 'LaTeX-mode-hook

@@ -19,7 +19,10 @@
 	 ("C-c c" . org-capture)
          ("C-c o" . find-org-file))
   :config
-  ;; (add-hook 'org-mode-hook #'valign-mode)
+
+  ;; Org babel
+  (add-to-list 'org-babel-load-languages '(C . t))
+  (add-to-list 'org-babel-load-languages '(C++ . t))
 
   ;; Maybe prettify?
   (setq org-startup-indented nil
@@ -47,7 +50,7 @@
   ;; go into Org-roam (org-roam-dailies-capture-today) or Flomo.
 
   ;; Catch invisible edits!
-  (setq org-catch-invisible-edits 'smart)
+  (setq org-fold-catch-invisible-edits 'smart)
 
   ;; Formulae preview
   (setq org-preview-latex-default-process 'dvisvgm)
@@ -174,7 +177,7 @@
 
 (define-minor-mode org-latex-auto-toggle
   "Automatic toggle latex overlay when cursor enter/leave."
-  nil nil nil
+  :global nil
   (if org-latex-auto-toggle
       (add-hook 'post-command-hook #'k|org-latex-auto-toggle nil t)
     (remove-hook 'post-command-hook #'k|org-latex-auto-toggle t)))
