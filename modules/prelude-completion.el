@@ -1,10 +1,12 @@
 ;;; -*- lexical-binding: t; -*-
 
 (use-package prescient
+  :demand t
   :config
   (prescient-persist-mode))
 
 (use-package orderless
+  :demand t
   :custom
   (completion-styles '(prescient orderless))
   (orderless-component-separator " +\\|[-/]")
@@ -56,12 +58,13 @@
 
 (use-package vertico-posframe
   :disabled
+  :after (vertico)
   :hook (vertico-mode . vertico-posframe-mode)
   :config
   (setq vertico-posframe-border-width 3))
 
 (use-package marginalia
-  :hook (after-init . marginalia-mode)
+  :demand t
   :config
   (marginalia-mode))
 
@@ -155,8 +158,8 @@
 
 ;; Additional capf.
 (use-package cape
-  :commands (cape-file cape-dabbrev cape-keyword cape-symbol cape-line cape-tex cape-rfc1345)
-  :init
+  :demand t
+  :config
   (add-to-list 'completion-at-point-functions #'cape-file)
   ;;(add-to-list 'completion-at-point-functions #'cape-tex)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)

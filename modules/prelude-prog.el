@@ -1,11 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Configuration for programming needs.
 ;;; Some portions might be a standalone module.
-;;;
-;;; Note, all facilities here are not enabled by default.
-;;; Opt-in enable in the corresponding lang-xxx.el file.
-;;;
-;;; Most of the time, things like company will only be a burden...
 
 (setq-default indent-tabs-mode nil)
 (show-paren-mode t)
@@ -25,31 +20,35 @@
 ;;     (add-to-list 'company-backends #'company-tabnine)))
 
 (use-package corfu
-  :hook (after-init . global-corfu-mode)
-  :hook (corfu-mode . corfu-popupinfo-mode)
+  :demand t
   :custom
   (corfu-auto t)
   (corfu-quit-no-match t)
   (corfu-preview-current t)
   :config
-  (use-package corfu-prescient))
+  (global-corfu-mode)
+  (corfu-popupinfo-mode))
+
+(use-package corfu-prescient
+  :after (:all corfu prescient))
 
 (use-package kind-icon
-  :after corfu
+  :after (corfu)
   :custom
   (kind-icon-default-face 'corfu-default)
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (use-package yasnippet
-  :commands (yas-minor-mode yas-global-mode)
+  :commands (yas-minor-mode yas-global-mode))
+
+(use-package yasnippet-snippets
+  :after (yasnippet)
   :config
-  (use-package yasnippet-snippets)
   (yasnippet-snippets-initialize))
 
 (use-package hl-todo
-  :hook (prog-mode . hl-todo-mode)
-  :commands (hl-todo-mode))
+  :hook (prog-mode . hl-todo-mode))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -105,6 +104,7 @@ Use `k|toggle-eglot-debug' to change this value.")
   (setq lsp-auto-guess-root t))
 
 (use-package lsp-ui
+  :after (lsp-mode)
   :commands (lsp-ui-mode))
 
 (use-package lsp-bridge
@@ -173,13 +173,6 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 The history is stored in FILENAME."
   (setq comint-input-ring-file-name filename)
   (comint-read-input-ring t))
-
-
-;;
-;; debugging support
-;;
-(use-package dap-mode
-  :defer t)
 
 
 (use-package symbol-overlay

@@ -54,17 +54,6 @@
   (when k|mac
     (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 
-  ;; Babel
-  (use-package ob-rust :demand t)
-  (org-babel-do-load-languages
-   'org-babel-load-languages '((C . t)
-                               (emacs-lisp . t)
-			       (sqlite . t)
-			       (python . t)
-                               (haskell . t)
-                               (dot . t)
-                               (rust . t)))
-
   (defun find-org-file ()
     "Find one of my org files."
     (interactive)
@@ -78,6 +67,17 @@
   (define-advice texmathp (:before-until () org-cdlatex-fix)
     "In org-cdlatex-mode, call `org-inside-LaTeX-fragment-p'."
     (and org-cdlatex-mode (org-inside-LaTeX-fragment-p))))
+
+(use-package ob-rust
+  :after (:all org prelude-lang-rust)
+  :config
+  (add-to-list 'org-babel-load-languages '(rust . t)))
+
+;;; Babel
+(use-package jupyter
+  :after (:all org prelude-lang-python)
+  :config
+  (add-to-list 'org-babel-load-languages '(jupyter . t)))
 
 (use-package worf
   :disabled

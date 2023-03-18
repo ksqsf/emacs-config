@@ -464,6 +464,7 @@ system's dark or light variant."
 
 
 (use-package page-break-lines
+  :disabled
   :hook (prog-mode . page-break-lines-mode))
 
 

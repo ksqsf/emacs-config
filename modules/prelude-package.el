@@ -9,7 +9,8 @@
 ;; use-package
 (require 'use-package)
 
-;; quelpa
+;; NOTE: quelpa requires package, and hence package-quickstart will be
+;; useless.  (According to someone familiar with this matter.)
 (use-package quelpa
   :ensure t
   :demand t
