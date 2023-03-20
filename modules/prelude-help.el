@@ -2,7 +2,16 @@
 
 (use-package helpful
   :bind (("C-h f" . helpful-callable)
-         ("C-h v" . helpful-variable)))
+         ("C-h v" . helpful-variable)
+         ("C-h x" . helpful-command))
+  :config
+  (defun advice-helpful--navigate (button)
+    "Do not use `find-file' to open a buffer."
+    (pop-to-buffer (find-file-noselect (substring-no-properties (button-get button 'path))))
+    (-when-let (pos (get-text-property button 'position
+                                       (marker-buffer button)))
+      (helpful--goto-char-widen pos)))
+  (advice-add 'helpful--navigate :override 'advice-helpful--navigate))
 
 ;; Add a "Remove" button to the advice list
 ;; Credit: https://emacs-china.org/t/advice/7566
