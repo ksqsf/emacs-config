@@ -366,4 +366,11 @@ Useful for reading Python exception traces."
 ;; Save positions in files
 (toggle-save-place-globally)
 
+;; Utilities
+(defun update ()
+  "Update the auto-generated state of this Emacs config."
+  (interactive)
+  (byte-recompile-directory prelude-modules-dir)
+  (package-quickstart-refresh))
+
 (provide 'prelude-core)
