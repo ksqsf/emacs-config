@@ -2,9 +2,8 @@
 ;; run benchmark-init/show-durations-tree after init
 
 (use-package benchmark-init
-  :init
-  (benchmark-init/activate)
-  (add-hook 'after-init #'(lambda () (benchmark-init/deactivate)))
-  )
+  :demand t
+  :config (benchmark-init/activate)
+  :hook   (after-init . benchmark-init/deactivate))
 
 (provide 'prelude-benchmark)
