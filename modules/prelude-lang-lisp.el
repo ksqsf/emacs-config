@@ -5,6 +5,7 @@
 ;;
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "M-<up>") #'raise-sexp)
+(add-to-list 'auto-mode-alist '("\\.el\\.disabled\\'" . emacs-lisp-mode))
 
 
 ;;
@@ -40,5 +41,8 @@
   :ensure nil
   :mode (("\\.smt2?\\'" . smtlib2-mode)
          ("\\.sygus2?\\'" . smtlib2-mode)))
+
+;; Clojure
+(use-package cider)
 
 (provide 'prelude-lang-lisp)

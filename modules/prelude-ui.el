@@ -325,6 +325,9 @@ The existence of such windows is guaranteed by Emacs."
 (global-set-key (kbd "C-x 1") #'k|delete-other-windows)
 
 ;; Preferred dark and light themes.
+(use-package one-themes :defer t)
+(use-package catppuccin-theme :defer t)
+
 (defcustom prelude-enable-switch-dark-light nil
   "Whether automatically switch the current theme to match the
 system's dark or light variant."
