@@ -6,8 +6,13 @@
 (show-paren-mode t)
 (setq show-paren-delay 0.0)
 (setq tab-always-indent 'complete)
-
 (add-hook 'prog-mode-hook 'turn-on-adaptive-wrap)
+
+
+(use-package yaml-mode)
+(use-package dockerfile-mode)
+
+
 
 ;; (use-package company
 ;;   :hook (after-init . global-company-mode)
@@ -159,7 +164,7 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 (use-package copilot
   :disabled
   :hook (prog-mode . copilot-mode)
-  :quelpa (copilot :fetcher github :repo "zerolfx/copilot.el")
+  :vc (:fetcher github :repo "zerolfx/copilot.el")
   :bind (("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 
@@ -201,7 +206,7 @@ The history is stored in FILENAME."
 (use-package combobulate
   :disabled
   :defer t
-  :quelpa (combobulate :fetcher github :repo "mickeynp/combobulate")
+  :vc (:fetcher github :repo "mickeynp/combobulate")
   :preface
   (dolist (mapping '((python-mode . python-ts-mode)
                      (css-mode . css-ts-mode)
@@ -220,7 +225,7 @@ The history is stored in FILENAME."
 
 (use-package codeium
   :disabled
-  :quelpa (codeium :fetcher github :repo "Exafunction/codeium.el")
+  :vc (:fetcher github :repo "Exafunction/codeium.el")
   :init
   (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
   :config

@@ -66,7 +66,6 @@
 (require 'prelude-lang-agda)
 (require 'prelude-lang-web)
 (require 'prelude-lang-zig)
-(require 'prelude-lang-misc)
 
 (require 'prelude-help)
 (require 'prelude-os)
