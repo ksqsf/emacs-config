@@ -158,8 +158,9 @@
 
 ;; Mac is stupid
 (when k|mac
-  (setq default-directory "~/")
-  (setq command-line-default-directory "~/")
+  (when (string-prefix-p "/Applications" default-directory)
+    (setq default-directory "~/")
+    (setq command-line-default-directory "~/"))
   (setq polling-period 0.05)
   (setenv "LC_ALL" "zh_CN.utf-8")
   (setenv "LANG" "zh_CN.utf-8")
