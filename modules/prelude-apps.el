@@ -160,7 +160,7 @@
 
   (use-package pdf-continuous-scroll-mode
     :disabled                           ; This mode barely does anything useful
-    :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el")
+    :vc (:fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el")
     :hook (pdf-view-mode . pdf-continuous-scroll-mode)))
 
 (use-package dash-at-point

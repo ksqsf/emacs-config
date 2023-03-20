@@ -11,7 +11,8 @@ The number of dashes is determined by the MOUDLE line."
                  (- (pos-eol) (pos-bol)))))
     (insert (make-string width ?-))))
 
+;; NOTE: this does not work...
 (use-package tla-tools
-  :quelpa (tla-tools :fetcher github :repo "mrc/tla-tools"))
+  :vc (:fetcher github :repo "mrc/tla-tools"))
 
 (provide 'prelude-lang-tlaplus)

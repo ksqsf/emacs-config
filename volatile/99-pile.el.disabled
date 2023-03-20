@@ -1,7 +1,7 @@
 (use-package w
-  :quelpa (w :fetcher github :repo "lepisma/w.el"))
+  :vc (:fetcher github :repo "lepisma/w.el"))
 (use-package pile
-  :quelpa (pile :fetcher github :repo "lepisma/pile"))
+  :vc (:fetcher github :repo "lepisma/pile"))
 
 (setq wiki (pile-project-wiki
             :name "Ksqsf's Wiki"
