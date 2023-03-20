@@ -8,6 +8,8 @@
 (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
                          ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
+(setq package-quickstart t)
+(setq package-quickstart-file (expand-file-name "var/package-quickstart.el" user-emacs-directory))
 
 ;; This is optional.
 (setq buffer-file-coding-system 'utf-8-unix)

@@ -13,9 +13,12 @@
   files are loaded automatically.  You shouldn't byte-compile
   these Lisp files.  To disable a file, just change the extension
   from .el to whatever else.")
-
 (add-to-list 'load-path prelude-lisp-dir)
 (add-to-list 'load-path prelude-modules-dir)
+
+;; Packages should have been made available.  Disable it to speed up
+;; installing packages during initialization.
+(setq package-quickstart nil)
 
 ;; Replace Emacs paths early -- before doing anything.
 (use-package no-littering
@@ -79,6 +82,9 @@
 ;; Customization.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file t)
+
+;; Re-enable package-quickstart.
+(setq package-quickstart t)
 
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'list-timers 'disabled nil)
