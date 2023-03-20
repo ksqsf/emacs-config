@@ -43,6 +43,7 @@
          ("\\.sygus2?\\'" . smtlib2-mode)))
 
 ;; Clojure
-(use-package cider)
+(use-package cider
+  :defer t)
 
 (provide 'prelude-lang-lisp)

@@ -9,8 +9,8 @@
 (add-hook 'prog-mode-hook 'turn-on-adaptive-wrap)
 
 
-(use-package yaml-mode)
-(use-package dockerfile-mode)
+(use-package yaml-mode :defer t)
+(use-package dockerfile-mode :defer t)
 
 
 

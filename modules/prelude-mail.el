@@ -3,17 +3,18 @@
 ;; * user-mail-address    a GMail address
 
 (use-package gnus
+  :commands (gnus)
   :ensure nil
-  :custom
-  (gnus-use-cache t)
-  (gnus-use-scoring nil)
-  (gnus-suppress-duplicates t)
-  (gnus-novice-user nil)
-  (gnus-expert-user t)
-  (gnus-interactive-exit 'quiet)
-  (gnus-inhibit-startup-message t)
-  (gnus-select-method '(nnnil ""))
-  (gnus-secondary-select-methods '((nntp "news.gmane.io")
+  :config
+  (setq gnus-use-cache t)
+  (setq gnus-use-scoring nil)
+  (setq gnus-suppress-duplicates t)
+  (setq gnus-novice-user nil)
+  (setq gnus-expert-user t)
+  (setq gnus-interactive-exit 'quiet)
+  (setq gnus-inhibit-startup-message t)
+  (setq gnus-select-method '(nnnil ""))
+  (setq gnus-secondary-select-methods '((nntp "news.gmane.io")
                                    (nntp "nntp.lore.kernel.org")
                                    (nnimap "GMail"
                                            (nnimap-inbox "INBOX")
@@ -22,16 +23,16 @@
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'nerver))))
   ;;; Startup functions
-  (gnus-save-killed-list nil)
-  (gnus-check-new-newsgroups 'ask-server)
+  (setq gnus-save-killed-list nil)
+  (setq gnus-check-new-newsgroups 'ask-server)
   ;; No other newsreader is used.
-  (gnus-save-newsrc-file nil)
-  (gnus-read-newsrc-file nil)
-  (gnus-subscribe-newsgroup-method 'gnus-subscribe-zombies)
+  (setq gnus-save-newsrc-file nil)
+  (setq gnus-read-newsrc-file nil)
+  (setq gnus-subscribe-newsgroup-method 'gnus-subscribe-zombies)
   ;; Emacs 28 introduces a unified query lang
-  (gnus-search-use-parsed-queries t)
+  (setq gnus-search-use-parsed-queries t)
   ;;; Article mode for Gnus
-  (gnus-visible-headers (rx line-start (or "From"
+  (setq gnus-visible-headers (rx line-start (or "From"
                                            "Subject"
                                            "Mail-Followup-To"
                                            "Date"
@@ -42,24 +43,25 @@
                                            "X-Mailer"
                                            "X-Newsreader")
                             ":"))
-  (gnus-article-sort-functions '((not gnus-article-sort-by-number)
+  (setq gnus-article-sort-functions '((not gnus-article-sort-by-number)
                                  (not gnus-article-sort-by-date)))
-  (gnus-article-browse-delete-temp t)
+  (setq gnus-article-browse-delete-temp t)
   ;; Display more MINE stuff
-  (gnus-mime-display-multipart-related-as-mixed t)
+  (setq gnus-mime-display-multipart-related-as-mixed t)
   ;;; Asynchronous support for Gnus
-  (gnus-asynchronous t)
-  (gnus-use-header-prefetch t)
+  (setq gnus-asynchronous t)
+  (setq gnus-use-header-prefetch t)
   ;;; Cache interface for Gnus
-  (gnus-cache-enter-articles '(ticked dormant unread))
-  (gnus-cache-remove-articles '(read))
-  (gnus-cacheable-groups "^\\(nntp\\|nnimap\\)"))
+  (setq gnus-cache-enter-articles '(ticked dormant unread))
+  (setq gnus-cache-remove-articles '(read))
+  (setq gnus-cacheable-groups "^\\(nntp\\|nnimap\\)"))
 
 ;; Group mode commands for Gnus
 (use-package gnus-group
   :ensure nil
+  :defer t
   :hook (gnus-group-mode . gnus-topic-mode)
-  :custom
+  :config
   ;;          indentation ------------.
   ;;  #      process mark ----------. |
   ;;                level --------. | |
@@ -67,59 +69,61 @@
   ;;  %          new mail ----. | | | |
   ;;  *   marked articles --. | | | | |
   ;;                        | | | | | |  Ticked    New     Unread  open-status Group
-  (gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n")
-  (gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet)))
+  (setq gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n")
+  (setq gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet)))
 
 ;; Summary mode commands for Gnus
 (use-package gnus-sum
   :ensure nil
+  :defer t
   :hook (gnus-select-group . gnus-group-set-timestamp)
-  :custom
+  :config
   ;; Pretty marks
-  (gnus-sum-thread-tree-root            "┌ ")
-  (gnus-sum-thread-tree-false-root      "◌ ")
-  (gnus-sum-thread-tree-single-indent   "◎ ")
-  (gnus-sum-thread-tree-vertical        "│")
-  (gnus-sum-thread-tree-indent          "  ")
-  (gnus-sum-thread-tree-leaf-with-other "├─►")
-  (gnus-sum-thread-tree-single-leaf     "╰─►")
-  (gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n")
+  (setq gnus-sum-thread-tree-root            "┌ ")
+  (setq gnus-sum-thread-tree-false-root      "◌ ")
+  (setq gnus-sum-thread-tree-single-indent   "◎ ")
+  (setq gnus-sum-thread-tree-vertical        "│")
+  (setq gnus-sum-thread-tree-indent          "  ")
+  (setq gnus-sum-thread-tree-leaf-with-other "├─►")
+  (setq gnus-sum-thread-tree-single-leaf     "╰─►")
+  (setq gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n")
   ;; Loose threads
-  (gnus-summary-make-false-root 'adopt)
-  (gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace))
-  (gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject)
+  (setq gnus-summary-make-false-root 'adopt)
+  (setq gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace))
+  (setq gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject)
   ;; Filling in threads
   ;; 2 old articles are enough for memory
-  (gnus-fetch-old-headers 2)
-  (gnus-fetch-old-ephemeral-headers 2)
-  (gnus-build-sparse-threads 'some)
+  (setq gnus-fetch-old-headers 2)
+  (setq gnus-fetch-old-ephemeral-headers 2)
+  (setq gnus-build-sparse-threads 'some)
   ;; More threading
-  (gnus-show-threads t)
-  (gnus-thread-indent-level 2)
-  (gnus-thread-hide-subtree nil)
+  (setq gnus-show-threads t)
+  (setq gnus-thread-indent-level 2)
+  (setq gnus-thread-hide-subtree nil)
   ;; Sorting
-  (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
-  (gnus-subthread-sort-functions '(gnus-thread-sort-by-date))
+  (setq gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
+  (setq gnus-subthread-sort-functions '(gnus-thread-sort-by-date))
   ;; Viewing
-  (gnus-view-pseudos 'automatic)
-  (gnus-view-pseudos-separately t)
-  (gnus-view-pseudo-asynchronously t)
+  (setq gnus-view-pseudos 'automatic)
+  (setq gnus-view-pseudos-separately t)
+  (setq gnus-view-pseudo-asynchronously t)
   ;; No auto select
-  (gnus-auto-select-first nil)
-  (gnus-auto-select-next nil)
-  (gnus-paging-select-next nil))
+  (setq gnus-auto-select-first nil)
+  (setq gnus-auto-select-next nil)
+  (setq gnus-paging-select-next nil))
 
 (use-package message
   :ensure nil
+  :defer t
   :hook (message-mode . auto-fill-mode)
-  :custom
-  (message-kill-buffer-on-exit t)
-  (message-signature user-full-name)
-  (message-mail-alias-type 'ecomplete)
-  (message-send-mail-function #'message-use-send-mail-function)
-  (send-mail-function #'smtpmail-send-it)
-  (smtpmail-smtp-server "smtp.gmail.com")
-  (smtpmail-smtp-user user-mail-address)
-  (smtpmail-smtp-service 587))
+  :config
+  (setq message-kill-buffer-on-exit t)
+  (setq message-signature user-full-name)
+  (setq message-mail-alias-type 'ecomplete)
+  (setq message-send-mail-function #'message-use-send-mail-function)
+  (setq send-mail-function #'smtpmail-send-it)
+  (setq smtpmail-smtp-server "smtp.gmail.com")
+  (setq smtpmail-smtp-user user-mail-address)
+  (setq smtpmail-smtp-service 587))
 
 (provide 'prelude-mail)
