@@ -87,7 +87,6 @@
 
 ;; ligatures
 (use-package ligature
-  :quelpa (ligature :fetcher github :repo "mickeynp/ligature.el")
   :config
   (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
                                        ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
@@ -429,11 +428,15 @@ system's dark or light variant."
 (use-package tab-bar
   :ensure nil
   :demand t
-  :config
+  :custom
   (tab-bar-mode t)
   (tab-bar-history-mode t)
-
+  :config
   (setq tab-bar-new-tab-choice #'dashboard-refresh-buffer)
+
+  ;; Make tab-bar--load-buttons do nothing to prevent it from
+  ;; overriding our pretty icons.
+  (advice-add 'tab-bar--load-buttons :override (lambda (&rest _args)))
 
   ;; the low-res icons are soooo ugly!!
   ;; the proper way to do this is perhaps defining tab-bar-* icons before loading tab-bar

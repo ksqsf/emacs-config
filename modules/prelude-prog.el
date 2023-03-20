@@ -44,6 +44,7 @@
 
 (use-package yasnippet-snippets
   :after (yasnippet)
+  :defer 10
   :config
   (yasnippet-snippets-initialize))
 
