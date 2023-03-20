@@ -217,4 +217,10 @@
 (use-package mind-wave
   :load-path "lisp/mind-wave")
 
+(use-package gptel
+  :load-path "lisp/gptel"
+  :config
+  (require 'gptel-curl)
+  (require 'gptel-transient))
+
 (provide 'prelude-apps)
