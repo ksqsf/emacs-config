@@ -62,6 +62,7 @@
   :defer t
   :hook (gnus-group-mode . gnus-topic-mode)
   :config
+  (require 'gnus-topic)
   ;;          indentation ------------.
   ;;  #      process mark ----------. |
   ;;                level --------. | |
