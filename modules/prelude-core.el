@@ -74,12 +74,13 @@
 (defalias 'list-buffers 'ibuffer)
 
 ;; Better undo
+(global-set-key (kbd "C-/") 'undo-only)
+(global-set-key (kbd "C-?") 'undo-redo)
 (setq undo-limit (* 1024 1024))
 (use-package vundo
   :bind
   ("C-x u" . vundo))
 (use-package undohist)
-(global-set-key (kbd "C-?") #'undo-only)
 (add-hook 'after-init-hook
           #'(lambda ()
               (require 'undohist)
