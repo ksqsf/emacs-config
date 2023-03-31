@@ -20,6 +20,9 @@
   :config
   (remove-hook 'lisp-mode-hook 'sly-editing-mode))
 
+;;
+;; Scheme
+;;
 (eval-after-load 'scheme
   (setq scheme-program-name "guile"))
 
@@ -32,6 +35,13 @@
   :config
   (use-package geiser-guile)
   (use-package geiser-racket))
+
+;;
+;; Racket
+;;
+(use-package racket-mode
+  :mode (("\\.rkt\\'" . racket-mode))
+  :hook (racket-mode . racket-xp-mode))
 
 
 ;;
