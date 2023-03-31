@@ -20,6 +20,13 @@
          ("C-c o" . find-org-file))
   :config
 
+  ;; Disable cache consistency verification.  I constantly work on
+  ;; large org files (~100M, a single line could be 1M), and cache
+  ;; warnings are just too annoying.
+  (when (version<= "9.6" (org-version))
+    (setq org-element--cache-self-verify nil)
+    (setq org-element--cache-self-verify-frequency 100000.0))
+
   ;; Org babel
   (add-to-list 'org-babel-load-languages '(C . t))
   (add-to-list 'org-babel-load-languages '(C++ . t))
