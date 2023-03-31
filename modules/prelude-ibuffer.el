@@ -50,4 +50,12 @@
   (use-package all-the-icons-ibuffer
     :commands (all-the-icons-ibuffer-mode)))
 
+(use-package ibuffer-project
+  :disabled  ;; Not very useful
+  :after (ibuffer)
+  :custom
+  (ibuffer-project-use-cache t)
+  :hook (ibuffer . (lambda ()
+                     (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups)))))
+
 (provide 'prelude-ibuffer)
