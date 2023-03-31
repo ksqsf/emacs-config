@@ -49,7 +49,6 @@
 
 ;; telega
 (use-package telega
-  :disabled
   :commands (telega))
 
 ;; google translate
@@ -219,6 +218,8 @@
 
 (use-package gptel
   :load-path "lisp/gptel"
+  :commands (gptel gptel-send)
+  :bind ("C-c l" . gptel-send)
   :config
   (require 'gptel-curl)
   (require 'gptel-transient))
