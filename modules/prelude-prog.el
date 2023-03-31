@@ -7,6 +7,7 @@
 (setq show-paren-delay 0.0)
 (setq tab-always-indent 'complete)
 (add-hook 'prog-mode-hook 'turn-on-adaptive-wrap)
+(setq xref-history-storage 'xref-window-local-history)
 
 
 (use-package yaml-mode :defer t)
