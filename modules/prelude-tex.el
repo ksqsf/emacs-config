@@ -41,9 +41,11 @@
   :hook ((latex-mode LaTeX-mode) . turn-on-cdlatex)
   :config
   (setq cdlatex-command-alist
-      '(("sum" "Insert \\sum_{}^{}"
-         "\\sum_{?}^{}" cdlatex-position-cursor nil nil t)
-        ("prd" "Insert \\prod_{}^{}"
-         "\\prod_{?}^{}" cdlatex-position-cursor nil nil t))))
+        '(("sum" "Insert \\sum_{}^{}"
+           "\\sum_{?}^{}" cdlatex-position-cursor nil nil t)
+          ("prd" "Insert \\prod_{}^{}"
+           "\\prod_{?}^{}" cdlatex-position-cursor nil nil t)
+          ("tt" "Insert \\texttt{}"
+           "\\texttt{?}" cdlatex-position-cursor nil t t))))
 
 (provide 'prelude-tex)

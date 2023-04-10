@@ -350,6 +350,7 @@ Useful for reading Python exception traces."
 
 (use-package dabbrev
   :ensure nil
+  :if (version< "29.0" emacs-version)
   :config
   (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode))
 

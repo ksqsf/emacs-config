@@ -248,4 +248,8 @@ The history is stored in FILENAME."
   )
 
 
+(use-package devdocs
+  :commands (devdocs-install devdocs-update-all devdocs-search))
+
+
 (provide 'prelude-prog)
