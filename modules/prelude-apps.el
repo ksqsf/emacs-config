@@ -217,11 +217,7 @@
   :load-path "lisp/mind-wave")
 
 (use-package gptel
-  :load-path "lisp/gptel"
   :commands (gptel gptel-send)
-  :bind ("C-c l" . gptel-send)
-  :config
-  (require 'gptel-curl)
-  (require 'gptel-transient))
+  :bind ("C-c l" . gptel-send))
 
 (provide 'prelude-apps)
