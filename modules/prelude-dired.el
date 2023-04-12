@@ -26,6 +26,8 @@
 
 (use-package dired-filter
   :after (dired)
+  :custom
+  (dired-filter-verbose nil)
   :hook ((dired-mode . dired-filter-group-mode)
          (dired-mode . dired-filter-mode))
   :config
