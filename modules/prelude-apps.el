@@ -162,13 +162,15 @@
     :vc (:fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el")
     :hook (pdf-view-mode . pdf-continuous-scroll-mode)))
 
+
+
 (use-package dash-at-point
   :commands (dash-at-point)
-  :after (embark)
   :preface
-  (defvar embark-symbol-map)
-  :bind (:map embark-symbol-map
-         ("d" . dash-at-point)))
+  :bind (("M-g M-d" . dash-at-point))
+  :config
+  (with-eval-after-load 'embark
+    (define-key embark-symbol-map (kbd "d") 'dash-at-point)))
 
 (use-package eaf
   :disabled ;; Does not work...
