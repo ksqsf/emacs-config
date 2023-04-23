@@ -22,12 +22,6 @@
   (add-hook 'LaTeX-mode-hook #'visual-line-mode)
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
 
-  (when k|mac
-    (setq TeX-source-correlate-mode 'synctex
-          TeX-view-program-list
-          '(("Skim"  "open -a Skim.app %o"))
-          TeX-view-program-selection '((output-pdf "Skim"))))
-
   (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs '(latex-mode "texlab"))))
 
