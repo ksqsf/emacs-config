@@ -10,6 +10,8 @@
   :ensure nil
   :custom
   (org-latex-preview-ltxpng-directory (no-littering-expand-var-file-name "org/ltxpng"))
+  (org-special-ctrl-a/e t)
+  (org-special-ctrl-k t)
   :hook (org-mode . org-cdlatex-mode)
   :hook (org-mode . visual-line-mode)
   :hook (org-mode . prelude/set-line-spacing)
