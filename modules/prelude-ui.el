@@ -423,8 +423,7 @@ system's dark or light variant."
   :commands (dashboard-refresh-buffer)
   :config
   (setq dashboard-items '((recents . 5)
-                          (projects . 5)
-                          (registers . 2)))
+                          (projects . 5)))
   (setq dashboard-center-content t)
   (setq dashboard-banner-logo-title "Happy Hacking!"))
 
