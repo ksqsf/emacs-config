@@ -500,4 +500,11 @@ system's dark or light variant."
 (use-package vterm-toggle
   :bind ("M-g v" . vterm-toggle))
 
+
+(use-package nord-theme
+  :ensure nil
+  :defer t
+  :config
+  (setq nord-region-highlight "frost"))
+
 (provide 'prelude-ui)
