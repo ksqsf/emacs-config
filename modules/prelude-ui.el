@@ -496,4 +496,8 @@ system's dark or light variant."
 (use-package rotate
   :defer t)
 
+
+(use-package vterm-toggle
+  :bind ("M-g v" . vterm-toggle))
+
 (provide 'prelude-ui)
