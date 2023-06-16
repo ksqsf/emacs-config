@@ -58,6 +58,8 @@
   :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package diredfl
-  :hook (dired-mode . diredfl-mode))
+  :after (dired)
+  :config
+  (diredfl-global-mode))
 
 (provide 'prelude-dired)
