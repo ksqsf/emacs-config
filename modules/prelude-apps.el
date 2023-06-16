@@ -206,7 +206,7 @@
 
 ;; rime
 (use-package rime
-  :disabled
+  :if (file-exists-p "~/.emacs.d/librime/dist")
   :custom
   (default-input-method "rime")
   (rime-librime-root "~/.emacs.d/librime/dist"))
@@ -219,7 +219,10 @@
   :load-path "lisp/mind-wave")
 
 (use-package gptel
+  :load-path "lisp/gptel"
   :commands (gptel gptel-send)
-  :bind ("C-c l" . gptel-send))
+  :bind ("C-c s" . gptel-send)
+  :config
+  (setq gptel-use-curl t))
 
 (provide 'prelude-apps)
