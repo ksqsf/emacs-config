@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: thisAssignProp
+# key: this
+# --
+this.$1 = props.$1;

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: kai
+# key: k
+# --
+\kai{$1}
