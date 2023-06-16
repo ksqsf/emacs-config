@@ -16,8 +16,8 @@
 
 ;; Use 落霞孤鹜 font.
 ;;
-;; (when (member "LXGW WenKai" +font-family-list)
-;;   (set-fontset-font t 'chinese-gbk "LXGW WenKai"))
+(when (member "LXGW WenKai" +font-family-list)
+  (set-fontset-font t 'chinese-gbk "LXGW WenKai"))
 
 ;; Hey, Org mode?
 (with-eval-after-load 'org
