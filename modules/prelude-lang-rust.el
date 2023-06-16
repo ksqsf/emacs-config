@@ -1,12 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Rust
 
-(use-package rust-mode
-  :mode ("\\.rs\\'" . rust-mode)
-  :hook (rust-mode . eglot-ensure)
-  :hook (rust-mode . subword-mode)
-  :hook (rust-mode . electric-pair-mode)
-  :hook (rust-mode . cargo-minor-mode))
+;; Use the bundled rust-ts-mode
+(add-hook 'rust-ts-mode-hook 'eglot-ensure)
+(add-hook 'rust-ts-mode-hook 'subword-mode)
+(add-hook 'rust-ts-mode-hook 'electric-pair-mode)
+(add-hook 'rust-ts-mode-hook 'cargo-minor-mode)
 
 (use-package cargo
   :defer t)
