@@ -50,8 +50,8 @@
   :ensure nil
   :defer t
   :bind (:map winner-mode-map
-              ("C-c C-," . winner-undo)
-              ("C-c C-." . winner-redo))
+              ("C-x C-," . winner-undo)
+              ("C-x C-." . winner-redo))
   :init
   (defvar winner-dont-bind-my-keys t)
   (add-hook 'after-init-hook #'winner-mode))
@@ -327,6 +327,8 @@ The existence of such windows is guaranteed by Emacs."
 ;; Preferred dark and light themes.
 (use-package one-themes :defer t)
 (use-package catppuccin-theme :defer t)
+(use-package dracula-theme :defer t)
+(use-package doom-themes :defer t)
 
 (defcustom prelude-enable-switch-dark-light nil
   "Whether automatically switch the current theme to match the
@@ -463,9 +465,9 @@ system's dark or light variant."
 ;; line numbers
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
-(setq display-line-numbers-type 'relative
-      display-line-numbers-grow-only t
-      display-line-numbers-width 4)
+(setq-default display-line-numbers-type 'relative
+              display-line-numbers-grow-only t
+              display-line-numbers-width 5)
 
 
 ;; toggle mwheel horizontal scroll when toggling truncate-lines
