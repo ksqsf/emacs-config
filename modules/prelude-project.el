@@ -44,7 +44,42 @@
    :compile "xmake build"
    :run "xmake run"
    :install "xmake install"
-   :package "xmake package"))
+   :package "xmake package")
+
+  ;; fix projectile bug
+  (defun projectile-ripgrep (search-term &optional arg)
+    "Run a ripgrep (rg) search with `SEARCH-TERM' at current project root.
+
+With an optional prefix argument ARG SEARCH-TERM is interpreted as a
+regular expression.
+
+This command depends on of the Emacs packages ripgrep or rg being
+installed to work."
+    (interactive
+     (list (projectile--read-search-string-with-default
+            (format "Ripgrep %ssearch for" (if current-prefix-arg "regexp " "")))
+           current-prefix-arg))
+    (let ((args (mapcar (lambda (val) (concat "--glob !" (shell-quote-argument val)))
+                        (append projectile-globally-ignored-files
+                                projectile-globally-ignored-directories))))
+      ;; we rely on the external packages ripgrep and rg for the actual search
+      ;;
+      ;; first we check if we can load ripgrep
+      (cond ((require 'ripgrep nil 'noerror)
+             (ripgrep-regexp search-term
+                             (projectile-acquire-root)
+                             (if arg
+                                 args
+                               (cons "--fixed-strings --hidden" args))))
+            ;; and then we try rg
+            ((require 'rg nil 'noerror)
+             (rg-run search-term
+                     "*"                       ;; all files
+                     (projectile-acquire-root)
+                     (not arg)                 ;; literal search?
+                     nil                       ;; no need to confirm
+                     args))
+            (t (error "Packages `ripgrep' and `rg' are not available"))))))
 
 (use-package project
   :defer t
