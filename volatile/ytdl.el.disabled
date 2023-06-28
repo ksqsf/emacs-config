@@ -1,0 +1,13 @@
+(defvar ytdl-dest-dir (expand-file-name "~/Movies/"))
+(defvar ytdl-command "youtube-dl")
+(defvar ytdl-cookies-file (expand-file-name "~/Movies/ytdl-cookies.txt"))
+
+(defun youtube-dl (url)
+  "Run youtube-dl to download Internet videos."
+  (interactive "sVideo URL to download: ")
+  (let ((ytdl (executable-find ytdl-command nil))
+        (default-directory ytdl-dest-dir))
+    (unless ytdl (error "youtube-dl not found in exec-path"))
+    (start-process "youtube-dl" "*youtube-dl*"
+                   ytdl url "--no-progress" "--cookies" ytdl-cookies-file)
+    (pop-to-buffer "*youtube-dl*")))
