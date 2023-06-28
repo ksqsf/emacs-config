@@ -12,7 +12,8 @@
   :custom
   (projectile-auto-discover nil)
   (projectile-completion-system 'auto)
-  (projectile-switch-project-action #'projectile-dired)
+  (projectile-switch-project-action #'projectile-find-file)
+  (projectile-current-project-on-switch 'move-to-end)
   (projectile-find-dir-includes-top-level t)
   (projectile-enable-caching nil)       ; Projectile will save a cache file, which is
                                         ; slow for large projects.
