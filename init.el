@@ -42,7 +42,7 @@
 (require 'prelude-completion)
 
 ;; (require 'prelude-meow)
-;; (require 'prelude-evil)
+(require 'prelude-evil)
 (require 'prelude-nix)
 
 (require 'prelude-search)
