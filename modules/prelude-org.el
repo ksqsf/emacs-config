@@ -87,17 +87,14 @@
 (setq org-babel-load-languages
       '((emacs-lisp . t)
         (C . t)
-        (C++ . t)
         (rust . t)
         (python . t)
         (dot . t)
-        (jupyter . t)
         (d2 . t)))
 (setq org-babel-python-command "python3")
 (use-package ob-d2 :defer t)
 (use-package d2-mode :defer t)
 
-
 (use-package deft
   :after org
   :bind

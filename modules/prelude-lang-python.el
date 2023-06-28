@@ -23,4 +23,6 @@
   (when (eq k|lsp 'lsp)
     (use-package lsp-pyright)))
 
+;; (use-package jupyter :defer t)
+
 (provide 'prelude-lang-python)
