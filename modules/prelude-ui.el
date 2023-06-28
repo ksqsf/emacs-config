@@ -430,6 +430,7 @@ system's dark or light variant."
   (setq dashboard-banner-logo-title "Happy Hacking!"))
 
 (use-package tab-bar
+  :disabled
   :ensure nil
   :demand t
   :custom

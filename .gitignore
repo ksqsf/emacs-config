@@ -16,6 +16,7 @@ SessionDesktop.el
 ede-projects.el
 eln-cache/
 elpa/
+elpaca/
 filesets-cache.el
 session.*
 var/
