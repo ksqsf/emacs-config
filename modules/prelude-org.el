@@ -33,10 +33,6 @@
 (setq org-return-follows-link t)
 (setq org-fold-catch-invisible-edits 'smart)
 (setq org-pretty-entities t)
-(add-hook 'org-mode-hook 'org-indent-mode)
-(use-package org-appear                 ; Typora-style editing
-  :defer t
-  :hook (org-mode . org-appear-mode))
 
 ;; LaTeX preview
 (setq org-latex-preview-ltxpng-directory (no-littering-expand-var-file-name "org/ltxpng"))
@@ -48,6 +44,10 @@
 ;; Restore <s tab
 (with-eval-after-load 'org
   (require 'org-tempo))
+
+
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode))
 
 
 ;; (org) Speed Keys
