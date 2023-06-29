@@ -67,6 +67,31 @@ These modifications are generally in =prelude-core.el= and
 
 User-visible modifications are listed here.
 
+*** Modal editing (Evil)
+
+I use Evil, because the Vi-style editing commands are the de facto
+standard right now, and evil-collection is great, and I still retain
+some muscle memory (I used to be a Vim user).  Though, conceptually, I
+like Meow better.
+
+Evil-collection offers a large collection of consistent,
+pre-configured keybindings for a variety of major modes.  See its
+[[https://github.com/emacs-evil/evil-collection][readme]].
+
+I use a hybrid editing style, i.e. in the insert mode, most Emacs
+commands are still available, so I can keep my muscle memory as much
+as possible.  This is done by customizing
+=evil-disable-insert-state-bindings=.
+
+Unfortunately, there are still conflicts.  In those cases, I abide by
+the Evil's default behaviors in the normal mode.  For example,
+
+| Keybinding | Evil behavior       |
+|------------+---------------------|
+| C-f        | Scroll down by page |
+| C-v        | Visual block        |
+| C-e        | Scroll up by line   |
+
 *** Expand region
 
 =C-SPC C-SPC= to expand the current region semantically.

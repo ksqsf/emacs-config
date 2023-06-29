@@ -9,7 +9,6 @@
   (setq evil-undo-system 'undo-redo)
   (setq evil-disable-insert-state-bindings t)
   :config
-  (evil-define-key '(normal insert) 'global (kbd "C-p") 'projectile-find-file)
   (evil-mode t))
 
 (use-package evil-collection
@@ -30,5 +29,41 @@
   :config
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
+
+;; Quit corfu on Escape
+(with-eval-after-load 'evil
+  (with-eval-after-load 'corfu
+    (add-hook 'evil-normal-state-entry-hook
+              (lambda ()
+                (corfu-quit)))))
+
+;; Leader key
+(use-package general
+  :init
+  (setq general-override-states '(insert emacs hybrid normal visual motion operator replace))
+  :config
+  (general-evil-setup)
+  (general-nmap
+   :prefix "SPC"
+   :prefix-map '+leader-map
+   "SPC" 'execute-extended-command
+   ;; buffer
+   "bi" 'ibuffer
+   "bb" 'switch-to-buffer
+   "bk" 'kill-this-buffer
+   "br" 'bury-buffer
+   "bc" 'clone-indirect-buffer
+   ;; projectile
+   "pp" 'projectile-switch-project
+   "ps" 'projectile-vterm
+   "pf" 'projectile-find-file
+   "pb" 'projectile-ibuffer
+   "pk" 'projectile-kill-buffers
+   "pg" 'projectile-grep
+   "pa" 'projectile-find-other-file-other-window
+   ;; vc
+   "v=" 'vc-diff
+   "vg" 'magit
+   ))
 
 (provide 'prelude-evil)

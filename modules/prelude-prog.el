@@ -33,7 +33,10 @@
   (corfu-preview-current t)
   :config
   (global-corfu-mode)
-  (corfu-popupinfo-mode))
+  (corfu-popupinfo-mode)
+
+  ;; Let RET be newlines.
+  (define-key corfu-map (kbd "RET") nil))
 
 (use-package corfu-prescient
   :after (:all corfu prescient))

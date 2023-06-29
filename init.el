@@ -41,10 +41,6 @@
 (require 'prelude-project)
 (require 'prelude-completion)
 
-;; (require 'prelude-meow)
-(require 'prelude-evil)
-(require 'prelude-nix)
-
 (require 'prelude-search)
 (require 'prelude-ibuffer)
 (require 'prelude-chinese)
@@ -72,6 +68,10 @@
 (require 'prelude-mail)
 (require 'prelude-apps)
 (require 'prelude-irc)
+
+;; (require 'prelude-meow)
+(require 'prelude-evil)
+(require 'prelude-nix)
 
 ;; Volatile.
 (when (file-exists-p prelude-volatile-dir)
