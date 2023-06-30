@@ -187,7 +187,7 @@
 
 
 (use-package org-xlatex
-  :ensure nil
+  :vc (:fetcher github :repo "ksqsf/org-xlatex")
   :after (org)
   :hook (org-mode . org-xlatex-mode))
 
