@@ -92,6 +92,9 @@ the Evil's default behaviors in the normal mode.  For example,
 | C-v        | Visual block        |
 | C-e        | Scroll up by line   |
 
+The evil integration can be disabled by commenting out =(require 'prelude-evil)=
+in =init.el=.
+
 *** Expand region
 
 =C-SPC C-SPC= to expand the current region semantically.
@@ -204,6 +207,7 @@ for better discoverability.
 | clipboard      | ./lisp/clipboard.el      | clipboard inspector                |
 | clipmgr        | ./lisp/clipmgr.el        | (WIP) a clipboard manager          |
 | region-mark    | ./lisp/region-mark.el    |                                    |
-| fish-protector | ./lisp/fish-protector.el | 魚の護衛者                           |
+| fish-protector | ./lisp/fish-protector.el | 魚の護衛者                         |
 | logseq         | ./lisp/logseq.el         | Logseq HTTP API                    |
 | leitner        | ./lisp/leitner.el        | The Leitner system (a kind of SRS) |
+| org-xlatex     | github ksqsf/org-xlatex  | instant latex preview              |
