@@ -1,5 +1,8 @@
 ;; -*- lexical-binding: t; -*-
 
+;; Currently, I consider this an ``addition'' -- my config still works if you disable this.
+;; Therefore, evil is loaded AFTER other modules, and other modules should not depend on the presence of evil.
+
 (use-package evil
   :demand t
   :init
@@ -53,6 +56,7 @@
    "bk" 'kill-this-buffer
    "br" 'bury-buffer
    "bc" 'clone-indirect-buffer
+   "bd" 'delete-trailing-whitespace
    ;; projectile
    "pp" 'projectile-switch-project
    "ps" 'projectile-vterm
@@ -61,9 +65,10 @@
    "pk" 'projectile-kill-buffers
    "pg" 'projectile-grep
    "pa" 'projectile-find-other-file-other-window
-   ;; vc
-   "v=" 'vc-diff
-   "vg" 'magit
    ))
+
+(evil-define-key 'normal 'global (kbd "gh") 'previous-buffer)
+(evil-define-key 'normal 'global (kbd "gl") 'next-buffer)
+(evil-define-key 'normal haskell-mode-map (kbd "gz") 'haskell-interactive-switch)
 
 (provide 'prelude-evil)
