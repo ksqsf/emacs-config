@@ -43,6 +43,8 @@
 ;; Scroll: avoid surprises (try to make scrolling "continous")
 (setq scroll-margin 1)
 (setq scroll-preserve-screen-position t)
+(setq scroll-step 1)
+(setq scroll-conservatively 10000)
 
 ;; Disable fancy features when the file is too large
 (global-so-long-mode t)
