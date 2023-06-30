@@ -185,4 +185,10 @@
   :config
   (require 'ebib-biblio))
 
+
+(use-package org-xlatex
+  :ensure nil
+  :after (org)
+  :hook (org-mode . org-xlatex-mode))
+
 (provide 'prelude-org)
