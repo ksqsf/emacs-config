@@ -25,28 +25,7 @@
 ;;     :config
 ;;     (add-to-list 'company-backends #'company-tabnine)))
 
-(use-package corfu
-  :demand t
-  :custom
-  (corfu-auto t)
-  (corfu-quit-no-match t)
-  (corfu-preview-current t)
-  :config
-  (global-corfu-mode)
-  (corfu-popupinfo-mode)
 
-  ;; Let RET be newlines.
-  (define-key corfu-map (kbd "RET") nil))
-
-(use-package corfu-prescient
-  :after (:all corfu prescient))
-
-(use-package kind-icon
-  :after (corfu)
-  :custom
-  (kind-icon-default-face 'corfu-default)
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode))

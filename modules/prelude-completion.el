@@ -154,7 +154,7 @@
   (setq read-file-name-completion-ignore-case t)
   (setq completion-category-defaults nil)
   (setq completions-format 'vertical)
-  (setq-default completion-at-point-functions ))
+  (setq-default completion-at-point-functions nil))
 
 ;; Additional capf.
 (use-package cape
@@ -172,5 +172,31 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
   )
+
+(use-package corfu
+  :demand t
+  :custom
+  (corfu-auto t)
+  (corfu-quit-no-match t)
+  (corfu-preview-current t)
+  (corfu-cycle t)
+  (corfu-preselect 'valid)
+  :bind (:map corfu-map
+              ("RET" . nil)
+              ("C-j" . corfu-next)
+              ("C-k" . corfu-previous))
+  :init
+  (global-corfu-mode)
+  (corfu-popupinfo-mode)
+  :config
+  ;; Let RET be newlines.
+  (define-key corfu-map (kbd "RET") nil))
+
+(use-package kind-icon
+  :after (corfu)
+  :custom
+  (kind-icon-default-face 'corfu-default)
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (provide 'prelude-completion)
