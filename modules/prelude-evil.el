@@ -57,6 +57,7 @@
    "br" 'bury-buffer
    "bc" 'clone-indirect-buffer
    "bd" 'delete-trailing-whitespace
+   "bu" 'revert-buffer
    ;; projectile
    "pp" 'projectile-switch-project
    "ps" 'projectile-vterm
