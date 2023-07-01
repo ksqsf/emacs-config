@@ -27,6 +27,9 @@
   (find-file org-directory))
 
 
+;; Startup options
+(setq org-startup-indented t)
+
 ;; Editing
 (setq org-special-ctrl-a/e t)
 (setq org-special-ctrl-k t)
