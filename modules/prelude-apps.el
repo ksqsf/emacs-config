@@ -219,8 +219,6 @@
   :load-path "lisp/mind-wave")
 
 (use-package gptel
-  :load-path "lisp/gptel"
-  :commands (gptel gptel-send)
   :bind ("C-c s" . gptel-send)
   :config
   (setq gptel-use-curl t))

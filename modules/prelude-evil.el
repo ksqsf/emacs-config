@@ -66,10 +66,17 @@
    "pk" 'projectile-kill-buffers
    "pg" 'projectile-grep
    "pa" 'projectile-find-other-file-other-window
+   ;; gpt
+   "gg" 'gptel
+   "gm" 'gptel-menu
+   "gp" 'gptel-system-prompt
+   "gs" 'gptel-send
    ))
 
 (evil-define-key 'normal 'global (kbd "gh") 'previous-buffer)
 (evil-define-key 'normal 'global (kbd "gl") 'next-buffer)
 (evil-define-key 'normal haskell-mode-map (kbd "gz") 'haskell-interactive-switch)
+(evil-define-key 'motion 'global (kbd "gs") 'gptel-send)
+(evil-define-key 'visual 'global (kbd "gs") 'gptel-send)
 
 (provide 'prelude-evil)
