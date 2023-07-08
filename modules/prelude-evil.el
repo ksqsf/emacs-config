@@ -11,6 +11,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-redo)
   (setq evil-disable-insert-state-bindings t)
+  :bind (:map evil-normal-state-map (("C-e" . end-of-line)))
   :config
   (evil-mode t))
 

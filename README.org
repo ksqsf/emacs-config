@@ -81,19 +81,11 @@ pre-configured keybindings for a variety of major modes.  See its
 I use a hybrid editing style, i.e. in the insert mode, most Emacs
 commands are still available, so I can keep my muscle memory as much
 as possible.  This is done by customizing
-=evil-disable-insert-state-bindings=.
+=evil-disable-insert-state-bindings=.  The conflicts are resolved
+depending on which is most familiar to me.
 
-Unfortunately, there are still conflicts.  In those cases, I abide by
-the Evil's default behaviors in the normal mode.  For example,
-
-| Keybinding | Evil behavior       |
-|------------+---------------------|
-| C-f        | Scroll down by page |
-| C-v        | Visual block        |
-| C-e        | Scroll up by line   |
-
-The evil integration can be disabled by commenting out =(require 'prelude-evil)=
-in =init.el=.
+The evil integration can be disabled cleanly by commenting out
+=(require 'prelude-evil)= in =init.el=.
 
 *** Expand region
 
