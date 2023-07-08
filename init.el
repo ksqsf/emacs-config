@@ -69,7 +69,6 @@
 (require 'prelude-apps)
 (require 'prelude-irc)
 
-;; (require 'prelude-meow)
 (require 'prelude-evil)
 (require 'prelude-nix)
 
