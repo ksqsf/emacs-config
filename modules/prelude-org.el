@@ -19,6 +19,7 @@
   ("c" org-capture "capture" :exit t)
   ("l" org-store-link "store link" :exit t)
   ("o" +open-org-dir "open dir" :exit t)
+  ("f" +find-org "find file" :exit t)
   ("j" org-journal-new-entry "journal" :exit t))
 (global-set-key (kbd "C-c o") 'hydra-org/body)
 (defun +open-org-dir ()
@@ -29,6 +30,7 @@
 
 ;; Startup options
 (setq org-startup-indented t)
+(with-eval-after-load 'org (require 'org-tempo)) ; Legacy completion system, e.g. <s tab
 
 ;; Editing
 (setq org-special-ctrl-a/e t)
@@ -37,22 +39,24 @@
 (setq org-fold-catch-invisible-edits 'smart)
 (setq org-pretty-entities t)
 
+;; Apperance
+(use-package org-bullets :hook (org-mode . org-bullets-mode))
+(use-package org-appear
+  :hook (org-mode . org-appear-mode)
+  :config (setq org-hide-emphasis-markers t))
+
 ;; LaTeX preview
 (setq org-latex-preview-ltxpng-directory (no-littering-expand-var-file-name "org/ltxpng"))
 (setq org-preview-latex-default-process 'dvisvgm)
 (when k|mac
   (with-eval-after-load 'org
     (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75))))
+(use-package org-xlatex
+  :vc (:fetcher github :repo "ksqsf/org-xlatex")
+  :after (org)
+  :hook (org-mode . org-xlatex-mode)
+  :hook (markdown-mode . org-xlatex-mode))
 
-;; Restore <s tab
-(with-eval-after-load 'org
-  (require 'org-tempo))
-
-
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode))
-
-
 ;; (org) Speed Keys
 (setq org-use-speed-commands
       (lambda () (and (looking-at org-outline-regexp) (looking-back "^\\**"))))
@@ -189,9 +193,81 @@
   (require 'ebib-biblio))
 
 
-(use-package org-xlatex
-  :vc (:fetcher github :repo "ksqsf/org-xlatex")
-  :after (org)
-  :hook (org-mode . org-xlatex-mode))
+(use-package org-preview-html
+  :config
+  (setq org-preview-html-viewer 'xwidget))
 
+
+(defun +find-org ()
+  "Find or create an org file."
+  (interactive)
+  (let ((default-directory org-directory))
+    (project-find-file)))
+
+
+;; (use-package org-roam
+;;   :custom
+;;   (org-roam-directory (file-truename "~/Documents/org"))
+;;   :bind (("C-c n l" . org-roam-buffer-toggle)
+;;          ("C-c n f" . org-roam-node-find)
+;;          ("C-c n g" . org-roam-graph)
+;;          ("C-c n i" . org-roam-node-insert)
+;;          ("C-c n c" . org-roam-capture)
+;;          ;; Dailies
+;;          ("C-c n t" . org-roam-dailies-goto-today)
+;;          ("C-c n j" . org-roam-dailies-capture-today))
+;;   :config
+;;   (require 'org-roam-protocol)
+;;   (org-roam-db-autosync-mode)
+
+;;   ;; The following are from: https://jethrokuan.github.io/org-roam-guide/
+;;   ;; That workflow seems too heavyweight for me...
+;;   ;; Let's see.
+
+;;   ;; Show node types in the node list
+;;   (cl-defmethod org-roam-node-type ((node org-roam-node))
+;;     "Return the TYPE of NODE."
+;;     (condition-case nil
+;;         (file-name-nondirectory
+;;          (directory-file-name
+;;           (file-name-directory
+;;            (file-relative-name (org-roam-node-file node) org-roam-directory))))
+;;       (error "")))
+;;   (setq org-roam-node-display-template (concat "${type:15}" "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+
+;;   ;; Capture templates
+;;   (setq org-roam-capture-templates
+;;         '(("f" "fleet" plain "%?"
+;;            :if-new (file+head "fleet/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+;;            :immediate-finish t
+;;            :unnarrowed t)
+;;           ("m" "main" plain "%?"
+;;            :if-new (file+head "main/${slug}.org" "#+title: ${title}\n")
+;;            :immediate-finish t
+;;            :unnarrowed t)
+;;           ("e" "essay" plain "%?"
+;;            :if-new (file+head "essay/${slug}.org" "#+title: ${title}\n#+author: \n#+date: \n")
+;;            :immediate-finish t
+;;            :unnarrowed t)
+;;           ("p" "paper" plain "%?"
+;;            :if-new (file+head "paper/${slug}.org"
+;;                               "#+title: ${title}\n")
+;;            :immediate-finish t
+;;            :unnarrowed t)
+;;           ("b" "book" plain "%?"
+;;            :if-new (file+head "book/${slug}.org"
+;;                               "#+title: ${title}\n#+filetags: :book:\n")
+;;            :immediate-finish t
+;;            :unnarrowed t))))
+
+;; (use-package org-roam-ui
+;;   :after org-roam
+;;   :config
+;;   (defalias 'orui 'org-roam-ui-open)
+;;   (setq org-roam-ui-sync-theme t
+;;         org-roam-ui-follow t
+;;         org-roam-ui-update-on-save t
+;;         org-roam-ui-open-on-start t))
+
+
 (provide 'prelude-org)
