@@ -276,7 +276,6 @@
 
 ;; Provide mixed-pitch faces
 (use-package mixed-pitch
-  :disabled
   :hook
   (org-mode . mixed-pitch-mode)
   (markdown-mode . mixed-pitch-mode)
@@ -284,8 +283,7 @@
   ;; text-mode.
   :config
   (dolist (i '(org-drawer org-special-keyword org-property-value))
-    (push i mixed-pitch-fixed-pitch-faces))
-  (set-face-attribute 'variable-pitch nil :font "Arial"))
+    (push i mixed-pitch-fixed-pitch-faces)))
 
 ;; I don't really like which-key, but it's helpful when it's
 ;; helpful...  *wink*
