@@ -18,4 +18,4 @@
 (setq default-frame-alist '((height . 50)
                             (width . 120)
                             (vertical-scroll-bars . nil)))
-(setq initial-frame-alist '((alpha . 0.97)))
+
