@@ -18,6 +18,8 @@
 ;;
 (when (member "LXGW WenKai" +font-family-list)
   (set-fontset-font t 'chinese-gbk "LXGW WenKai"))
+(when (member "PingFang TC" +font-family-list)
+  (set-fontset-font t 'chinese-gbk "PingFang TC"))
 
 ;; Hey, Org mode?
 (with-eval-after-load 'org

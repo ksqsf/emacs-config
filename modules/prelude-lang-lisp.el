@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+(use-package paredit
+  :hook (emacs-lisp . paredit-mode))
+
 ;;
 ;; Emacs Lisp
 ;;

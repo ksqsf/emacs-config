@@ -182,9 +182,12 @@
   (corfu-cycle t)
   (corfu-preselect 'valid)
   :bind (:map corfu-map
-              ("RET" . nil)
+              ("<return>" . nil)
+              ("<escape>" . corfu-quit)
               ("C-j" . corfu-next)
-              ("C-k" . corfu-previous))
+              ("C-k" . corfu-previous)
+              ("M-d" . corfu-popupinfo-documentation)
+              ("M-l" . corfu-info-location))
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode)

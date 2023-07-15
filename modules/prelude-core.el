@@ -73,13 +73,15 @@
 
 ;; Use `ibuffer' as a drop-in replacement of `list-buffers' (C-x C-b).
 ;; The former should provide much more functions.
-(defalias 'list-buffers 'ibuffer)
+(global-set-key [remap list-buffers] #'ibuffer)
 
 ;; Better undo
 (global-set-key (kbd "C-/") 'undo)
 (global-set-key (kbd "C-_") 'undo-only)
 (global-set-key (kbd "C-?") 'undo-redo)
 (setq undo-limit (* 100 1024 1024))
+(setq undo-strong-limit (* 200 1024 1024))
+(setq undo-outer-limit (* 50 1024 1024))
 (use-package vundo
   :bind ("C-x u" . vundo))
 (use-package undohist)
@@ -377,5 +379,11 @@ Useful for reading Python exception traces."
   (interactive)
   (byte-recompile-directory prelude-modules-dir)
   (package-quickstart-refresh))
+
+(defun kill-all-buffers ()
+  "Literally kill all buffers"
+  (interactive)
+  (dolist (buf (buffer-list))
+    (kill-buffer buf)))
 
 (provide 'prelude-core)

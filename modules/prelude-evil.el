@@ -11,7 +11,10 @@
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-redo)
   (setq evil-disable-insert-state-bindings t)
-  :bind (:map evil-normal-state-map (("C-e" . end-of-line)))
+  :bind (:map evil-normal-state-map
+              (("C-e" . end-of-line)
+               ("C-r" . isearch-backward)
+               ("U" . evil-redo)))
   :config
   (evil-mode t))
 
@@ -50,7 +53,9 @@
   (general-nmap
    :prefix "SPC"
    :prefix-map '+leader-map
-   "SPC" 'execute-extended-command
+   "SPC" 'projectile-switch-to-buffer
+   ;; file
+   "fb" 'bookmark-bmenu-list
    ;; buffer
    "bi" 'ibuffer
    "bb" 'switch-to-buffer
@@ -74,10 +79,16 @@
    "gs" 'gptel-send
    ))
 
-(evil-define-key 'normal 'global (kbd "gh") 'previous-buffer)
-(evil-define-key 'normal 'global (kbd "gl") 'next-buffer)
-(evil-define-key 'normal haskell-mode-map (kbd "gz") 'haskell-interactive-switch)
-(evil-define-key 'motion 'global (kbd "gs") 'gptel-send)
-(evil-define-key 'visual 'global (kbd "gs") 'gptel-send)
+(with-eval-after-load 'haskell-mode
+  (evil-define-key 'normal haskell-mode-map (kbd "gz") 'haskell-interactive-switch))
+
+(with-eval-after-load 'gptel
+  (evil-define-key 'motion 'global (kbd "gs") 'gptel-send)
+  (evil-define-key 'visual 'global (kbd "gs") 'gptel-send))
+
+(with-eval-after-load 'org
+  (evil-define-key 'normal org-mode-map [tab] 'org-cycle)
+  (evil-define-key 'insert org-mode-map [tab] 'org-metaright)
+  (evil-define-key 'insert org-mode-map [S-tab] 'org-metaleft))
 
 (provide 'prelude-evil)

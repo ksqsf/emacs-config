@@ -20,6 +20,7 @@
 ;; Mac-specific settings
 (when k|mac
   (use-package ns-auto-titlebar
+    :disabled
     :init
     (ns-auto-titlebar-mode)))
 
@@ -107,6 +108,12 @@
 ;; prioritize vertical side windows
 (setq window-sides-vertical t)
 
+;; fix bad default behavior
+(setopt display-buffer-base-action
+        '((display-buffer-reuse-window display-buffer-same-window)
+          (reusable-frames . t)))
+(setopt even-window-sizes nil)
+
 ;; popups policy
 (setq display-buffer-alist
  `(;; Bottom Root
@@ -131,7 +138,7 @@
     (dedicated . t))
 
    ;; Bottom Side
-   ("^\\*.*-compilation\\*"
+   ("^\\*.*-?compilation\\*"
     (display-buffer-reuse-window
      display-buffer-pop-up-window)
     ;; (side . bottom)
@@ -161,7 +168,8 @@
    ((derived-mode . haskell-interactive-mode)
     (display-buffer-reuse-window
      display-buffer-at-bottom
-     display-buffer-below-selected))
+     display-buffer-below-selected)
+    (dedicated . t))
    ((derived-mode . inferior-python-mode)
     (display-buffer-below-selected))
 
@@ -276,6 +284,7 @@
 
 ;; Provide mixed-pitch faces
 (use-package mixed-pitch
+  :disabled
   :hook
   (org-mode . mixed-pitch-mode)
   (markdown-mode . mixed-pitch-mode)

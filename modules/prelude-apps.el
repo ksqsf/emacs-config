@@ -142,15 +142,21 @@
   ;; (add-hook 'buffer-list-update-hook #'-treemacs-locate-project-if-in-workspace)
 
   (use-package treemacs-projectile
+    :after (projectile)
     :demand t)
 
   (use-package treemacs-tab-bar
+    :after (tab-bar)
     :demand t)
 
   (use-package treemacs-all-the-icons
     :demand t
     :config
-    (treemacs-load-theme "all-the-icons")))
+    (treemacs-load-theme "all-the-icons"))
+
+  (use-package treemacs-persp
+    :after (persp-mode)
+    :demand t))
 
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)

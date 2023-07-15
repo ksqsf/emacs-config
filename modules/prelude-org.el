@@ -40,7 +40,6 @@
 (setq org-pretty-entities t)
 
 ;; Apperance
-(use-package org-bullets :hook (org-mode . org-bullets-mode))
 (use-package org-appear
   :hook (org-mode . org-appear-mode)
   :config (setq org-hide-emphasis-markers t))
@@ -106,13 +105,13 @@
   :after org
   :bind
   ("C-c n d" . deft)
-  :custom
-  (deft-recursive t)
-  (deft-use-filter-string-for-filename t)
-  (deft-default-extension "org")
-  (deft-directory org-directory)
-  (deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n")
-  (deft-use-filename-as-title t))
+  :config
+  (setopt deft-recursive t
+          deft-use-filter-string-for-filename t
+          deft-default-extension "org"
+          deft-directory org-directory
+          deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"
+          deft-use-filename-as-title t))
 
 (use-package org-download
   :disabled                             ; not used atm
@@ -194,6 +193,8 @@
 
 
 (use-package org-preview-html
+  :defer t
+  :commands (org-preview-html-mode)
   :config
   (setq org-preview-html-viewer 'xwidget))
 

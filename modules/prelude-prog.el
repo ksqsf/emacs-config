@@ -15,18 +15,6 @@
 
 
 
-;; (use-package company
-;;   :hook (after-init . global-company-mode)
-;;   :config
-;;   (use-package company-posframe
-;;     :config
-;;     (company-posframe-mode))
-;;   (use-package company-tabnine
-;;     :config
-;;     (add-to-list 'company-backends #'company-tabnine)))
-
-
-
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode))
 
