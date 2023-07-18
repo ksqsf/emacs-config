@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; -*-
 
 ;; Currently, I consider this an ``addition'' -- my config still works if you disable this.
 ;; Therefore, evil is loaded AFTER other modules, and other modules should not depend on the presence of evil.
@@ -37,47 +37,44 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-;; Quit corfu on Escape
+;;; Quit corfu on Escape
 (with-eval-after-load 'evil
   (with-eval-after-load 'corfu
     (add-hook 'evil-normal-state-entry-hook
               (lambda ()
                 (corfu-quit)))))
 
-;; Leader key
-(use-package general
+;;; Leader key
+(use-package evil-leader
+  :demand t
   :init
-  (setq general-override-states '(insert emacs hybrid normal visual motion operator replace))
+  (global-evil-leader-mode)
   :config
-  (general-evil-setup)
-  (general-nmap
-   :prefix "SPC"
-   :prefix-map '+leader-map
-   "SPC" 'projectile-switch-to-buffer
-   ;; file
-   "fb" 'bookmark-bmenu-list
-   ;; buffer
-   "bi" 'ibuffer
-   "bb" 'switch-to-buffer
-   "bk" 'kill-this-buffer
-   "br" 'bury-buffer
-   "bc" 'clone-indirect-buffer
-   "bd" 'delete-trailing-whitespace
-   "bu" 'revert-buffer
-   ;; projectile
-   "pp" 'projectile-switch-project
-   "ps" 'projectile-vterm
-   "pf" 'projectile-find-file
-   "pb" 'projectile-ibuffer
-   "pk" 'projectile-kill-buffers
-   "pg" 'projectile-grep
-   "pa" 'projectile-find-other-file-other-window
-   ;; gpt
-   "gg" 'gptel
-   "gm" 'gptel-menu
-   "gp" 'gptel-system-prompt
-   "gs" 'gptel-send
-   ))
+  (evil-leader/set-leader "<SPC>"))
+
+;;; Keybindings
+(evil-leader/set-key
+    "SPC" 'projectile-switch-to-buffer
+    ;; file
+    "fb" 'bookmark-bmenu-list
+    ;; buffer
+    "bi" 'ibuffer
+    "bb" 'switch-to-buffer
+    "bc" 'clone-indirect-buffer
+    "bd" 'delete-trailing-lines
+    "bu" 'revert-buffer
+    ;; projectile
+    "pp" 'projectile-switch-project
+    "ps" 'projectile-vterm
+    "pb" 'projectile-ibuffer
+    "pk" 'projectile-kill-buffers
+    "pg" 'projectile-grep
+    "pa" 'projectile-find-other-file-other-window
+    ;; gptel
+    "gg" 'gptel
+    "gm" 'gptel-menu
+    "gp" 'gptel-system-prompt
+    "gs" 'gptel-send)
 
 (with-eval-after-load 'haskell-mode
   (evil-define-key 'normal haskell-mode-map (kbd "gz") 'haskell-interactive-switch))
