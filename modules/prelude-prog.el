@@ -10,11 +10,20 @@
 (setq xref-history-storage 'xref-window-local-history)
 
 
-(use-package yaml-mode :defer t)
-(use-package dockerfile-mode :defer t)
+;;; Tree-sitter basic configuration
+(setq major-mode-remap-alist
+      '((python-mode . python-ts-mode)
+        (css-mode . css-ts-mode)
+        (js-mode . js-ts-mode)
+        (typescript-mode . tsx-ts-mode)
+        (yaml-mode . yaml-ts-mode)))
+(use-package yaml-ts-mode
+  :mode ("\\.ya?ml\\'" . yaml-ts-mode))
+(use-package dockerfile-ts-mode
+  :mode ("Dockerfile.*\\'" . dockerfile-ts-mode))
 
 
-
+;;; Snippets
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode))
 
@@ -34,6 +43,7 @@
   :commands (smartparens-mode))
 
 
+;;; Language Server Protocol
 (setq read-process-output-max (* 1024 1024))
 
 (use-package eglot
@@ -178,14 +188,6 @@ The history is stored in FILENAME."
   :disabled
   :defer t
   :vc (:fetcher github :repo "mickeynp/combobulate")
-  :preface
-  (dolist (mapping '((python-mode . python-ts-mode)
-                     (css-mode . css-ts-mode)
-                     (typescript-mode . tsx-ts-mode)
-                     (js-mode . js-ts-mode)
-                     (css-mode . css-ts-mode)
-                     (yaml-mode . yaml-ts-mode)))
-    (add-to-list 'major-mode-remap-alist mapping))
   :hook ((python-ts-mode . combobulate-mode)
          (js-ts-mode . combobulate-mode)
          (css-ts-mode . combobulate-mode)
