@@ -113,6 +113,8 @@
         '((display-buffer-reuse-window display-buffer-same-window)
           (reusable-frames . t)))
 (setopt even-window-sizes nil)
+(setq window-combination-limit 'display-buffer)
+(setq window-combination-resize t)
 
 ;; popups policy
 (setq display-buffer-alist
@@ -409,7 +411,7 @@ system's dark or light variant."
   (let ((sibling (or (window-prev-sibling)
                      (window-next-sibling)))
         (keymap (let ((keymap (make-sparse-keymap)))
-                  (define-key keymap (kbd "1") #'window-lift)
+                  (define-key keymap (kbd "l") #'window-lift)
                   keymap)))
     ;; In the following configuration
     ;;
@@ -426,7 +428,8 @@ system's dark or light variant."
       (set-transient-map keymap t nil nil 0.5)
       (delete-window sibling))))
 
-;; (global-set-key (kbd "C-x 1") #'window-lift)  ;; Not ready yet.
+(global-set-key (kbd "C-x 1") #'delete-other-windows)
+(global-set-key (kbd "C-x l") #'window-lift)
 
 (use-package dashboard
   :commands (dashboard-refresh-buffer)
