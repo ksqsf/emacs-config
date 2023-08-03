@@ -210,13 +210,6 @@
 (use-package nov
   :commands (nov-mode))
 
-;; rime
-(use-package rime
-  :if (file-exists-p "~/.emacs.d/librime/dist")
-  :custom
-  (default-input-method "rime")
-  (rime-librime-root "~/.emacs.d/librime/dist"))
-
 ;; debbugs
 (use-package debbugs
   :defer t)
