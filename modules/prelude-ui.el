@@ -72,7 +72,7 @@
          ("M-9" . winum-select-window-9)))
 
 ;; Eye candy icons
-(use-package all-the-icons)
+(use-package all-the-icons :demand t)
 
 ;; Rainbow
 (use-package rainbow-mode
