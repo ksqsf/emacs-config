@@ -146,10 +146,13 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 
 
 (use-package copilot
-  :disabled
   :hook (prog-mode . copilot-mode)
   :vc (:fetcher github :repo "zerolfx/copilot.el")
-  :bind (("C-<tab>" . 'copilot-accept-completion-by-word)))
+  :bind (:map copilot-completion-map
+              ("<tab>" . copilot-accept-completion)
+              ("<backtab>" . copilot-previous-completion))
+  :config
+  (setq copilot-network-proxy '(:host "127.0.0.1" :port 7890)))
 
 
 (use-package citre
