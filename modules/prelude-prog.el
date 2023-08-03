@@ -13,6 +13,9 @@
 ;;; Tree-sitter basic configuration
 (setq major-mode-remap-alist
       '((python-mode . python-ts-mode)
+        (c-mode . c-ts-mode)
+        (c++-mode . c++-ts-mode)
+        (rust-mode . rust-ts-mode)
         (css-mode . css-ts-mode)
         (js-mode . js-ts-mode)
         (typescript-mode . tsx-ts-mode)
@@ -150,7 +153,9 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 
 
 (use-package citre
-  :hook (c-mode-common . citre-mode))
+  :hook (c-mode-common . citre-mode)
+  :hook (c-ts-mode . citre-mode)
+  :hook (c++-ts-mode . citre-mode))
 
 
 (use-package quickrun
