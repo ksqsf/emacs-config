@@ -382,8 +382,17 @@ Useful for reading Python exception traces."
 
 (defun kill-all-buffers ()
   "Literally kill all buffers"
+  ;; FIXME: this kills too many buffers, tab-line won't work anymore
+  ;; after this.
   (interactive)
   (dolist (buf (buffer-list))
     (kill-buffer buf)))
+
+(defun kill-other-buffers ()
+  "Kill all buffers except for the current buffer."
+  ;; FIXME: this kills too many buffers, tab-line won't work anymore
+  ;; after this.
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 (provide 'prelude-core)
