@@ -105,8 +105,8 @@
   (ligature-set-ligatures 'markdown-mode '("[ ]" "[X]"))
   (global-ligature-mode t))
 
-;; prioritize vertical side windows
-(setq window-sides-vertical t)
+;; let left and right side windows occupy full frame height
+(setopt window-sides-vertical t)
 
 ;; fix bad default behavior
 (setopt display-buffer-base-action
@@ -116,20 +116,77 @@
 (setq window-combination-limit 'display-buffer)
 (setq window-combination-resize t)
 
-;; popups policy
-(setq display-buffer-alist
- `(;; Bottom Root
-   ("^\\*scratch\\*\\'"
+;; Helper function for display-buffer-alist.
+(defun +has-mode (major-modes)
+  (lambda (buffer-name action)
+    (with-current-buffer buffer-name (apply #'derived-mode-p major-modes))))
+
+;; I hate emacs layout venomously!
+;; Let's fix it once and for all.
+;; FIXME: This still does not do what I want.
+;; I want a "side" to be a list of buffers associated with this "side".
+;; And I can hide or show them at once.
+;; The "side window" however is still disconnected with the buffers.
+(setopt display-buffer-alist
+ `(;; Side windows: bottom
+   (,(+has-mode '(magit-status-mode))
     (display-buffer-reuse-window
-     display-buffer-at-bottom
-     display-buffer-same-window))
-   ("^magit: .*"
+     display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 0)
+    (window-height . 0.4))
+   ("^\\*.*-?compilation\\*"
     (display-buffer-reuse-window
-     display-buffer-at-bottom)
-    (window-height . 0.4)
+     display-buffer-pop-up-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (window-height . 0.3)
+    (slot . 1)
+    (dedicated . t))
+   ("^\\*Backtrace\\*\\'"
+    (display-buffer-reuse-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (window-height . 0.3)
+    (slot . 2)
+    (dedicated . t))
+   ("\\*quickrun\\*"
+    (display-buffer-reuse-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 3)
+    (dedicated . t))
+   (,(+has-mode '(haskell-interactive-mode))
+    (display-buffer-reuse-mode-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 4))
+   (,(+has-mode '(inferior-python-mode))
+    (display-buffer-reuse-mode-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 5))
+   ("^\\*\\(.*-\\)?e?shell\\*"
+    (display-buffer-reuse-mode-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 6)
+    (dedicated . t))
+   ("^\\*vterm"
+    (display-buffer-reuse-mode-window
+     display-buffer-in-side-window)
+    (mode vterm-mode vterm-copy-mode)
+    (side . bottom)
+    (slot . 7)
+    (dedicated . t))
+   ("^\\*ielm\\*"
+    (display-buffer-reuse-mode-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 8)
     (dedicated . t))
 
-   ;; Right Side
+   ;; Side windows: right
    ("^\\*[Hh]elp"
     (display-buffer-reuse-window
      display-buffer-in-side-window)
@@ -139,71 +196,41 @@
     (slot . 0)
     (dedicated . t))
 
-   ;; Bottom Side
-   ("^\\*.*-?compilation\\*"
+   ;; Temporary buffers that contain rich contents
+   ("^\\*ripgrep-search\\*"
     (display-buffer-reuse-window
-     display-buffer-pop-up-window)
-    ;; (side . bottom)
-    ;; (window-height . 0.3)
-    ;; (slot . 1)
-    (dedicated . t))
-   ("^\\*Backtrace\\*\\'"
+     display-buffer-reuse-mode-window
+     display-buffer-at-bottom))
+   ("^\\*grep\\*"
     (display-buffer-reuse-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (window-height . 0.3)
-    (slot . 1)
-    (dedicated . t))
-   ("^HELM .*"
-    (display-buffer-at-bottom))
-   ("\\*[Hh]elm.*"
-    (display-buffer-at-bottom))
-   ("\\*quickrun\\*"
+     display-buffer-reuse-mode-window
+     display-buffer-at-bottom))
+   ("^\\*vc-diff\\*\\'"
     (display-buffer-reuse-window
-     display-buffer-pop-up-window)
-    nil)
-
-   ;; Below Selected
-   ;; ("^\\*\\(\\(e?shell\\)\\|\\(vterm\\)\\)"
-   ;;  (display-buffer-below-selected)
-   ;;  (window-width . 72))
-   ((derived-mode . haskell-interactive-mode)
-    (display-buffer-reuse-window
-     display-buffer-at-bottom
-     display-buffer-below-selected)
-    (dedicated . t))
-   ((derived-mode . inferior-python-mode)
-    (display-buffer-below-selected))
-
-   ;; Terminals
-   ("^\\*\\(.*-\\)?e?shell\\*"
-    (display-buffer-reuse-window
-     display-buffer-below-selected)
-    (inhibit-same-window . nil)
-    (dedicated . t))
-   ("^\\*vterm"
-    (display-buffer-reuse-window
-     display-buffer-below-selected)
-    (window-height . 0.37)
-    (inhibit-same-window . nil)
-    (dedicated . t))
-
-   ;; Magit
-   ((derived-mode . magit-status-mode)
+     display-buffer-reuse-mode-window
+     display-buffer-in-direction)
+    (direction . right))
+   ("^\\*Warnings"
     (display-buffer-reuse-window
      display-buffer-at-bottom))
 
    ;; Telega
-   ((derived-mode . telega-root-mode)
+   (,(+has-mode '(telega-root-mode))
     (display-buffer-in-side-window)
     (window-width . 0.35)
     (side . right)
     (slot . 0))
-   ((derived-mode . telega-chat-mode)
+   (,(+has-mode '(telega-chat-mode))
     (display-buffer-reuse-mode-window
      display-buffer-at-bottom)
     (mode . telega-chat-mode)
-    (dedicated . t))))
+    (dedicated . t))
+   ))
+
+;; FIXME: window-toggle-side-windows unfortunately relies on the
+;; existence of side windows to decide whether to show or to hide side
+;; windows.  It cannot toggle only one side.  Treemacs is a victim.
+(global-set-key [C-tab] #'window-toggle-side-windows)
 
 ;; Minimap
 (use-package minimap
@@ -229,25 +256,6 @@
     (select-window win)))
 
 (defalias 'dd-term 'drop-down-term)
-
-;; Pop-up windows
-(use-package popper
-  :disabled
-  :defer 1
-  :bind (("C-`" . popper-toggle-latest)
-         ;; ("M-`" . popper-cycle)
-         ("C-M-`" . popper-toggle-type))
-  :config
-  (setq popper-reference-buffers
-        '("\\*Messages\\*"
-          "Output\\*$"
-          "\\*Async Shell Command\\*"
-          help-mode
-          compilation-mode
-          interactive-haskell-mode))
-  (setq popper-group-function nil)
-  (popper-mode +1)
-  (popper-echo-mode +1))
 
 ;; Enable context menu
 (context-menu-mode +1)
@@ -301,37 +309,6 @@
 (use-package which-key
   :diminish ""
   :hook (after-init . which-key-mode))
-
-;; `delete-other-windows' will signal an error when the current window
-;; is a side window.  Hack it so it display the current buffer in a
-;; main window.
-(defun k|window-is-side (&optional win)
-  "Returns non-nil iff WIN is a side window.
-
-WIN means the current window if it is nil."
-  (window-parameter win 'window-side))
-
-(defun k|first-main-window ()
-  "Returns the first window that is not a side window.
-
-The existence of such windows is guaranteed by Emacs."
-  ;; dash.el is much better:
-  ;; (--first (not (k|window-is-side win)) (window-list))
-  (cl-loop for win in (window-list)
-           if (not (k|window-is-side win))
-           return win))
-
-(defun k|delete-other-windows ()
-  "`delete-other-windows' that supports side windows."
-  (interactive)
-  (if (k|window-is-side)
-      (let ((buf (current-buffer))
-            (win (k|first-main-window)))
-        (delete-other-windows win)
-        (switch-to-buffer buf))
-    (delete-other-windows)))
-
-(global-set-key (kbd "C-x 1") #'k|delete-other-windows)
 
 ;; Preferred dark and light themes.
 (use-package one-themes :defer t)
@@ -428,7 +405,6 @@ system's dark or light variant."
       (set-transient-map keymap t nil nil 0.5)
       (delete-window sibling))))
 
-(global-set-key (kbd "C-x 1") #'delete-other-windows)
 (global-set-key (kbd "C-x l") #'window-lift)
 
 (use-package dashboard
@@ -511,12 +487,5 @@ system's dark or light variant."
 
 (use-package vterm-toggle
   :bind ("M-g v" . vterm-toggle))
-
-
-(use-package nord-theme
-  :ensure nil
-  :defer t
-  :config
-  (setq nord-region-highlight "frost"))
 
 (provide 'prelude-ui)
