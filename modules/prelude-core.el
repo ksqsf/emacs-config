@@ -259,6 +259,11 @@
   :config
   (add-to-list 'er/try-expand-list 'treesit-mark-bigger-node))
 
+;; Mark
+(setq global-mark-ring-max 50)
+(setq mark-ring-max 50)
+(setq set-mark-command-repeat-pop t)
+
 ;; C-w to kill word when region is inactive
 (defun k/kill-region-or-backward-word ()
   (interactive)
