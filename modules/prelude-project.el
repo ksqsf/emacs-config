@@ -29,6 +29,7 @@
               )
 
   :config
+  (add-to-list 'projectile-globally-ignored-files ".tags")
 
   ;; Support for Citre (a u-ctags frontend).
   (advice-add 'projectile-regenerate-tags :around
