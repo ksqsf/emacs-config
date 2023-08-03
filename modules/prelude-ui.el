@@ -160,10 +160,12 @@
     (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
     (side . bottom)
+    (window-height . 0.4)
     (slot . 4))
    (,(+has-mode '(inferior-python-mode))
     (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
+    (window-height . 0.4)
     (side . bottom)
     (slot . 5))
    ("^\\*\\(.*-\\)?e?shell\\*"
@@ -171,6 +173,7 @@
      display-buffer-in-side-window)
     (side . bottom)
     (slot . 6)
+    (window-height . 0.4)
     (dedicated . t))
    ("^\\*vterm"
     (display-buffer-reuse-mode-window
@@ -183,18 +186,26 @@
     (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
     (side . bottom)
+    (window-height . 0.4)
     (slot . 8)
+    (dedicated . t))
+   (,(+has-mode '(comint-mode))
+    (display-buffer-reuse-mode-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (window-height . 0.4)
+    (slot . 9)
     (dedicated . t))
 
    ;; Side windows: right
-   ("^\\*[Hh]elp"
-    (display-buffer-reuse-window
+   ("^\\*[Hh]elp.*"
+    (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
     (side . right)
-    (window-height . 0.4)
     (window-width . 80)
     (slot . 0)
-    (dedicated . t))
+    (dedicated . t)
+    (inhibit-same-window . t))
 
    ;; Temporary buffers that contain rich contents
    ("^\\*ripgrep-search\\*"
