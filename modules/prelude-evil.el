@@ -38,11 +38,8 @@
   (evil-org-agenda-set-keys))
 
 ;;; Quit corfu on Escape
-(with-eval-after-load 'evil
-  (with-eval-after-load 'corfu
-    (add-hook 'evil-normal-state-entry-hook
-              (lambda ()
-                (corfu-quit)))))
+(with-eval-after-load 'corfu
+  (evil-define-key 'insert corfu-map (kbd "<escape>") 'corfu-quit))
 
 ;;; Leader key
 (use-package evil-leader
