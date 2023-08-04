@@ -8,10 +8,11 @@
 (add-hook 'rust-ts-mode-hook 'cargo-minor-mode)
 
 ;; support rustc output
-(add-to-list 'compilation-error-regexp-alist 'rustc)
-(add-to-list 'compilation-error-regexp-alist-alist
-             '(rustc . ("\\(?:\\(?:error\\)\\|\\(warning\\)\\).*?: .*
-   --> \\(.*?\\):\\([0-9]+\\):\\([0-9]+\\)" 2 3 4 (1))))
+(with-eval-after-load 'compile
+  (add-to-list 'compilation-error-regexp-alist 'rustc)
+  (add-to-list 'compilation-error-regexp-alist-alist
+               '(rustc . ("\\(?:\\(?:error\\)\\|\\(warning\\)\\).*?: .*
+ +--> \\(.*?\\):\\([0-9]+\\):\\([0-9]+\\)" 2 3 4 (1)))))
 
 (use-package cargo
   :defer t)
