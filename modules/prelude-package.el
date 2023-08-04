@@ -17,4 +17,12 @@
   (package-vc-install "https://github.com/slotThe/vc-use-package"))
 (require 'vc-use-package)
 
+;; Mask package-quickstart before doing batch operations
+(advice-add 'package-menu-execute :around
+            (lambda (oldfun &rest args)
+              (let ((package-quickstart nil))
+                (apply oldfun args))
+              (when package-quickstart
+                (package-quickstart-refresh))))
+
 (provide 'prelude-package)
