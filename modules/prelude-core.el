@@ -400,4 +400,7 @@ Useful for reading Python exception traces."
   (interactive)
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
+(use-package hydra
+  :demand t)
+
 (provide 'prelude-core)
