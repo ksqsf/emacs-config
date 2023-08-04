@@ -33,6 +33,7 @@
 
 ;; Modules.
 (require 'prelude-package)
+(require 'prelude-iload)
 (require 'prelude-common)
 
 (require 'prelude-benchmark)

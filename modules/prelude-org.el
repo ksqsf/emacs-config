@@ -1,5 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 
+(iload org-macs org-compat org-faces org-entities org-list org-pcomplete
+       org-src org-footnote org-macro ob
+       org org-clock org-agenda org-capture)
+
 ;; This config is still fledging. I don't use org-roam (for now).
 
 ;; Basic user options and special org files
