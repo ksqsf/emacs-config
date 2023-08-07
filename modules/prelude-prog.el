@@ -25,6 +25,13 @@
 (use-package dockerfile-ts-mode
   :mode ("Dockerfile.*\\'" . dockerfile-ts-mode))
 
+(with-eval-after-load 'treesit
+  (defun treesit--explorer-jump-advice-really-jump (button)
+    "Really jump to the node, not just highlight it."
+    (with-current-buffer treesit--explorer-source-buffer
+      (goto-char (button-get button 'node-start))))
+  (advice-add 'treesit--explorer-jump :after #'treesit--explorer-jump-advice-really-jump))
+
 
 ;;; Snippets
 (use-package yasnippet
