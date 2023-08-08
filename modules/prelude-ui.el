@@ -236,6 +236,16 @@
      display-buffer-at-bottom)
     (mode . telega-chat-mode)
     (dedicated . t))
+
+   ;; Fix magit commit: show the two buffers simultaneously.
+   ("COMMIT_MSG"
+    (display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 0))
+   ("^magit-diff"
+    (display-buffer-in-side-window)
+    (side . bottom)
+    (slot . 1))
    ))
 
 ;; FIXME: window-toggle-side-windows unfortunately relies on the
