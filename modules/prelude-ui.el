@@ -463,8 +463,7 @@ system's dark or light variant."
 ;; line numbers
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
-(setq-default display-line-numbers-type 'relative
-              display-line-numbers-grow-only t
+(setq-default display-line-numbers-grow-only t
               display-line-numbers-width 5)
 
 
