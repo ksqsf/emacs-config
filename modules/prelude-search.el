@@ -10,4 +10,8 @@
         ;; dired-style keybinding
         ("C-x C-q" . wgrep-change-to-wgrep-mode)))
 
+;; ripgrep
+(use-package rg
+  :bind ("M-s M-s" . rg-menu))
+
 (provide 'prelude-search)
