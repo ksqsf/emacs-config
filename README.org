@@ -63,11 +63,24 @@ The following fonts are "blessed" in this configuration.
 ** Better Defaults
 
 These modifications are generally in =prelude-core.el= and
-=prelude-ui.el=.
+=prelude-ui.el=, and a few other files.  They are loaded before anything
+else.
 
-User-visible modifications are listed here.
+Prominent user-visible modifications are listed below.
 
-*** Modal editing (Evil)
+*** UI
+**** Mode line
+
+Any of the following looks pretty good:
+
+- Default
+- Doom mode line
+- Moody
+
+**** Modal editing (Evil)
+
+I'm not fully invested in Evil, so currently it can be disabled
+*completely* by commenting out =(require 'prelude-evil)= in =init.el=.
 
 I use Evil, because the Vi-style editing commands are the de facto
 standard right now, and evil-collection is great, and I still retain
@@ -84,14 +97,29 @@ as possible.  This is done by customizing
 =evil-disable-insert-state-bindings=.  The conflicts are resolved
 depending on which is most familiar to me.
 
-The evil integration can be disabled cleanly by commenting out
-=(require 'prelude-evil)= in =init.el=.
+**** Completion
 
-*** Expand region
+I use Vertico, Prescient, and Orderless.
 
-=C-SPC C-SPC= to expand the current region semantically.
+Vertico offers a lightweight yet versatile frontend to
+=completion-at-point=.
 
-*** Zap up to char
+Orderless significantly enhances the default completion algorithms,
+though its sorting is less than ideal.
+
+**** Side windows
+
+Many temporary buffers pop up in the side windows.
+
+=C-TAB= toggles whether or not side windows are displayed.
+
+*** Editing
+**** Expand region
+
+=C-SPC C-SPC= to expand the current region meaningfully.  It supports
+tree-sitter-based expansion.
+
+**** Zap up to char
 
 =M-z= was assigned to =zap-up-to-char=.  You can easily achieve what
 =zap-to-char= does with =M-z <char> C-d=.
@@ -100,19 +128,28 @@ At first, I thought =M-z t= and =M-z f= would be cool, but it turned
 out to be a horrible idea, because one must stop to think which key to
 press.
 
-*** Mode line
+**** Structured Editing
 
-Any of the following looks pretty good:
+Structured editing operates on the level of syntactical structures, be
+it identifiers, expressions, or statements.
 
-- Default
-- Doom mode line
-- Moody
+I use paredit for the Lisp family.  For tree-sitter-powered major
+modes, use combobulate-mode.
 
-*** Quick Completion
+*** Programming
+**** LSP
 
-I use Vertico.
+I've fully embraced LSP! (Used to be a skeptic.)
 
-*** REPL
+- =eglot= as the LSP client. (Easier to hack than =lsp-mode=.)
+- =corfu= as the universal completion frontend.
+
+
+Language servers can be installed via Homebrew or Nix.  Eglot is
+intelligent enough to work with any server without special
+configuration.
+
+**** REPL
 
 Many major modes support REPL, but their keybindings are often
 very different.  The following keychords are adopted by Emacs
@@ -125,64 +162,20 @@ itself, so they are preferred when possible.
 | C-x C-e | Send this expression |
 | C-M-x   | Send this function   |
 
-**** Haskell, Idris
+***** Haskell, Idris
 
 Haskell-mode has Interactive Haskell mode supporting ghci.  Due to
 Haskell's specialness, all you can do is =C-c C-l=.
 
-**** Python
+***** Python
 
 Elpy defined a bunch of send functions, but they turn out to be not so
 helpful.
 
-**** Coq
+***** Coq
 
 Coq is an interactive proof assistant, whose Emacs interface is Proof
 General, which defines its own set of commands.
-
-*** Structured Editing
-
-Structured editing is a novel editing experience that operates on the
-level of "structures", be it expressions or statements.
-
-I use paredit for the Lisp family.  For tree-sitter-enabled major
-modes, use combobulate-mode.
-
-My preferred keybindings are:
-
-| Key     | Function             |
-|---------+----------------------|
-| M-k     | Kill current         |
-| M-up    | Splice               |
-| M-left  | Slurp left           |
-| M-right | Slurp right          |
-| M-a     | Same level, backward |
-| M-e     | Same level, forward  |
-
-"Sentence" is the metaphor for "expression". Navigation by word is
-useful, so I won't override it.
-
-*** LSP
-
-I've fully embraced LSP! (Used to be a skeptic.)
-
-- =eglot= as the LSP client. (Easier to hack than =lsp-mode=.)
-- =corfu= as the universal completion frontend.
-
-
-"Blessed" LSP servers:
-
-| Language | Server        | Integration  |
-|----------+---------------+--------------|
-| Haskell  | [[https://github.com/haskell/haskell-language-server][HLS]]           | (not needed) |
-| Rust     | [[https://github.com/rust-analyzer/rust-analyzer][rust-analyzer]] | [[https://github.com/brotzeit/rustic][Rustic]]       |
-| C/C++    | [[https://github.com/MaskRay/ccls][ccls]]          | (not needed) |
-| Python   | [[https://github.com/microsoft/pyright][PyRight]]       | (not needed) |
-| LaTeX    | [[https://github.com/latex-lsp/texlab][texlab]]        | (not needed) |
-
-These servers can be installed via Homebrew or Nix.  Eglot is
-intelligent enough to work with any server without special
-configuration.
 
 ** Unlimited Lisp Works
 This repo hosts some other Emacs Lisp works made by me for my own
