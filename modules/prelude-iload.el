@@ -26,7 +26,8 @@ Each feature in FEATURES will be loaded one by one in the order."
 Returns t if there are more features to load, nil otherwise."
  (when-let ((feature (queue-dequeue +iload-queue)))
    ;; (message "Incrementally loading %s..." feature)
-   (require feature nil t)
+   (let ((inhibit-message t))
+     (require feature nil t))
    (not (null (queue-head +iload-queue)))))
 
 (defun +iload-start ()
@@ -47,5 +48,23 @@ Example: (iload org-macs org-compat org)"
  `(+iload (quote ,features)))
 
 (add-hook 'emacs-startup-hook #'+iload-start)
+
+;;; use-package keyword :iload
+(add-to-list 'use-package-keywords :iload)
+
+(defun use-package-normalize/:iload (name-symbol keyword args)
+  (use-package-only-one (symbol-name keyword) args
+    (lambda (label arg)
+      (cond ((symbolp arg) (list arg))
+            ((listp arg) arg)
+            (t (use-package-error ":iload wants a list of features"))))))
+
+(defun use-package-handler/:iload (name-symbol keyword features rest state)
+  (let ((body (use-package-process-keywords name-symbol rest state)))
+    (if (not (listp features))
+        body
+      (use-package-concat
+       body
+       `((iload ,@features))))))
 
 (provide 'prelude-iload)

@@ -2,6 +2,7 @@
 
 (use-package magit
   :defer t
+  :iload (magit-base magit-git magit-mode magit-process magit-status magit-submodule magit)
   :bind (("C-x g" . magit-status))
   :custom
   (magit-clone-set-remote.pushDefault t)
