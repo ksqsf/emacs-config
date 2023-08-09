@@ -57,6 +57,7 @@
 (require 'prelude-lang-python)
 (require 'prelude-lang-rust)
 (require 'prelude-lang-coq)
+(require 'prelude-lang-lean)
 (require 'prelude-lang-ml)
 (require 'prelude-lang-js)
 (require 'prelude-lang-haskell)
