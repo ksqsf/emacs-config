@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 ;; Currently, I consider this an ``addition'' -- my config still works if you disable this.
-;; Therefore, evil is loaded AFTER other modules, and other modules should not depend on the presence of evil.
+;; Therefore, evil is loaded AFTER other modules, and other modules should not assume the presence of evil.
 
 (use-package evil
   :demand t
@@ -67,6 +67,9 @@
     "pk" 'projectile-kill-buffers
     "pg" 'projectile-grep
     "pa" 'projectile-find-other-file-other-window
+    ;; profiler
+    "PP" 'profiler-start
+    "PS" 'profiler-stop
     ;; gptel
     "gg" 'gptel
     "gm" 'gptel-menu
