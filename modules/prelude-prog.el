@@ -157,9 +157,11 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
   :vc (:fetcher github :repo "zerolfx/copilot.el")
   :bind (:map copilot-completion-map
               ("<tab>" . copilot-accept-completion)
-              ("C-j" . copilot-accept-completion)
               ("<right>" . copilot-accept-completion)
-              ("<backtab>" . copilot-previous-completion))
+              ("M-f" . copilot-accept-completion-by-word)
+              ("C-e" . copilot-accept-completion-by-line)
+              ("M-n" . copilot-next-completion)
+              ("M-p" . copilot-previous-completion))
   :config
   (setq copilot-network-proxy '(:host "127.0.0.1" :port 7890)))
 
