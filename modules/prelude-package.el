@@ -13,8 +13,6 @@
 (setq use-package-always-ensure t)  ; All packages used have to be installed
 
 ;; Marry package-vc with use-package.  Quelpa is too heavy.
-(unless (package-installed-p 'vc-use-package)
-  (package-vc-install "https://github.com/slotThe/vc-use-package"))
 (require 'vc-use-package)
 
 ;; Mask package-quickstart before doing batch operations
