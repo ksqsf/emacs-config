@@ -20,3 +20,5 @@
         (width . 120)
         (vertical-scroll-bars . nil)))
 
+;; Must be set before loading use-package
+(setq use-package-enable-imenu-support t)
