@@ -1,10 +1,9 @@
-* Venus Emacs
+* My Emacs Config
 
-[[./venus.jpg]]
+This is my personal, "slightly configured" Emacs.
 
-Venus Emacs is a "slightly configured" Emacs flavor, made by
-ksqsf. (It also hosts some packages that I have written for my own
-convenience. See the last section.)
+There are some packages written by me for my own convenience.  See the
+last section.
 
 ** Supported Platforms
 
@@ -15,23 +14,6 @@ NOTE: This configuration only targets Emacs 29.  (For one thing, it
 relies on the bundled =use-package=.)  No guarantee about
 forward/backward compatibility.  You can comment out the first
 paragraph in =init.el= if you do want to try.
-
-** Philosophy
-
-My primary goals are
-
-- Fast, and responsive
-- Healthy, and easy on the eye
-- Productive, and distraction-free
-- Predictable
-- Stable
-- Maintainable codebase
-- Prefer built-in functionality to third-party packages
-
-
-+I don't strive to achieve eye-candy and powerfulness, but they are
-good, and may be considered in the future.+ I think my Emacs now is
-beautiful AND powerful! ( ^ ω ^ )
 
 ** Structure
 

@@ -21,6 +21,7 @@
         (typescript-mode . tsx-ts-mode)
         (yaml-mode . yaml-ts-mode)))
 (use-package yaml-ts-mode
+  :iload (yaml-ts-mode)
   :mode ("\\.ya?ml\\'" . yaml-ts-mode))
 (use-package dockerfile-ts-mode
   :mode ("Dockerfile.*\\'" . dockerfile-ts-mode))
