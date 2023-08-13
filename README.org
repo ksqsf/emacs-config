@@ -178,3 +178,4 @@ for better discoverability.
 | logseq         | ./lisp/logseq.el         | Logseq HTTP API                    |
 | leitner        | ./lisp/leitner.el        | The Leitner system (a kind of SRS) |
 | org-xlatex     | github ksqsf/org-xlatex  | instant latex preview              |
+| flygpt         | ./lisp/flygpt.el         | semantic flymake based on GPT      |
