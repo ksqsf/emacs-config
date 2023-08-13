@@ -14,7 +14,8 @@
   :bind (:map evil-normal-state-map
               (("C-e" . end-of-line)
                ("C-r" . isearch-backward)
-               ("U" . evil-redo)))
+               ("U" . evil-redo)
+               ("M-." . xref-find-definitions)))
   :config
   (evil-mode t))
 
