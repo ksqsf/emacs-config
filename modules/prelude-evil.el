@@ -22,7 +22,8 @@
   :after evil
   :demand t
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+  (diminish 'evil-collection-unimpaired-mode))
 
 (use-package evil-surround
   :after evil
