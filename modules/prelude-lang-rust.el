@@ -2,6 +2,7 @@
 ;;; Rust
 
 ;; Use the bundled rust-ts-mode
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
 (add-hook 'rust-ts-mode-hook 'eglot-ensure)
 (add-hook 'rust-ts-mode-hook 'subword-mode)
 (add-hook 'rust-ts-mode-hook 'electric-pair-mode)
