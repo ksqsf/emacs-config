@@ -178,6 +178,7 @@
    ("^\\*vterm"
     (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
+    (window-height . 0.4)
     (mode vterm-mode vterm-copy-mode)
     (side . bottom)
     (slot . 7)
@@ -195,6 +196,13 @@
     (side . bottom)
     (window-height . 0.4)
     (slot . 9)
+    (dedicated . t))
+   ("^\\*[Ff]ly"
+    (display-buffer-reuse-mode-window
+     display-buffer-in-side-window)
+    (side . bottom)
+    (window-height . 0.4)
+    (slot . 10)
     (dedicated . t))
 
    ;; Side windows: right
