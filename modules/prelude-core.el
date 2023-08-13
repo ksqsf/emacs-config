@@ -84,7 +84,11 @@
 (setq undo-outer-limit (* 50 1024 1024))
 (use-package vundo
   :bind ("C-x u" . vundo))
-(use-package undohist)
+(use-package undohist
+  :config
+  (setq undohist-directory (no-littering-expand-var-file-name "undohist"))
+  (push "\\.git/COMMIT_EDITMSG\\'" undohist-ignored-files)
+  (push "dict.yaml\\'" undohist-ignored-files))
 (add-hook 'after-init-hook
           #'(lambda ()
               (require 'undohist)
@@ -108,8 +112,6 @@
                           (message "File digest doesn't match, so undo history will be discarded."))))
                     (when (consp undo-list)
                       (setq buffer-undo-list undo-list)))))))
-(setq undohist-directory (no-littering-expand-var-file-name "undohist"))
-(setq undohist-ignored-files '("\\.git/COMMIT_EDITMSG$"))
 
 ;; Use ace-window for quick window navigation
 ;; Sorry, `other-window', but you are too weak!
