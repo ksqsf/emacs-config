@@ -90,4 +90,8 @@
   (evil-define-key 'insert org-mode-map [tab] 'org-metaright)
   (evil-define-key 'insert org-mode-map [S-tab] 'org-metaleft))
 
+(with-eval-after-load 'telega
+  ;; Emacs-mode by default in telega-chat-mode
+  (push 'telega-chat-mode evil-emacs-state-modes))
+
 (provide 'prelude-evil)
