@@ -68,6 +68,9 @@
 ;; Auto revert
 (global-auto-revert-mode)
 
+;; Some useful editing commands deserve quicker access.
+(global-set-key (kbd "C-x C-d") #'duplicate-dwim)
+
 ;; why, but why, emacs!
 (setq load-prefer-newer t)
 
