@@ -220,4 +220,8 @@
   :config
   (setq gptel-use-curl t))
 
+(keymap-global-set "C-c C-p C-p" #'profiler-start)
+(keymap-global-set "C-c C-p C-s" #'profiler-stop)
+(keymap-global-set "C-c C-p C-r" #'profiler-report)
+
 (provide 'prelude-apps)
