@@ -487,7 +487,9 @@ system's dark or light variant."
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 (setq-default display-line-numbers-grow-only t
-              display-line-numbers-width 5)
+              display-line-numbers-width 4
+              line-number-extra-spaces 2  ; This depends on one of my custom patches
+              )
 
 
 ;; toggle mwheel horizontal scroll when toggling truncate-lines
