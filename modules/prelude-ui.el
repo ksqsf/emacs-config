@@ -134,7 +134,8 @@
      display-buffer-in-side-window)
     (side . bottom)
     (slot . 0)
-    (window-height . 0.4))
+    (window-height . 0.4)
+    (dedicated . t))
    ("^\\*.*-?compilation\\*"
     (display-buffer-reuse-window
      display-buffer-pop-up-window
@@ -161,19 +162,22 @@
      display-buffer-in-side-window)
     (side . bottom)
     (window-height . 0.4)
-    (slot . 4))
+    (slot . 4)
+    (dedicated . t))
    (,(+has-mode '(inferior-python-mode))
     (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
     (window-height . 0.4)
     (side . bottom)
-    (slot . 5))
+    (slot . 5)
+    (dedicated . t))
    ("^\\*\\(.*-\\)?e?shell\\*"
     (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
     (side . bottom)
     (slot . 6)
     (window-height . 0.4)
+    (dedicated . t)
     (dedicated . t))
    ("^\\*vterm"
     (display-buffer-reuse-mode-window
@@ -182,6 +186,7 @@
     (mode vterm-mode vterm-copy-mode)
     (side . bottom)
     (slot . 7)
+    (dedicated . t)
     (dedicated . t))
    ("^\\*ielm\\*"
     (display-buffer-reuse-mode-window
