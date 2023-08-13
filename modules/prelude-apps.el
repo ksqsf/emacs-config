@@ -217,6 +217,8 @@
 
 (use-package gptel
   :bind ("C-c s" . gptel-send)
+  :bind (:map gptel-mode-map
+              ("C-c C-c" . gptel-send))
   :config
   (setq gptel-use-curl t))
 
