@@ -65,21 +65,12 @@
         eglot-autoreconnect 60
         eglot-autoshutdown t)
 
-  (defvar prelude--eglot-enable-debug nil
-    "Non-nil when JSON-RPC logging is enabled.
-
-Use `k|toggle-eglot-debug' to change this value.")
-
-  (defun prelude--jsonrpc-ignore-log (_orig-func &rest _))
-
-  (defun k|toggle-eglot-debug ()
+  (defun toggle-eglot-debug ()
     (interactive)
-    (if prelude--eglot-enable-debug
-        (progn
-          (advice-remove 'jsonrpc--log-event 'prelude--jsonrpc-ignore-log)
-          (setq prelude--eglot-enable-debug nil))
-      (advice-add 'jsonrpc--log-event :around 'prelude--jsonrpc-ignore-log)
-      (setq prelude--eglot-enable-debug t)))
+    (if (= 0 eglot-events-buffer-size)
+        (setq eglot-events-buffer-size 20000)
+      (setq eglot-events-buffer-size 0)))
+  (setq eglot-events-buffer-size 0)
 
   (fset #'eglot--snippet-expansion-fn #'ignore))
 
