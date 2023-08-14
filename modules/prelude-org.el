@@ -177,6 +177,7 @@
 ;; Usage:
 ;; 1. Cite with M-x org-cite-insert (C-c C-x @)
 ;; 2. #+PRINT_BIBLIOGRAPHY:
+(use-package citeproc :after (org))
 (with-eval-after-load 'org
   (require 'oc-bibtex)
   (require 'citeproc)
