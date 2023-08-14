@@ -80,7 +80,6 @@
   (mapc 'load (directory-files prelude-volatile-dir 't "^[^#\.].*el$")))
 
 ;; Customization.
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file t)
 
 ;; Re-enable package-quickstart.

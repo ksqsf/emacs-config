@@ -22,3 +22,6 @@
 
 ;; Must be set before loading use-package
 (setq use-package-enable-imenu-support t)
+
+;; Customization file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
