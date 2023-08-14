@@ -14,8 +14,14 @@ In most cases, this means the current directory of the current buffer."
   (interactive)
   (k|with-suppressed-message
     (shell-command (format "%s %s" k|default-opener (shell-quote-argument (expand-file-name default-directory))))))
-
 (global-set-key (kbd "C-c d") #'open-directory-here)
+
+(defun open-term-here ()
+  "Open `default-directory' in iTerm2."
+  (interactive)
+  (k|with-suppressed-message
+    (shell-command (format "open -a iTerm %s" (shell-quote-argument (expand-file-name default-directory))))))
+(defalias 'iterm2 'open-term-here)
 
 (when k|mac
   (defun dic ()
