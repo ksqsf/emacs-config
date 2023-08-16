@@ -94,4 +94,10 @@
   ;; Emacs-mode by default in telega-chat-mode
   (push 'telega-chat-mode evil-emacs-state-modes))
 
+(with-eval-after-load 'sqlite-mode
+  (evil-define-key 'normal sqlite-mode-map (kbd "RET") 'sqlite-mode-list-data)
+  (evil-define-key 'normal sqlite-mode-map (kbd "g c") 'sqlite-mode-list-columns)
+  (evil-define-key 'normal sqlite-mode-map (kbd "g r") 'sqlite-mode-list-tables)
+  (evil-define-key 'normal sqlite-mode-map (kbd "DEL") 'sqlite-mode-delete))
+
 (provide 'prelude-evil)
