@@ -28,7 +28,9 @@
   :after (dired)
   :custom
   (dired-filter-verbose nil)
-  :hook ((dired-mode . dired-filter-group-mode)
+  :hook (;; dired-filter-group-mode causes dired batch operations to
+         ;; behave strangely, so we disable it for now.
+         ;; (dired-mode . dired-filter-group-mode)
          (dired-mode . dired-filter-mode))
   :config
   (define-key dired-mode-map "/" dired-filter-map)
