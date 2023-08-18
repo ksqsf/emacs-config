@@ -14,4 +14,7 @@
 (use-package rg
   :bind ("M-s M-s" . rg-menu))
 
+(with-eval-after-load 'grep
+  (push ".tags" grep-find-ignored-files))
+
 (provide 'prelude-search)
