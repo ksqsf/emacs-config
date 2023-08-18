@@ -15,7 +15,9 @@
               (("C-e" . end-of-line)
                ("C-r" . isearch-backward)
                ("U" . evil-redo)
-               ("M-." . xref-find-definitions)))
+               ("M-." . xref-find-definitions))
+              :map evil-visual-state-map
+              (("DEL" . delete-region)))
   :config
   (evil-mode t))
 
