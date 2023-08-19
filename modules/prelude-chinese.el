@@ -1,4 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
+
+;; Must-have.
 (setq word-wrap-by-category t)
 
 ;; Table font for perfect alignment.
@@ -114,5 +116,16 @@
   :commands (rime-regexp-mode)
   :config
   (rime-regexp-mode 1))
+
+;; Define category O for Unicode's private use areas
+(defvar unicode-pua-ranges
+  '((#xE000 . #xF8FF)
+    (#xF0000 . #xFFFFD)
+    (#x100000 . #x10FFFD))
+  "List of ranges of Unicode's private use areas.")
+(define-category ?O "Other (PUA)")
+(mapc (lambda (range)
+        (modify-category-entry range ?O))
+      unicode-pua-ranges)
 
 (provide 'prelude-chinese)
