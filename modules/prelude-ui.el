@@ -109,9 +109,10 @@
 (setopt window-sides-vertical t)
 
 ;; fix bad default behavior
-(setopt display-buffer-base-action
-        '((display-buffer-reuse-window display-buffer-same-window)
-          (reusable-frames . t)))
+;; ... but some packages (e.g. checkdoc) rely on the default behavior.
+;; (setopt display-buffer-base-action
+;;         '((display-buffer-reuse-window display-buffer-same-window)
+;;           (reusable-frames . t)))
 (setopt even-window-sizes nil)
 (setq window-combination-limit 'display-buffer)
 (setq window-combination-resize t)
