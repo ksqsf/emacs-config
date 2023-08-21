@@ -48,6 +48,18 @@
    :install "xmake install"
    :package "xmake package")
 
+  (add-to-list 'projectile-other-file-alist '("schema.yaml" "dict.yaml"))
+  (add-to-list 'projectile-other-file-alist '("dict.yaml" "schema.yaml"))
+  (projectile-register-project-type
+   'rime
+   '("default.yaml")
+   :project-file "default.yaml"
+   :configure ""
+   :compile ""
+   :run "\"/Library/Input Methods/Squirrel.app/Contents/MacOS/Squirrel\" --reload"
+   :install ""
+   :package "")
+
   ;; fix projectile bug
   (defun projectile-ripgrep (search-term &optional arg)
     "Run a ripgrep (rg) search with `SEARCH-TERM' at current project root.
