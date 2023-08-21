@@ -179,23 +179,6 @@
   (with-eval-after-load 'embark
     (define-key embark-symbol-map (kbd "d") 'dash-at-point)))
 
-(use-package eaf
-  :disabled ;; Does not work...
-  :load-path "lisp/emacs-application-framework"
-  :custom
-  (eaf-browser-continue-where-left-off t)
-  (eaf-browser-enable-adblocker t)
-  (browse-url-browser-function 'eaf-open-browser)
-  :config
-  (defalias 'browse-web #'eaf-open-browser)
-  (require 'eaf-demo)
-  (require 'eaf-file-sender)
-  (require 'eaf-camera)
-  (require 'eaf-browser)
-  (require 'eaf-file-browser)
-  (require 'eaf-file-manager)
-  (require 'eaf-airshare))
-
 (use-package go-translate
   :commands (gts-do-translate gts-buffer-render gts-bing-engine gts-google-rpc-engine gts-google-engine)
   :config

@@ -97,10 +97,6 @@
   :after (lsp-mode)
   :commands (lsp-ui-mode))
 
-(use-package lsp-bridge
-  :load-path "lisp/lsp-bridge/"
-  :commands (global-lsp-bridge-mode lsp-bridge-mode))
-
 (defcustom k|auto-lsp nil
   "Whether to start lsp automatically on all supported languages."
   :group 'prelude
