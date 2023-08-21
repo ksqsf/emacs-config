@@ -104,10 +104,10 @@
 
 ;; rime
 (use-package rime
-  :if (file-exists-p "~/.emacs.d/librime/dist")
+  :if (no-littering-expand-var-file-name "librime/dist")
   :custom
   (default-input-method "rime")
-  (rime-librime-root "~/.emacs.d/librime/dist"))
+  (rime-librime-root (no-littering-expand-var-file-name "librime/dist")))
 
 ;; use rime for search
 (use-package rime-regexp

@@ -23,7 +23,7 @@
 (setq kill-do-not-save-duplicates t)
 
 ;; Move backups away
-(setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory))))
+(setq backup-directory-alist `(("." . ,(no-littering-expand-var-file-name "backups"))))
 
 ;; Don't recenter to the middle of the screen
 (setq recenter-positions '(top 0.3 bottom))

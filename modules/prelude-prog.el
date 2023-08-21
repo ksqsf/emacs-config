@@ -12,6 +12,8 @@
 
 
 ;;; Tree-sitter basic configuration
+(add-to-list 'treesit-extra-load-path (no-littering-expand-var-file-name "tree-sitter"))
+
 (setq major-mode-remap-alist
       '((python-mode . python-ts-mode)
         (c-mode . c-ts-mode)
