@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t; -*-
 
+;; Prefer regular expression-based searches
+(global-set-key [remap isearch-forward] #'isearch-forward-regexp)
+(global-set-key [remap query-replace] #'query-replace-regexp)
+
 ;; See also occur (built-in), embark, consult-line, etc.
 (use-package wgrep
   :defer t
