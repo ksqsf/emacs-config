@@ -8,7 +8,7 @@
          ("C-c C-f" . haskell-mode-format-imports)
          ("<f8>" . haskell-navigate-imports))
   :hook (haskell-mode . interactive-haskell-mode)
-  :hook (haskell-mode . k|setup-haskell-prettify-symbols)
+  ;; :hook (haskell-mode . k|setup-haskell-prettify-symbols)
   :hook (inferior-haskell-mode . (lambda () (comint-use-persistent-input-history "~/.ghc/ghci_history")))
   :hook (haskell-mode . k|lsp-ensure)
   :hook (after-save . k|hpack-after-save)
@@ -34,8 +34,9 @@
             ))
     (prettify-symbols-mode))
 
-  (setq haskell-process-wrapper-function
-        (lambda (args) (apply 'nix-shell-command (nix-current-sandbox) args))))
+  ;; (setq haskell-process-wrapper-function
+  ;;       (lambda (args) (apply 'nix-shell-command (nix-current-sandbox) args)))
+  )
 
 (use-package speedbar
   :ensure nil
@@ -94,7 +95,7 @@
 
 (use-package ormolu
   :after (haskell-mode)
-  :hook (haskell-mode . ormolu-format-on-save-mode)
+  ;; :hook (haskell-mode . ormolu-format-on-save-mode)
   :bind
   (:map haskell-mode-map
         ("C-c C-f" . ormolu-format-buffer)))
