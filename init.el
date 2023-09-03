@@ -72,7 +72,7 @@
 (require 'prelude-irc)
 
 (require 'prelude-evil)
-(require 'prelude-nix)
+;;(require 'prelude-nix)
 
 ;; Volatile.
 (when (file-exists-p prelude-volatile-dir)
