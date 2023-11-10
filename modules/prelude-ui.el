@@ -20,7 +20,6 @@
 ;; Mac-specific settings
 (when k|mac
   (use-package ns-auto-titlebar
-    :disabled
     :init
     (ns-auto-titlebar-mode)))
 

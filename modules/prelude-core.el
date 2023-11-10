@@ -320,7 +320,9 @@
 (use-package isearch
   :ensure nil
   :custom
-  (isearch-lazy-count t))
+  (isearch-lazy-count t)
+  (isearch-allow-motion t)
+  (isearch-motion-changes-direction t))
 
 ;; Sublime-like multiple cursors.
 (use-package multiple-cursors
