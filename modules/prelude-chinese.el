@@ -25,6 +25,10 @@
            (member +preferred-chinese-font +font-family-list))
   (set-fontset-font t 'chinese-gbk +preferred-chinese-font))
 
+;; font for emoji
+(when k|mac
+  (set-fontset-font t 'unicode (font-spec :family "Apple Color Emoji") nil 'append))
+
 ;; Hey, Org mode?
 (with-eval-after-load 'org
   (setq org-emphasis-regexp-components 
