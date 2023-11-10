@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: todo
+# name: texttt
 # key: t
 # --
-todo!()
+\texttt{$1}
