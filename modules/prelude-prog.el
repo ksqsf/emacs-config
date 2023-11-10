@@ -74,7 +74,9 @@
       (setq eglot-events-buffer-size 0)))
   (setq eglot-events-buffer-size 0)
 
-  (fset #'eglot--snippet-expansion-fn #'ignore))
+  (fset #'eglot--snippet-expansion-fn #'ignore)
+
+  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster))
 
 ;;
 ;; lsp-mode is powerful and cool!  but it has severe performance
@@ -202,11 +204,17 @@ The history is stored in FILENAME."
          (css-ts-mode . combobulate-mode)
          (yaml-ts-mode . combobulate-mode)
          (typescript-ts-mode . combobulate-mode)
-         (tsx-ts-mode . combobulate-mode)))
+         (tsx-ts-mode . combobulate-mode))
+  :bind (:map combobulate-key-map
+              (("C-M-U" . combobulate-mark-node-dwim)
+               ("M-h" . nil))))
 
 
 (use-package devdocs
   :commands (devdocs-install devdocs-update-all devdocs-search))
+
+
+(use-package realgud)
 
 
 (provide 'prelude-prog)
