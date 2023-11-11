@@ -214,7 +214,8 @@ The history is stored in FILENAME."
   :commands (devdocs-install devdocs-update-all devdocs-search))
 
 
-(use-package realgud)
+(use-package realgud
+  :defer t)
 
 
 (provide 'prelude-prog)
