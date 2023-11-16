@@ -132,4 +132,13 @@
         (modify-category-entry range ?O))
       unicode-pua-ranges)
 
+(use-package emt
+  :load-path "lisp/emt"
+  :if k|mac
+  :bind (("M-f" . emt-forward-word)
+         ("M-b" . emt-backward-word))
+  :config
+  (setq emt-lib-path (expand-file-name "lisp/emt/module/.build/release/libEMT.dylib" user-emacs-directory))
+  (emt-ensure))
+
 (provide 'prelude-chinese)
