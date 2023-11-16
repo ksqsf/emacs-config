@@ -32,7 +32,8 @@
   (setq reftex-plug-into-AUCTeX t))
 
 (use-package cdlatex
-  :hook ((latex-mode LaTeX-mode) . turn-on-cdlatex)
+  :defer t
+  ;; :hook ((latex-mode LaTeX-mode) . turn-on-cdlatex)
   :config
   (setq cdlatex-command-alist
         '(("sum" "Insert \\sum_{}^{}" "\\sum_{?}^{}" cdlatex-position-cursor nil nil t)
