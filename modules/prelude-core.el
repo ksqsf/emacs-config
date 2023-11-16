@@ -383,7 +383,7 @@ Useful for reading Python exception traces."
     (adaptive-wrap-prefix-mode t)))
 
 ;; Save positions in files
-(toggle-save-place-globally)
+(save-place-mode +1)
 
 ;; Utilities
 (defun update ()
