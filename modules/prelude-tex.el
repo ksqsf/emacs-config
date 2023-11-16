@@ -20,6 +20,7 @@
   (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
   (add-hook 'LaTeX-mode-hook #'TeX-PDF-mode)
   (add-hook 'LaTeX-mode-hook #'visual-line-mode)
+  (add-hook 'LaTeX-mode-hook #'flyspell-mode)
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
 
   (with-eval-after-load 'eglot
