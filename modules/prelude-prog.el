@@ -218,4 +218,8 @@ The history is stored in FILENAME."
   :defer t)
 
 
+(with-eval-after-load 'ebrowse
+  (keymap-unset ebrowse-tree-mode-map "C-l"))
+
+
 (provide 'prelude-prog)
