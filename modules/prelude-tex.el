@@ -22,6 +22,11 @@
   (add-hook 'LaTeX-mode-hook #'visual-line-mode)
   (add-hook 'LaTeX-mode-hook #'flyspell-mode)
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  (add-hook 'LaTeX-mode-hook #'+latex-setup)
+
+  (defun +latex-setup ()
+    ;; remove { and } so that cape-file can work inside {}
+    (setq-local thing-at-point-file-name-chars "-@~/[:alnum:]_.$#%,:"))
 
   (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs '(latex-mode "texlab"))))
