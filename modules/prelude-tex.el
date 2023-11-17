@@ -57,4 +57,8 @@
           (?~ ("\\sim" "\\approx" "\\propto"))))
   (setq cdlatex-parens-pairs "$[{("))
 
+(use-package typst-ts-mode
+  :vc (:fetcher sourcehut :repo "meow_king/typst-ts-mode")
+  :mode ("\\.typ\\'" . typst-ts-mode))
+
 (provide 'prelude-tex)
