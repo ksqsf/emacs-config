@@ -16,8 +16,8 @@
 
 (setq major-mode-remap-alist
       '((python-mode . python-ts-mode)
-        (c-mode . c-ts-mode)
-        (c++-mode . c++-ts-mode)
+        ;; (c-mode . c-ts-mode)
+        ;; (c++-mode . c++-ts-mode)
         (rust-mode . rust-ts-mode)
         (css-mode . css-ts-mode)
         (js-mode . js-ts-mode)
