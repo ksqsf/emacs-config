@@ -355,15 +355,15 @@
 system's dark or light variant."
   :group 'prelude
   :type 'boolean)
-(defcustom prelude-theme-package 'one-themes
+(defcustom prelude-theme-package 'doom-themes
   "The package that defines `prelude-dark-theme' and `prelude-light-theme'."
   :group 'prelude
   :type 'symbol)
-(defcustom prelude-dark-theme 'one-dark
+(defcustom prelude-dark-theme 'doom-oksolar-dark
   "Preferred dark theme."
   :group 'prelude
   :type 'symbol)
-(defcustom prelude-light-theme 'one-light
+(defcustom prelude-light-theme 'doom-oksolar-light
   "Preferred light theme."
   :group 'prelude
   :type 'symbol)
@@ -379,10 +379,10 @@ system's dark or light variant."
     (cond
      ((eq appearance 'dark)
       (disable-theme prelude-light-theme)
-      (enable-theme prelude-dark-theme))
+      (load-theme prelude-dark-theme))
      ((eq appearance 'light)
       (disable-theme prelude-dark-theme)
-      (enable-theme prelude-light-theme)))))
+      (load-theme prelude-light-theme)))))
 
 (add-hook 'ns-system-appearance-change-functions #'prelude-switch-light-dark)
 
