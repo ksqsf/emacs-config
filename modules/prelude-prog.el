@@ -222,4 +222,8 @@ The history is stored in FILENAME."
   (keymap-unset ebrowse-tree-mode-map "C-l"))
 
 
+(use-package rmsbolt
+  :defer t)
+
+
 (provide 'prelude-prog)
