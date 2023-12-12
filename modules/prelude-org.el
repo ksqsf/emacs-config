@@ -166,10 +166,18 @@
 
   (defun org-protocol-find-file (fname)
     "Process org-protocol://find-file?path= style URL."
-    (let ((f (plist-get (org-protocol-parse-parameters fname nil '(:path)) :path)))
+    (let* ((parsed (org-protocol-parse-parameters fname nil '(:path :anchor)))
+           (f (plist-get parsed :path))
+           (anchor (plist-get parsed :anchor))
+           (anchor-re (and anchor (concat "\\(-\\|\\*\\) " (regexp-quote anchor)))))
       (find-file (org-protocol-find-file-fix-wsl-path f))
       (raise-frame)
-      (select-frame-set-input-focus (selected-frame)))))
+      (select-frame-set-input-focus (selected-frame))
+      (unhighlight-regexp t)
+      (highlight-regexp anchor-re)
+      (when anchor
+        (or (re-search-forward anchor-re nil t 1)
+            (re-search-backward anchor-re nil t 1))))))
 
 
 ;; Citation and Bibliography
