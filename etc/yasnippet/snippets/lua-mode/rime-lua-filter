@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: rime-lua-filter
+# key: filter
+# --
+local Module = {}
+
+function Module.init(env)
+   
+end
+
+function Module.fini(env)
+end
+
+function Module.func(translation, env)
+end
+
+return Module

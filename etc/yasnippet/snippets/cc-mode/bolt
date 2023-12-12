@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: bolt
+# key: bolt
+# --
+// Local Variables:
+// rmsbolt-command: "g++ -O2"
+// rmsbolt-disassemble: nil
+// End:

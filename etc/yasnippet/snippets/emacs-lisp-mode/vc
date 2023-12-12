@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: vc
+# key: vc
+# --
+:vc (:fetcher $1 :repo $2)

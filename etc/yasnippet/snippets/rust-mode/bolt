@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: bolt
+# key: bolt
+# --
+// Local Variables:
+// rmsbolt-command: "rustc -C opt-level=1"
+// rmsbolt-disassemble: nil
+// End:
