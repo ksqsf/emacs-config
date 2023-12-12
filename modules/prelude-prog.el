@@ -146,6 +146,7 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 
 
 (use-package copilot
+  :disabled
   :hook (prog-mode . copilot-mode)
   :vc (:fetcher github :repo "zerolfx/copilot.el")
   :bind (:map copilot-completion-map
@@ -156,7 +157,8 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
               ("M-n" . copilot-next-completion)
               ("M-p" . copilot-previous-completion))
   :config
-  (setq copilot-network-proxy '(:host "127.0.0.1" :port 7890)))
+  (setq copilot-network-proxy '(:host "127.0.0.1" :port 7890))
+  (setq copilot-balancer-debug-buffer (get-buffer-create " *copilot-balancer*")))
 
 
 (use-package citre
@@ -224,6 +226,12 @@ The history is stored in FILENAME."
 
 (use-package rmsbolt
   :defer t)
+
+(defun godbolt ()
+  "Send the current buffer to Compiler Explorer."
+  (interactive)
+  (let ((url (goldbolt--construct-url)))
+    (browse-url (format "https://godbolt.org/%s" ()))))
 
 
 (provide 'prelude-prog)
