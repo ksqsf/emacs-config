@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
+;; Restore dumped load-path
+(when (boundp '+saved-load-path-during-dump)
+  (message "Starting from a dump file...")
+  (setq load-path +saved-load-path-during-dump))
+
 ;; This is a dangerous value, and will be reset after Emacs is
 ;; initialized.
 (setq gc-cons-threshold (* 1024 1024 1024))
