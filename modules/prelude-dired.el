@@ -2,6 +2,9 @@
 
 (global-set-key (kbd "C-x C-j") #'dired-jump)
 
+;; Display human readable file sizes.
+(setq dired-listing-switches "-alh")
+
 (with-eval-after-load 'dired
   ;; Since Emacs 29, Dired supports file DnD on X windows, and NS.
   (setq dired-mouse-drag-files t)
