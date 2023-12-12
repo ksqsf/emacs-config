@@ -4,3 +4,6 @@
 [submodule "lisp/rime-regexp"]
 	path = lisp/rime-regexp
 	url = https://github.com/colawithsauce/rime-regexp.el
+[submodule "lisp/emt"]
+	path = lisp/emt
+	url = git@github.com:roife/emt.git
