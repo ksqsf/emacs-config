@@ -50,7 +50,9 @@
 
 ;; telega
 (use-package telega
-  :commands (telega))
+  :commands (telega)
+  :config
+  (setq telega-avatar-workaround-gaps-for '(return t)))
 
 ;; google translate
 (use-package google-translate
@@ -174,7 +176,8 @@
 (use-package dash-at-point
   :commands (dash-at-point)
   :preface
-  :bind (("M-g M-d" . dash-at-point))
+  :bind (("M-g M-d" . dash-at-point)
+         ("M-g d" . dash-at-point))
   :config
   (with-eval-after-load 'embark
     (define-key embark-symbol-map (kbd "d") 'dash-at-point)))
