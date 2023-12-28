@@ -31,7 +31,7 @@
                     (mode . css-mode)
                     (mode . python-mode)
                     (mode . prog-mode)))
-           ("Mait" (name . "^magit"))
+           ("Magit" (name . "^magit"))
            ("Help" (or
                     (name . "^\\*Help\\*$")
                     (name . "^\\*info\\*$")
