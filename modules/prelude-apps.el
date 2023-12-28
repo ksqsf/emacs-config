@@ -202,14 +202,17 @@
   :defer t)
 
 (use-package gptel
-  :bind ("C-c s" . gptel-send)
+  :bind (("C-c h" . gptel-menu))
   :bind (:map gptel-mode-map
               ("C-c C-c" . gptel-send))
+  :custom
+  (gptel-model "gpt-4-1106-preview")
   :config
-  (setq gptel-use-curl t))
-
-(keymap-global-set "C-c C-p C-p" #'profiler-start)
-(keymap-global-set "C-c C-p C-s" #'profiler-stop)
-(keymap-global-set "C-c C-p C-r" #'profiler-report)
+  (setq gptel-directives
+        '((default . "You are a large language model living in Emacs and a helpful assistant. Respond concisely.")
+          (programming . "You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note.")
+          (writing . "You are a large language model and a writing assistant. Respond concisely.")
+          (chat . "You are a large language model and a conversation partner. Respond concisely.")
+          (bug . "You are a large language model and a careful programmer. The supplied code doesn't work, or contains bugs. Describe each problem using only one sentence. Provide fixes without changing the old behavior."))))
 
 (provide 'prelude-apps)
