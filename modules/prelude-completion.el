@@ -54,6 +54,15 @@
   ;; Unfortunately, this does not work yet.
   ;; (add-hook 'minibuffer-setup-hook #'+move-point-to-the-beginning-of-the-window)
   ;; (add-hook 'minibuffer-exit-hook #'+restore-saved-point)
+
+  ;; vertico-repeat
+  (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+  (keymap-set vertico-map "C-r" #'vertico-repeat)
+  (keymap-set vertico-map "C-s" #'vertico-repeat-next)
+  (setq vertico-repeat-filter
+        (remove 'execute-extended-command
+                (remove 'execute-extended-command-for-buffer
+                        vertico-repeat-filter)))
   )
 
 (use-package vertico-posframe
