@@ -21,11 +21,10 @@
         (rust-mode . rust-ts-mode)
         (css-mode . css-ts-mode)
         (js-mode . js-ts-mode)
-        (typescript-mode . tsx-ts-mode)
-        (yaml-mode . yaml-ts-mode)))
-(use-package yaml-ts-mode
-  :iload (yaml-ts-mode)
-  :mode ("\\.ya?ml\\'" . yaml-ts-mode))
+        (typescript-mode . tsx-ts-mode)))
+(use-package yaml-mode
+  :iload (yaml-mode)
+  :mode ("\\.ya?ml\\'" . yaml-mode))
 (use-package dockerfile-ts-mode
   :mode ("Dockerfile.*\\'" . dockerfile-ts-mode))
 
