@@ -59,10 +59,11 @@
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
   (keymap-set vertico-map "C-r" #'vertico-repeat)
   (keymap-set vertico-map "C-s" #'vertico-repeat-next)
-  (setq vertico-repeat-filter
-        (remove 'execute-extended-command
-                (remove 'execute-extended-command-for-buffer
-                        vertico-repeat-filter)))
+  (with-eval-after-load 'vertico-repeat
+    (setq vertico-repeat-filter
+          (remove 'execute-extended-command
+                  (remove 'execute-extended-command-for-buffer
+                          vertico-repeat-filter))))
   )
 
 (use-package vertico-posframe
