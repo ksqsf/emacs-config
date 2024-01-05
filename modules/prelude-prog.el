@@ -15,13 +15,8 @@
 (add-to-list 'treesit-extra-load-path (no-littering-expand-var-file-name "tree-sitter"))
 
 (setq major-mode-remap-alist
-      '((python-mode . python-ts-mode)
-        ;; (c-mode . c-ts-mode)
-        ;; (c++-mode . c++-ts-mode)
-        (rust-mode . rust-ts-mode)
-        (css-mode . css-ts-mode)
-        (js-mode . js-ts-mode)
-        (typescript-mode . tsx-ts-mode)))
+      '((python-mode . python-ts-mode)   ;; python-ts-mode is better than python-mode at indentation
+        ))
 (use-package yaml-mode
   :iload (yaml-mode)
   :mode ("\\.ya?ml\\'" . yaml-mode))
@@ -163,7 +158,8 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 (use-package citre
   :hook (c-mode-common . citre-mode)
   :hook (c-ts-mode . citre-mode)
-  :hook (c++-ts-mode . citre-mode))
+  :hook (c++-ts-mode . citre-mode)
+  :hook (swift-mode . citre-mode))
 
 
 (use-package quickrun

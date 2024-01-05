@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; things that don't fit elsewhere
 (use-package wakatime-mode
-  :when (not (eq system-type 'darwin))  ; wakatime can cause emacs to hang on macos
+  ;; :when (not (eq system-type 'darwin))  ; wakatime can cause emacs to hang on macos
   :diminish ""
   :commands (global-wakatime-mode)
   :defer 3
