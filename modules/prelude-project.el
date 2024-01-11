@@ -15,8 +15,7 @@
   (projectile-switch-project-action #'projectile-find-file)
   (projectile-current-project-on-switch 'move-to-end)
   (projectile-find-dir-includes-top-level t)
-  (projectile-enable-caching nil)       ; Projectile will save a cache file, which is
-                                        ; slow for large projects.
+  (projectile-enable-caching t)
 
   ;; Emulate project.el keybindings
   :bind (:map projectile-command-map
@@ -24,6 +23,8 @@
               ("g" . projectile-ripgrep)
               ("s" . projectile-run-vterm)
               ("x x" . projectile-run-vterm)
+              ("i" . projectile-install-project)
+              ("I" . projectile-invalidate-cache)
               ;; ("s s" . projectile-ripgrep)
               ;; ("s a" . projectile-ag)
               )
