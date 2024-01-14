@@ -183,26 +183,9 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
   )
 
-(use-package company
-  :demand t
-  :custom
-  (company-idle-delay 0.2)
-  :bind (:map company-active-map
-              ("<return>" . nil)
-              ("<tab>" . company-complete))
-  :config
-  (global-company-mode +1))
-
-(use-package company-posframe
-  :if (display-graphic-p)
-  :demand t
-  :config
-  (company-posframe-mode +1))
-
 ;; Corfu is inferior to Company in many important ways.
 ;; I'm going to stick to Company for a while now.
 (use-package corfu
-  :disabled
   :demand t
   :custom
   (corfu-auto t)
@@ -213,8 +196,6 @@
   :bind (:map corfu-map
               ("<return>" . nil)
               ("<escape>" . corfu-quit)
-              ("C-j" . corfu-next)
-              ("C-k" . corfu-previous)
               ("M-d" . corfu-popupinfo-documentation)
               ("M-l" . corfu-info-location))
   :init
