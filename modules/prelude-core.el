@@ -91,7 +91,9 @@
   :config
   (setq undohist-directory (no-littering-expand-var-file-name "undohist"))
   (push "\\.git/COMMIT_EDITMSG\\'" undohist-ignored-files)
-  (push "dict.yaml\\'" undohist-ignored-files))
+  (push "dict.yaml\\'" undohist-ignored-files)
+  (push tramp-file-name-regexp undohist-ignored-files)
+  )
 (add-hook 'after-init-hook
           #'(lambda ()
               (require 'undohist)
@@ -409,5 +411,8 @@ Useful for reading Python exception traces."
 
 (use-package hydra
   :demand t)
+
+;; TRAMP performance
+(setq remote-file-name-inhibit-locks t)
 
 (provide 'prelude-core)
