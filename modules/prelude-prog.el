@@ -229,4 +229,9 @@ The history is stored in FILENAME."
     (browse-url (format "https://godbolt.org/%s" ()))))
 
 
+(use-package editorconfig
+  :config
+  (add-hook 'hack-local-variables-hook (lambda () (editorconfig-apply))))
+
+
 (provide 'prelude-prog)
