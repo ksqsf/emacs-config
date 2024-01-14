@@ -43,6 +43,8 @@
 
 ;;; Quit corfu on Escape
 (with-eval-after-load 'corfu
+  (keymap-set corfu-map "C-j" 'corfu-next)
+  (kemapp-set corfu-map "C-k" 'corfu-previous)
   (evil-define-key 'insert corfu-map (kbd "<escape>") 'corfu-quit))
 
 ;;; Leader key

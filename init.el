@@ -71,7 +71,7 @@
 (require 'prelude-apps)
 (require 'prelude-irc)
 
-(require 'prelude-evil)
+;; (require 'prelude-evil)
 ;;(require 'prelude-nix)
 
 ;; Volatile.
