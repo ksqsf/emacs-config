@@ -419,6 +419,7 @@ Useful for reading Python exception traces."
 (advice-add 'process-kill-buffer-query-function :before-until
             (lambda (&rest args)
               (and (derived-mode-p 'vterm-mode 'shell-mode 'term-mode 'comint-mode)
-                   (not (process-running-child-p (get-buffer-process (current-buffer)))))))
+                   (and (get-buffer-process (current-buffer))
+                        (not (process-running-child-p (get-buffer-process (current-buffer))))))))
 
 (provide 'prelude-core)
