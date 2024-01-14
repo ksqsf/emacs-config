@@ -415,4 +415,10 @@ Useful for reading Python exception traces."
 ;; TRAMP performance
 (setq remote-file-name-inhibit-locks t)
 
+;; Do not query on exit if the term process has no running child process.
+(advice-add 'process-kill-buffer-query-function :before-until
+            (lambda (&rest args)
+              (and (derived-mode-p 'vterm-mode 'shell-mode 'term-mode 'comint-mode)
+                   (not (process-running-child-p (get-buffer-process (current-buffer)))))))
+
 (provide 'prelude-core)
