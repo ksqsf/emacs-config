@@ -14,7 +14,6 @@
 
 (use-package forge
   :after magit
-  :defer t
   :config
   (setq forge-owned-accounts '(("ksqsf" . (remote-name "personal")))))
 
