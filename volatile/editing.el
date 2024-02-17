@@ -87,3 +87,42 @@ CAR is the first candidate, etc."
                do (cl-loop for word in sorted-words
                            do (insert code "\t" word "\n"))))
     (sort-fields 1 (point-min) (point-max))))
+
+(defun yedict-char-at-point ()
+  (interactive)
+  (let ((char (char-after)))
+    (shell-command (format "open 'http://yedict.com/zscontent.asp?uni=%X'" char))))
+
+(defun yedict-char-bol ()
+  (interactive)
+  (let ((char (char-after (pos-bol))))
+    (shell-command (format "open 'http://yedict.com/zscontent.asp?uni=%X'" char))))
+
+(defvar-local yedict-follow-mode-last-line-number nil)
+(defvar-local yedict-follow-mode-xwidget-buffer nil)
+
+(define-minor-mode yedict-follow-mode
+  "Let yedict follow the current line."
+  :global nil
+  (if yedict-follow-mode
+      (progn
+        (add-hook 'post-command-hook 'yedict-follow-mode-watch-line-changed nil t))
+    (remove-hook 'post-command-hook 'yedict-follow-mode-watch-line-changed t)))
+
+(defun yedict-follow-mode-watch-line-changed ()
+  (when (not (equal (line-number-at-pos) yedict-follow-mode-last-line-number))
+    (yedict-follow-mode-navigate)
+    (setq yedict-follow-mode-last-line-number (line-number-at-pos))))
+
+(defmacro with-yedict-xwidget-buffer (&rest body)
+  `(progn
+     (unless yedict-follow-mode-xwidget-buffer
+       (setq yedict-follow-mode-xwidget-buffer (xwidget-webkit--create-new-session-buffer "about:blank")))
+     (with-current-buffer yedict-follow-mode-xwidget-buffer
+       ,@body)))
+
+(defun yedict-follow-mode-navigate ()
+  (let ((char (char-after (pos-bol))))
+    (with-yedict-xwidget-buffer
+     (message "Display info about %c" char)
+     (xwidget-webkit-goto-uri (xwidget-webkit-current-session) (format "http://yedict.com/zscontent.asp?uni=%X" char)))))
