@@ -7,3 +7,6 @@
 [submodule "lisp/emt"]
 	path = lisp/emt
 	url = git@github.com:roife/emt.git
+[submodule "lisp/spookfox"]
+	path = lisp/spookfox
+	url = https://github.com/bitspook/spookfox
