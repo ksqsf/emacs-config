@@ -177,7 +177,6 @@
     (side . bottom)
     (slot . 6)
     (window-height . 0.4)
-    (dedicated . t)
     (dedicated . t))
    ("^\\*vterm"
     (display-buffer-reuse-mode-window
@@ -186,7 +185,6 @@
     (mode vterm-mode vterm-copy-mode)
     (side . bottom)
     (slot . 7)
-    (dedicated . t)
     (dedicated . t))
    ("^\\*ielm\\*"
     (display-buffer-reuse-mode-window
@@ -243,7 +241,8 @@
     (display-buffer-in-side-window)
     (window-width . 0.35)
     (side . right)
-    (slot . 0))
+    (slot . 0)
+    (dedicated . t))
    (,(+has-mode '(telega-chat-mode))
     (display-buffer-reuse-mode-window
      display-buffer-at-bottom)
@@ -254,10 +253,12 @@
    ("COMMIT_MSG"
     (display-buffer-in-side-window)
     (side . bottom)
+    (dedicated . t)
     (slot . 0))
    ("^magit-diff"
     (display-buffer-in-side-window)
     (side . bottom)
+    (dedicated . t)
     (slot . 1))
    ))
 
