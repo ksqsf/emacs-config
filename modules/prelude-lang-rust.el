@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Rust
 
-;; rust-mode is really buggy... stick to rust-mode for now
+;; rust-ts-mode is really buggy... stick to rust-mode for now
 (use-package rust-mode
   :hook (rust-mode . eglot-ensure)
   :hook (rust-mode . subword-mode)
