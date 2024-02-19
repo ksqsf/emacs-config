@@ -49,4 +49,14 @@ This function returns nil if it cannot parse REMOTE."
     (kill-new url)
     (message "%s" url)))
 
+;; Inspired by https://twitter.com/samcraigjohnson/status/1747412804112703734
+(defun open-github-pullreq ()
+  "Visit the github pr creation link."
+  (interactive)
+  (magit-process-buffer)
+  (goto-char (point-max))
+  (re-search-backward "https://github.com/[^ ]+pull[^ ]")
+  (let ((url (buffer-substring (point) (pos-eol))))
+    (browse-url (s-trim url))))
+
 (provide 'prelude-git)
