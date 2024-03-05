@@ -49,7 +49,7 @@
 ;;; Code:
 
 (setq treefold-continuation-regexp (rx (or " " " " "|" "│")))
-(setq treefold-subtree-indicator-regexp (rx (or "+" "└" "├")))
+(setq treefold-subtree-indicator-regexp (rx (or "+" "└" "├" "|-")))
 
 (defun treefold--subtree-end ()
   (save-excursion
