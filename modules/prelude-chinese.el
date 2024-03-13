@@ -141,4 +141,17 @@
   (setq emt-lib-path (expand-file-name "lisp/emt/module/.build/release/libEMT.dylib" user-emacs-directory))
   (emt-ensure))
 
+(defun opencc-on-region (beg end conf)
+  (shell-command-on-region beg end (format "opencc -c /usr/local/share/opencc/%s.json" conf)))
+
+(defun opencc-t2s (beg end)
+  "Use opencc to convert trad to simp on region."
+  (interactive "r")
+  (opencc-on-region beg end "t2s"))
+
+(defun opencc-s2t (beg end)
+  "Use opencc to convert simp to trad on region."
+  (interactive "r")
+  (opencc-on-region beg end "s2t"))
+
 (provide 'prelude-chinese)
