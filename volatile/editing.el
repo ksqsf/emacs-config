@@ -126,3 +126,160 @@ CAR is the first candidate, etc."
     (with-yedict-xwidget-buffer
      (message "Display info about %c" char)
      (xwidget-webkit-goto-uri (xwidget-webkit-current-session) (format "http://yedict.com/zscontent.asp?uni=%X" char)))))
+
+;; Maintain the tables of table-based Chinese input methods.
+;;
+;; Typical usage
+;; =============
+;;
+;; Extract all Chinese words:
+;;    M-x extract-regexp RET \cc+
+;; Transpose table format (exchange the first and second columns):
+;;    M-x transpose-table-singular
+;;
+;; Code
+;; ====
+;;
+;; Use `with-each-code-word' and `with-each-word-code' to iterate over
+;; the default table.
+
+(defun extract-regexp (regexp)
+  "Search for REGEXP in the current buffer and extract all matches.
+
+Each match will be placed on a separate line."
+  (interactive "sRegexp: ")
+  (with-current-buffer (get-buffer-create "*extract*")
+    (erase-buffer))
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward regexp nil t)
+      (let ((matched (match-string 0)))
+        (with-current-buffer "*extract*"
+          (insert matched "\n")))))
+  (display-buffer "*extract*"))
+
+(defun transpose-table-singular ()
+  "Exchange the first and the second columns of the current buffer."
+  (interactive)
+  (while (re-search-forward (rx bol (group (0+ any)) "\t" (group (0+ any)) eol) nil t)
+    (replace-match "\\2\t\\1")))
+
+;; (defun transpose-table-multiple ()
+;;   (interactive)
+;;   (while (re-search-forward (rx bol (group (0+ any)) "\t" (group (0+ any)) eol) nil t)
+;;     (let ((first (match-string 1))
+;;           (second (s-split " " (match-string 2))))
+;;       (replace-match "")
+;;       (dolist (it second)
+;;         (insert (format "%s\t%s\n" it first))))))
+
+(defmacro with-each-word-code (word-symbol code-symbol &rest body)
+  (declare (indent 2))
+  `(while (re-search-forward "^\\(\\cc+\\)\t\\([a-z]+\\)" nil t)
+     (let ((,word-symbol (match-string 1))
+           (,code-symbol (match-string 2)))
+       ,@body)))
+
+(defmacro with-each-code-word (code-symbol word-symbol &rest body)
+  (declare (indent 2))
+  `(while (re-search-forward "^\\([a-z]+\\)\t\\(\\cc+\\)" nil t)
+     (let ((,code-symbol (match-string 1))
+           (,word-symbol (match-string 2)))
+       ,@body)))
+
+(defun all-codes-satisfying (file pred)
+  (save-window-excursion
+    (find-file file)
+    (goto-char (point-min))
+    (let (result)
+      (with-each-word-code word code
+        (when (funcall pred word code)
+          (push code result)))
+      result)))
+
+(defun keep-empty-3code-words ()
+  (interactive)
+  (keep-lines "^[a-z][a-z][a-z]\t\\cc\\cc")
+  (let ((non-empty-3code (all-codes-satisfying
+                          "~/Library/Rime/moran_fixed.dict.yaml"
+                          (lambda (word code)
+                            (= (length code) 3)))))
+    (with-each-code-word code word
+      (when (member code non-empty-3code)
+        (delete-line)))))
+
+(defun make-hash-set ()
+  (make-hash-table :test 'equal))
+
+(defun hash-set-add (set elem)
+  (puthash elem t set))
+
+(defun hash-set-del (set elem)
+  (remhash elem set))
+
+(defun hash-set-in (set elem)
+  (gethash elem set nil))
+
+(defun hash-set-union (set1 set2)
+  "Find set1 ∪ set2."
+  (let ((result (make-hash-set)))
+    (maphash (lambda (key _)
+               (hash-set-add result key))
+             set1)
+    (maphash (lambda (key _)
+               (hash-set-add result key))
+             set2)))
+
+(defun hash-set-intersection (set1 set2)
+  "Find set1 ∩ set2."
+  (let ((result (make-hash-set)))
+    (maphash (lambda (key _)
+               (when (hash-set-in set2 key)
+                 (hash-set-add result key)))
+             set1)
+    result))
+
+(defun hash-set-difference (set1 set2)
+  "Find set1 - set2."
+  (let ((result (make-hash-set)))
+    (maphash (lambda (key _)
+               (when (not (hash-set-in set2 key))
+                 (hash-set-add result key)))
+             set1)
+    result))
+
+(defun construct-buffer-set (buf)
+  (with-current-buffer buf
+    (let ((set (make-hash-table :test 'equal)))
+      (goto-char (point-min))
+      (while (not (eobp))
+        (puthash (buffer-substring-no-properties (pos-bol) (pos-eol)) t set)
+        (forward-line 1))
+      set)))
+
+(defun hash-set-insert (set)
+  (maphash (lambda (key _)
+             (insert key "\n"))
+           set))
+
+(defun compare-buffers-as-sets (buf-a buf-b)
+  "Compare two buffers as sets, with lines as elements.
+
+The results are stored in three buffers: 
+ *compare:intersection*
+ *compare:only-in-a*
+ *compare:only-in-b*"
+  (interactive
+   (list
+    (get-buffer (read-buffer "buffer-a " (current-buffer) t))
+    (get-buffer
+     (read-buffer "buffer-b "
+		  (window-buffer (next-window)) t))))
+  (let ((set1 (construct-buffer-set buf-a))
+        (set2 (construct-buffer-set buf-b)))
+    (with-current-buffer (get-buffer-create "*compare:intersection*")
+      (hash-set-insert (hash-set-intersection set1 set2)))
+    (with-current-buffer (get-buffer-create "*compare:only-in-a*")
+      (hash-set-insert (hash-set-difference set1 set2)))
+    (with-current-buffer (get-buffer-create "*compare:only-in-b*")
+      (hash-set-insert (hash-set-difference set2 set1)))))
