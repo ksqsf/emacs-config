@@ -129,7 +129,7 @@
 ;; The "side window" however is still disconnected with the buffers.
 (setopt display-buffer-alist
  `(;; Side windows: bottom
-   (,(+has-mode '(magit-status-mode))
+   ("^magit: "
     (display-buffer-reuse-window
      display-buffer-in-side-window)
     (side . bottom)
