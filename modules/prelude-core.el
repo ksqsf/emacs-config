@@ -173,8 +173,6 @@
   (when (string-prefix-p "/Applications" default-directory)
     (setq default-directory "~/")
     (setq command-line-default-directory "~/"))
-  (setenv "LC_ALL" "zh_CN.utf-8")
-  (setenv "LANG" "zh_CN.utf-8")
 
   (use-package exec-path-from-shell
     :demand t
