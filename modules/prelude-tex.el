@@ -17,6 +17,8 @@
         TeX-parse-self t)
   (setq-default TeX-master nil)
 
+  (setq-default LaTeX-electric-left-right-brace t)
+
   (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
   (add-hook 'LaTeX-mode-hook #'TeX-PDF-mode)
   (add-hook 'LaTeX-mode-hook #'visual-line-mode)
