@@ -133,10 +133,11 @@
 
 (use-package windmove
   :ensure nil
-  :bind (("C-<left>" . windmove-left)
-         ("C-<right>" . windmove-right)
-         ("C-<up>" . windmove-up)
-         ("C-<down>" . windmove-down)))
+  :init
+  (windmove-default-keybindings) ;; S-<arrow>
+  (windmove-delete-default-keybindings) ;; C-x S-<arrow>
+  (windmove-swap-states-default-keybindings) ;; s-S-<arrow>
+  )
 
 ;; Recentf
 (use-package recentf
@@ -183,14 +184,14 @@
 
   ;; prefer Hyper because Super is already polluted.
   (setq ns-right-command-modifier 'hyper)
-  (setq ns-alternate-modifier 'hyper)
+  (setq ns-alternate-modifier 'super)
   (setq ns-command-modifier 'meta)
 
-  (global-set-key (kbd "H-t") tab-prefix-map)
-  (global-set-key (kbd "H-n") #'tab-new)
-  (global-set-key (kbd "H-w") #'tab-close)
-  (global-set-key (kbd "H-z") #'tab-undo)
-  (global-set-key (kbd "H-u") #'revert-buffer)
+  ;; (global-set-key (kbd "H-t") tab-prefix-map)
+  ;; (global-set-key (kbd "H-n") #'tab-new)
+  ;; (global-set-key (kbd "H-w") #'tab-close)
+  ;; (global-set-key (kbd "H-z") #'tab-undo)
+  ;; (global-set-key (kbd "H-u") #'revert-buffer)
 
   ;; (global-set-key (kbd "s-c") #'clipboard-kill-ring-save)
   ;; (global-set-key (kbd "s-v") #'clipboard-yank)
