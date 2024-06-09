@@ -18,16 +18,20 @@
 
 ;; font for Chinese texts
 (setq +preferred-chinese-fonts
-      '("PingFang TC"
-        "LXGW WenKai"))
+      '("LXGW WenKai"
+        "PingFang TC"))
 (setq +preferred-chinese-font (car-safe +preferred-chinese-fonts))
 (when (and +preferred-chinese-font
            (member +preferred-chinese-font +font-family-list))
-  (set-fontset-font t 'chinese-gbk +preferred-chinese-font))
+  (set-fontset-font t 'han +preferred-chinese-font))
+
+(when (member "TH-Tshyn-P0" +font-family-list)
+  (dolist (thfont '("TH-Feon" "TH-Sy-P0" "TH-Sy-P2" "TH-Sy-P16" "TH-Tshyn-P0"))
+    (set-fontset-font t 'han thfont nil 'append)))
 
 ;; font for emoji
 (when k|mac
-  (set-fontset-font t 'unicode (font-spec :family "Apple Color Emoji") nil 'append))
+  (set-fontset-font t 'unicode (font-spec :family "Apple Color Emoji") nil 'prepend))
 
 ;; Hey, Org mode?
 (with-eval-after-load 'org
