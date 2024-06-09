@@ -421,4 +421,16 @@ Useful for reading Python exception traces."
                    (and (get-buffer-process (current-buffer))
                         (not (process-running-child-p (get-buffer-process (current-buffer))))))))
 
+;; Bind C-h C-p to profiler (was: view-emacs-problems)
+(defun profiler-dwim ()
+  (interactive)
+  (if (or (profiler-cpu-running-p) (profiler-memory-running-p))
+      (progn
+        (profiler-report)
+        (profiler-stop))
+    (progn
+      (profiler-reset)
+      (profiler-start 'cpu))))
+(global-set-key (kbd "C-h C-p") #'profiler-dwim)
+
 (provide 'prelude-core)
