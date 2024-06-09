@@ -23,15 +23,20 @@
 (setq +preferred-chinese-font (car-safe +preferred-chinese-fonts))
 (when (and +preferred-chinese-font
            (member +preferred-chinese-font +font-family-list))
-  (set-fontset-font t 'han +preferred-chinese-font))
-
-(when (member "TH-Tshyn-P0" +font-family-list)
-  (dolist (thfont '("TH-Feon" "TH-Sy-P0" "TH-Sy-P2" "TH-Sy-P16" "TH-Tshyn-P0"))
-    (set-fontset-font t 'han thfont nil 'append)))
+  (set-fontset-font t 'han +preferred-chinese-font)
+  (set-fontset-font t 'kana +preferred-chinese-font)
+  (set-fontset-font t 'hangul +preferred-chinese-font)
+  (set-fontset-font t 'cjk-misc +preferred-chinese-font)
+  (set-fontset-font t 'unicode +preferred-chinese-font nil 'append))
 
 ;; font for emoji
 (when k|mac
   (set-fontset-font t 'unicode (font-spec :family "Apple Color Emoji") nil 'prepend))
+
+;; fallback font
+(when (member "TH-Tshyn-P0" +font-family-list)
+  (dolist (thfont '("TH-Feon" "TH-Sy-P0" "TH-Sy-P2" "TH-Sy-P16" "TH-Tshyn-P0"))
+    (set-fontset-font t 'unicode thfont nil 'append)))
 
 ;; Hey, Org mode?
 (with-eval-after-load 'org
