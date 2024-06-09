@@ -64,6 +64,8 @@
 (require 'prelude-lang-agda)
 (require 'prelude-lang-web)
 (require 'prelude-lang-zig)
+(require 'prelude-lang-swift)
+(require 'prelude-lang-lua)
 
 (require 'prelude-help)
 (require 'prelude-os)
