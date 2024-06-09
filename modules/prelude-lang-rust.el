@@ -1,14 +1,13 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Rust
 
-;; rust-ts-mode is really buggy... stick to rust-mode for now
-(use-package rust-mode
-  :hook (rust-mode . eglot-ensure)
-  :hook (rust-mode . subword-mode)
-  :hook (rust-mode . electric-pair-mode)
-  :hook (rust-mode . cargo-minor-mode)
+(use-package rust-ts-mode
+  :hook (rust-ts-mode . k|lsp-ensure)
+  :hook (rust-ts-mode . subword-mode)
+  :hook (rust-ts-mode . electric-pair-mode)
+  :hook (rust-ts-mode . cargo-minor-mode)
   :init
-  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode)))
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode)))
 
 ;; support rustc output
 (with-eval-after-load 'compile

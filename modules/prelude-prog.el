@@ -17,6 +17,7 @@
 
 (setq major-mode-remap-alist
       '((python-mode . python-ts-mode)   ;; python-ts-mode is better than python-mode at indentation
+        (rust-mode . rust-ts-mode)       ;; rust-mode has severe performance issues with adaptive-prefix
         ))
 (use-package yaml-mode
   :iload (yaml-mode)
