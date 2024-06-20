@@ -25,6 +25,7 @@
            (member +preferred-chinese-font +font-family-list))
   (set-fontset-font t 'han +preferred-chinese-font)
   (set-fontset-font t 'kana +preferred-chinese-font)
+  (set-fontset-font t 'kanbun +preferred-chinese-font)
   (set-fontset-font t 'hangul +preferred-chinese-font)
   (set-fontset-font t 'cjk-misc +preferred-chinese-font)
   (set-fontset-font t 'unicode +preferred-chinese-font nil 'append))
