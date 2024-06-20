@@ -97,12 +97,12 @@
   :after (lsp-mode)
   :commands (lsp-ui-mode))
 
-(defcustom k|auto-lsp nil
+(defcustom prelude-auto-lsp nil
   "Whether to start lsp automatically on all supported languages."
   :group 'prelude
   :type 'boolean)
 
-(defcustom k|lsp 'eglot
+(defcustom prelude-lsp-client 'eglot
   "The LSP client to use.
 
 One of `lsp-mode', `eglot', or `lsp-bridge'."
@@ -112,15 +112,15 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 (defun k|lsp-ensure ()
   (interactive)
   (catch 'foo
-    (cond ((not k|auto-lsp)
+    (cond ((not prelude-auto-lsp)
            (throw 'foo nil))
-          ((eq k|lsp 'lsp-bridge)
+          ((eq prelude-lsp-client 'lsp-bridge)
            (lsp-bridge-mode)
            ;; Let lsp-bridge control when popups should be displayed.
            (setq corfu-auto nil))
-          ((eq k|lsp 'lsp-mode)
+          ((eq prelude-lsp-client 'lsp-mode)
            (lsp-deferred))
-          ((eq k|lsp 'eglot)
+          ((eq prelude-lsp-client 'eglot)
            (eglot-ensure)))))
 
 

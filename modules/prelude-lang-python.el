@@ -20,7 +20,7 @@
   ;; (add-hook 'inferior-python-mode-hook
   ;;           (lambda ()
   ;;             (company-mode t)))
-  (when (eq k|lsp 'lsp)
+  (when (eq prelude-lsp-client 'lsp-mode)
     (use-package lsp-pyright)))
 
 ;; (use-package jupyter :defer t)
