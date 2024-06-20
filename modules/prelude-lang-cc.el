@@ -48,4 +48,13 @@ Mode."
 (use-package modern-cpp-font-lock
   :hook ((c++-mode . modern-c++-font-lock-mode)))
 
+;;; Styles
+(with-eval-after-load 'cc-mode
+  (c-add-style "rime"
+               '("gnu"
+                 (c-offsets-alist
+                  (innamespace . 0)
+                  (access-label . -1)
+                  (inclass . 2)))))
+
 (provide 'prelude-lang-cc)
