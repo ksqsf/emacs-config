@@ -273,25 +273,6 @@
   :config
   (setq minimap-window-location 'right))
 
-;; Dropdown terminal
-(defun drop-down-term ()
-  "Open a drop-down terminal in the same directory as the current file."
-  (interactive)
-  (use-package vterm :ensure t)
-  (let ((buffer (get-buffer-create "*dd-term*"))
-        win)
-    (with-current-buffer buffer
-      (unless (derived-mode-p 'vterm-mode)
-        (vterm-mode)))
-    (setq win
-          (display-buffer-in-side-window
-           buffer
-           '((side . top)
-             (dedicated . t))))
-    (select-window win)))
-
-(defalias 'dd-term 'drop-down-term)
-
 ;; Enable context menu
 (context-menu-mode +1)
 (setq-default context-menu-functions
@@ -531,5 +512,61 @@ system's dark or light variant."
 
 (use-package vterm-toggle
   :bind ("M-g v" . vterm-toggle))
+
+
+;; Allow setting preferred terminal emulator.
+;; Think 'pterm' as (1) preferred term, (2) prelude-term, or (3) parametric term.
+(defcustom prelude-term 'vterm
+  "Preferred terminal emulator. Used by project."
+  :group 'prelude
+  :type 'symbol)
+
+(defun pterm (&rest args)
+  (interactive)
+  (cond ((eq prelude-term 'eat)
+         (funcall 'eat nil args))
+        (t
+         (funcall 'vterm args))))
+
+(defun pterm-other-window (&rest args)
+  (interactive)
+  (cond ((eq prelude-term 'eat)
+         (funcall 'eat-other-window nil args))
+        (t
+         (funcall 'vterm-other-window args))))
+
+(defun pterm-run-in-current-buffer ()
+  (interactive)
+  (cond ((eq prelude-term 'eat)
+         (progn
+           (unless (derived-mode-p 'eat-mode)
+             (let ((program (or explicit-shell-file-name
+                              (getenv "ESHELL")
+                              shell-file-name)))
+               (eat-mode)
+               (eat-exec (current-buffer) (buffer-name) "/usr/bin/env" nil
+                         (list "sh" "-c" program))))))
+        (t
+         (unless (derived-mode-p 'vterm-mode)
+           (vterm-mode)))))
+
+;; Dropdown terminal
+(defun drop-down-term ()
+  "Open a drop-down terminal in the same directory as the current file."
+  (interactive)
+  (use-package vterm :ensure t)
+  (let ((buffer (get-buffer-create "*dd-term*"))
+        win)
+    (with-current-buffer buffer
+      (pterm-run-in-current-buffer))
+    (setq win
+          (display-buffer-in-side-window
+           buffer
+           '((side . top)
+             (dedicated . t))))
+    (select-window win)))
+
+(defalias 'dd-term 'drop-down-term)
+(defalias 'ddt 'drop-down-term)
 
 (provide 'prelude-ui)

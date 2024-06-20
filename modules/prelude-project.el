@@ -21,8 +21,8 @@
   :bind (:map projectile-command-map
               ("f" . projectile-find-file)
               ("g" . projectile-ripgrep)
-              ("s" . projectile-run-vterm)
-              ("x x" . projectile-run-vterm)
+              ("s" . projectile-run-pterm-other-window)
+              ("x x" . projectile-run-pterm)
               ("i" . projectile-install-project)
               ("I" . projectile-invalidate-cache)
               ;; ("s s" . projectile-ripgrep)
@@ -61,6 +61,8 @@
    :install ""
    :package "")
 
+  :preface
+
   ;; fix projectile bug
   (defun projectile-ripgrep (search-term &optional arg)
     "Run a ripgrep (rg) search with `SEARCH-TERM' at current project root.
@@ -94,7 +96,47 @@ installed to work."
                      (not arg)                 ;; literal search?
                      nil                       ;; no need to confirm
                      args))
-            (t (error "Packages `ripgrep' and `rg' are not available"))))))
+            (t (error "Packages `ripgrep' and `rg' are not available")))))
+
+  ;; PTerm related
+  (defun projectile-run-pterm-other-window (&optional arg)
+    "Invoke `pterm' in the project's root.
+
+Switch to the project specific term buffer if it already exists.
+
+Use a prefix argument ARG to indicate creation of a new process instead."
+    (interactive "P")
+    (projectile--pterm arg 'other-window))
+
+  (defun projectile-run-pterm (&optional arg)
+    "Invoke `pterm' in the project's root.
+
+Switch to the project specific term buffer if it already exists.
+
+Use a prefix argument ARG to indicate creation of a new process instead."
+    (interactive "P")
+    (projectile--pterm arg))
+
+  (defun projectile--pterm (&optional new-process other-window)
+    "Invoke `vterm' in the project's root.
+
+Use argument NEW-PROCESS to indicate creation of a new process instead.
+Use argument OTHER-WINDOW to indentation whether the buffer should
+be displayed in a different window.
+
+Switch to the project specific term buffer if it already exists."
+    (let* ((project (projectile-acquire-root))
+           (buffer (projectile-generate-process-name "pterm" new-process project)))
+      (if (buffer-live-p (get-buffer buffer))
+          (if other-window
+              (switch-to-buffer-other-window buffer)
+            (switch-to-buffer buffer))
+        (projectile-with-default-dir project
+          (progn
+            (if other-window
+                (pterm-other-window buffer)
+              (pterm buffer))
+            (rename-buffer (concat "*term: " (projectile-project-name) "*") t)))))))
 
 (use-package project
   :defer t
