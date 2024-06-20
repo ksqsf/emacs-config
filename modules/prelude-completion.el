@@ -183,10 +183,9 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
   )
 
-;; Corfu is inferior to Company in many important ways.
-;; I'm going to stick to Company for a while now.
 (use-package corfu
   :demand t
+  :if (display-graphic-p)
   :custom
   (corfu-auto t)
   (corfu-quit-no-match t)
@@ -211,5 +210,11 @@
   (kind-icon-default-face 'corfu-default)
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+(use-package company
+  :if (not (display-graphic-p))
+  :demand t
+  :init
+  (global-company-mode))
 
 (provide 'prelude-completion)
