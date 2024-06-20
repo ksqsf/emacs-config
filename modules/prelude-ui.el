@@ -442,6 +442,14 @@ system's dark or light variant."
 
 (global-set-key (kbd "C-x l") #'window-lift)
 
+;; Make side windows `C-x 1'-able
+(advice-add 'delete-other-windows :before
+            (lambda (&rest args)
+              (let ((w (selected-window)))
+                (when (window-parameter w 'window-side)
+                  (set-window-parameter w 'window-side nil)
+                  (set-window-parameter w 'window-slot nil)))))
+
 (use-package dashboard
   :commands (dashboard-refresh-buffer)
   :config
