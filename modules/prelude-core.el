@@ -219,9 +219,8 @@
 ;; Disable keys I don't use.
 (global-unset-key (kbd "C-x C-n"))
 
-;; Jump
-(global-set-key (kbd "M-]") #'forward-paragraph)
-(global-set-key (kbd "M-[") #'backward-paragraph)
+;; Never bind M-[ !
+;; ESC [ is an important escape sequence prefix used by terminals.
 
 ;; dwim
 (global-set-key (kbd "M-l") #'downcase-dwim)
