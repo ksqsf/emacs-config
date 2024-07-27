@@ -9,10 +9,15 @@
 ;; initialized.
 (setq gc-cons-threshold (* 1024 1024 1024))
 
-;; Prefer ELPA mirrors in China.
-(setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
-                         ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")
-                         ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
+;; Set package archives. Possibly set mirrors.
+(defconst +i-am-in-china+ nil)
+(with-eval-after-load 'package
+  (if +i-am-in-china+
+      (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
+                           ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")
+                           ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
+    (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))))
+
 (setq package-quickstart t)
 (setq package-quickstart-file (expand-file-name "var/package-quickstart.el" user-emacs-directory))
 
