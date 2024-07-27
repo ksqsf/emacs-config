@@ -326,9 +326,9 @@
 
 ;; Sublime-like multiple cursors.
 (use-package multiple-cursors
-  :commands (mc/add-cursor-on-click)
-  :bind ("A-<mouse-1>" . mc/add-cursor-on-click))
-
+  :bind ("M-<mouse-1>" . mc/add-cursor-on-click)
+  :bind ("C->" . 'mc/mark-next-like-this)
+  :bind ("C-<" . 'mc/mark-previous-like-this))
 ;; Graphical Emacs should serve as a daemon.
 (use-package server
   :if window-system
