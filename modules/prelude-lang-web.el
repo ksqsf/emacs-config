@@ -6,7 +6,9 @@
          ("\\.as[cp]x\\'" . web-mode)
          ("\\.erb\\'" . web-mode)
          ("\\.mustache\\'" . web-mode)
-         ("\\.djhtml\\'" . web-mode))
+         ("\\.djhtml\\'" . web-mode)
+         ("\\.vue\\'" . web-mode)
+         ("\\.ts\\'" . web-mode))
   :config
   (setq web-mode-engines-alist
         '(("jinja" . "\\.html\\'"))))
