@@ -21,8 +21,8 @@
   :bind (:map projectile-command-map
               ("f" . projectile-find-file)
               ("g" . projectile-ripgrep)
-              ("s" . projectile-run-pterm-other-window)
-              ("x x" . projectile-run-pterm)
+              ("s" . projectile-run-vterm-other-window)
+              ("x x" . projectile-run-vterm)
               ("i" . projectile-install-project)
               ("I" . projectile-invalidate-cache)
               ;; ("s s" . projectile-ripgrep)
