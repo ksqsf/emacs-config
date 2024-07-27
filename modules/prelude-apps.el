@@ -206,7 +206,7 @@
   :bind (:map gptel-mode-map
               ("C-c C-c" . gptel-send))
   :custom
-  (gptel-model "gpt-4-1106-preview")
+  (gptel-model "gpt-4o")
   :config
   (setq gptel-directives
         '((default . "You are a large language model living in Emacs and a helpful assistant. Respond concisely.")
