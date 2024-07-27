@@ -15,7 +15,7 @@
   (projectile-switch-project-action #'projectile-find-file)
   (projectile-current-project-on-switch 'move-to-end)
   (projectile-find-dir-includes-top-level t)
-  (projectile-enable-caching t)
+  ;; (projectile-enable-caching nil)
 
   ;; Emulate project.el keybindings
   :bind (:map projectile-command-map
