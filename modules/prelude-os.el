@@ -8,7 +8,7 @@
     (shell-command-on-region (mark) (point) "python3 -m json.tool" (buffer-name) t)))
 
 (defun open-directory-here ()
-  "Open `default-directory'  with `system-opener'.
+  "Open the current directory in the GUI file manager.
 
 In most cases, this means the current directory of the current buffer."
   (interactive)
@@ -67,5 +67,42 @@ of the box `(w h)' inside the box `(cw ch)'."
   (let* ((frame (or frame (selected-frame)))
          (center (ct/frame-get-center frame)))
     (apply 'set-frame-position (flatten-list (list frame center)))))
+
+;;; WSL2
+;;; Requires 'wslu' (https://wslutiliti.es/wslu/install.html)
+(defun wsl-copy (beg end)
+  "In a WSL2 environment, copy region to the system clipboard."
+  (interactive "r")
+  (k|with-suppressed-message
+    (let ((default-directory "/"))
+      (shell-command-on-region beg end "clip.exe")))
+  (deactivate-mark))
+
+(defun wsl-get-clipboard ()
+  "In a WSL2 environment, get the clipboard text."
+  (let ((clipboard
+         (let ((default-directory "/"))
+           (shell-command-to-string "powershell.exe -command 'Get-Clipboard' 2>/dev/null")
+           ;; WSLu utility
+           ;; (shell-command-to-string "wslclip --get")
+           )))
+    (setq clipboard (replace-regexp-in-string "\r" "" clipboard))
+    (setq clipboard (substring clipboard 0 -1))
+    clipboard))
+
+(defun wsl-paste ()
+  "In a WSL2 environment, paste the text from the system clipboard."
+  (interactive)
+  (if (derived-mode-p 'vterm-mode)
+      (vterm-insert (wsl-get-clipboard))
+    (insert (wsl-get-clipboard))))
+
+(when k|wsl
+  (advice-add 'gui-select-text :before
+              (lambda (text)
+                (when select-enable-clipboard
+                  (with-temp-buffer
+                    (insert text)
+                    (wsl-copy (point-min) (point-max)))))))
 
 (provide 'prelude-os)
