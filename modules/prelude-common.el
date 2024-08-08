@@ -11,6 +11,7 @@
 
 (defconst k|mac (eq system-type 'darwin))
 (defconst k|windows (eq system-type 'windows-nt))
+(defconst k|wsl (string-match "WSL2" operating-system-release))
 
 (defmacro k|double-tap-to-insert (to-char)
   "Create a function suitable for key binding.  It replaces
@@ -27,6 +28,7 @@ double consecutive occurrences of that character with TO-CHAR."
 (defconst k|default-opener
   (cond (k|mac     "open")
         (k|windows "start")
+        (k|wsl     "wslview")
         (t         "xdg-open"))
   "The default file opener on the current system. (No Windows support.)")
 
