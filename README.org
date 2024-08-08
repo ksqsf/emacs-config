@@ -7,13 +7,18 @@ last section.
 
 ** Supported Platforms
 
-This configuration is mainly developed on macOS.  It also works on
-Linux and Windows (for the most part).
+This configuration supports macOS, and Linux.  It should work on
+Windows for the most part.
 
-NOTE: This configuration only targets Emacs 29.  (For one thing, it
-relies on the bundled =use-package=.)  No guarantee about
-forward/backward compatibility.  You can comment out the first
-paragraph in =init.el= if you do want to try.
+The following Emacs versions are explicitly supported.  NOTE: the
+Emacs version shipped in the current Debian stable (since 13 "trixie")
+will be supported.
+
+| Version | Notes                                                    |
+|---------+----------------------------------------------------------|
+|      29 | the current stable version; will be shipped in Debian 13 |
+|      30 | the current "testing" version                            |
+|      31 | the current development version                          |
 
 ** Structure
 
