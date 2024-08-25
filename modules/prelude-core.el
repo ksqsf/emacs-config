@@ -118,11 +118,14 @@
                     (when (consp undo-list)
                       (setq buffer-undo-list undo-list)))))))
 
+;; Window and frame navigation
+(global-set-key (kbd "M-o") #'other-window)
+(global-set-key (kbd "M-O") #'other-frame)
+
 ;; Use ace-window for quick window navigation
 ;; Sorry, `other-window', but you are too weak!
 (use-package ace-window
-  :bind (("M-o" . other-window)
-         ("C-x o" . ace-window)
+  :bind (("C-x o" . ace-window)
          ("C-x C-o" . ace-window))  ;; was delete-blank-lines
   :config
   (custom-set-faces
