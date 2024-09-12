@@ -120,7 +120,6 @@
 
 ;; Window and frame navigation
 (global-set-key (kbd "M-o") #'other-window)
-(global-set-key (kbd "M-O") #'other-frame)
 
 ;; Use ace-window for quick window navigation
 ;; Sorry, `other-window', but you are too weak!
@@ -435,5 +434,8 @@ Useful for reading Python exception traces."
       (profiler-reset)
       (profiler-start 'cpu))))
 (global-set-key (kbd "C-h C-p") #'profiler-dwim)
+
+;; CAVEAT: to be compatible to terminals, do NOT bind:
+;; M-<arrow>, M-O
 
 (provide 'prelude-core)
