@@ -426,6 +426,7 @@ Useful for reading Python exception traces."
 ;; Bind C-h C-p to profiler (was: view-emacs-problems)
 (defun profiler-dwim ()
   (interactive)
+  (require 'profiler)
   (if (or (profiler-cpu-running-p) (profiler-memory-running-p))
       (progn
         (profiler-report)
