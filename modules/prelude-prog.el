@@ -15,10 +15,10 @@
 (when (boundp 'treesit-extra-load-path)
   (add-to-list 'treesit-extra-load-path (no-littering-expand-var-file-name "tree-sitter")))
 
-(setq major-mode-remap-alist
-      '((python-mode . python-ts-mode)   ;; python-ts-mode is better than python-mode at indentation
-        (rust-mode . rust-ts-mode)       ;; rust-mode has severe performance issues with adaptive-prefix
-        ))
+;; Disable tree-sitter for better portability.
+;; (setq major-mode-remap-alist
+;;       '((python-mode . python-ts-mode)   ;; python-ts-mode is better than python-mode at indentation
+;;         ))
 (use-package yaml-mode
   :iload (yaml-mode)
   :mode ("\\.ya?ml\\'" . yaml-mode))

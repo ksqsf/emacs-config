@@ -1,13 +1,40 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; Rust
 
-(use-package rust-ts-mode
-  :hook (rust-ts-mode . k|lsp-ensure)
-  :hook (rust-ts-mode . subword-mode)
-  :hook (rust-ts-mode . electric-pair-mode)
-  :hook (rust-ts-mode . cargo-minor-mode)
+(use-package rust-mode
+  :hook (rust-mode . k|lsp-ensure)
+  :hook (rust-mode . subword-mode)
+  :hook (rust-mode . electric-pair-mode)
+  :hook (rust-mode . cargo-minor-mode)
   :init
-  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode)))
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
+  :config
+  ;; Remove syntax-ppss-flush-cache to fix the performance issue with
+  ;; adaptive-wrap-prefix-mode.  See
+  ;; https://github.com/rust-lang/rust-mode/issues/558
+  (defun rust-in-comment-paragraph (body)
+    (save-excursion
+      (when (not (nth 4 (syntax-ppss)))
+        (beginning-of-line)
+        (when (looking-at (concat "[[:space:]\n]*" comment-start-skip))
+          (goto-char (match-end 0))))
+
+      (let ((next-bol (line-beginning-position 2)))
+        (while (save-excursion
+                 (end-of-line)
+                 (and (nth 4 (syntax-ppss))
+                      (save-excursion
+                        (beginning-of-line)
+                        (looking-at paragraph-start))
+                      (looking-at "[[:space:]]*$")
+                      (nth 4 (syntax-ppss next-bol))))
+          (goto-char next-bol)))
+      (when (save-excursion
+              (and (nth 4 (syntax-ppss (line-beginning-position 1)))
+                   (looking-at "[[:space:]]*\\*/")))
+        (goto-char (line-end-position 0)))
+      (funcall body))))
 
 ;; support rustc output
 (with-eval-after-load 'compile
