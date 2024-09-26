@@ -57,4 +57,8 @@ Mode."
                   (access-label . -1)
                   (inclass . 2)))))
 
+;;; ObjC++
+;;; There seems to be no dedicated major mode for ObjC++. Just use objc-mode.
+(add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
+
 (provide 'prelude-lang-cc)
