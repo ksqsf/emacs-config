@@ -436,6 +436,9 @@ Useful for reading Python exception traces."
 (global-set-key (kbd "C-h C-p") #'profiler-dwim)
 
 ;; CAVEAT: to be compatible to terminals, do NOT bind:
-;; M-<arrow>, M-O
+;; M-[, M-], M-O, etc.
+
+;; Indicate the depth of recursive editing.
+(minibuffer-depth-indicate-mode +1)
 
 (provide 'prelude-core)
