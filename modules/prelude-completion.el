@@ -185,7 +185,6 @@
 
 (use-package corfu
   :demand t
-  :if (display-graphic-p)
   :custom
   (corfu-auto t)
   (corfu-quit-no-match t)
@@ -211,10 +210,10 @@
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
-(use-package company
+(use-package corfu-terminal
   :if (not (display-graphic-p))
   :demand t
   :init
-  (global-company-mode))
+  (corfu-terminal-mode))
 
 (provide 'prelude-completion)
