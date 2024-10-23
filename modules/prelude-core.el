@@ -80,7 +80,7 @@
 
 ;; Better undo
 (global-set-key (kbd "C-/") 'undo)
-(global-set-key (kbd "C-_") 'undo-only)
+(global-set-key (kbd "C-_") 'undo)  ; Generated in a terminal on C-/
 (global-set-key (kbd "C-?") 'undo-redo)
 (setq undo-limit (* 100 1024 1024))
 (setq undo-strong-limit (* 200 1024 1024))
