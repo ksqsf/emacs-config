@@ -5,7 +5,7 @@
   :mode (("\\.tex\\'" . LaTeX-mode))
   :commands (TeX-revert-document-buffer TeX-PDF-mode TeX-source-correlate-mode)
   :config
-  (setq-default TeX-engine 'luatex)
+  (setq-default TeX-engine 'xetex)
   (add-hook 'LaTeX-mode-hook
             #'(lambda ()
                 (setq fill-column 80)))
