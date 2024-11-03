@@ -8,6 +8,7 @@
 
 (use-package company-coq
   :hook (coq-mode . company-coq-mode)
+  :config
   (setq company-coq-live-on-the-edge t))
 
 
