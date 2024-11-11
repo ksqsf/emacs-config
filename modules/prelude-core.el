@@ -155,11 +155,9 @@
 
   ;; reduce 1rtt on remote files
   (defun +recentf-keep-p (file)
-    (or (get-file-buffer file)
-        (cond
-         ((file-remote-p file nil t) (recentf-access-file file))
-         ((file-remote-p file))
-         ((file-readable-p file)))))
+    (cond
+     ((file-remote-p file))
+     ((file-readable-p file))))
   (setq recentf-keep '(+recentf-keep-p)))
 
 ;; recursive edit
@@ -423,6 +421,11 @@ Useful for reading Python exception traces."
 
 ;; TRAMP performance
 (setq remote-file-name-inhibit-locks t)
+(setq remote-file-name-inhibit-auto-save t)
+(setq remote-file-name-inhibit-auto-save-visited t)
+(setq remote-file-name-inhibit-delete-by-moving-to-trash t)
+(setq remote-file-name-inhibit-cache 600)
+(setq remote-file-name-access-timeout 1)
 
 ;; Do not query on exit if the term process has no running child process.
 (advice-add 'process-kill-buffer-query-function :before-until
