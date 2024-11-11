@@ -59,12 +59,8 @@
            ("Images"
             (extension "jpg" "jpeg" "webp" "png" "bmp" "gif" "tiff" "xcf"))))))
 
-(use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode--except-tramp)
-  :config
-  (defun all-the-icons-dired-mode--except-tramp ()
-    (when (and buffer-file-name (not (file-remote-p buffer-file-name)))
-      (all-the-icons-dired-mode))))
+(use-package nerd-icons-dired
+  :hook (dired-mode . nerd-icons-dired-mode))
 
 (use-package diredfl
   :after (dired)

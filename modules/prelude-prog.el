@@ -232,8 +232,9 @@ The history is stored in FILENAME."
 
 
 (use-package editorconfig
+  :ensure nil
   :config
-  (add-hook 'hack-local-variables-hook (lambda () (editorconfig-apply))))
+  (editorconfig-mode))
 
 
 (provide 'prelude-prog)

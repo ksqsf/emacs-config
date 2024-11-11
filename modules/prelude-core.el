@@ -151,7 +151,16 @@
   (setq recentf-auto-cleanup 'never)
   (run-with-idle-timer 30 t #'(lambda () (k|with-suppressed-message (recentf-save-list))))
   (add-to-list 'recentf-exclude no-littering-var-directory)
-  (add-to-list 'recentf-exclude no-littering-etc-directory))
+  (add-to-list 'recentf-exclude no-littering-etc-directory)
+
+  ;; reduce 1rtt on remote files
+  (defun +recentf-keep-p (file)
+    (or (get-file-buffer file)
+        (cond
+         ((file-remote-p file nil t) (recentf-access-file file))
+         ((file-remote-p file))
+         ((file-readable-p file)))))
+  (setq recentf-keep '(+recentf-keep-p)))
 
 ;; recursive edit
 (defun isearch-open-recursive-edit ()

@@ -5,7 +5,7 @@
   :ensure nil
   :commands (ibuffer ibuffer-switch-to-saved-filter-groups)
   :hook (ibuffer-mode . (lambda () (ibuffer-switch-to-saved-filter-groups "Normal")))
-  :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
   (setq ibuffer-saved-filter-groups
         '(("Normal"
@@ -47,8 +47,8 @@
   (setq ibuffer-show-empty-filter-groups nil
         ibuffer-default-sorting-mode 'filename/process)
 
-  (use-package all-the-icons-ibuffer
-    :commands (all-the-icons-ibuffer-mode)))
+  (use-package nerd-icons-ibuffer
+    :commands (nerd-icons-ibuffer-mode)))
 
 (use-package ibuffer-project
   :disabled  ;; Not very useful

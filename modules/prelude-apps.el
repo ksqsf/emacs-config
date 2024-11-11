@@ -152,10 +152,10 @@
     :after (tab-bar)
     :demand t)
 
-  (use-package treemacs-all-the-icons
+  (use-package treemacs-nerd-icons
     :demand t
     :config
-    (treemacs-load-theme "all-the-icons"))
+    (treemacs-load-theme "nerd-icons"))
 
   (use-package treemacs-persp
     :after (persp-mode)

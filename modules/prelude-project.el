@@ -15,7 +15,8 @@
   (projectile-switch-project-action #'projectile-find-file)
   (projectile-current-project-on-switch 'move-to-end)
   (projectile-find-dir-includes-top-level t)
-  ;; (projectile-enable-caching nil)
+  (projectile-enable-caching t)
+  (projectile-indexing-method 'hybrid)
 
   ;; Emulate project.el keybindings
   :bind (:map projectile-command-map
@@ -157,5 +158,19 @@ Modified to run vterm instead of shell."
     (if (and shell-buffer (not current-prefix-arg))
         (pop-to-buffer-same-window shell-buffer)
       (vterm-other-window (generate-new-buffer-name default-project-shell-name))))))
+
+;; disable Project detection on remote files
+(with-eval-after-load 'projectile
+  (advice-add 'projectile-project-root :around
+              (lambda (orig &rest args)
+                (unless (file-remote-p default-directory)
+                  (apply orig args)))))
+
+(with-eval-after-load 'project
+  (advice-add 'project-current :around
+              (lambda (orig &rest args)
+                (unless (file-remote-p default-directory)
+                  (apply orig args)))))
+
 
 (provide 'prelude-project)

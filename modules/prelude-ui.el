@@ -71,7 +71,7 @@
          ("M-9" . winum-select-window-9)))
 
 ;; Eye candy icons
-(use-package all-the-icons :demand t)
+(use-package nerd-icons :demand t)
 
 ;; Rainbow
 (use-package rainbow-mode
@@ -453,13 +453,14 @@ system's dark or light variant."
   ;; overriding our pretty icons.
   (advice-add 'tab-bar--load-buttons :override (lambda (&rest _args)))
 
-  ;; the low-res icons are soooo ugly!!
-  ;; the proper way to do this is perhaps defining tab-bar-* icons before loading tab-bar
-  ;; but all-the-icons has another definition for 'define-icon'.
-  ;; so let's do it this way until all-the-icons remove that definition.
-  (setq tab-bar-new-button (all-the-icons-material "add")
-        tab-bar-back-button (all-the-icons-faicon "chevron-left")
-        tab-bar-forward-button (all-the-icons-faicon "chevron-right"))
+  ;; ;; the low-res icons are soooo ugly!!
+  ;; ;; the proper way to do this is perhaps defining tab-bar-* icons before loading tab-bar
+  ;; ;; but all-the-icons has another definition for 'define-icon'.
+  ;; ;; so let's do it this way until all-the-icons remove that definition.
+  ;; (setq tab-bar-new-button (nerd-icons-faicon "add")
+  ;;       tab-bar-back-button (nerd-icons-faicon "chevron-left")
+  ;;       tab-bar-forward-button (all-the-icons-faicon "chevron-right"))
+
   ;; we can't use all-the-icons for the close button because its face
   ;; gets overwritten by tab-bar's format function.
   (setq tab-bar-close-button-show t)
