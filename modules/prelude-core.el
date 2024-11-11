@@ -25,6 +25,14 @@
 ;; Move backups away
 (setq backup-directory-alist `(("." . ,(no-littering-expand-var-file-name "backups"))))
 
+;; Don't backup by rename
+;; By default, Emacs creates backup B for file A by renaming A into B, then write new contents to a new file A'.
+;; The original intention is probably handling hard links better. Plausible.
+;; Alas, this method will destroy permission bits and ownership information!
+;; Let's settle on the lesser evil.
+;; (Another benefit is Tramp saving become faster combined with purely local backups.)
+(setq backup-by-copying t)
+
 ;; Don't recenter to the middle of the screen
 (setq recenter-positions '(top 0.3 bottom))
 
