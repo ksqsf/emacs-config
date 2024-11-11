@@ -22,8 +22,9 @@
 (use-package yaml-mode
   :iload (yaml-mode)
   :mode ("\\.ya?ml\\'" . yaml-mode))
-(use-package dockerfile-ts-mode
-  :mode ("Dockerfile.*\\'" . dockerfile-ts-mode))
+(use-package dockerfile-mode
+  :mode ("Dockerfile.*\\'" . dockerfile-mode)
+  :mode (".dockerfile\\'" . dockerfile-mode))
 
 (with-eval-after-load 'treesit
   (defun treesit--explorer-jump-advice-really-jump (button)
