@@ -1,7 +1,46 @@
 ;;; -*- lexical-binding: t; -*-
 ;; Deal with the concept of `Project'
 
+(use-package project
+  :ensure nil
+  :custom
+  (project-buffers-viewer 'project-list-buffers-buffer-ibuffer)
+  (project-switch-use-entire-map nil)
+  (project-switch-commands 'project-find-file)
+  :config
+  (require 'projection)
+  (require 'projection-multi))
+
+(use-package projection
+  :hook (after-init . global-projection-hook-mode)
+  :bind-keymap
+  ("C-x P" . projection-map)
+  :config
+  (setq projection-project-type-rime-config
+    (projection-type
+     :name 'rime-config
+     :predicate (defun projection-rime-config-project-p ()
+                  (and (file-exists-p "default.yaml")))
+     :configure ""
+     :build ""
+     :test ""
+     :run ""
+     :install ""
+     :compile-multi-targets
+     '(("rime:squirrel:deploy" . "\"/Library/Input Methods/Squirrel.app/Contents/MacOS/Squirrel\" --reload")
+       ("rime:f5m:copy and deploy" . "./fcitx.sh && \"/Library/Input Methods/Fcitx5.app/Contents/bin/fcitx5-curl\" /config/addon/rime/deploy -X POST -d '{}'")
+       ("rime:f5m:deploy" . "\"/Library/Input Methods/Fcitx5.app/Contents/bin/fcitx5-curl\" /config/addon/rime/deploy -X POST -d '{}'"))))
+  (add-to-list 'projection-project-types projection-project-type-rime-config))
+
+(use-package projection-multi
+  :bind (:map project-prefix-map
+              ("RET" . projection-multi-compile)))
+
 (use-package projectile
+  :disabled
+  ;; I'm really sad to let projectile go, but it does not handle remote files very well.
+  ;; Currently, I will be experimenting with 
+
   :hook (after-init . projectile-mode)
   :diminish ""
 
@@ -32,6 +71,12 @@
 
   :config
   (add-to-list 'projectile-globally-ignored-files ".tags")
+
+  ;; disable project detecion on remote files
+  (advice-add 'projectile-project-root :around
+              (lambda (orig &optional dir)
+                (when (not (file-remote-p default-directory))
+                  (funcall orig dir))))
 
   ;; Support for Citre (a u-ctags frontend).
   (advice-add 'projectile-regenerate-tags :around
@@ -138,39 +183,5 @@ Switch to the project specific term buffer if it already exists."
                 (pterm-other-window buffer)
               (pterm buffer))
             (rename-buffer (concat "*term: " (projectile-project-name) "*") t)))))))
-
-(use-package project
-  :defer t
-  :ensure nil
-  :config
-  (defun project-shell ()
-  "Start an inferior shell in the current project's root directory.
-If a buffer already exists for running a shell in the project's root,
-switch to it.  Otherwise, create a new shell buffer.
-With \\[universal-argument] prefix arg, create a new inferior shell buffer even
-if one already exists.
-
-Modified to run vterm instead of shell."
-  (interactive)
-  (let* ((default-directory (project-root (project-current t)))
-         (default-project-shell-name (project-prefixed-buffer-name "vterm"))
-         (shell-buffer (get-buffer default-project-shell-name)))
-    (if (and shell-buffer (not current-prefix-arg))
-        (pop-to-buffer-same-window shell-buffer)
-      (vterm-other-window (generate-new-buffer-name default-project-shell-name))))))
-
-;; disable Project detection on remote files
-(with-eval-after-load 'projectile
-  (advice-add 'projectile-project-root :around
-              (lambda (orig &rest args)
-                (unless (file-remote-p default-directory)
-                  (apply orig args)))))
-
-(with-eval-after-load 'project
-  (advice-add 'project-current :around
-              (lambda (orig &rest args)
-                (unless (file-remote-p default-directory)
-                  (apply orig args)))))
-
 
 (provide 'prelude-project)
