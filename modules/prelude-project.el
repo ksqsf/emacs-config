@@ -3,18 +3,36 @@
 
 (use-package project
   :ensure nil
+  :bind (:map project-prefix-map
+              ("s" . project-vterm))
   :custom
   (project-buffers-viewer 'project-list-buffers-buffer-ibuffer)
   (project-switch-use-entire-map nil)
   (project-switch-commands 'project-find-file)
+
   :config
   (require 'projection)
-  (require 'projection-multi))
+  (require 'projection-multi)
+
+  ;; vterm integraion
+  (add-to-list 'project-kill-buffer-conditions '(major-mode . vterm-mode))
+  (defun project-vterm ()
+    (interactive)
+    (require 'vterm)
+    (defvar vterm-buffer-name)
+    (let* ((default-directory (project-root (project-current t)))
+           (vterm-buffer-name (project-prefixed-buffer-name "vterm"))
+           (vterm-buffer (get-buffer vterm-buffer-name)))
+      (if vterm-buffer
+          (pop-to-buffer vterm-buffer current-prefix-arg)
+        (vterm current-prefix-arg)))))
 
 (use-package projection
   :hook (after-init . global-projection-hook-mode)
   :bind-keymap
   ("C-x P" . projection-map)
+  :bind (:map project-prefix-map
+              ("a" . projection-find-other-file))
   :config
   (setq projection-project-type-rime-config
     (projection-type

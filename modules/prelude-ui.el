@@ -178,7 +178,7 @@
     (slot . 6)
     (window-height . 0.4)
     (dedicated . t))
-   ("^\\*vterm"
+   ("vterm*"
     (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
     (window-height . 0.4)
