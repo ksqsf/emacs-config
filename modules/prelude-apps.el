@@ -202,9 +202,8 @@
   :defer t)
 
 (use-package gptel
-  :bind (("C-c h" . gptel-menu))
-  :bind (:map gptel-mode-map
-              ("C-c C-c" . gptel-send))
+  :bind (("C-h RET" . gptel-send)  ;; C-u C-h RET for gptel-menu
+         ("C-h C-h" . gptel))
   :custom
   (gptel-model "gpt-4o")
   :config
