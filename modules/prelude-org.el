@@ -7,11 +7,11 @@
 ;; This config is still fledging. I don't use org-roam (for now).
 
 ;; Basic user options and special org files
-(setq org-directory "~/Documents/org")
-(setq org-agenda-files '("~/Documents/org"))
-(setq org-default-notes-file "~/Documents/org/notes.org")
-(setq +org-journal-dir (expand-file-name "journal" org-directory))
-(setq +org-plan-file (expand-file-name "plan.org" org-directory))
+(setq org-directory "~/org")
+(setq org-agenda-files '("~/org"))
+;; (setq org-default-notes-file "~/org/notes.org")
+;; (setq +org-journal-dir (expand-file-name "journal" org-directory))
+;; (setq +org-plan-file (expand-file-name "plan.org" org-directory))
 
 ;; Global keys
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -21,7 +21,7 @@
   "org-mode"
   ("a" org-agenda "agenda" :exit t)
   ("c" org-capture "capture" :exit t)
-  ("l" org-store-link "store link" :exit t)
+  ("l" +find-ledger-file "ledger" :exit t)
   ("o" +open-org-dir "open dir" :exit t)
   ("f" +find-org "find file" :exit t)
   ("j" org-journal-new-entry "journal" :exit t))
@@ -30,6 +30,9 @@
   "Open `org-directory' in a dired buffer."
   (interactive)
   (find-file org-directory))
+(defun +find-ledger-file ()
+  (interactive)
+  (find-file (expand-file-name "Ledger/all.dat" org-directory)))
 
 
 ;; Startup options
@@ -190,18 +193,16 @@
 (with-eval-after-load 'org
   (require 'oc-bibtex)
   (require 'citeproc)
-  (setq org-cite-global-bibliography `(,(expand-file-name "~/Zotero/library.bib")))
+  (setq org-cite-global-bibliography `(,(expand-file-name "Research/all.bib" org-directory)))
   (setq org-cite-export-processors '((t csl))))
 
 (use-package ebib
   :defer t
   :bind (("C-c e" . ebib)
          :map ebib-index-mode-map
-         ("B" . ebib-biblio-import-doi)
-         :map biblio-selection-mode-map
-         ("e" . ebib-biblio-selection-import))
+         ("B" . ebib-biblio-import-doi))
   :custom
-  (ebib-preload-bib-files '("~/Zotero/library.bib"))
+  (ebib-preload-bib-files `(,(expand-file-name "Research/all.bib" org-directory)))
   :config
   (require 'ebib-biblio))
 
@@ -283,6 +284,18 @@
 ;;         org-roam-ui-follow t
 ;;         org-roam-ui-update-on-save t
 ;;         org-roam-ui-open-on-start t))
+
+
+;; I shall discuss this with the org devs later:
+
+;; (defvar +org-resource-dir (expand-file-name "~/MEGA"))
+;; (setenv "RESOURCE" +org-resource-dir)
+;; (advice-add 'org-store-link :around
+;;             (lambda (oldfun &rest args)
+;;               (let ((directory-abbrev-alist
+;;                      (append (list (cons +org-resource-dir "$RESOURCE"))
+;;                              directory-abbrev-alist)))
+;;                 (apply oldfun args))))
 
 
 (provide 'prelude-org)

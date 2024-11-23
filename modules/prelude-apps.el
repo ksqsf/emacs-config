@@ -214,4 +214,7 @@
           (chat . "You are a large language model and a conversation partner. Respond concisely.")
           (bug . "You are a large language model and a careful programmer. The supplied code doesn't work, or contains bugs. Describe each problem using only one sentence. Provide fixes without changing the old behavior."))))
 
+(use-package ledger-mode
+  :defer t)
+
 (provide 'prelude-apps)
