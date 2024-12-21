@@ -118,10 +118,11 @@
 
 ;; rime
 (use-package rime
-  :if (no-littering-expand-var-file-name "librime/dist")
   :custom
   (default-input-method "rime")
-  (rime-librime-root (no-littering-expand-var-file-name "librime/dist")))
+  :init
+  (when k|mac
+    (setq rime-emacs-module-header-root "/Applications/Emacs.app/Contents/Resources/include")))
 
 ;; use rime for search
 (use-package rime-regexp
