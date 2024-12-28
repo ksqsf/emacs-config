@@ -50,8 +50,8 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package smartparens
-  :commands (smartparens-mode))
+(use-package puni
+  :hook (prog-mode . puni-mode))
 
 
 ;;; Language Server Protocol
