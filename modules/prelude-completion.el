@@ -211,7 +211,9 @@
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (use-package corfu-terminal
-  :if (not (display-graphic-p))
+  :if (and (not (display-graphic-p))     ; not GUI
+           (not (fboundp 'tty-tip-mode)) ; not compiled with tty child frames
+           )
   :demand t
   :init
   (corfu-terminal-mode))
