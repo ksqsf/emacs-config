@@ -48,7 +48,7 @@
   :hook (prog-mode . hl-todo-mode))
 
 (use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :hook (c-common-mode . rainbow-delimiters-mode))
 
 (use-package puni
   :hook (prog-mode . puni-mode))
@@ -71,7 +71,8 @@
       (setq eglot-events-buffer-size 0)))
   (setq eglot-events-buffer-size 0)
 
-  (fset #'eglot--snippet-expansion-fn #'ignore)
+  ;; eglot expansion should be okay these days...
+  ;; (fset #'eglot--snippet-expansion-fn #'ignore)
 
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster))
 

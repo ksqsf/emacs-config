@@ -23,7 +23,8 @@
 (setq kill-do-not-save-duplicates t)
 
 ;; Move backups away
-(setq backup-directory-alist `(("." . ,(no-littering-expand-var-file-name "backups"))))
+(setq backup-directory-alist `(("/ssh:.*" . nil)
+                               ("." . ,(no-littering-expand-var-file-name "backups"))))
 
 ;; Don't backup by rename
 ;; By default, Emacs creates backup B for file A by renaming A into B, then write new contents to a new file A'.
@@ -100,6 +101,7 @@
   (setq undohist-directory (no-littering-expand-var-file-name "undohist"))
   (push "\\.git/COMMIT_EDITMSG\\'" undohist-ignored-files)
   (push "dict.yaml\\'" undohist-ignored-files)
+  (push "essay.txt\\'" undohist-ignored-files)
   (push tramp-file-name-regexp undohist-ignored-files)
   )
 (add-hook 'after-init-hook
@@ -142,6 +144,7 @@
         aw-scope 'frame))
 
 (use-package windmove
+  :disabled ;; conflict with org!
   :ensure nil
   :init
   (windmove-default-keybindings) ;; S-<arrow>
@@ -434,6 +437,10 @@ Useful for reading Python exception traces."
 (setq remote-file-name-inhibit-delete-by-moving-to-trash t)
 (setq remote-file-name-inhibit-cache 600)
 (setq remote-file-name-access-timeout 1)
+
+;; TRAMP shells
+(setq vterm-tramp-shells '(("docker" "/bin/sh")
+                           ("ssh" "/bin/bash")))
 
 ;; Do not query on exit if the term process has no running child process.
 (advice-add 'process-kill-buffer-query-function :before-until

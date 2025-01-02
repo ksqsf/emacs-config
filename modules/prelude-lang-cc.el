@@ -39,6 +39,7 @@ Mode."
   (define-key c-mode-base-map (kbd "RET") #'c-newline-and-indent)
 
   (use-package ccls
+    :disabled ;; default to clangd
     :config
     (setq ccls-sem-highlight-method 'font-lock)
     (with-eval-after-load 'eglot

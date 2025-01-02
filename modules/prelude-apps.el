@@ -217,4 +217,8 @@
 (use-package ledger-mode
   :defer t)
 
+(use-package dall-e-shell
+  :config
+  (setq dall-e-shell-openai-key #'gptel-api-key-from-auth-source))
+
 (provide 'prelude-apps)
