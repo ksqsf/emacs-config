@@ -131,6 +131,7 @@
 
 (defvar octo-mode-map
   (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-x 0") 'octo-delete-window)
     (define-key map (kbd "C-x 1") 'octo-delete-other-windows)
     (define-key map (kbd "C-x 2") 'octo-split-window-below)
     (define-key map (kbd "C-x 3") 'octo-split-window-right)
