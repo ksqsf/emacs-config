@@ -28,6 +28,16 @@
 ;;
 ;; - Focus on one gen window, so that window commands ONLY affect
 ;;   windows in the currently focused gen window.
+;;
+;; * Usage
+;;
+;; 1) Activate `octo-mode'.
+;;
+;; 2) Create your top-level layout, then call `octo-activate'.
+;;
+;; At this point, each child (internal or not) of the root window will
+;; be a Gen window. And, for example, `C-x 1' will be confined to the
+;; currently selected Gen window.
 
 ;;; Code:
 
@@ -54,7 +64,10 @@
 
 (defun octo-split-window-1 (fun)
   "Split window while maintaining GEN flags."
+  ;; Always create a Gen internal window when splitting a Gen leaf window.
   (let* ((win (selected-window))
+         (win-is-gen (octo--gen-p win))
+         (window-combination-limit (or win-is-gen window-combination-limit))
          (oldp (window-parent win))
          (new (funcall fun))
          (newp (window-parent win)))
@@ -97,7 +110,8 @@
      ((eq win gen)
       (message "No other windows to delete."))
      (t
-      (delete-other-windows-internal win gen)))))
+      (delete-other-windows-internal win gen)
+      (octo--set-gen win t)))))
 
 (defun octo-deactivate ()
   "Clear all GEN flags."
