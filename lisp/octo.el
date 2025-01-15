@@ -95,6 +95,8 @@
   ;; internal window.
   (let* ((win (selected-window))
          (parent (window-parent win)))
+    (when (eq win (octo--gen win))
+      (error "Cannot delete the sole window."))
     (when (<= (window-child-count parent) 2)
       (let ((sibling (or (window-next-sibling win)
                          (window-prev-sibling win))))
