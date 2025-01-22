@@ -221,4 +221,20 @@
   :config
   (setq dall-e-shell-openai-key #'gptel-api-key-from-auth-source))
 
+(use-package minuet
+  :vc (:fetcher github :repo "milanglacier/minuet-ai.el")
+  :bind
+  (("M-i" . #'minuet-show-suggestion)
+   ("M-I" . #'minuet-complete-with-minibuffer)
+   :map minuet-active-mode-map
+   ("M-p" . #'minuet-previous-suggestion)
+   ("M-n" . #'minuet-next-suggestion)
+   ("TAB" . #'minuet-accept-suggestion)
+   ("C-n" . #'minuet-accept-suggestion-line)
+   ("C-g" . #'minuet-dismiss-suggestion))
+  :config
+  (setq minuet-provider 'openai)
+  (minuet-set-optional-options minuet-openai-options :max_tokens 256)
+  (plist-put minuet-openai-options :api-key 'gptel-api-key-from-auth-source))
+
 (provide 'prelude-apps)
