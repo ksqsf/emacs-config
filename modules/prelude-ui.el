@@ -4,6 +4,9 @@
 (setq frame-resize-pixelwise t)
 (setq frame-inhibit-implied-resize t)
 
+;; TUI prettification
+(set-display-table-slot standard-display-table 5 ?│)  ;; ?┃ ?┆ ?┇
+
 ;; A quick way to toggle maximized
 (global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
 
