@@ -201,18 +201,35 @@
 (use-package debbugs
   :defer t)
 
+(defun openai-api-key ()
+  (gptel-api-key-from-auth-source "api.openai.com"))
+
+(defun deepseek-api-key ()
+  (gptel-api-key-from-auth-source "api.deepseek.com"))
+
 (use-package gptel
   :bind (("C-h RET" . gptel-send)  ;; C-u C-h RET for gptel-menu
          ("C-h C-h" . gptel))
-  :custom
-  (gptel-model "gpt-4o")
   :config
   (setq gptel-directives
         '((default . "You are a large language model living in Emacs and a helpful assistant. Respond concisely.")
           (programming . "You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note.")
           (writing . "You are a large language model and a writing assistant. Respond concisely.")
           (chat . "You are a large language model and a conversation partner. Respond concisely.")
-          (bug . "You are a large language model and a careful programmer. The supplied code doesn't work, or contains bugs. Describe each problem using only one sentence. Provide fixes without changing the old behavior."))))
+          (bug . "You are a large language model and a careful programmer. The supplied code doesn't work, or contains bugs. Describe each problem using only one sentence. Provide fixes without changing the old behavior.")))
+
+  ;; DeepSeek
+  (gptel-make-openai "DeepSeek"
+    :host "api.deepseek.com"
+    :endpoint "/chat/completions"
+    :stream t
+    :key #'deepseek-api-key
+    :models '(deepseek-chat deepseek-reasoner))
+
+  ;; Default backend and model
+  (setopt gptel-model 'deepseek-chat
+          gptel-backend (cdr (assoc "DeepSeek" gptel--known-backends))
+          gptel-default-mode 'org-mode))
 
 (use-package ledger-mode
   :defer t)
@@ -233,8 +250,18 @@
    ("C-n" . #'minuet-accept-suggestion-line)
    ("C-g" . #'minuet-dismiss-suggestion))
   :config
-  (setq minuet-provider 'openai)
-  (minuet-set-optional-options minuet-openai-options :max_tokens 256)
-  (plist-put minuet-openai-options :api-key 'gptel-api-key-from-auth-source))
+
+  (defun minuet-use-openai ()
+    "Use gpt-4o-mini for code auto-completion."
+    (interactive)
+    (setq minuet-provider 'openai)
+    (plist-put minuet-openai-options :api-key #'gptel-api-key-from-auth-source))
+
+  (defun minuet-use-deepseek ()
+    "Use deepseek-chat for code auto-completion."
+    (interactive)
+    (setq minuet-provider 'openai-fim-compatible)
+    (plist-put minuet-openai-fim-compatible-options :endpoint "https://api.deepseek.com/chat/completions")
+    (plist-put minuet-openai-fim-compatible-options :api-key #'deepseek-api-key)))
 
 (provide 'prelude-apps)
