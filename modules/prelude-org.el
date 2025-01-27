@@ -4,6 +4,8 @@
        org-src org-footnote org-macro ob
        org org-clock org-agenda org-capture)
 
+(add-hook 'org-mode-hook #'visual-line-mode)
+
 ;; This config is still fledging. I don't use org-roam (for now).
 
 ;; Basic user options and special org files
@@ -219,6 +221,25 @@
   (interactive)
   (let ((default-directory org-directory))
     (project-find-file)))
+
+
+;; I've somehow changed my mind about org-roam.  I can still keep the
+;; old file-based way of working, but org-roam *adds* the ability to
+;; link nodes.  So it's a win.
+(use-package org-roam
+  :custom
+  (org-roam-directory org-directory)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  (require 'org-roam-protocol))
 
 
 ;; (use-package org-roam
