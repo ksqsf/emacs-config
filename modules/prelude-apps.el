@@ -207,6 +207,9 @@
 (defun deepseek-api-key ()
   (gptel-api-key-from-auth-source "api.deepseek.com"))
 
+(defun anthropic-api-key ()
+  (gptel-api-key-from-auth-source "api.anthropic.com"))
+
 (use-package gptel
   :bind (("C-h RET" . gptel-send)  ;; C-u C-h RET for gptel-menu
          ("C-h C-h" . gptel))
@@ -226,9 +229,14 @@
     :key #'deepseek-api-key
     :models '(deepseek-chat deepseek-reasoner))
 
+  ;; Anthropic
+  (gptel-make-anthropic "Claude"
+    :stream t
+    :key #'anthropic-api-key)
+
   ;; Default backend and model
-  (setopt gptel-model 'deepseek-chat
-          gptel-backend (cdr (assoc "DeepSeek" gptel--known-backends))
+  (setopt gptel-model 'claude-3-5-sonnet-20241022
+          gptel-backend (cdr (assoc "Claude" gptel--known-backends))
           gptel-default-mode 'org-mode))
 
 (use-package ledger-mode
@@ -262,6 +270,14 @@
     (interactive)
     (setq minuet-provider 'openai-fim-compatible)
     (plist-put minuet-openai-fim-compatible-options :endpoint "https://api.deepseek.com/chat/completions")
-    (plist-put minuet-openai-fim-compatible-options :api-key #'deepseek-api-key)))
+    (plist-put minuet-openai-fim-compatible-options :api-key #'deepseek-api-key))
+
+  (defun minuet-use-claude ()
+    "Use claude-3.5-sonnet for code auto-completion."
+    (interactive)
+    (setq minuet-provider 'claude)
+    (plist-put minuet-claude-options :api-key #'anthropic-api-key))
+
+  (minuet-use-claude))
 
 (provide 'prelude-apps)
