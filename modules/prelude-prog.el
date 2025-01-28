@@ -15,7 +15,6 @@
 (when (boundp 'treesit-extra-load-path)
   (add-to-list 'treesit-extra-load-path (no-littering-expand-var-file-name "tree-sitter")))
 
-;; Disable tree-sitter for better portability.
 ;; (setq major-mode-remap-alist
 ;;       '((python-mode . python-ts-mode)   ;; python-ts-mode is better than python-mode at indentation
 ;;         ))

@@ -388,7 +388,11 @@ Useful for reading Python exception traces."
   :ensure nil
   :if (version< "29.0" emacs-version)
   :config
-  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode))
+  (setopt dabbrev-ignored-buffer-modes
+          (append dabbrev-ignored-buffer-modes
+                  '(pdf-view-mode
+                    magit-diff-mode
+                    gdb-inferior-io-mode))))
 
 (defun sudoedit ()
   "Edit the current file using Sudo."
