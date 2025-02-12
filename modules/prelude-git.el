@@ -8,10 +8,12 @@
   (magit-clone-set-remote.pushDefault t)
   (magit-clone-default-directory (expand-file-name (expand-file-name "src/Clone/" (getenv "HOME"))))
   (magit-refresh-status-buffer nil)
-  (magit-git-executable "/usr/bin/git")
   (magit-display-buffer 'display-buffer) ;; I've done my own customization
   :bind (("C-c g" . magit-file-dispatch))
-  :hook ((magit-status-mode magit-diff-mode) . buffer-disable-undo))
+  :hook ((magit-status-mode magit-diff-mode) . buffer-disable-undo)
+  :config
+  (when k|mac
+    (setq magit-git-executable "/usr/local/bin/git")))
 
 (use-package forge
   :after magit
