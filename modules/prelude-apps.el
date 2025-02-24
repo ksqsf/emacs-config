@@ -235,9 +235,18 @@
     :key #'anthropic-api-key)
 
   ;; Default backend and model
-  (setopt gptel-model 'claude-3-5-sonnet-20241022
+  (push '(claude-3-7-sonnet-20250219
+          :description "Highest level of intelligence and capability"
+          :capabilities (media tool-use cache)
+          :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
+          :context-window 200
+          :input-cost 3
+          :output-cost 15
+          :cutoff-date "2024-04")
+        gptel--anthropic-models)
+  (setopt gptel-model 'claude-3-7-sonnet-20250219
           gptel-backend (cdr (assoc "Claude" gptel--known-backends))
-          gptel-default-mode 'org-mode))
+          gptel-default-mode 'markdown-mode))
 
 (use-package ledger-mode
   :defer t)
