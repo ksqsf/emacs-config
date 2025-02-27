@@ -295,4 +295,11 @@
 
   (minuet-use-claude))
 
+;; M-x world-clock
+(setq world-clock-list
+      '(("Asia/Chongqing" "China")
+        ("Asia/Tokyo" "Japan")
+        ("Europe/Berlin" "Germany")
+        ("Europe/London" "UK")))
+
 (provide 'prelude-apps)
