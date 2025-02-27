@@ -287,6 +287,12 @@
     (setq minuet-provider 'claude)
     (plist-put minuet-claude-options :api-key #'anthropic-api-key))
 
+  (defun minuet-use-deepseek-coder-v2 ()
+    "use ollama open-ai-fim deepseek-coder-v2"
+    (interactive)
+    (setq minuet-provider 'openai-fim-compatible)
+    (plist-put minuet-openai-fim-compatible-options :endpoint "http://127.0.0.1:11434/v1/completions"))
+
   (minuet-use-claude))
 
 (provide 'prelude-apps)
