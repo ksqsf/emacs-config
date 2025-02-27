@@ -10,15 +10,10 @@ last section.
 This configuration supports macOS, and Linux.  It should work on
 Windows for the most part.
 
-The following Emacs versions are explicitly supported.  NOTE: the
-Emacs version shipped in the current Debian stable (since 13 "trixie")
-will be supported.
+The following Emacs versions are supported:
 
-| Version | Notes                                                    |
-|---------+----------------------------------------------------------|
-|      29 | the current stable version; will be shipped in Debian 13 |
-|      30 | the current "testing" version                            |
-|      31 | the current development version                          |
+- Emacs 30, the current stable version
+- Emacs 31, the current development version
 
 ** Structure
 

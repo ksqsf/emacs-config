@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 ;; I don't support any version other than what I use.
-(when (version< emacs-version "29")
-  (warn "This configuration is only tested on Emacs 29"))
+(when (version< emacs-version "30")
+  (warn "This configuration is only tested on Emacs 30"))
 
 ;; Directories.
 (defvar prelude-lisp-dir (expand-file-name "lisp" user-emacs-directory)
