@@ -5,6 +5,7 @@
   :iload (magit-base magit-git magit-mode magit-process magit-status magit-submodule magit)
   :bind (("C-x g" . magit-status))
   :custom
+  (magit-wip-mode +1)
   (magit-clone-set-remote.pushDefault t)
   (magit-clone-default-directory (expand-file-name (expand-file-name "src/Clone/" (getenv "HOME"))))
   (magit-refresh-status-buffer nil)
