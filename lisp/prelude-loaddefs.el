@@ -196,6 +196,47 @@ Set up the Lojban language environment." t)
 
 ;;;***
 
+;;;### (autoloads nil "octo" "octo.el" "239a8784e1aa63ffba5aaa883d1d083d")
+;;; Generated autoloads from octo.el
+
+(defvar octo-mode nil "\
+Non-nil if Octo mode is enabled.
+See the `octo-mode' command
+for a description of this minor mode.")
+
+(custom-autoload 'octo-mode "octo" nil)
+
+(autoload 'octo-mode "octo" "\
+A global minor mode with custom window management key bindings.
+
+This is a global minor mode.  If called interactively, toggle the `Octo
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='octo-mode)'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+\\{octo-mode-map}
+
+\(fn &optional ARG)" t)
+
+;;;### (autoloads "actual autoloads are elsewhere" "octo" "octo.el"
+;;;;;;  (26519 34531 753320 657000))
+;;; Generated autoloads from octo.el
+
+(register-definition-prefixes "octo" '("octo-"))
+
+;;;***
+
+;;;***
+
 ;;;### (autoloads nil "region-mark" "region-mark.el" (0 0 0 0))
 ;;; Generated autoloads from region-mark.el
 
