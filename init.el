@@ -72,6 +72,7 @@
 (require 'prelude-mail)
 (require 'prelude-apps)
 (require 'prelude-irc)
+(require 'prelude-ai)
 
 ;; (require 'prelude-evil)
 ;;(require 'prelude-nix)
