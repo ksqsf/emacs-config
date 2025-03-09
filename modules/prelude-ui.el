@@ -38,6 +38,7 @@
     (setq doom-modeline-project-detection 'project)))
 
 (use-package moody
+  :if (display-graphic-p)
   :config
   (moody-replace-mode-line-front-space)
   (moody-replace-mode-line-buffer-identification)
