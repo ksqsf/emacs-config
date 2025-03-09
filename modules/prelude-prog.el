@@ -73,7 +73,9 @@
   ;; eglot expansion should be okay these days...
   ;; (fset #'eglot--snippet-expansion-fn #'ignore)
 
-  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster))
+  ;; The buster conflicts with corfu, causing repeated insertions.
+  ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+  )
 
 ;;
 ;; lsp-mode is powerful and cool!  but it has severe performance
