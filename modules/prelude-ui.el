@@ -28,6 +28,7 @@
 
 ;; Mode line
 (use-package doom-modeline
+  :disabled   ;; Sometimes "C-SPC" & Down will lose the region. Seems related to doom-modeline.
   :hook ((after-init . doom-modeline-mode))
   :init
   (setq doom-modeline-minor-modes nil)
@@ -37,16 +38,11 @@
     (setq doom-modeline-project-detection 'project)))
 
 (use-package moody
-  :disabled
   :config
-  (defun prelude-activate-moody (&optional disactivate)
-    "If DISACTIVATE is t, moody is disabled."
-    (setq arg (or disactivate nil))
-    (moody-replace-mode-line-buffer-identification arg)
-    (moody-replace-vc-mode arg)
-    (moody-replace-eldoc-minibuffer-message-function arg))
-  (setq x-underline-at-descent-line t)
-  (prelude-activate-moody t))
+  (moody-replace-mode-line-front-space)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode)
+  (moody-replace-eldoc-minibuffer-message-function))
 
 ;; I'm the winner ;-)
 (use-package winner
