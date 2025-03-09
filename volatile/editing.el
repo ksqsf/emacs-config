@@ -283,3 +283,9 @@ The results are stored in three buffers:
       (hash-set-insert (hash-set-difference set1 set2)))
     (with-current-buffer (get-buffer-create "*compare:only-in-b*")
       (hash-set-insert (hash-set-difference set2 set1)))))
+
+(defun sort-fields-by-column-2 ()
+  (interactive)
+  (mark-paragraph)
+  (next-line)
+  (sort-fields 2 (region-beginning) (region-end)))
