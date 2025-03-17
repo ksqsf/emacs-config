@@ -12,6 +12,10 @@
   (require 'gptel)
   (gptel-api-key-from-auth-source "api.anthropic.com"))
 
+(defun tavily-api-key ()
+  (require 'gptel)
+  (gptel-api-key-from-auth-source "api.tavily.com"))
+
 (use-package gptel
   :bind (("C-h RET" . gptel-send)  ;; C-u C-h RET for gptel-menu
          ("C-h C-h" . gptel))
@@ -24,12 +28,9 @@
           (bug . "You are a large language model and a careful programmer. The supplied code doesn't work, or contains bugs. Describe each problem using only one sentence. Provide fixes without changing the old behavior.")))
 
   ;; DeepSeek
-  (gptel-make-openai "DeepSeek"
-    :host "api.deepseek.com"
-    :endpoint "/chat/completions"
+  (gptel-make-deepseek "DeepSeek"
     :stream t
-    :key #'deepseek-api-key
-    :models '(deepseek-chat deepseek-reasoner))
+    :key #'deepseek-api-key)
 
   ;; Anthropic
   (gptel-make-anthropic "Claude"
@@ -37,18 +38,38 @@
     :key #'anthropic-api-key)
 
   ;; Default backend and model
-  (push '(claude-3-7-sonnet-20250219
-          :description "Highest level of intelligence and capability"
-          :capabilities (media tool-use cache)
-          :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
-          :context-window 200
-          :input-cost 3
-          :output-cost 15
-          :cutoff-date "2024-04")
-        gptel--anthropic-models)
   (setopt gptel-model 'claude-3-7-sonnet-20250219
           gptel-backend (cdr (assoc "Claude" gptel--known-backends))
-          gptel-default-mode 'markdown-mode))
+          gptel-default-mode 'markdown-mode)
+
+  (gptel-make-tool
+   :name "create_python_repl"
+   :function (lambda ()
+               (run-python nil t)
+               (pop-to-buffer (python-shell-get-buffer)))
+   :description "Create a new python repl for this session"
+   :args nil
+   :category "emacs")
+
+  (gptel-make-tool
+   :name "send_python_to_repl"
+   :function (lambda (code)
+               (python-shell-send-string code))
+   :args (list '(:name "code"
+                       :type string
+                       :description "python code to execute"))
+   :description "Send some python code to the python repl for this session and execute it"
+   :category "emacs")
+
+  (gptel-make-tool
+   :category "web"
+   :name "search"
+   :function (lambda (keyword)
+               (tavily-search keyword))
+   :description "Search the Internet"
+   :args (list '(:name "keyword"
+                       :type string
+                       :description "The keyword to search"))))
 
 (use-package dall-e-shell
   :config
@@ -94,5 +115,23 @@
   (chatgpt-shell-openai-key #'openai-api-key)
   (chatgpt-shell-deepseek-key #'deepseek-api-key))
 
+(defun tavily-search (query &optional search-depth max-results)
+  "Perform a search using the Tavily API and return results as JSON string.
+API-KEY is your Tavily API key.
+QUERY is the search query string.
+Optional SEARCH-DEPTH is either \"basic\" (default) or \"advanced\".
+Optional MAX-RESULTS is the maximum number of results (default 10)."
+  (let* ((url "https://api.tavily.com/search")
+         (search-depth (or search-depth "basic"))
+         (max-results (or max-results 10))
+         (request-data
+          `(("api_key" . ,(tavily-api-key))
+            ("query" . ,query)
+            ("search_depth" . ,search-depth)
+            ("max_results" . ,max-results))))
+    (plz 'post url
+         :headers '(("Content-Type" . "application/json"))
+         :body (json-encode request-data)
+         :as 'string)))
 
 (provide 'prelude-ai)
