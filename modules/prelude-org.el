@@ -206,7 +206,8 @@
   :custom
   (ebib-preload-bib-files `(,(expand-file-name "Research/all.bib" org-directory)))
   :config
-  (require 'ebib-biblio))
+  (require 'ebib-biblio)
+  (setq ebib-reading-list-file (expand-file-name "Read.org" org-directory)))
 
 
 (use-package org-preview-html
