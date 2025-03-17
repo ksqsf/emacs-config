@@ -69,7 +69,17 @@
    :description "Search the Internet"
    :args (list '(:name "keyword"
                        :type string
-                       :description "The keyword to search"))))
+                       :description "The keyword to search")))
+
+  (gptel-make-tool
+   :category "web"
+   :name "fetch_url_text"
+   :description "Fetch the plaintext contents from an HTML page specified by its URL"
+   :args (list '(:name "url"
+                       :type string
+                       :description "The url of the web page"))
+   :function (lambda (url)
+               (fetch-url-text url))))
 
 (use-package dall-e-shell
   :config
@@ -120,10 +130,10 @@
 API-KEY is your Tavily API key.
 QUERY is the search query string.
 Optional SEARCH-DEPTH is either \"basic\" (default) or \"advanced\".
-Optional MAX-RESULTS is the maximum number of results (default 10)."
+Optional MAX-RESULTS is the maximum number of results (default 5)."
   (let* ((url "https://api.tavily.com/search")
          (search-depth (or search-depth "basic"))
-         (max-results (or max-results 10))
+         (max-results (or max-results 5))
          (request-data
           `(("api_key" . ,(tavily-api-key))
             ("query" . ,query)
@@ -133,5 +143,16 @@ Optional MAX-RESULTS is the maximum number of results (default 10)."
          :headers '(("Content-Type" . "application/json"))
          :body (json-encode request-data)
          :as 'string)))
+
+(defun fetch-url-text (url)
+  "Fetch text content from URL."
+  (interactive "sEnter URL: ")
+  (require 'plz)
+  (require 'shr)
+  (let ((html (plz 'get url :as 'string)))
+    (with-temp-buffer
+      (insert html)
+      (shr-render-region (point-min) (point-max))
+      (buffer-substring-no-properties (point-min) (point-max)))))
 
 (provide 'prelude-ai)
