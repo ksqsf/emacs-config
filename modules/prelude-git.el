@@ -64,4 +64,12 @@ This function returns nil if it cannot parse REMOTE."
   (let ((url (buffer-substring (point) (pos-eol))))
     (browse-url (s-trim url))))
 
+(defun open-gitlab-mergereq ()
+  (interactive)
+  (magit-process-buffer)
+  (goto-char (point-max))
+  (re-search-backward "https://[^ ]+/merge_requests/[^ ]+")
+  (let ((url (buffer-substring (point) (pos-eol))))
+    (browse-url (s-trim url))))
+
 (provide 'prelude-git)
