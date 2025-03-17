@@ -64,9 +64,10 @@
   (gptel-make-tool
    :category "web"
    :name "search"
-   :function (lambda (keyword)
-               (tavily-search keyword))
-   :description "Search the Internet"
+   :async t
+   :function (lambda (cb keyword)
+               (tavily-search-async cb keyword))
+   :description "Search the Internet; If you used any search results, be sure to include the references in your response."
    :args (list '(:name "keyword"
                        :type string
                        :description "The keyword to search")))
@@ -74,12 +75,13 @@
   (gptel-make-tool
    :category "web"
    :name "fetch_url_text"
+   :async t
    :description "Fetch the plaintext contents from an HTML page specified by its URL"
    :args (list '(:name "url"
                        :type string
                        :description "The url of the web page"))
-   :function (lambda (url)
-               (fetch-url-text url))))
+   :function (lambda (cb url)
+               (fetch-url-text-async cb url))))
 
 (use-package dall-e-shell
   :config
@@ -125,7 +127,7 @@
   (chatgpt-shell-openai-key #'openai-api-key)
   (chatgpt-shell-deepseek-key #'deepseek-api-key))
 
-(defun tavily-search (query &optional search-depth max-results)
+(defun tavily-search-async (callback query &optional search-depth max-results)
   "Perform a search using the Tavily API and return results as JSON string.
 API-KEY is your Tavily API key.
 QUERY is the search query string.
@@ -140,19 +142,22 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
             ("search_depth" . ,search-depth)
             ("max_results" . ,max-results))))
     (plz 'post url
-         :headers '(("Content-Type" . "application/json"))
-         :body (json-encode request-data)
-         :as 'string)))
+      :headers '(("Content-Type" . "application/json"))
+      :body (json-encode request-data)
+      :as 'string
+      :then (lambda (result) (funcall callback result)))))
 
-(defun fetch-url-text (url)
+(defun fetch-url-text-async (callback url)
   "Fetch text content from URL."
   (interactive "sEnter URL: ")
   (require 'plz)
   (require 'shr)
-  (let ((html (plz 'get url :as 'string)))
-    (with-temp-buffer
-      (insert html)
-      (shr-render-region (point-min) (point-max))
-      (buffer-substring-no-properties (point-min) (point-max)))))
+  (plz 'get url
+    :as 'string
+    :then (lambda (html)
+            (with-temp-buffer
+              (insert html)
+              (shr-render-region (point-min) (point-max))
+              (funcall callback (buffer-substring-no-properties (point-min) (point-max)))))))
 
 (provide 'prelude-ai)
