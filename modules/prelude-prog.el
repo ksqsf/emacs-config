@@ -77,6 +77,11 @@
   ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   )
 
+(use-package eglot-booster
+  :vc (:fetcher github :repo "jdtsmith/eglot-booster")
+  :after eglot
+  :config (eglot-booster-mode))
+
 ;;
 ;; lsp-mode is powerful and cool!  but it has severe performance
 ;; problems. not lsp-mode but emacs itself is to blame.
