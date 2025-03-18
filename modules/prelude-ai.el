@@ -76,7 +76,7 @@
    :category "web"
    :name "fetch_url_text"
    :async t
-   :description "Fetch the plaintext contents from an HTML page specified by its URL"
+   :description "Fetch the Markdown contents from an HTML page specified by its URL"
    :args (list '(:name "url"
                        :type string
                        :description "The url of the web page"))
@@ -149,7 +149,6 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
 
 (defun fetch-url-text-async (callback url)
   "Fetch text content from URL."
-  (interactive "sEnter URL: ")
   (require 'plz)
   (require 'shr)
   (plz 'get url
@@ -158,6 +157,19 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
             (with-temp-buffer
               (insert html)
               (shr-render-region (point-min) (point-max))
+              (shr-link-to-markdown)
               (funcall callback (buffer-substring-no-properties (point-min) (point-max)))))))
+
+(defun shr-link-to-markdown ()
+  "Replace all shr-link in the current buffer to markdown format"
+  (goto-char (point-min))
+  (while (setq prop (text-property-search-forward 'shr-url))
+    (let* ((start (prop-match-beginning prop))
+           (end (prop-match-end prop))
+           (text (buffer-substring-no-properties start end))
+           (link (prop-match-value prop)))
+      (delete-region start end)
+      (goto-char start)
+      (insert (format "[%s](%s)" text link)))))
 
 (provide 'prelude-ai)
