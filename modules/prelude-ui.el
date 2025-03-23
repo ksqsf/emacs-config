@@ -328,7 +328,7 @@
 
 ;; Preferred dark and light themes.
 (use-package one-themes :defer t)
-(use-package catppuccin-theme :defer t)
+; (use-package catppuccin-theme :defer t)
 (use-package dracula-theme :defer t)
 (use-package doom-themes :defer t)
 
@@ -471,6 +471,7 @@ system's dark or light variant."
   :hook (after-init . global-hl-line-mode))
 
 (use-package solaire-mode
+  :disabled
   :hook (after-init . solaire-global-mode))
 
 

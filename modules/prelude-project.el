@@ -28,6 +28,7 @@
         (vterm current-prefix-arg)))))
 
 (use-package projection
+  :defer t
   :hook (after-init . global-projection-hook-mode)
   :bind-keymap
   ("C-x P" . projection-map)

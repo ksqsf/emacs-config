@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 ;; Must-have.
-(setq word-wrap-by-category t)
+(setopt word-wrap-by-category t)
 
 ;; Table font for perfect alignment.
 ;; Warning: this may not work on different font settings.
@@ -118,6 +118,7 @@
 
 ;; rime
 (use-package rime
+  :defer t
   :custom
   (default-input-method "rime")
   :init

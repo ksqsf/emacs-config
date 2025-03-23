@@ -1,4 +1,5 @@
 (use-package swift-mode
+  :mode ((".swift\\'" . swift-mode))
   :custom
   (swift-mode:basic-offset 2))
 

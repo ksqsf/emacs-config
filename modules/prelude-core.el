@@ -5,7 +5,6 @@
 (setq confirm-kill-emacs 'yes-or-no-p)
 
 ;; GC.
-(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 32 1024 1024))))
 (add-hook 'focus-out-hook #'garbage-collect)
 
 ;; auto revert everything, including dired.

@@ -5,10 +5,6 @@
   (message "Starting from a dump file...")
   (setq load-path +saved-load-path-during-dump))
 
-;; This is a dangerous value, and will be reset after Emacs is
-;; initialized.
-(setq gc-cons-threshold (* 1024 1024 1024))
-
 ;; Set package archives. Possibly set mirrors.
 (defconst +i-am-in-china+ nil)
 (with-eval-after-load 'package
@@ -25,7 +21,8 @@
 (setq default-frame-alist
       '((height . 50)
         (width . 120)
-        (vertical-scroll-bars . nil)))
+        (vertical-scroll-bars . nil)
+        (tool-bar-mode . nil)))
 
 ;; Must be set before loading use-package
 (setq use-package-enable-imenu-support t)

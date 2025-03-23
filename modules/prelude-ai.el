@@ -84,11 +84,13 @@
                (fetch-url-text-async cb url))))
 
 (use-package dall-e-shell
+  :commands (dall-e-shell)
   :config
   (setq dall-e-shell-openai-key #'gptel-api-key-from-auth-source))
 
 (use-package minuet
   :vc (:fetcher github :repo "milanglacier/minuet-ai.el")
+  :defer t
   :bind
   (("M-i" . #'minuet-show-suggestion)
    ("M-I" . #'minuet-complete-with-minibuffer)
@@ -122,6 +124,7 @@
   (minuet-use-claude))
 
 (use-package chatgpt-shell
+  :commands (chatgpt-shell)
   :custom
   (chatgpt-shell-anthropic-key #'anthropic-api-key)
   (chatgpt-shell-openai-key #'openai-api-key)

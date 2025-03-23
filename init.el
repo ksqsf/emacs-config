@@ -3,6 +3,14 @@
 (when (version< emacs-version "30")
   (warn "This configuration is only tested on Emacs 30"))
 
+;; Hacks for speeding up initialization.
+(defconst +file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+(setq gc-cons-threshold most-positive-fixnum)
+;; Packages should have been made available.  Disable it to speed up
+;; installing packages during initialization.
+(setq package-quickstart nil)
+
 ;; Directories.
 (defvar prelude-lisp-dir (expand-file-name "lisp" user-emacs-directory)
   "This directory contains third-party Lisp files.")
@@ -15,10 +23,6 @@
   from .el to whatever else.")
 (add-to-list 'load-path prelude-lisp-dir)
 (add-to-list 'load-path prelude-modules-dir)
-
-;; Packages should have been made available.  Disable it to speed up
-;; installing packages during initialization.
-(setq package-quickstart nil)
 
 ;; Replace Emacs paths early -- before doing anything.
 (use-package no-littering
@@ -85,6 +89,9 @@
 ;; Customization.
 (load custom-file t)
 
+;; End of hacks.
+(setq file-name-handler-alist +file-name-handler-alist)
+(setq gc-cons-threshold 16777216) ;; 16mb
 ;; Re-enable package-quickstart.
 (setq package-quickstart t)
 
