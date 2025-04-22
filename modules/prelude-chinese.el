@@ -154,7 +154,10 @@
   (emt-ensure))
 
 (defun opencc-on-region (beg end conf)
-  (shell-command-on-region beg end (format "opencc -c /usr/local/share/opencc/%s.json" conf)))
+  (let ((prefix (if (file-exists-p "/usr/local/share/opencc/s2t.json")
+                    "/usr/local/share/opencc"
+                  "/usr/share/opencc")))
+    (shell-command-on-region beg end (format "opencc -c %s/%s.json" prefix conf))))
 
 (defun opencc-t2s (beg end)
   "Use opencc to convert trad to simp on region."
