@@ -289,3 +289,9 @@ The results are stored in three buffers:
   (mark-paragraph)
   (next-line)
   (sort-fields 2 (region-beginning) (region-end)))
+
+(defun deploy-weasel ()
+  (interactive)
+  (let ((default-directory "~/src/Clone/plum/"))
+    (with-environment-variables (("rime_dir" "/mnt/d/Rime/"))
+      (shell-command "bash rime-install rimeinn/rime-moran@main && \"/mnt/c/Program Files/Rime/weasel-0.16.3/WeaselDeployer.exe\" /deploy &"))))
