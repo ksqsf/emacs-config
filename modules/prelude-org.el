@@ -113,8 +113,6 @@
 
 (use-package deft
   :after org
-  :bind
-  ("C-c n d" . deft)
   :config
   (setopt deft-recursive t
           deft-use-filter-string-for-filename t
@@ -235,6 +233,7 @@
          ("C-c n g" . org-roam-graph)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n c" . org-roam-capture)
+         ("C-c n d" . org-roam-dailies-goto-today)
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
