@@ -16,6 +16,14 @@
   (require 'gptel)
   (gptel-api-key-from-auth-source "api.tavily.com"))
 
+(defun gemini-api-key ()
+  (require 'gptel)
+  (gptel-api-key-from-auth-source "aistudio.google.com"))
+
+(defun openrouter-api-key ()
+  (require 'gptel)
+  (gptel-api-key-from-auth-source "api.openrouter.ai"))
+
 (use-package gptel
   :bind (("C-h RET" . gptel-send)  ;; C-u C-h RET for gptel-menu
          ("C-h C-h" . gptel))
@@ -36,6 +44,22 @@
   (gptel-make-anthropic "Claude"
     :stream t
     :key #'anthropic-api-key)
+
+  ;; Gemini -- use OpenRouter instead
+  ;; (gptel-make-gemini "Gemini"
+  ;;   :stream t
+  ;;   :key #'gemini-api-key)
+
+  ;; OpenRouter
+  (gptel-make-openai "OpenRouter"
+    :host "openrouter.ai"
+    :endpoint "/api/v1/chat/completions"
+    :stream t
+    :key #'openrouter-api-key
+    :models '(x-ai/grok-3-mini-beta
+              x-ai/grok-3-beta
+              google/gemini-2.5-pro-preview-03-25
+              deepseek/deepseek-r1))
 
   ;; Default backend and model
   (setopt gptel-model 'claude-3-7-sonnet-20250219
