@@ -22,4 +22,7 @@
   (push ".tags" grep-find-ignored-files)
   (push ".git" grep-find-ignored-files))
 
+(with-eval-after-load 'vterm
+  (keymap-set vterm-mode-map "M-s" search-map))
+
 (provide 'prelude-search)
