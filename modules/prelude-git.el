@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+(with-eval-after-load 'diff-mode
+  (keymap-unset diff-mode-map "M-o"))
+
 (use-package magit
   :defer t
   :iload (magit-base magit-git magit-mode magit-process magit-status magit-submodule magit)
