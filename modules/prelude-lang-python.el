@@ -23,6 +23,11 @@
   (when (eq prelude-lsp-client 'lsp-mode)
     (use-package lsp-pyright)))
 
+;; Integrate with uv
+(use-package uv-mode
+  :defer t
+  :hook (python-mode . uv-mode-auto-activate-hook))
+
 ;; (use-package jupyter :defer t)
 
 (provide 'prelude-lang-python)
