@@ -471,4 +471,9 @@ Useful for reading Python exception traces."
 ;; Indicate the depth of recursive editing.
 (minibuffer-depth-indicate-mode +1)
 
+;; Use isearch in minibuffre
+;; This enables rime in isearch and also other navigational keys.
+(use-package isearch-mb
+  :hook (after-init . isearch-mb-mode))
+
 (provide 'prelude-core)
