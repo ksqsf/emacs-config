@@ -231,7 +231,7 @@
          ("C-c n g" . org-roam-graph)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n c" . org-roam-capture)
-         ("C-c n d" . org-roam-dailies-goto-today)
+         ("C-c n d" . org-roam-dailies-goto-date)
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
