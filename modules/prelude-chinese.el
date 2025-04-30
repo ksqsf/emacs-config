@@ -122,6 +122,16 @@
   :custom
   (default-input-method "rime")
   :init
+  (defun rime-menu ()
+    (interactive)
+    (let ((last-input-event (aref (kbd "C-`") 0)))
+      (rime-send-keybinding)))
+  (defun rime-moran-trad ()
+    (interactive)
+    (rime-lib-set-option "simplification" nil))
+  (defun rime-moran-simp ()
+    (interactive)
+    (rime-lib-set-option "simplification" t))
   (when k|mac
     (setq rime-emacs-module-header-root "/Applications/Emacs.app/Contents/Resources/include")))
 
