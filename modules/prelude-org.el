@@ -226,8 +226,6 @@
 ;; old file-based way of working, but org-roam *adds* the ability to
 ;; link nodes.  So it's a win.
 (use-package org-roam
-  :custom
-  (org-roam-directory org-directory)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n g" . org-roam-graph)
@@ -237,6 +235,17 @@
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
+
+  ;; Allows interlinking to any org file
+  (setq org-roam-directory org-directory)
+
+  ;; But only create it under ~/org/Notes
+  (setq org-roam-capture-templates
+        '(("d" "default" plain "%?"
+           :target (file+head "Roam/%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n")
+           :unnarrowed t)))
+
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode)
   (require 'org-roam-protocol))
