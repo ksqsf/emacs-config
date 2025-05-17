@@ -468,7 +468,7 @@ system's dark or light variant."
   (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab)))
 
 (use-package hl-line
-  :hook (after-init . global-hl-line-mode))
+  :hook ((prog-mode yaml-ts-mode yaml-mode) . hl-line-mode))
 
 (use-package solaire-mode
   :disabled
