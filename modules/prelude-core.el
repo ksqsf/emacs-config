@@ -396,7 +396,9 @@ Useful for reading Python exception traces."
 (defun sudoedit ()
   "Edit the current file using Sudo."
   (interactive)
-  (find-file (concat "/sudo::" buffer-file-name)))
+  (setq buf (current-buffer))
+  (find-file (concat "/sudo::" buffer-file-name))
+  (kill-buffer buf))
 
 (use-package adaptive-wrap
   :init
