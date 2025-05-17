@@ -11,6 +11,10 @@
 ;; Basic user options and special org files
 (setq org-directory "~/org")
 (setq org-agenda-files '("~/org"))
+(setq org-agenda-span 13)
+(setq org-agenda-start-day "-3d")
+(setq org-agenda-todo-ignore-scheduled 'future)
+(setq org-agenda-show-future-repeats nil)
 ;; (setq org-default-notes-file "~/org/notes.org")
 ;; (setq +org-journal-dir (expand-file-name "journal" org-directory))
 ;; (setq +org-plan-file (expand-file-name "plan.org" org-directory))
