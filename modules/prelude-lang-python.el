@@ -7,7 +7,7 @@
   (setq doom-modeline-env-python-executable "python3")
   (setq python-shell-interpreter "python3")
   (setq python-shell-interpreter-args "-i")
-  (setq python-shell-dedicated 'project)
+  (setq python-shell-dedicated 'buffer)
   (setq gud-pdb-command-name "python3 -m pdb")
   :hook
   (python-mode . k|lsp-ensure)
