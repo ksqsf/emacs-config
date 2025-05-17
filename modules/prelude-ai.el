@@ -160,6 +160,7 @@ API-KEY is your Tavily API key.
 QUERY is the search query string.
 Optional SEARCH-DEPTH is either \"basic\" (default) or \"advanced\".
 Optional MAX-RESULTS is the maximum number of results (default 5)."
+  (require 'plz)
   (let* ((url "https://api.tavily.com/search")
          (search-depth (or search-depth "basic"))
          (max-results (or max-results 5))
