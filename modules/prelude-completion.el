@@ -78,6 +78,10 @@
   :config
   (marginalia-mode))
 
+(use-package nerd-icons-completion
+  :config
+  (nerd-icons-completion-mode))
+
 (use-package embark
   :bind
   (("C-," . embark-act)
@@ -204,7 +208,13 @@
   ;; Let RET be newlines.
   (define-key corfu-map (kbd "RET") nil))
 
+(use-package nerd-icons-corfu
+  :after (corfu)
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
 (use-package kind-icon
+  :disabled
   :after (corfu)
   :custom
   (kind-icon-default-face 'corfu-default)
