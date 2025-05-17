@@ -4,7 +4,7 @@
 (use-package project
   :ensure nil
   :bind (:map project-prefix-map
-              ("s" . project-vterm))
+              ("s" . eat-project))
   :custom
   (project-buffers-viewer 'project-list-buffers-buffer-ibuffer)
   (project-switch-use-entire-map nil)
@@ -163,44 +163,45 @@ installed to work."
                      args))
             (t (error "Packages `ripgrep' and `rg' are not available")))))
 
-  ;; PTerm related
-  (defun projectile-run-pterm-other-window (&optional arg)
-    "Invoke `pterm' in the project's root.
+;;   ;; PTerm related
+;;   (defun projectile-run-pterm-other-window (&optional arg)
+;;     "Invoke `pterm' in the project's root.
 
-Switch to the project specific term buffer if it already exists.
+;; Switch to the project specific term buffer if it already exists.
 
-Use a prefix argument ARG to indicate creation of a new process instead."
-    (interactive "P")
-    (projectile--pterm arg 'other-window))
+;; Use a prefix argument ARG to indicate creation of a new process instead."
+;;     (interactive "P")
+;;     (projectile--pterm arg 'other-window))
 
-  (defun projectile-run-pterm (&optional arg)
-    "Invoke `pterm' in the project's root.
+;;   (defun projectile-run-pterm (&optional arg)
+;;     "Invoke `pterm' in the project's root.
 
-Switch to the project specific term buffer if it already exists.
+;; Switch to the project specific term buffer if it already exists.
 
-Use a prefix argument ARG to indicate creation of a new process instead."
-    (interactive "P")
-    (projectile--pterm arg))
+;; Use a prefix argument ARG to indicate creation of a new process instead."
+;;     (interactive "P")
+;;     (projectile--pterm arg))
 
-  (defun projectile--pterm (&optional new-process other-window)
-    "Invoke `vterm' in the project's root.
+;;   (defun projectile--pterm (&optional new-process other-window)
+;;     "Invoke `vterm' in the project's root.
 
-Use argument NEW-PROCESS to indicate creation of a new process instead.
-Use argument OTHER-WINDOW to indentation whether the buffer should
-be displayed in a different window.
+;; Use argument NEW-PROCESS to indicate creation of a new process instead.
+;; Use argument OTHER-WINDOW to indentation whether the buffer should
+;; be displayed in a different window.
 
-Switch to the project specific term buffer if it already exists."
-    (let* ((project (projectile-acquire-root))
-           (buffer (projectile-generate-process-name "pterm" new-process project)))
-      (if (buffer-live-p (get-buffer buffer))
-          (if other-window
-              (switch-to-buffer-other-window buffer)
-            (switch-to-buffer buffer))
-        (projectile-with-default-dir project
-          (progn
-            (if other-window
-                (pterm-other-window buffer)
-              (pterm buffer))
-            (rename-buffer (concat "*term: " (projectile-project-name) "*") t)))))))
+;; Switch to the project specific term buffer if it already exists."
+;;     (let* ((project (projectile-acquire-root))
+;;            (buffer (projectile-generate-process-name "pterm" new-process project)))
+;;       (if (buffer-live-p (get-buffer buffer))
+;;           (if other-window
+;;               (switch-to-buffer-other-window buffer)
+;;             (switch-to-buffer buffer))
+;;         (projectile-with-default-dir project
+;;           (progn
+;;             (if other-window
+;;                 (pterm-other-window buffer)
+;;               (pterm buffer))
+;;             (rename-buffer (concat "*term: " (projectile-project-name) "*") t))))))
+  )
 
 (provide 'prelude-project)

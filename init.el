@@ -43,6 +43,7 @@
 (require 'prelude-benchmark)
 (require 'prelude-core)
 (require 'prelude-ui)
+(require 'prelude-term)
 (require 'prelude-project)
 (require 'prelude-completion)
 

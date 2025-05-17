@@ -93,9 +93,13 @@ of the box `(w h)' inside the box `(cw ch)'."
 (defun wsl-paste ()
   "In a WSL2 environment, paste the text from the system clipboard."
   (interactive)
-  (if (derived-mode-p 'vterm-mode)
-      (vterm-insert (wsl-get-clipboard))
-    (insert (wsl-get-clipboard))))
+  (cond
+   ((derived-mode-p 'vterm-mode)
+    (vterm-insert (wsl-get-clipboard)))
+   ((derived-mode-p 'eat-mode)
+    (eat-term-send-string-as-yank eat-terminal (wsl-get-clipboard)))
+   (t
+    (insert (wsl-get-clipboard)))))
 
 (when k|wsl
   (advice-add 'gui-select-text :before
