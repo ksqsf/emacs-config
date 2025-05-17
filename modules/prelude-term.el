@@ -16,7 +16,10 @@
         ("M-o" . other-window))
   :config
   (setq eat-kill-buffer-on-exit t)
-  (setq eat-term-name "xterm-256color"))
+  (setq eat-enable-blinking-text t)
+  ;; Note: this integration only works if $TERM starts with "eat".
+  ;; So you cannot set $TERM to xterm.
+  (setq eat-enable-directory-tracking t))
 
 ;; VTerm
 (use-package vterm
