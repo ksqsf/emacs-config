@@ -12,7 +12,8 @@
 ;; Eat
 (use-package eat
   :bind
-  (:map eat-semi-char-mode-map
+  (("M-g v" . eat)  ;; Take place of vterm-toggle
+   :map eat-semi-char-mode-map
         ("M-o" . other-window))
   :config
   (setq eat-kill-buffer-on-exit t)
@@ -23,6 +24,7 @@
 
 ;; VTerm
 (use-package vterm
+  :disabled
   :commands (vterm)
   :bind (:map vterm-mode-map
               ("C-c C-t" . vterm-copy-mode)
@@ -51,18 +53,22 @@
   (add-to-list 'desktop-buffer-mode-handlers '(vterm-mode . vterm-restore-desktop-buffer))
   (add-hook 'vterm-mode-hook #'(lambda () (setq-local desktop-save-buffer 'vterm-save-desktop-buffer))))
 
-(use-package vterm-toggle
-  :bind ("M-g v" . vterm-toggle))
+;; (use-package vterm-toggle
+;;   :bind ("M-g v" . vterm-toggle))
 
 ;; Dropdown terminal
 (defun drop-down-term ()
   "Open a drop-down terminal in the same directory as the current file."
   (interactive)
-  (use-package vterm :ensure t)
   (let ((buffer (get-buffer-create "*dd-term*"))
         win)
     (with-current-buffer buffer
-      (pterm-run-in-current-buffer))
+      (unless (eq major-mode 'eat-mode)
+        (eat-mode))
+      (unless (and eat-terminal
+                   (eat-term-parameter eat-terminal 'eat--process))
+        (eat-exec buffer (buffer-name) "/usr/bin/env" nil
+                  (list "sh" "-c" shell-file-name))))
     (setq win
           (display-buffer-in-side-window
            buffer

@@ -178,6 +178,14 @@
     (slot . 6)
     (window-height . 0.4)
     (dedicated . t))
+   ("-eat\\*\\'"
+    (display-buffer-reuse-mode-window
+     display-buffer-in-side-window)
+    (window-height . 0.4)
+    (mode vterm-mode vterm-copy-mode)
+    (side . bottom)
+    (slot . 7)
+    (dedicated . t))
    ("vterm*"
     (display-buffer-reuse-mode-window
      display-buffer-in-side-window)
@@ -510,10 +518,6 @@ system's dark or light variant."
 
 (use-package rotate
   :defer t)
-
-
-(use-package vterm-toggle
-  :bind ("M-g v" . vterm-toggle))
 
 
 ;; Allow setting preferred terminal emulator.
