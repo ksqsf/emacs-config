@@ -294,4 +294,4 @@ The results are stored in three buffers:
   (interactive)
   (let ((default-directory "~/src/Clone/plum/"))
     (with-environment-variables (("rime_dir" "/mnt/d/Rime/"))
-      (shell-command "bash rime-install rimeinn/rime-moran@main && \"/mnt/c/Program Files/Rime/weasel-0.16.3/WeaselDeployer.exe\" /deploy &"))))
+      (shell-command "bash rime-install rimeinn/rime-moran@main && \"/mnt/c/Program Files/Rime/weasel-0.17.0/WeaselDeployer.exe\" /deploy &"))))
