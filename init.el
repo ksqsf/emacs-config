@@ -46,6 +46,7 @@
 (require 'prelude-term)
 (require 'prelude-project)
 (require 'prelude-completion)
+(require 'prelude-workspace)
 
 (require 'prelude-search)
 (require 'prelude-ibuffer)
