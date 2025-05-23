@@ -62,7 +62,7 @@
               deepseek/deepseek-r1))
 
   ;; Default backend and model
-  (setopt gptel-model 'claude-3-7-sonnet-20250219
+  (setopt gptel-model 'claude-sonnet-4-20250514
           gptel-backend (cdr (assoc "Claude" gptel--known-backends))
           gptel-default-mode 'markdown-mode)
 
