@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
+(use-package completion
+  :ensure nil
+  :custom
+  (completion-styles '(prescient orderless)))
+
 (use-package prescient
   :demand t
   :config
@@ -8,13 +13,12 @@
 (use-package orderless
   :demand t
   :custom
-  (completion-styles '(prescient orderless))
-  (orderless-component-separator " +\\|[-/]")
   (orderless-matching-styles
-   '(orderless-literal
-     orderless-prefixes
-     orderless-initialism
-     orderless-regexp)))
+   '(orderless-prefixes                 ; Match a component as multiple word prefixes.
+     orderless-initialism               ; Match a component as an initialism.
+     orderless-flex                     ; Match a component in flex style.
+     orderless-regexp))                 ; Match a component as a regexp.
+  (orderless-smart-case t))
 
 (use-package vertico
   :hook (after-init . vertico-mode)
