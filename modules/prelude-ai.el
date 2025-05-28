@@ -161,7 +161,8 @@ QUERY is the search query string.
 Optional SEARCH-DEPTH is either \"basic\" (default) or \"advanced\".
 Optional MAX-RESULTS is the maximum number of results (default 5)."
   (require 'plz)
-  (let* ((url "https://api.tavily.com/search")
+  (let* ((plz-curl-default-args (cons "-k" plz-curl-default-args))
+         (url "https://api.tavily.com/search")
          (search-depth (or search-depth "basic"))
          (max-results (or max-results 5))
          (request-data
@@ -179,14 +180,15 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
   "Fetch text content from URL."
   (require 'plz)
   (require 'shr)
-  (plz 'get url
-    :as 'string
-    :then (lambda (html)
-            (with-temp-buffer
-              (insert html)
-              (shr-render-region (point-min) (point-max))
-              (shr-link-to-markdown)
-              (funcall callback (buffer-substring-no-properties (point-min) (point-max)))))))
+  (let ((plz-curl-default-args (cons "-k" plz-curl-default-args)))
+    (plz 'get url
+      :as 'string
+      :then (lambda (html)
+              (with-temp-buffer
+                (insert html)
+                (shr-render-region (point-min) (point-max))
+                (shr-link-to-markdown)
+                (funcall callback (buffer-substring-no-properties (point-min) (point-max))))))))
 
 (defun shr-link-to-markdown ()
   "Replace all shr-link in the current buffer to markdown format"
