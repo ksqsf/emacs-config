@@ -24,5 +24,7 @@
 
 (with-eval-after-load 'vterm
   (keymap-set vterm-mode-map "M-s" search-map))
+(with-eval-after-load 'eat
+  (keymap-set eat-semi-char-mode-map "M-s" search-map))
 
 (provide 'prelude-search)
