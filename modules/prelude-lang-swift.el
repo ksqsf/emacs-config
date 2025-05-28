@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package swift-mode
   :mode ((".swift\\'" . swift-mode))
   :custom

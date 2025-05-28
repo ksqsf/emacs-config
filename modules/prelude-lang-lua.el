@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package lua-mode
   :bind (:map lua-mode-map
               ("C-c C-z" . run-lua)

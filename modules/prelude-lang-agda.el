@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defcustom prelude-agda-mode-path nil
   "Specify the path to the executable 'agda-mode'."
   :group 'prelude

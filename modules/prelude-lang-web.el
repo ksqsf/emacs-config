@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
          ("\\.phtml\\'" . web-mode)
