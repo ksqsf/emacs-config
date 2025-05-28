@@ -9,6 +9,7 @@
   (project-buffers-viewer 'project-list-buffers-buffer-ibuffer)
   (project-switch-use-entire-map nil)
   (project-switch-commands 'project-find-file)
+  (project-vc-extra-root-markers '(".projectile" ".project"))
 
   :config
   (require 'projection)

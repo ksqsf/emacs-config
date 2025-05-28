@@ -8,6 +8,7 @@
 (setq tab-always-indent 'complete)
 (add-hook 'prog-mode-hook 'turn-on-adaptive-wrap)
 (setq xref-history-storage 'xref-window-local-history)
+(setq xref-search-program 'ripgrep)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
 
 
