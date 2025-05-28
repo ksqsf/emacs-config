@@ -30,8 +30,7 @@ lexical scoping.
 
 Volatile configuration files are more fragile and personal.  They are
 mainly temporary tests or (let's hope not) ugly hacks.  A volatile
-Lisp file should never be byte compiled.  Typically, it's dynamically
-scoped.
+Lisp file should never be byte compiled.
 
 ** Fonts
 

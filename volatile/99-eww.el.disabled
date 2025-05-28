@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; EMACScript!
 
 (with-eval-after-load 'eww

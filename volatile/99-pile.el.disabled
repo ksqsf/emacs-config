@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package w
   :vc (:fetcher github :repo "lepisma/w.el"))
 (use-package pile

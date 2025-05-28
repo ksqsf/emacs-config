@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defvar k|emacs-uptime-log-file
   (expand-file-name "var/uptime.org" user-emacs-directory))
 

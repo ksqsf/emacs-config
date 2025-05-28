@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defun frame-appear-animation (&optional frame from to inc)
   (interactive)
   (setq from (or from 0))

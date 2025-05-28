@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'ox-publish)
 
 (defun md2org ()

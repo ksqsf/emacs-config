@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defun binary-search (&optional needle)
   "Locate for insertion in an ordered manner."
   (interactive "sNeedle: ")

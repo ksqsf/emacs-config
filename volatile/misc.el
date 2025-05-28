@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package keyfreq
   :config
   (keyfreq-mode 1)

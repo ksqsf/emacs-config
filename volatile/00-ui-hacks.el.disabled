@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Only works on GNOME
 ;; Prefer dark variant
 

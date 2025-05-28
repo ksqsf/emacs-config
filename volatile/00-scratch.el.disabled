@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defun refresh-scratch ()
   "Refresh the *scratch* buffer with a fortune cookie."
   (interactive)
