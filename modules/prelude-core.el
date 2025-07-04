@@ -20,6 +20,7 @@
 ;; 1024 seems large enough.
 (setq save-interprogram-paste-before-kill 1024)
 (setq kill-do-not-save-duplicates t)
+(setq kill-region-dwim t)
 
 ;; Move backups away
 (setq backup-directory-alist `(("/ssh:.*" . nil)
