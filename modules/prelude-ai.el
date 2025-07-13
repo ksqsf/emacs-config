@@ -56,7 +56,9 @@
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key #'openrouter-api-key
-    :models '(x-ai/grok-3-mini-beta
+    :models '((moonshotai/kimi-k2
+               :capabilities (media tool json url))
+              x-ai/grok-3-mini-beta
               x-ai/grok-3-beta
               google/gemini-2.5-pro-preview-03-25
               deepseek/deepseek-r1))
