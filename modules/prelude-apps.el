@@ -204,4 +204,13 @@
 (use-package ledger-mode
   :defer t)
 
+;; world-clock
+(setq world-clock-list
+      '(("Asia/Chongqing" "China")
+        ("Asia/Tokyo" "Japan")
+        ("Europe/Berlin" "Germany")
+        ("Europe/Paris" "France")
+        ("America/New_York" "New York")
+        ("America/Los_Angeles" "Los Angeles")))
+
 (provide 'prelude-apps)
