@@ -41,15 +41,16 @@
 
 ;; Hey, Org mode?
 (with-eval-after-load 'org
-  (setq org-emphasis-regexp-components 
-        (list (concat " \t('\"{"            "[:alpha:]") 
-              (concat "- \t.,:!?;'\")}\\["  "[:alpha:]") 
-              " \t\r\n,\"'" 
-              "." 
-              1))
-  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
-  (setcar (nthcdr 1 org-emphasis-regexp-components) "-[:space:].。,，:；!！?？;；'\")}\\")
-  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components))
+  ;; (setq org-emphasis-regexp-components 
+  ;;       (list (concat " \t('\"{"            "[:alpha:]") 
+  ;;             (concat "- \t.,:!?;'\")}\\["  "[:alpha:]") 
+  ;;             " \t\r\n,\"'" 
+  ;;             "." 
+  ;;             1))
+  ;; (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  ;; (setcar (nthcdr 1 org-emphasis-regexp-components) "-[:space:].。,，:；!！?？;；'\")}\\")
+  ;; (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  )
 
 ;; Even though I speak Chinese, please use English dictionary for
 ;; spell checking.
