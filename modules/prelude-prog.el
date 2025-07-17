@@ -253,5 +253,11 @@ The history is stored in FILENAME."
   (editorconfig-mode))
 
 
+(use-package cmake-mode)
+
+(use-package eldoc-cmake
+  :hook (cmake-mode-hook . eldoc-cmake-enable))
+
+
 (provide 'prelude-prog)
 ;;; prelude-prog.el ends here
