@@ -259,5 +259,11 @@ The history is stored in FILENAME."
   :hook (cmake-mode-hook . eldoc-cmake-enable))
 
 
+(use-package flymake
+  :ensure nil
+  :config
+  (setopt flymake-show-diagnostics-at-end-of-line 'short))
+
+
 (provide 'prelude-prog)
 ;;; prelude-prog.el ends here
