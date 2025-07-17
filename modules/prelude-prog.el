@@ -1,6 +1,11 @@
-;;; -*- lexical-binding: t; -*-
+;;; preloude-prog ---  -*- lexical-binding: t; -*-
+
+;;; Commentary:
+
 ;;; Configuration for programming needs.
 ;;; Some portions might be a standalone module.
+
+;;; Code:
 
 (setq-default indent-tabs-mode nil)
 (show-paren-mode t)
@@ -51,6 +56,7 @@
   :hook (c-common-mode . rainbow-delimiters-mode))
 
 (use-package puni
+  :disabled
   :hook (prog-mode . puni-mode))
 
 
@@ -79,6 +85,7 @@
   )
 
 (use-package eglot-booster
+  :disabled
   :vc (:fetcher github :repo "jdtsmith/eglot-booster")
   :after eglot
   :config (eglot-booster-mode))
@@ -247,3 +254,4 @@ The history is stored in FILENAME."
 
 
 (provide 'prelude-prog)
+;;; prelude-prog.el ends here
