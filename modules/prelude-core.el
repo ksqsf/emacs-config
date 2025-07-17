@@ -437,16 +437,30 @@ Useful for reading Python exception traces."
   :demand t)
 
 ;; TRAMP performance
+;; See https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 (setq remote-file-name-inhibit-locks t)
 (setq remote-file-name-inhibit-auto-save t)
 (setq remote-file-name-inhibit-auto-save-visited t)
 (setq remote-file-name-inhibit-delete-by-moving-to-trash t)
 (setq remote-file-name-inhibit-cache 600)
 (setq remote-file-name-access-timeout 1)
+(setq tramp-use-scp-direct-remote-copying t)
+(setq tramp-copy-size-limit (* 1024 1024))
+(connection-local-set-profile-variables
+ 'remote-direct-async-process
+ '((tramp-direct-async-process . t)))
+(connection-local-set-profiles
+ '(:application tramp :protocol "scp")
+ 'remote-direct-async-process)
+(with-eval-after-load 'tramp
+  (with-eval-after-load 'compile
+    (remove-hook 'compilation-mode-hook #'tramp-compile-disable-ssh-controlmaster-options)))
 
 ;; TRAMP shells
+(setq tramp-default-remote-shell "/bin/bash")
 (setq vterm-tramp-shells '(("docker" "/bin/sh")
                            ("ssh" "/bin/bash")))
+
 
 ;; Bind C-h C-p to profiler (was: view-emacs-problems)
 (defun profiler-dwim ()

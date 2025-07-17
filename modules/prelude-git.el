@@ -17,7 +17,8 @@
   :config
   (setq magit-wip-mode +1)
   (when k|mac
-    (setq magit-git-executable "/usr/local/bin/git")))
+    (setq magit-git-executable "/usr/local/bin/git"))
+  (setq magit-tramp-pipe-stty-settings 'pty))
 
 (use-package forge
   :after magit
