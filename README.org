@@ -15,6 +15,15 @@ The following Emacs versions are supported:
 - Emacs 30, the current stable version
 - Emacs 31, the current development version
 
+
+*** Which Emacs do I use, exactly?
+
+I use a custom build of Emacs, both on Linux and macOS, patched with
+my own changes to the Emacs core.
+
+BTW, Emacs is super easy to build from source.
+
+
 ** Structure
 
 There are two kinds of configuration, Module and Volatile.  The
