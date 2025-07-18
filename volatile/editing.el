@@ -296,5 +296,6 @@ The results are stored in three buffers:
   (interactive)
   (let ((default-directory "~/src/Clone/plum/")
         (deployer-path (car (last (file-expand-wildcards "/mnt/c/Program Files/Rime/weasel-*/WeaselDeployer.exe")))))
-    (with-environment-variables (("rime_dir" "/mnt/d/Rime/"))
+    (with-environment-variables (("rime_dir" "/mnt/d/Rime/")
+                                 ("no_update" "1"))
       (shell-command (format "bash rime-install rimeinn/rime-moran@main && \"%s\" /deploy &" deployer-path)))))
