@@ -398,7 +398,9 @@ Useful for reading Python exception traces."
   "Edit the current file using Sudo."
   (interactive)
   (setq buf (current-buffer))
-  (find-file (concat "/sudo::" buffer-file-name))
+  (if (derived-mode-p 'dired-mode)
+      (find-file (concat "/sudo::" default-directory))
+    (find-file (concat "/sudo::" buffer-file-name)))
   (kill-buffer buf))
 
 (use-package adaptive-wrap
