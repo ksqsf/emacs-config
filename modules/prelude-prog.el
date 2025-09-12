@@ -126,6 +126,7 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
   :type 'symbol)
 
 (defun k|lsp-ensure ()
+  "Ensure the preferred lsp client has started."
   (interactive)
   (catch 'foo
     (cond ((not prelude-auto-lsp)
@@ -263,6 +264,18 @@ The history is stored in FILENAME."
   :ensure nil
   :config
   (setopt flymake-show-diagnostics-at-end-of-line 'short))
+
+
+(use-package indent-bars
+  :config
+  (setq indent-bars-no-descend-lists t)
+  (setq indent-bars-display-on-blank-lines 'least)
+  (setq indent-bars-treesit-support t)
+  :hook ((prog-mode . indent-bars-mode)
+         (lua-mode . (lambda ()
+                       (setq indent-bars-spacing-override lua-indent-level)))
+         (c-common-mode . (lambda ()
+                            (setq-local indent-bars-spacing-override 4)))))
 
 
 (provide 'prelude-prog)
