@@ -335,9 +335,9 @@
   :hook (after-init . which-key-mode))
 
 ;; Preferred dark and light themes.
-(use-package one-themes :defer t)
+; (use-package one-themes :defer t)
 ; (use-package catppuccin-theme :defer t)
-(use-package dracula-theme :defer t)
+; (use-package dracula-theme :defer t)
 (use-package doom-themes :defer t)
 
 (defcustom prelude-enable-switch-dark-light nil
