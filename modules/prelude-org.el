@@ -2,7 +2,8 @@
 
 (iload org-macs org-compat org-faces org-entities org-list org-pcomplete
        org-src org-footnote org-macro ob
-       org org-clock org-agenda org-capture)
+       org org-clock org-agenda org-capture
+       ol-man ol-doi org-roam)
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 
