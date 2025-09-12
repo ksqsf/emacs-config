@@ -19,12 +19,13 @@
 
 (defun function-advices (function)
   "Return FUNCTION's advices."
-  (let ((function-def (advice--symbol-function function))
-        (ad-functions '()))
-    (while (advice--p function-def)
-      (setq ad-functions (append `(,(advice--car function-def)) ad-functions))
-      (setq function-def (advice--cdr function-def)))
-    ad-functions))
+  (when (symbolp function)
+    (let ((function-def (advice--symbol-function function))
+          (ad-functions '()))
+      (while (advice--p function-def)
+        (setq ad-functions (append `(,(advice--car function-def)) ad-functions))
+        (setq function-def (advice--cdr function-def)))
+      ad-functions)))
 
 (defconst +prelude--advice-regex+
   (if (version<= "27.1" emacs-version)
