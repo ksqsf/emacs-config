@@ -7,6 +7,11 @@
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 
+;; Additional Hyperlinks
+(with-eval-after-load 'org
+  (require 'ol-man)
+  (require 'ol-doi))
+
 ;; This config is still fledging. I don't use org-roam (for now).
 
 ;; Basic user options and special org files
