@@ -319,4 +319,8 @@ The results are stored in three buffers:
   (update-weasel-kagiroi))
 
 (defun update-emacs-rime ()
-  )
+  (interactive)
+  (let ((default-directory "~/src/Clone/plum/package/rimeinn/moran/"))
+    (shell-command "make dist DESTDIR=~/.emacs.d/var/rime"))
+  (require 'rime)
+  (rime-deploy))
