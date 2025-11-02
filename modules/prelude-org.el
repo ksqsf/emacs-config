@@ -71,7 +71,7 @@
     (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75))))
 (use-package org-xlatex
   :when (featurep 'xwidget-internal)
-  :vc (:fetcher github :repo "ksqsf/org-xlatex")
+  :load-path "lisp/org-xlatex"
   :after (org)
   :hook (org-mode . org-xlatex-mode)
   :hook (markdown-mode . org-xlatex-mode))
