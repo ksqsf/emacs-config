@@ -27,4 +27,7 @@
 (with-eval-after-load 'eat
   (keymap-set eat-semi-char-mode-map "M-s" search-map))
 
+(use-package ast-grep
+  :commands (ast-grep-search ast-grep-project ast-grep-directory))
+
 (provide 'prelude-search)
