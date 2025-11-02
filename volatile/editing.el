@@ -313,6 +313,24 @@ The results are stored in three buffers:
     (with-environment-variables (("rime_dir" "/mnt/d/Rime/"))
       (shell-command (format "bash rime-install rimeinn/rime-kagiroi@main && \"%s\" /deploy &" deployer-path)))))
 
+(defun update-squirrel-moran ()
+  (interactive)
+  (let ((default-directory "~/plum/")
+        (squirrel-path (car (last (file-expand-wildcards "/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel")))))
+    (with-environment-variables (("rime_dir" (expand-file-name "~/Library/Rime/"))
+                                 ("no_update" "1"))
+      (shell-command "make -C package/rimeinn/moran")
+      (shell-command (format "bash rime-install rimeinn/rime-moran@main && \"%s\" --reload &" squirrel-path)))))
+
+(defun update-squirrel-kagiroi ()
+  (interactive)
+  (let ((default-directory "~/plum/")
+        (squirrel-path (car (last (file-expand-wildcards "/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel")))))
+    (with-environment-variables (("rime_dir" (expand-file-name "~/Library/Rime/"))
+                                 ("no_update" "1"))
+      (shell-command (format "bash rime-install rimeinn/rime-kagiroi && \"%s\" --reload &" squirrel-path)))))
+
+
 (defun update-weasel ()
   (interactive)
   (update-weasel-moran)
@@ -324,3 +342,15 @@ The results are stored in three buffers:
     (shell-command "make dist DESTDIR=~/.emacs.d/var/rime"))
   (require 'rime)
   (rime-deploy))
+
+(defun my-update-rime-file-date ()
+  (catch 'foo
+    (unless (derived-mode-p 'yaml-mode)
+      (throw 'foo nil))
+    (save-excursion
+      (goto-char (point-min))
+      (when (re-search-forward "^version: \"[0-9]\\{8\\}\"" 10000 t)
+        (when t ;(y-or-n-p "Update version? ")
+          (replace-match (format "version: \"%s\""
+                               (format-time-string "%Y%m%d"))))))))
+(add-hook 'before-save-hook 'my-update-rime-file-date)
