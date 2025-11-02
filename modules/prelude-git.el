@@ -46,6 +46,8 @@ This function returns nil if it cannot parse REMOTE."
   (save-buffer)
   (let* ((remote (or (magit-get-remote)
                      (magit-get-upstream-remote)
+                     (magit-get-remote "main")
+                     (magit-get-remote "master")
                      (error "Unknown remote!")))
          (remote-url (magit-git-str "remote" "get-url" remote))
          (commit (magit-rev-parse "--short" "HEAD"))
