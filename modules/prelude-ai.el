@@ -204,4 +204,12 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
       (goto-char start)
       (insert (format "[%s](%s)" text link)))))
 
+;; aider
+(use-package aider
+  :config
+  (setq aider-args '("--model" "sonnet" "--no-auto-accept-architect"))
+  (setenv "ANTHROPIC_API_KEY" (anthropic-api-key))
+  (global-set-key (kbd "C-x p h") 'aider-transient-menu))
+
+
 (provide 'prelude-ai)
