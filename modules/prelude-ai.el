@@ -60,8 +60,10 @@
                :capabilities (media tool json url))
               x-ai/grok-3-mini-beta
               x-ai/grok-3-beta
-              google/gemini-2.5-pro-preview-03-25
-              deepseek/deepseek-r1))
+              google/gemini-2.5-pro
+              deepseek/deepseek-r1
+              anthropic/claude-sonnet-4
+              anthropic/claude-opus-4))
 
   ;; Default backend and model
   (setopt gptel-model 'claude-sonnet-4-20250514
