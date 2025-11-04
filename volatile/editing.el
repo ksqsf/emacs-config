@@ -310,7 +310,8 @@ The results are stored in three buffers:
   (interactive)
   (let ((default-directory "~/src/Clone/plum/")
         (deployer-path (car (last (file-expand-wildcards "/mnt/d/Program Files/Rime/weasel-*/WeaselDeployer.exe")))))
-    (with-environment-variables (("rime_dir" "/mnt/d/Rime/"))
+    (with-environment-variables (("rime_dir" "/mnt/d/Rime/")
+                                 ("no_update" "1"))
       (shell-command (format "bash rime-install rimeinn/rime-kagiroi@main && \"%s\" /deploy &" deployer-path)))))
 
 (defun update-squirrel-moran ()
