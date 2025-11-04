@@ -182,17 +182,6 @@
   (with-eval-after-load 'embark
     (define-key embark-symbol-map (kbd "d") 'dash-at-point)))
 
-(use-package go-translate
-  :commands (gts-do-translate gts-buffer-render gts-bing-engine gts-google-rpc-engine gts-google-engine)
-  :config
-  (setq gts-translate-list '(("en" "zh" "jp")))
-  (setq gts-default-translator
-        (gts-translator
-         :picker (gts-prompt-picker)
-         :engines (list (gts-google-engine) (gts-google-rpc-engine)
-                        (gts-bing-engine) )
-         :render (gts-buffer-render))))
-
 ;; epub reader
 (use-package nov
   :commands (nov-mode))
