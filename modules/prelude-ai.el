@@ -213,5 +213,17 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
   (setenv "ANTHROPIC_API_KEY" (anthropic-api-key))
   (global-set-key (kbd "C-x p h") 'aider-transient-menu))
 
+(use-package claude-code-ide
+  :load-path "lisp/claude-code-ide.el"
+  :bind ("C-h C-c" . claude-code-ide-menu)
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
+(add-to-list 'hs-special-modes-alist
+             '(markdown-mode
+               "^``` reasoning$"
+               "^```$"                  ;end
+               hs-forward-sexp))
+(add-hook 'markdown-mode-hook #'hs-minor-mode)
 
 (provide 'prelude-ai)
