@@ -293,12 +293,14 @@ The results are stored in three buffers:
   (sort-fields 2 (region-beginning) (region-end)))
 
 (defun deploy-weasel ()
+  "Deploy Weasel."
   (interactive)
   (let ((default-directory "~/src/Clone/plum/")
         (deployer-path (car (last (file-expand-wildcards "/mnt/d/Program Files/Rime/weasel-*/WeaselDeployer.exe")))))
     (shell-command (format "\"%s\" /deploy &" deployer-path))))
 
 (defun update-weasel-moran (&optional deploy)
+  "Install moran to weasel and deploy."
   (interactive)
   (let ((default-directory "~/src/Clone/plum/")
         (deployer-path (car (last (file-expand-wildcards "/mnt/d/Program Files/Rime/weasel-*/WeaselDeployer.exe")))))
@@ -307,6 +309,7 @@ The results are stored in three buffers:
       (shell-command (format "bash rime-install rimeinn/rime-moran@main && \"%s\" /deploy &" deployer-path)))))
 
 (defun update-weasel-kagiroi ()
+  "Install kagiroi to weasel and deploy."
   (interactive)
   (let ((default-directory "~/src/Clone/plum/")
         (deployer-path (car (last (file-expand-wildcards "/mnt/d/Program Files/Rime/weasel-*/WeaselDeployer.exe")))))
@@ -314,7 +317,22 @@ The results are stored in three buffers:
                                  ("no_update" "1"))
       (shell-command (format "bash rime-install rimeinn/rime-kagiroi@main && \"%s\" /deploy &" deployer-path)))))
 
+(defun update-f5m-moran ()
+  "Install moran to f5m and deploy."
+  (interactive)
+  (let ((default-directory "~/plum/"))
+    (with-environment-variables (("rime_dir" (expand-file-name "~/.local/share/fcitx5/rime/"))
+                                 ("no_update" "1"))
+      (shell-command "make -C package/rimeinn/moran")
+      (shell-command (format "bash rime-install rimeinn/rime-moran@main && \"/Library/Input Methods/Fcitx5.app/Contents/bin/fcitx5-curl\" /config/addon/rime/deploy -X POST -d '{}' &")))))
+
+(defun deploy-f5m ()
+  "Deploy fcitx5-macos."
+  (interactive)
+  (shell-command "\"/Library/Input Methods/Fcitx5.app/Contents/bin/fcitx5-curl\" /config/addon/rime/deploy -X POST -d '{}' &"))
+
 (defun update-squirrel-moran ()
+  "Install moran to Squirrel and deploy."
   (interactive)
   (let ((default-directory "~/plum/")
         (squirrel-path (car (last (file-expand-wildcards "/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel")))))
@@ -324,6 +342,7 @@ The results are stored in three buffers:
       (shell-command (format "bash rime-install rimeinn/rime-moran@main && \"%s\" --reload &" squirrel-path)))))
 
 (defun update-squirrel-kagiroi ()
+  "Install kagiroi to Squirrel and deploy."
   (interactive)
   (let ((default-directory "~/plum/")
         (squirrel-path (car (last (file-expand-wildcards "/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel")))))
@@ -333,11 +352,13 @@ The results are stored in three buffers:
 
 
 (defun update-weasel ()
+  "Install moran and kagiroi to Weasel and deploy."
   (interactive)
   (update-weasel-moran)
   (update-weasel-kagiroi))
 
 (defun update-emacs-rime ()
+  "Install moran to emacs-rime and deploy."
   (interactive)
   (let ((default-directory "~/src/Clone/plum/package/rimeinn/moran/"))
     (shell-command "make dist DESTDIR=~/.emacs.d/var/rime"))
@@ -345,6 +366,7 @@ The results are stored in three buffers:
   (rime-deploy))
 
 (defun my-update-rime-file-date ()
+  "Update rime yaml versions."
   (catch 'foo
     (unless (derived-mode-p 'yaml-mode)
       (throw 'foo nil))
