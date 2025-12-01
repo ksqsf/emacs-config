@@ -61,6 +61,7 @@
               x-ai/grok-3-mini-beta
               x-ai/grok-3-beta
               google/gemini-2.5-pro
+              google/gemini-3-pro-preview
               deepseek/deepseek-r1
               anthropic/claude-sonnet-4
               anthropic/claude-opus-4))
