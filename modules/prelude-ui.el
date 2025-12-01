@@ -575,4 +575,8 @@ system's dark or light variant."
 (defalias 'dd-term 'drop-down-term)
 (defalias 'ddt 'drop-down-term)
 
+;; nyanmacs
+(use-package nyan-mode
+  :hook (after-init . nyan-mode))
+
 (provide 'prelude-ui)
