@@ -79,6 +79,7 @@
 
 ;; Some useful editing commands deserve quicker access.
 (global-set-key (kbd "C-x C-d") #'duplicate-dwim)
+(setq duplicate-line-final-position 1)
 
 ;; why, but why, emacs!
 (setq load-prefer-newer t)
