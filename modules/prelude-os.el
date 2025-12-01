@@ -75,7 +75,7 @@ of the box `(w h)' inside the box `(cw ch)'."
   (interactive "r")
   (k|with-suppressed-message
     (let ((default-directory "/"))
-      (shell-command-on-region beg end "clip.exe" " *wsl-copy*")))
+      (shell-command-on-region beg end "iconv -f utf-8 -t utf16le | clip.exe" " *wsl-copy*")))
   (deactivate-mark))
 
 (defun wsl-get-clipboard ()
