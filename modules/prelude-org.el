@@ -12,8 +12,6 @@
   (require 'ol-man)
   (require 'ol-doi))
 
-;; This config is still fledging. I don't use org-roam (for now).
-
 ;; Basic user options and special org files
 (setq org-directory "~/org")
 (setq org-agenda-files '("~/org"))
@@ -213,7 +211,12 @@
          ("B" . ebib-biblio-import-doi))
   :custom
   (ebib-preload-bib-files `(,(expand-file-name "Research/all.bib" org-directory)))
-  :config
+  (ebib-notes-storage 'one-file-per-note)
+  (ebib-notes-directory (expand-file-name "Research" org-directory))
+  (ebib-notes-use-org-capture nil)
+  (ebib-notes-template
+   "* %T\n:PROPERTIES:\nID: %(org-id-new)\n%K\n:END:\n%%?\n")
+  
   (require 'ebib-biblio)
   (setq ebib-reading-list-file (expand-file-name "Read.org" org-directory)))
 
