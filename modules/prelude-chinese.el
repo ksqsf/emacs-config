@@ -123,6 +123,8 @@
   :custom
   (default-input-method "rime")
   :init
+  (when k|mac
+    (setq rime-emacs-module-header-root "/Applications/Emacs.app/Contents/Resources/include"))
   (defun rime-menu ()
     (interactive)
     (let ((last-input-event (aref (kbd "C-`") 0)))
@@ -133,8 +135,11 @@
   (defun rime-moran-simp ()
     (interactive)
     (rime-lib-set-option "simplification" t))
-  (when k|mac
-    (setq rime-emacs-module-header-root "/Applications/Emacs.app/Contents/Resources/include")))
+
+  ;; Keymaps
+  (setq rime-translate-keybindings
+        '("C-f" "C-b" "C-n" "C-p" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"
+          "C-`" "C-s" "C-k" "C-q" "C-k" "C-i")))
 
 ;; use rime for search
 (use-package rime-regexp
