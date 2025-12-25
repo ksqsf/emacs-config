@@ -173,7 +173,7 @@
   (let ((prefix (if (file-exists-p "/usr/local/share/opencc/s2t.json")
                     "/usr/local/share/opencc"
                   "/usr/share/opencc")))
-    (shell-command-on-region beg end (format "opencc -c %s/%s.json" prefix conf))))
+    (shell-command-on-region beg end (format "opencc -c %s/%s.json" prefix conf) nil t)))
 
 (defun opencc-t2s (beg end)
   "Use opencc to convert trad to simp on region."
