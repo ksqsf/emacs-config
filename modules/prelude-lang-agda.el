@@ -8,8 +8,8 @@
 
 (defun load-agda-mode ()
   ;; Load agda-mode only when 'agda-mode' can be found.
-  (when-let ((agda-mode-path (or prelude-agda-mode-path
-                                 (executable-find "agda-mode"))))
+  (when-let* ((agda-mode-path (or prelude-agda-mode-path
+                                  (executable-find "agda-mode"))))
     (load-file (let ((coding-system-for-read 'utf-8))
                  (shell-command-to-string (concat agda-mode-path " locate")))))
   (if (featurep 'agda2)

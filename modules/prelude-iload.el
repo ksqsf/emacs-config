@@ -24,7 +24,7 @@ Each feature in FEATURES will be loaded one by one in the order."
  "Pop one feature from `+iload-queue' and load it.
 
 Returns t if there are more features to load, nil otherwise."
- (when-let ((feature (queue-dequeue +iload-queue)))
+ (when-let* ((feature (queue-dequeue +iload-queue)))
    ;; (message "Incrementally loading %s..." feature)
    (let ((inhibit-message t))
      (require feature nil t))

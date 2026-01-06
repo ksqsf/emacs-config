@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Be sure to customize:
 ;; * user-full-name       will be displayed on all emails you send
 ;; * user-mail-address    a GMail address
