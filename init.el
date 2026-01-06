@@ -80,6 +80,8 @@
 (require 'prelude-irc)
 (require 'prelude-ai)
 
+(require 'prelude-lifehacks)
+
 ;; (require 'prelude-evil)
 ;;(require 'prelude-nix)
 
