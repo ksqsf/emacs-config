@@ -88,7 +88,12 @@
          "* TODO %?
 %a")
         ("j" "journal" entry (file+datetree "journal.org")
-         "* %?\n%U\n%i\n%a")))
+         "* %?\n%U\n%i\n%a")
+        ("n" "Note" plain
+         (file (lambda ()
+                 (vulpea-note-path
+                  (vulpea-create "Quick Note"))))
+         "%?")))
 
 
 ;; Babel
@@ -235,98 +240,38 @@
     (project-find-file)))
 
 
-;; I've somehow changed my mind about org-roam.  I can still keep the
-;; old file-based way of working, but org-roam *adds* the ability to
-;; link nodes.  So it's a win.
-(use-package org-roam
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n c" . org-roam-capture)
-         ("C-c n d" . org-roam-dailies-goto-date)
-         ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
+(use-package vulpea
+  :bind (("C-c n f" . vulpea-find)
+         ("C-c n i" . vulpea-insert)
+         ("C-c n l" . vulpea-find-backlink))
+  :custom
+  (vulpea-default-notes-directory "~/org/Roam")
   :config
+  (vulpea-db-autosync-mode +1)
 
-  ;; Allows interlinking to any org file
-  (setq org-roam-directory org-directory)
+  (use-package vulpea-ui
+    :after vulpea)
 
-  ;; But only create it under ~/org/Notes
-  (setq org-roam-capture-templates
-        '(("d" "default" plain "%?"
-           :target (file+head "Roam/%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n")
-           :unnarrowed t)))
+  (use-package vulpea-journal
+    :after (vulpea vulpea-ui)
+    :vc (:fetcher github :repo "d12frosted/vulpea-journal")
+    :config
 
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode)
-  (require 'org-roam-protocol))
+    (setq vulpea-journal-default-template
+          '(:file-name "daily/%Y-%m-%d.org"
+                       :title "%Y-%m-%d %A"
+                       :tags ("journal")
+                       :head "#+created: %<[%Y-%m-%d]>"))
 
-
-;; (use-package org-roam
-;;   :custom
-;;   (org-roam-directory (file-truename "~/Documents/org"))
-;;   :bind (("C-c n l" . org-roam-buffer-toggle)
-;;          ("C-c n f" . org-roam-node-find)
-;;          ("C-c n g" . org-roam-graph)
-;;          ("C-c n i" . org-roam-node-insert)
-;;          ("C-c n c" . org-roam-capture)
-;;          ;; Dailies
-;;          ("C-c n t" . org-roam-dailies-goto-today)
-;;          ("C-c n j" . org-roam-dailies-capture-today))
-;;   :config
-;;   (require 'org-roam-protocol)
-;;   (org-roam-db-autosync-mode)
+    ;; this seems like a bug in vulpea-journal's current version.
+    (setq vulpea-directory "~/org")
 
-;;   ;; The following are from: https://jethrokuan.github.io/org-roam-guide/
-;;   ;; That workflow seems too heavyweight for me...
-;;   ;; Let's see.
+    (vulpea-journal-setup)))
 
-;;   ;; Show node types in the node list
-;;   (cl-defmethod org-roam-node-type ((node org-roam-node))
-;;     "Return the TYPE of NODE."
-;;     (condition-case nil
-;;         (file-name-nondirectory
-;;          (directory-file-name
-;;           (file-name-directory
-;;            (file-relative-name (org-roam-node-file node) org-roam-directory))))
-;;       (error "")))
-;;   (setq org-roam-node-display-template (concat "${type:15}" "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
 
-;;   ;; Capture templates
-;;   (setq org-roam-capture-templates
-;;         '(("f" "fleet" plain "%?"
-;;            :if-new (file+head "fleet/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-;;            :immediate-finish t
-;;            :unnarrowed t)
-;;           ("m" "main" plain "%?"
-;;            :if-new (file+head "main/${slug}.org" "#+title: ${title}\n")
-;;            :immediate-finish t
-;;            :unnarrowed t)
-;;           ("e" "essay" plain "%?"
-;;            :if-new (file+head "essay/${slug}.org" "#+title: ${title}\n#+author: \n#+date: \n")
-;;            :immediate-finish t
-;;            :unnarrowed t)
-;;           ("p" "paper" plain "%?"
-;;            :if-new (file+head "paper/${slug}.org"
-;;                               "#+title: ${title}\n")
-;;            :immediate-finish t
-;;            :unnarrowed t)
-;;           ("b" "book" plain "%?"
-;;            :if-new (file+head "book/${slug}.org"
-;;                               "#+title: ${title}\n#+filetags: :book:\n")
-;;            :immediate-finish t
-;;            :unnarrowed t))))
-
-;; (use-package org-roam-ui
-;;   :after org-roam
-;;   :config
-;;   (defalias 'orui 'org-roam-ui-open)
-;;   (setq org-roam-ui-sync-theme t
-;;         org-roam-ui-follow t
-;;         org-roam-ui-update-on-save t
-;;         org-roam-ui-open-on-start t))
+;;
+;; Org-roam stuff all deleted in favor of Vulpea.
+;;
 
 
 ;; I shall discuss this with the org devs later:
