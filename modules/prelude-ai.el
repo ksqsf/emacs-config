@@ -67,7 +67,7 @@
               anthropic/claude-opus-4))
 
   ;; Default backend and model
-  (setopt gptel-model 'claude-sonnet-4-20250514
+  (setopt gptel-model 'claude-sonnet-4-5-20250929
           gptel-backend (cdr (assoc "Claude" gptel--known-backends))
           gptel-default-mode 'markdown-mode)
 
