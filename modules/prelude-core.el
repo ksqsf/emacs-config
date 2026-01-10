@@ -478,6 +478,9 @@ Useful for reading Python exception traces."
 ;; CAVEAT: to be compatible to terminals, do NOT bind:
 ;; M-[, M-], M-O, etc.
 
+;; Directly open network resources
+(url-handler-mode +1)
+
 ;; Indicate the depth of recursive editing.
 (minibuffer-depth-indicate-mode +1)
 
