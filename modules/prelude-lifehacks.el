@@ -2,10 +2,6 @@
 ;;;
 ;;; A collection of lifehacks.
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Web Search
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defvar web-search-history nil)
 
 (defun web-search ()
@@ -16,6 +12,10 @@
     (browse-url kagi-url)))
 
 (defalias 'kagi 'web-search)
+
+(use-package life-calendar
+  :vc (:fetcher github :repo "vshender/emacs-life-calendar")
+  :ensure t)
 
 (provide 'prelude-lifehacks)
 ;;; prelude-lifehacks.el ends here
