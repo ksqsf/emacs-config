@@ -4,14 +4,21 @@
 
 (defvar web-search-history nil)
 
-(defun web-search ()
+(defun web-search (url)
   "Search the Internet."
   (interactive)
-  (let* ((input (read-from-minibuffer "Search: " nil nil nil 'web-search-history))
-         (kagi-url (format "https://kagi.com/search?q=%s" (url-encode-url input))))
-    (browse-url kagi-url)))
+  (let* ((input (read-from-minibuffer "Search: " nil nil nil 'web-search-history)))
+    (browse-url (concat url (url-encode-url input)))))
 
-(defalias 'kagi 'web-search)
+(defun kagi ()
+  "Search with Kagi."
+  (interactive)
+  (web-serach "https://kagi.com/search?q="))
+
+(defun ddg ()
+  "Search with DuckDuckGo."
+  (interactive)
+  (web-search "https://duckduckgo.com/?q="))
 
 (use-package life-calendar
   :vc (:fetcher github :repo "vshender/emacs-life-calendar")
