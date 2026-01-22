@@ -14,9 +14,12 @@
         ;; dired-style keybinding
         ("C-x C-q" . wgrep-change-to-wgrep-mode)))
 
-;; ripgrep
-(use-package rg
-  :bind ("M-s M-s" . rg-menu))
+(defun consult-ripgrep-current-dir ()
+  "Search with rg for files in the current directory with INITIAL input."
+  (interactive)
+  (consult-ripgrep default-directory nil))
+
+(keymap-global-set "M-s M-s" #'consult-ripgrep-current-dir)
 
 (with-eval-after-load 'grep
   (push ".tags" grep-find-ignored-files)
