@@ -340,7 +340,10 @@
   :custom
   (isearch-lazy-count t)
   (isearch-allow-motion t)
-  (isearch-motion-changes-direction t))
+  (isearch-motion-changes-direction t)
+  (isearch-regexp-lax-whitespace t)
+  (search-ring-max 200)
+  (regexp-search-ring-max 200))
 
 ;; Sublime-like multiple cursors.
 (use-package multiple-cursors
