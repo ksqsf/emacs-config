@@ -17,6 +17,11 @@
               ("C-c C-c" . python-shell-send-buffer)
               ("C-x C-e" . python-shell-send-statement))
   :config
+
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+                 '((python-mode python-ts-mode) "ty" "server")))
+
   ;; (add-hook 'inferior-python-mode-hook
   ;;           (lambda ()
   ;;             (company-mode t)))
