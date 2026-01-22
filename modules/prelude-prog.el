@@ -271,6 +271,7 @@ The history is stored in FILENAME."
   (setq indent-bars-no-descend-lists t)
   (setq indent-bars-display-on-blank-lines 'least)
   (setq indent-bars-treesit-support t)
+  (setq indent-bars-no-descend-lists 'skip)
   :hook ((prog-mode . indent-bars-mode)
          (lua-mode . (lambda ()
                        (setq indent-bars-spacing-override lua-indent-level)))
