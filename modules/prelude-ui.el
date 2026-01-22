@@ -7,6 +7,16 @@
 ;; TUI prettification
 (set-display-table-slot standard-display-table 5 ?│)  ;; ?┃ ?┆ ?┇
 
+(defun +tui-unset-background ()
+  "Remove the background color from the default face in TUI."
+  (interactive)
+  (unless (display-graphic-p)
+    (set-face-attribute 'default nil :background "unspecified-bg")))
+
+(add-hook 'server-after-make-frame-hook #'+tui-unset-background)
+
+(advice-add 'load-theme :after #'+tui-unset-background)
+
 ;; A quick way to toggle maximized
 (global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
 
