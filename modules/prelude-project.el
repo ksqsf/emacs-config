@@ -15,6 +15,9 @@
   (require 'projection)
   (require 'projection-multi)
 
+  ;; eat integration
+  (add-to-list 'project-kill-buffer-conditions '(major-mode . eat-mode))
+
   ;; vterm integraion
   (add-to-list 'project-kill-buffer-conditions '(major-mode . vterm-mode))
   (defun project-vterm ()
