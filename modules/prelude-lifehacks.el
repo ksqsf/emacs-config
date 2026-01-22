@@ -13,7 +13,7 @@
 (defun kagi ()
   "Search with Kagi."
   (interactive)
-  (web-serach "https://kagi.com/search?q="))
+  (web-search "https://kagi.com/search?q="))
 
 (defun ddg ()
   "Search with DuckDuckGo."
