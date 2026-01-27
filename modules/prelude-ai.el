@@ -18,7 +18,7 @@
 
 (defun gemini-api-key ()
   (require 'gptel)
-  (gptel-api-key-from-auth-source "aistudio.google.com"))
+  (gptel-api-key-from-auth-source "generativelanguage.googleapis.com"))
 
 (defun openrouter-api-key ()
   (require 'gptel)
@@ -35,6 +35,11 @@
           (chat . "You are a large language model and a conversation partner. Respond concisely.")
           (bug . "You are a large language model and a careful programmer. The supplied code doesn't work, or contains bugs. Describe each problem using only one sentence. Provide fixes without changing the old behavior.")))
 
+  ;; Gemini
+  (gptel-make-gemini "Gemini"
+    :stream t
+    :key #'gemini-api-key)
+
   ;; DeepSeek
   (gptel-make-deepseek "DeepSeek"
     :stream t
@@ -44,11 +49,6 @@
   (gptel-make-anthropic "Claude"
     :stream t
     :key #'anthropic-api-key)
-
-  ;; Gemini -- use OpenRouter instead
-  ;; (gptel-make-gemini "Gemini"
-  ;;   :stream t
-  ;;   :key #'gemini-api-key)
 
   ;; OpenRouter
   (gptel-make-openai "OpenRouter"
