@@ -222,9 +222,10 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
 
 (add-to-list 'hs-special-modes-alist
              '(markdown-mode
-               "^``` reasoning$"
-               "^```$"                  ;end
-               hs-forward-sexp))
+               "``` reasoning"
+               "```"
+               nil
+               nil))
 (add-hook 'markdown-mode-hook #'hs-minor-mode)
 
 (provide 'prelude-ai)
