@@ -74,6 +74,22 @@
   :hook (org-mode . org-xlatex-mode)
   :hook (markdown-mode . org-xlatex-mode))
 
+
+;; Org-mode editing
+(defun +org-table-column-from-rectangle ()
+  "Insert killed rectangle as cells in org table column."
+  (interactive)
+  (let ((lines (split-string (current-kill 0) "\n")))
+    (dolist (line lines)
+      (insert line)
+      (org-table-next-row))))
+
+(setq org-todo-keywords
+      '((sequence "TODO" "DOING" "|" "DONE")))
+
+(setq org-todo-keyword-faces
+      'nil)
+
 ;; (org) Speed Keys
 (setq org-use-speed-commands
       (lambda () (and (looking-at org-outline-regexp) (looking-back "^\\**"))))
@@ -242,32 +258,38 @@
 
 (use-package vulpea
   :bind (("C-c n f" . vulpea-find)
-         ("C-c n i" . vulpea-insert)
-         ("C-c n l" . vulpea-find-backlink))
+         ("C-c n i" . vulpea-insert))
   :custom
   (vulpea-default-notes-directory "~/org/Roam")
   :config
   (vulpea-db-autosync-mode +1)
 
-  (use-package vulpea-ui
-    :after vulpea)
+  ;; Don't show the original file name for notes.
+  (advice-add 'vulpea-find :after
+              (lambda (&rest r)
+                (when-let* ((title (org-get-title)))
+                  (rename-buffer title)))))
 
-  (use-package vulpea-journal
-    :after (vulpea vulpea-ui)
-    :vc (:fetcher github :repo "d12frosted/vulpea-journal")
-    :config
+(use-package vulpea-ui
+  :after (vulpea)
+  :bind ("C-c n l" . vulpea-ui-sidebar-toggle))
 
-    (setq vulpea-journal-default-template
-          '(:file-name "daily/%Y-%m-%d.org"
-                       :title "%Y-%m-%d %A"
-                       :tags ("journal")
-                       :head "#+created: %<[%Y-%m-%d]>"))
+(use-package vulpea-journal
+  :after (vulpea vulpea-ui)
+  :bind (("C-c n d" . vulpea-journal-date))
+  :vc (:fetcher github :repo "d12frosted/vulpea-journal")
+  :config
 
-    ;; this seems like a bug in vulpea-journal's current version.
-    (setq vulpea-directory "~/org")
+  (setq vulpea-journal-default-template
+        '(:file-name "daily/%Y-%m-%d.org"
+                     :title "%Y-%m-%d %A"
+                     :tags ("journal")
+                     :head "#+created: %<[%Y-%m-%d]>"))
 
-    (vulpea-journal-setup)))
+  ;; this seems like a bug in vulpea-journal's current version.
+  (setq vulpea-directory "~/org")
 
+  (vulpea-journal-setup))
 
 ;;
 ;; Org-roam stuff all deleted in favor of Vulpea.
