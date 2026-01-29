@@ -292,22 +292,6 @@ The results are stored in three buffers:
   (next-line)
   (sort-fields 2 (region-beginning) (region-end)))
 
-(defun deploy-weasel ()
-  "Deploy Weasel."
-  (interactive)
-  (let ((default-directory "~/src/Clone/plum/")
-        (deployer-path (car (last (file-expand-wildcards "/mnt/d/Program Files/Rime/weasel-*/WeaselDeployer.exe")))))
-    (shell-command (format "\"%s\" /deploy &" deployer-path))))
-
-(defun update-weasel-moran (&optional deploy)
-  "Install moran to weasel and deploy."
-  (interactive)
-  (let ((default-directory "~/src/Clone/plum/")
-        (deployer-path (car (last (file-expand-wildcards "/mnt/d/Program Files/Rime/weasel-*/WeaselDeployer.exe")))))
-    (with-environment-variables (("rime_dir" "/mnt/d/Rime/")
-                                 ("no_update" "1"))
-      (shell-command (format "bash rime-install rimeinn/rime-moran@main && \"%s\" /deploy &" deployer-path)))))
-
 (defun update-weasel-kagiroi ()
   "Install kagiroi to weasel and deploy."
   (interactive)
@@ -317,53 +301,44 @@ The results are stored in three buffers:
                                  ("no_update" "1"))
       (shell-command (format "bash rime-install rimeinn/rime-kagiroi@main && \"%s\" /deploy &" deployer-path)))))
 
-(defun update-f5m-moran ()
-  "Install moran to f5m and deploy."
-  (interactive)
-  (let ((default-directory "~/plum/"))
-    (with-environment-variables (("rime_dir" (expand-file-name "~/.local/share/fcitx5/rime/"))
-                                 ("no_update" "1"))
-      (shell-command "make -C package/rimeinn/moran")
-      (shell-command (format "bash rime-install rimeinn/rime-moran@main && \"/Library/Input Methods/Fcitx5.app/Contents/bin/fcitx5-curl\" /config/addon/rime/deploy -X POST -d '{}' &")))))
+(defvar plum-dir (expand-file-name "~/src/Clone/plum/")
+  "Default plum dir")
 
-(defun deploy-f5m ()
-  "Deploy fcitx5-macos."
+(defun plum-install (recipe &optional deploy-cmd)
+  "Update rime"
   (interactive)
-  (shell-command "\"/Library/Input Methods/Fcitx5.app/Contents/bin/fcitx5-curl\" /config/addon/rime/deploy -X POST -d '{}' &"))
+  (setq deploy-cmd (or deploy-cmd "true"))
+  (let ((default-directory plum-dir))
+    (shell-command (format "bash rime-install %s && %s &"
+                           recipe
+                           deploy-cmd))))
 
-(defun update-squirrel-moran ()
-  "Install moran to Squirrel and deploy."
+(defun f5m-deploy-cmd ()
+  "\"/Library/Input Methods/Fcitx5.app/Contents/bin/fcitx5-curl\" /config/addon/rime/deploy -X POST -d '{}'")
+
+(defun update-f5m ()
   (interactive)
-  (let ((default-directory "~/plum/")
-        (squirrel-path (car (last (file-expand-wildcards "/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel")))))
-    (with-environment-variables (("rime_dir" (expand-file-name "~/Library/Rime/"))
-                                 ("no_update" "1"))
-      (shell-command "make -C package/rimeinn/moran")
-      (shell-command (format "bash rime-install rimeinn/rime-moran@main && \"%s\" --reload &" squirrel-path)))))
+  (with-environment-variables (("rime_dir" (expand-file-name "~/.local/share/fcitx5/rime/"))
+                               ("branch_moran" "main"))
+    (plum-install "rimeinn/rime-mkm/mkm-packages.conf" (f5m-deploy-cmd))))
 
-(defun update-squirrel-kagiroi ()
-  "Install kagiroi to Squirrel and deploy."
-  (interactive)
-  (let ((default-directory "~/plum/")
-        (squirrel-path (car (last (file-expand-wildcards "/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel")))))
-    (with-environment-variables (("rime_dir" (expand-file-name "~/Library/Rime/"))
-                                 ("no_update" "1"))
-      (shell-command (format "bash rime-install rimeinn/rime-kagiroi && \"%s\" --reload &" squirrel-path)))))
-
+(defun weasel-deploy-cmd ()
+  (let ((deployer-path (car (last (file-expand-wildcards "/mnt/d/Program Files/Rime/weasel-*/WeaselDeployer.exe")))))
+    (format "\"%s\" /deploy" deployer-path)))
 
 (defun update-weasel ()
-  "Install moran and kagiroi to Weasel and deploy."
+  "Update weasel."
   (interactive)
-  (update-weasel-moran)
-  (update-weasel-kagiroi))
+  (with-environment-variables (("rime_dir" "/mnt/d/Rime/"
+                                "branch_moran" "main"))
+    (plum-install "rimeinn/rime-mkm/mkm-packages.conf" (weasel-deploy-cmd))))
 
 (defun update-emacs-rime ()
-  "Install moran to emacs-rime and deploy."
+  "Update emacs-rime."
   (interactive)
-  (let ((default-directory "~/src/Clone/plum/package/rimeinn/moran/"))
-    (shell-command "make dist DESTDIR=~/.emacs.d/var/rime"))
-  (require 'rime)
-  (rime-deploy))
+  (with-environment-variables (("rime_dir" "~/.emacs.d/var/rime/"
+                                "branch_moran" "main"))
+    (plum-install "rimeinn/rime-mkm/mkm-packages.conf")))
 
 (defun my-update-rime-file-date ()
   "Update rime yaml versions."
@@ -377,3 +352,4 @@ The results are stored in three buffers:
           (replace-match (format "version: \"%s\""
                                (format-time-string "%Y%m%d"))))))))
 (add-hook 'before-save-hook 'my-update-rime-file-date)
+
