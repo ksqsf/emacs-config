@@ -9,6 +9,35 @@
                    (and (get-buffer-process (current-buffer))
                         (not (process-running-child-p (get-buffer-process (current-buffer))))))))
 
+;; vterm
+(use-package vterm
+  :commands (vterm)
+  :bind (:map vterm-mode-map
+              ("C-c C-t" . vterm-copy-mode))
+  :custom
+  (vterm-always-compile-module t)
+  :hook (vterm-mode . goto-address-mode)
+  :config
+
+  ;; Integration with desktop-save-mode
+  (defvar vterm-persist-buffer-contents t
+    "When t, desktop-save-mode also saves the buffer contents.")
+  (defun vterm-save-desktop-buffer (dirname)
+    (cons
+     (desktop-file-name default-directory dirname)
+     (if vterm-persist-buffer-contents (buffer-string) "")))
+  (defun vterm-restore-desktop-buffer (_filename buffer-name misc)
+    "MISC is the saved return value of `desktop-save-vterm'."
+    (let ((default-directory (car misc)))
+      (require 'vterm)
+      (with-current-buffer (get-buffer-create buffer-name)
+        (when vterm-persist-buffer-contents
+          (insert (cdr misc))
+          (insert "\n\n"))
+        (vterm-mode))))
+  (add-to-list 'desktop-buffer-mode-handlers '(vterm-mode . vterm-restore-desktop-buffer))
+  (add-hook 'vterm-mode-hook #'(lambda () (setq-local desktop-save-buffer 'vterm-save-desktop-buffer))))
+
 ;; Eat
 (use-package eat
   :bind
