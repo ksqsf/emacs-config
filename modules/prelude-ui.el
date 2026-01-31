@@ -344,49 +344,19 @@
   :diminish ""
   :hook (after-init . which-key-mode))
 
-;; Preferred dark and light themes.
-; (use-package one-themes :defer t)
-; (use-package catppuccin-theme :defer t)
-; (use-package dracula-theme :defer t)
+;; Install some theme packs.
 (use-package doom-themes :defer t)
+(use-package modus-themes :defer t)
+(use-package ef-themes :defer t)
 
-(defcustom prelude-enable-switch-dark-light nil
-  "Whether automatically switch the current theme to match the
-system's dark or light variant."
-  :group 'prelude
-  :type 'boolean)
-(defcustom prelude-theme-package 'doom-themes
-  "The package that defines `prelude-dark-theme' and `prelude-light-theme'."
-  :group 'prelude
-  :type 'symbol)
-(defcustom prelude-dark-theme 'doom-oksolar-dark
-  "Preferred dark theme."
-  :group 'prelude
-  :type 'symbol)
-(defcustom prelude-light-theme 'doom-oksolar-light
-  "Preferred light theme."
-  :group 'prelude
-  :type 'symbol)
+(setopt modus-themes-italic-constructs nil
+        modus-themes-bold-constructs t
+        modus-themes-faces t
+        modus-themes-variable-pitch-ui t
+        modus-themes-disable-other-themes t)
 
-(defun prelude-switch-light-dark (appearance)
-  (catch 'foo
-    (when (not prelude-enable-switch-dark-light)
-      (throw 'foo nil))
-    (when (not (package-installed-p prelude-theme-package))
-      (package-install prelude-theme-package))
-    (when (not (featurep prelude-theme-package))
-      (require prelude-theme-package))
-    (cond
-     ((eq appearance 'dark)
-      (disable-theme prelude-light-theme)
-      (load-theme prelude-dark-theme))
-     ((eq appearance 'light)
-      (disable-theme prelude-dark-theme)
-      (load-theme prelude-light-theme)))))
-
-(add-hook 'ns-system-appearance-change-functions #'prelude-switch-light-dark)
-
-
+;; Auto switch dark and light.
+;; (add-hook 'ns-system-appearance-change-functions #'prelude-switch-light-dark)
 
 ;; FIXME: Side windows?
 (defun window-lift ()
