@@ -353,3 +353,12 @@ The results are stored in three buffers:
                                (format-time-string "%Y%m%d"))))))))
 (add-hook 'before-save-hook 'my-update-rime-file-date)
 
+
+(defun update-squirrel ()
+  "Update squirrel."
+  (interactive)
+  (let ((plum-dir "~/plum"))
+    (with-environment-variables (("rime_dir" (expand-file-name "~/Library/Rime"))
+                                 ("branch_moran" "main"))
+      (plum-install "rimeinn/rime-mkm/mkm-packages.conf"
+                    "'/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel' --reload"))))
