@@ -7,7 +7,8 @@
 (defun web-search (url)
   "Search the Internet."
   (interactive)
-  (let* ((input (read-from-minibuffer "Search: " nil nil nil 'web-search-history)))
+  (let* ((input (read-from-minibuffer "Search: " nil nil nil 'web-search-history
+                                      (thing-at-point 'symbol))))
     (browse-url (concat url (url-encode-url input)))))
 
 (defun kagi ()
