@@ -185,4 +185,25 @@
   (interactive "r")
   (opencc-on-region beg end "s2t"))
 
+(defvar hanzi-search-history nil)
+
+(defun hanzi-search (prompt cmd)
+  "Invoke rimeinn/hanzi-search @ github"
+  (let ((args (read-from-minibuffer prompt nil nil nil 'hanzi-search-history))
+        (buf (get-buffer-create "*hanzi-search*")))
+    (shell-command (format "hanzi-search %s %s" cmd args) buf)
+    (switch-to-buffer buf)))
+
+(defun hanzi-search-find ()
+  (interactive)
+  (hanzi-search "簡單查詢: " "find"))
+
+(defun hanzi-search-match ()
+  (interactive)
+  (hanzi-search "全字匹配: " "match"))
+
+(defun hanzi-search-pmatch ()
+  (interactive)
+  (hanzi-search "部分匹配: " "pmatch"))
+
 (provide 'prelude-chinese)
