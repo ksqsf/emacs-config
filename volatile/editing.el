@@ -340,6 +340,17 @@ The results are stored in three buffers:
                                 "branch_moran" "main"))
     (plum-install "rimeinn/rime-mkm/mkm-packages.conf")))
 
+(defun update-squirrel ()
+  "Update squirrel."
+  (interactive)
+  (let ((plum-dir "~/plum"))
+    (with-environment-variables (("rime_dir" (expand-file-name "~/Library/Rime"))
+                                 ("branch_moran" "main"))
+      (plum-install "rimeinn/rime-mkm/mkm-packages.conf"
+                    "'/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel' --reload"))))
+
+
+
 (defun my-update-rime-file-date ()
   "Update rime yaml versions."
   (catch 'foo
@@ -351,14 +362,14 @@ The results are stored in three buffers:
         (when t ;(y-or-n-p "Update version? ")
           (replace-match (format "version: \"%s\""
                                (format-time-string "%Y%m%d"))))))))
-(add-hook 'before-save-hook 'my-update-rime-file-date)
-
-
-(defun update-squirrel ()
-  "Update squirrel."
-  (interactive)
-  (let ((plum-dir "~/plum"))
-    (with-environment-variables (("rime_dir" (expand-file-name "~/Library/Rime"))
-                                 ("branch_moran" "main"))
-      (plum-install "rimeinn/rime-mkm/mkm-packages.conf"
-                    "'/Library/Input Methods/Squirrel.App/Contents/MacOS/Squirrel' --reload"))))
+(define-minor-mode rime-maint-mode
+  "Toggle automatic updating of Rime YAML file versions.
+When enabled, automatically updates the version field in YAML files
+before saving."
+  :global t
+  :init-value t
+  :lighter " Rime"
+  (if rime-maint-mode
+      (add-hook 'before-save-hook 'my-update-rime-file-date)
+    (remove-hook 'before-save-hook 'my-update-rime-file-date)))
+(rime-maint-mode 1)
