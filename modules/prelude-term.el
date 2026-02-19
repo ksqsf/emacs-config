@@ -40,15 +40,14 @@
 
 ;; Eat
 (use-package eat
+  :vc (:fetcher github :repo "ksqsf/emacs-eat")  ; my own fork of eat
   :bind
   (("M-g v" . eat)  ;; Take place of vterm-toggle
    :map eat-semi-char-mode-map
-        ("M-o" . other-window))
+   ("M-o" . other-window))
   :config
   (setq eat-kill-buffer-on-exit t)
   (setq eat-enable-blinking-text t)
-  ;; Note: this integration only works if $TERM starts with "eat".
-  ;; So you cannot set $TERM to xterm.
   (setq eat-enable-directory-tracking t))
 
 ;; VTerm
