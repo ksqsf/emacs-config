@@ -52,7 +52,7 @@
 (require 'prelude-ibuffer)
 (require 'prelude-chinese)
 (require 'prelude-dired)
-(require 'prelude-git)
+(require 'prelude-vc)
 (require 'prelude-tex)
 (require 'prelude-org)
 (require 'prelude-blog)
@@ -105,3 +105,4 @@
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'erase-buffer 'disabled nil)
+(put 'list-threads 'disabled nil)

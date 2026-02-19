@@ -3,6 +3,9 @@
 (with-eval-after-load 'diff-mode
   (keymap-unset diff-mode-map "M-o"))
 
+(with-eval-after-load 'ediff
+  (setq ediff-split-window-function #'split-window-horizontally))
+
 (use-package magit
   :defer t
   :iload (magit-base magit-git magit-mode magit-process magit-status magit-submodule magit)
