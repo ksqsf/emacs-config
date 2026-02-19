@@ -81,4 +81,4 @@ This function returns nil if it cannot parse REMOTE."
   (let ((url (buffer-substring (point) (pos-eol))))
     (browse-url (s-trim url))))
 
-(provide 'prelude-git)
+(provide 'prelude-vc)
