@@ -7,6 +7,7 @@ newsrc.eld
 org-roam.db
 triples.db
 volatile/*-priv.el
+.chatgpt-shell.el
 
 # Caches
 *.elc
@@ -33,6 +34,7 @@ backups
 .DS_Store
 
 # Other binary blobs
+vulpea.db
 codeium/
 dump/
 librime/
