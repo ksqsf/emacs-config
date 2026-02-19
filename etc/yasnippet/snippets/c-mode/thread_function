@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: thread_function
+# key: tf
+# --
+void *
+$1(void *arg)
+{
+    return NULL;
+}

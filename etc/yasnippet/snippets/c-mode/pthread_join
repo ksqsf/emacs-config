@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pthread_join
+# key: pj
+# --
+pthread_join($1, NULL);

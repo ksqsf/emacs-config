@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pthread_create
+# key: pc
+# --
+pthread_create(&$1, NULL, $2, NULL);
