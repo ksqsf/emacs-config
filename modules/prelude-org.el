@@ -14,7 +14,7 @@
 
 ;; Basic user options and special org files
 (setq org-directory "~/org")
-(setq org-agenda-files '("~/org"))
+(setq org-agenda-files '("~/org" "~/org/Projects/"))
 (setq org-agenda-span 13)
 (setq org-agenda-start-day "-3d")
 (setq org-agenda-todo-ignore-scheduled 'future)
@@ -86,9 +86,9 @@
 
 (setq org-todo-keywords
       '((sequence "TODO" "DOING" "|" "DONE")))
-
-(setq org-todo-keyword-faces
-      'nil)
+(font-lock-add-keywords 'org-mode
+                        '(("^\\*+ \\(CANCELLED +.*\\)$"
+                           1 '(:strike-through t) prepend)))
 
 ;; (org) Speed Keys
 (setq org-use-speed-commands
