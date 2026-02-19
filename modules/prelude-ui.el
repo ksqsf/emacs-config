@@ -15,8 +15,6 @@
 
 (add-hook 'server-after-make-frame-hook #'+tui-unset-background)
 
-(advice-add 'load-theme :after #'+tui-unset-background)
-
 ;; A quick way to toggle maximized
 (global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
 
