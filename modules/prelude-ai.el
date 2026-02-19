@@ -29,11 +29,7 @@
          ("C-h C-h" . gptel))
   :config
   (setq gptel-directives
-        '((default . "You are a large language model living in Emacs and a helpful assistant. Respond concisely.")
-          (programming . "You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note.")
-          (writing . "You are a large language model and a writing assistant. Respond concisely.")
-          (chat . "You are a large language model and a conversation partner. Respond concisely.")
-          (bug . "You are a large language model and a careful programmer. The supplied code doesn't work, or contains bugs. Describe each problem using only one sentence. Provide fixes without changing the old behavior.")))
+        '((default . "Be terse, to the point, and helpful. Do not offer unprompted advice or clarifications.")))
 
   ;; Gemini
   (gptel-make-gemini "Gemini"
