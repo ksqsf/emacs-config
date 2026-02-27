@@ -109,40 +109,16 @@
   :config
   (setq dall-e-shell-openai-key #'gptel-api-key-from-auth-source))
 
-(use-package minuet
-  :vc (:fetcher github :repo "milanglacier/minuet-ai.el")
-  :defer t
-  :bind
-  (("M-i" . #'minuet-show-suggestion)
-   ("M-I" . #'minuet-complete-with-minibuffer)
-   :map minuet-active-mode-map
-   ("M-p" . #'minuet-previous-suggestion)
-   ("M-n" . #'minuet-next-suggestion)
-   ("TAB" . #'minuet-accept-suggestion)
-   ("C-n" . #'minuet-accept-suggestion-line)
-   ("C-g" . #'minuet-dismiss-suggestion))
-  :config
-
-  (defun minuet-use-openai ()
-    "Use gpt-4o-mini for code auto-completion."
-    (interactive)
-    (setq minuet-provider 'openai)
-    (plist-put minuet-openai-options :api-key #'gptel-api-key-from-auth-source))
-
-  (defun minuet-use-deepseek ()
-    "Use deepseek-chat for code auto-completion."
-    (interactive)
-    (setq minuet-provider 'openai-fim-compatible)
-    (plist-put minuet-openai-fim-compatible-options :endpoint "https://api.deepseek.com/chat/completions")
-    (plist-put minuet-openai-fim-compatible-options :api-key #'deepseek-api-key))
-
-  (defun minuet-use-claude ()
-    "Use claude-3.5-sonnet for code auto-completion."
-    (interactive)
-    (setq minuet-provider 'claude)
-    (plist-put minuet-claude-options :api-key #'anthropic-api-key))
-
-  (minuet-use-claude))
+(use-package copilot
+  :ensure t
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . copilot-accept-completion)
+              ("TAB" . copilot-accept-completion)
+              ("C-<tab>" . copilot-accept-completion-by-word)
+              ("C-TAB" . copilot-accept-completion-by-word)
+              ("C-n" . copilot-next-completion)
+              ("C-p" . copilot-previous-completion)))
 
 (use-package chatgpt-shell
   :commands (chatgpt-shell)
