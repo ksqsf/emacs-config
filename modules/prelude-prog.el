@@ -39,6 +39,19 @@
   (advice-add 'treesit--explorer-jump :after #'treesit--explorer-jump-advice-really-jump))
 
 
+;;; Indentation bars
+
+(use-package indent-bars
+  ;; indent-bars-mode must be run after the indentation settings are done.
+  ;; we put it before any other settings, so the hook gets run last.
+  :config
+  (setq indent-bars-no-descend-lists t)
+  (setq indent-bars-display-on-blank-lines 'least)
+  (setq indent-bars-treesit-support t)
+  (setq indent-bars-no-descend-lists 'skip)
+  :hook (((lua-mode c-mode c++-mode java-mode yaml-mode yaml-ts-mode) . indent-bars-mode)))
+
+
 ;;; Snippets
 (use-package yasnippet
   :commands (yas-minor-mode yas-global-mode))
@@ -264,19 +277,6 @@ The history is stored in FILENAME."
   :ensure nil
   :config
   (setopt flymake-show-diagnostics-at-end-of-line 'short))
-
-
-(use-package indent-bars
-  :config
-  (setq indent-bars-no-descend-lists t)
-  (setq indent-bars-display-on-blank-lines 'least)
-  (setq indent-bars-treesit-support t)
-  (setq indent-bars-no-descend-lists 'skip)
-  :hook ((prog-mode . indent-bars-mode)
-         (lua-mode . (lambda ()
-                       (setq indent-bars-spacing-override lua-indent-level)))
-         (c-common-mode . (lambda ()
-                            (setq-local indent-bars-spacing-override 4)))))
 
 
 (provide 'prelude-prog)
