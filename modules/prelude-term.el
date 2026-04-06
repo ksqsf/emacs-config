@@ -38,6 +38,12 @@
   (add-to-list 'desktop-buffer-mode-handlers '(vterm-mode . vterm-restore-desktop-buffer))
   (add-hook 'vterm-mode-hook #'(lambda () (setq-local desktop-save-buffer 'vterm-save-desktop-buffer))))
 
+;; Ghostel
+(use-package ghostel
+  :load-path "lisp/ghostel"
+  :bind
+  (("M-g v" . ghostel)))
+
 ;; Eat
 (use-package eat
   :vc (:fetcher github :repo "ksqsf/emacs-eat")  ; my own fork of eat

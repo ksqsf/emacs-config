@@ -10,3 +10,6 @@
 [submodule "lisp/spookfox"]
 	path = lisp/spookfox
 	url = https://github.com/bitspook/spookfox
+[submodule "lisp/ghostel"]
+	path = lisp/ghostel
+	url = https://github.com/dakra/ghostel.git
