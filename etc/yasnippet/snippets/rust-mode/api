@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: api
+# key: api
+# --
+define_api_endpoint! {
+    $1,
+    $2,
+    request: $3,
+    response: $4,
+}
