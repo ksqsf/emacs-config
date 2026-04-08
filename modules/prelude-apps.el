@@ -202,4 +202,9 @@
         ("America/New_York" "New York")
         ("America/Los_Angeles" "Los Angeles")))
 
+;; beancount
+(use-package beancount
+  :mode ("\\.beancount\\'" . beancount-mode)
+  :hook (beancount-mode . flymake-mode))
+
 (provide 'prelude-apps)
