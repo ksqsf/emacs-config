@@ -113,6 +113,10 @@
 (defalias 'dd-term 'drop-down-term)
 (defalias 'ddt 'drop-down-term)
 
+(use-package kitty-graphics
+  :if (not (display-graphic-p))
+  :vc (:fetcher github :repo "cashmeredev/kitty-graphics.el"))
+
 (provide 'prelude-term)
 ;;; prelude-term.el ends here
 
