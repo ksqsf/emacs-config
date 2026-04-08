@@ -7,6 +7,18 @@
 ;; GC.
 (add-hook 'focus-out-hook #'garbage-collect)
 
+;; Performance
+(setq-default bidi-paragraph-direction 'left-to-right)
+(setq-default bidi-display-reordering nil)
+(setq bidi-inhibit-bpa t)
+(defun +bidi-enable ()
+  "Enable bidi support in a buffer-local manner."
+  (setq-local bidi-paragraph-direction 'nil)
+  (setq-local bidi-display-reordering t)
+  (setq bidi-inhibit-bpa nil))
+(setq redisplay-skip-fontification-on-input t)
+(setq ffap-machine-p-known 'reject)
+
 ;; auto revert everything, including dired.
 (global-auto-revert-mode)
 (setq global-auto-revert-non-file-buffers t)
@@ -413,6 +425,9 @@ Useful for reading Python exception traces."
 
 ;; Save positions in files
 (save-place-mode +1)
+(advice-add 'save-place-find-file-hook :after
+            (lambda (&rest _)
+              (when buffer-file-name (ignore-errors (recenter)))))
 
 ;; Utilities
 (defun update ()

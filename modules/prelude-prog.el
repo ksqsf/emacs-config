@@ -15,6 +15,9 @@
 (setq xref-history-storage 'xref-window-local-history)
 (setq xref-search-program 'ripgrep)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
+(add-hook 'after-save-hook
+          #'executable-make-buffer-file-executable-if-script-p)
+(setq reb-re-syntax 'string)
 
 
 ;;; Tree-sitter basic configuration

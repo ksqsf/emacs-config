@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
+(setq help-window-select t)
+
 (use-package helpful
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
