@@ -28,8 +28,9 @@
   :bind (("C-h RET" . gptel-send)  ;; C-u C-h RET for gptel-menu
          ("C-h C-h" . gptel))
   :config
+  (setq gptel-default-mode 'org-mode)
   (setq gptel-directives
-        '((default . "Be terse, to the point, and helpful. Do not offer unprompted advice or clarifications.")))
+        '((default . "Respond in org-mode. Be terse, to the point, and helpful. Do not offer unprompted advice or clarifications.")))
 
   ;; Gemini
   (gptel-make-gemini "Gemini"
@@ -54,12 +55,13 @@
     :key #'openrouter-api-key
     :models '((moonshotai/kimi-k2.5
                :capabilities (media tool json url))
-              google/gemini-3-pro-preview
+              google/gemini-3.1-pro-preview
               anthropic/claude-sonnet-4.6
-              anthropic/claude-opus-4.6))
+              anthropic/claude-opus-4.6
+              openai/gpt-5.4))
 
   ;; Default backend and model
-  (setopt gptel-model 'claude-sonnet-4-5-20250929
+  (setopt gptel-model 'claude-sonnet-4-6
           gptel-backend (cdr (assoc "Claude" gptel--known-backends))
           gptel-default-mode 'markdown-mode)
 
@@ -149,6 +151,23 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
       :as 'string
       :then (lambda (result) (funcall callback result)))))
 
+(defun fetch-url-text (url)
+  "Fetch text content from URL."
+  (require 'plz)
+  (require 'shr)
+  (let ((plz-curl-default-args (cons "-k" plz-curl-default-args)))
+    (plz 'get url
+      :as 'string
+      :timeout 5
+      :then (lambda (html)
+              (with-temp-buffer
+                (insert html)
+                (shr-render-region (point-min) (point-max))
+                (shr-link-to-markdown)
+                (buffer-substring-no-properties (point-min) (point-max))))
+      :else (lambda (error)
+              (format "Error fetching URL: %s" error)))))
+
 (defun fetch-url-text-async (callback url)
   "Fetch text content from URL."
   (require 'plz)
@@ -156,12 +175,15 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
   (let ((plz-curl-default-args (cons "-k" plz-curl-default-args)))
     (plz 'get url
       :as 'string
+      :timeout 5
       :then (lambda (html)
               (with-temp-buffer
                 (insert html)
                 (shr-render-region (point-min) (point-max))
                 (shr-link-to-markdown)
-                (funcall callback (buffer-substring-no-properties (point-min) (point-max))))))))
+                (funcall callback (buffer-substring-no-properties (point-min) (point-max)))))
+      :else (lambda (error)
+              (funcall callback (format "Error fetching URL: %s" error))))))
 
 (defun shr-link-to-markdown ()
   "Replace all shr-link in the current buffer to markdown format"
