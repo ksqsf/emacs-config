@@ -258,7 +258,8 @@
 
 (use-package vulpea
   :bind (("C-c n f" . vulpea-find)
-         ("C-c n i" . vulpea-insert))
+         ("C-c n i" . vulpea-insert)
+         ("C-c n d" . vulpea-journal-date))
   :custom
   (vulpea-default-notes-directory "~/org/Roam")
   :config
