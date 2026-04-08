@@ -5,7 +5,17 @@
 (setq frame-inhibit-implied-resize t)
 
 ;; TUI prettification
-(set-display-table-slot standard-display-table 5 ?│)  ;; ?┃ ?┆ ?┇
+(unless (display-graphic-p)
+  (standard-display-unicode-special-glyphs)
+  (set-display-table-slot standard-display-table 5 ?│)  ;; ?┃ ?┆ ?┇
+  (set-display-table-slot standard-display-table
+                          'box-down-right (make-glyph-code #x256d))
+  (set-display-table-slot standard-display-table
+                          'box-down-left (make-glyph-code #x256e))
+  (set-display-table-slot standard-display-table
+                          'box-up-right (make-glyph-code #x2570))
+  (set-display-table-slot standard-display-table
+                          'box-up-left (make-glyph-code #x256f)))
 
 (defun +tui-unset-background ()
   "Remove the background color from the default face in TUI."
