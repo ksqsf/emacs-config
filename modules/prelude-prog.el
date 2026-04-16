@@ -175,19 +175,15 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 
 
 (use-package copilot
-  :disabled
-  :hook (prog-mode . copilot-mode)
-  :vc (:fetcher github :repo "zerolfx/copilot.el")
+  :ensure t
+  ;; :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
               ("<tab>" . copilot-accept-completion)
-              ("<right>" . copilot-accept-completion)
-              ("M-f" . copilot-accept-completion-by-word)
-              ("C-e" . copilot-accept-completion-by-line)
-              ("M-n" . copilot-next-completion)
-              ("M-p" . copilot-previous-completion))
-  :config
-  (setq copilot-network-proxy '(:host "127.0.0.1" :port 7890))
-  (setq copilot-balancer-debug-buffer (get-buffer-create " *copilot-balancer*")))
+              ("TAB" . copilot-accept-completion)
+              ("C-<tab>" . copilot-accept-completion-by-word)
+              ("C-TAB" . copilot-accept-completion-by-word)
+              ("C-n" . copilot-next-completion)
+              ("C-p" . copilot-previous-completion)))
 
 
 (use-package citre
