@@ -13,3 +13,6 @@
 [submodule "lisp/ghostel"]
 	path = lisp/ghostel
 	url = https://github.com/dakra/ghostel.git
+[submodule "lisp/tramp-rpc"]
+	path = lisp/tramp-rpc
+	url = https://github.com/ArthurHeymans/emacs-tramp-rpc

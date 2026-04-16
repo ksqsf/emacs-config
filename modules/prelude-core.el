@@ -533,4 +533,10 @@ The DWIM behaviour of this command is as follows:
     (keyboard-quit))))
 (global-set-key [remap keyboard-quit] #'+keyboard-quit-dwim)
 
+;; tramp rpc
+(use-package msgpack)
+(use-package tramp-rpc
+  :after tramp
+  :load-path "lisp/tramp-rpc/lisp")
+
 (provide 'prelude-core)
