@@ -145,10 +145,10 @@ are already set which is why you can mark a header within the script."
 
 
 
-(setq auto-mode-alist
-      (append
-       '(("\\.smt[2]?\\'" . smtlib2-mode)
-         ("\\.sygus[2]?\\'" . smtlib2-mode)) auto-mode-alist))
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.smt2?\\'" . smtlib2-mode))
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.sygus2?\\'" . smtlib2-mode))
 
 (provide 'smtlib2-mode)
 
