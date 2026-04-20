@@ -6,7 +6,8 @@
 
 ;; TUI prettification
 (unless (display-graphic-p)
-  (standard-display-unicode-special-glyphs)
+  (when (version<= "31" emacs-version)
+    (standard-display-unicode-special-glyphs))
   (set-display-table-slot standard-display-table 5 ?│)  ;; ?┃ ?┆ ?┇
   (set-display-table-slot standard-display-table
                           'box-down-right (make-glyph-code #x256d))
