@@ -60,9 +60,12 @@
               anthropic/claude-opus-4.6
               openai/gpt-5.4))
 
+  ;; Copilot
+  (gptel-make-gh-copilot "Copilot")
+
   ;; Default backend and model
-  (setopt gptel-model 'claude-sonnet-4-6
-          gptel-backend (cdr (assoc "Claude" gptel--known-backends))
+  (setopt gptel-model 'claude-sonnet-4.6
+          gptel-backend (cdr (assoc "Copilot" gptel--known-backends))
           gptel-default-mode 'markdown-mode)
 
   (gptel-make-tool
