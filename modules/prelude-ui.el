@@ -46,6 +46,10 @@
     (ns-auto-titlebar-mode)))
 
 ;; Mode line
+(set-face-attribute 'mode-line nil :box nil :underline nil :overline nil)
+(set-face-attribute 'mode-line-inactive nil :box nil :underline nil :overline nil)
+(set-face-attribute 'mode-line-active nil :box nil :underline nil :overline nil)
+
 (use-package doom-modeline
   :disabled   ;; Sometimes "C-SPC" & Down will lose the region. Seems related to doom-modeline.
   :hook ((after-init . doom-modeline-mode))
