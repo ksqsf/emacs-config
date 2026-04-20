@@ -543,6 +543,7 @@
 
 ;; nyanmacs
 (use-package nyan-mode
-  :hook (after-init . nyan-mode))
+  ;; enable it manually when feeling good
+  )
 
 (provide 'prelude-ui)
