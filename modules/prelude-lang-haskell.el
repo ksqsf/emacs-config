@@ -4,9 +4,10 @@
 
 (use-package haskell-mode
   :mode ("\\.hs\\'" . haskell-mode)
-  :bind (("C-c C-l" . haskell-process-load-or-reload)
-         ("C-c C-f" . haskell-mode-format-imports)
-         ("<f8>" . haskell-navigate-imports))
+  :bind ( :map haskell-mode-map
+          ("C-c C-l" . haskell-process-load-or-reload)
+          ("C-c C-f" . haskell-mode-format-imports)
+          ("<f8>" . haskell-navigate-imports))
   :hook (haskell-mode . interactive-haskell-mode)
   ;; :hook (haskell-mode . k|setup-haskell-prettify-symbols)
   :hook (inferior-haskell-mode . (lambda () (comint-use-persistent-input-history "~/.ghc/ghci_history")))
