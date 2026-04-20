@@ -205,6 +205,8 @@
 ;; beancount
 (use-package beancount
   :mode ("\\.beancount\\'" . beancount-mode)
-  :hook (beancount-mode . flymake-mode))
+  :bind ( :map beancount-mode-map
+          ("C-c C-n" . outline-next-visible-heading)
+          ("C-c C-p" . outline-previous-visible-heading)))
 
 (provide 'prelude-apps)
