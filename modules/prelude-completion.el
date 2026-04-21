@@ -3,7 +3,7 @@
 (use-package completion
   :ensure nil
   :custom
-  (completion-styles '(prescient orderless)))
+  (completion-styles '(prescient flex orderless)))
 
 (use-package prescient
   :demand t
