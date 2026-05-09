@@ -7,14 +7,17 @@ last section.
 
 ** Supported Platforms
 
-This configuration supports macOS, and Linux.  It should work on
-Windows for the most part.
+This configuration fully supports macOS, Linux, TUI and GUI.  Windows
+support is functional but suboptimal and not actively tested.
 
 The following Emacs versions are supported:
 
 - Emacs 30, the current stable version
 - Emacs 31, the current development version
 
+
+However, the config strongly assumes Emacs 31 (which I'm primarily
+using), so there might be a few very minor breakages on 30.
 
 *** Which Emacs do I use, exactly?
 

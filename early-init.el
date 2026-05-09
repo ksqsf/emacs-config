@@ -22,7 +22,8 @@
       '((height . 50)
         (width . 120)
         (vertical-scroll-bars . nil)
-        (tool-bar-mode . nil)))
+        (tool-bar-mode . nil)
+        (alpha . 0.95)))
 
 ;; Must be set before loading use-package
 (setq use-package-enable-imenu-support t)

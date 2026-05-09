@@ -13,6 +13,7 @@
 (setq bidi-inhibit-bpa t)
 (defun +bidi-enable ()
   "Enable bidi support in a buffer-local manner."
+  (interactive)
   (setq-local bidi-paragraph-direction 'nil)
   (setq-local bidi-display-reordering t)
   (setq bidi-inhibit-bpa nil))
@@ -315,12 +316,14 @@
 (setq set-mark-command-repeat-pop t)
 
 ;; C-w to kill word when region is inactive
-(defun k/kill-region-or-backward-word ()
-  (interactive)
-  (if (region-active-p)
-      (kill-region (region-beginning) (region-end))
-    (backward-kill-word 1)))
-(global-set-key (kbd "C-w") #'k/kill-region-or-backward-word)
+(if (boundp 'kill-region-dwim)
+    (setq kill-region-dwim t)
+  (defun k/kill-region-or-backward-word ()
+    (interactive)
+    (if (region-active-p)
+        (kill-region (region-beginning) (region-end))
+      (backward-kill-word 1)))
+  (global-set-key (kbd "C-w") #'k/kill-region-or-backward-word))
 
 ;; auth sources
 (setq auth-sources '("~/.authinfo" "~/.netrc"))
