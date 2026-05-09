@@ -18,6 +18,9 @@
 (add-hook 'after-save-hook
           #'executable-make-buffer-file-executable-if-script-p)
 (setq reb-re-syntax 'string)
+(setq imenu-auto-rescan t)
+(etags-regen-mode t)
+(setq compilation-scroll-output 'first-error)
 
 
 ;;; Tree-sitter basic configuration
@@ -263,7 +266,7 @@ The history is stored in FILENAME."
 (use-package editorconfig
   :ensure nil
   :config
-  (editorconfig-mode))
+  (editorconfig-mode t))
 
 
 (use-package cmake-mode)

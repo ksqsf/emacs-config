@@ -19,6 +19,22 @@
 (setq redisplay-skip-fontification-on-input t)
 (setq ffap-machine-p-known 'reject)
 
+;; Mouse operations
+(setq mouse-yank-at-point t)
+(setq mouse-drag-and-drop-region t
+      mouse-drag-and-drop-region-cross-program t
+      mouse-drag-mode-line-buffer t)
+(global-xref-mouse-mode t)
+
+;; Repeat
+(repeat-mode t)
+
+;; Open read-only files in view-mode
+(setq view-read-only t)
+
+;; Remember frames (`undelete-frame' to undo frame deletion)
+(undelete-frame-mode t)
+
 ;; auto revert everything, including dired.
 (global-auto-revert-mode)
 (setq global-auto-revert-non-file-buffers t)
@@ -538,5 +554,6 @@ The DWIM behaviour of this command is as follows:
 (use-package tramp-rpc
   :after tramp
   :load-path "lisp/tramp-rpc/lisp")
+
 
 (provide 'prelude-core)

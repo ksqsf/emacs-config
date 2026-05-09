@@ -3,7 +3,13 @@
 (use-package completion
   :ensure nil
   :custom
-  (completion-styles '(prescient flex orderless)))
+  (completion-styles '(prescient flex orderless))
+  (completions-detailed t)
+  (minibuffer-visible-completions t)
+  (completions-group t)
+  (completion-auto-select 'second-tab)
+  (completion-eager-update t)
+  (global-completion-preview-mode t))
 
 (use-package prescient
   :demand t

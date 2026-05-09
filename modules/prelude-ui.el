@@ -50,6 +50,8 @@
 (set-face-attribute 'mode-line-inactive nil :box nil :underline nil :overline nil)
 (set-face-attribute 'mode-line-active nil :box nil :underline nil :overline nil)
 
+(setq mode-line-compact 'long)
+
 (use-package doom-modeline
   :disabled   ;; Sometimes "C-SPC" & Down will lose the region. Seems related to doom-modeline.
   :hook ((after-init . doom-modeline-mode))
@@ -412,6 +414,11 @@
                           (projects . 5)))
   (setq dashboard-center-content t)
   (setq dashboard-banner-logo-title "Happy Hacking!"))
+
+(use-package tab-bar
+  :ensure nil
+  :custom
+  (tab-bar-history-mode t))
 
 (use-package tab-bar
   :disabled
