@@ -9,7 +9,8 @@
   (completions-group t)
   (completion-auto-select 'second-tab)
   (completion-eager-update t)
-  (global-completion-preview-mode t))
+  ;; (global-completion-preview-mode t)
+  )
 
 (use-package prescient
   :demand t

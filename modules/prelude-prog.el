@@ -7,20 +7,38 @@
 
 ;;; Code:
 
-(setq-default indent-tabs-mode nil)
+;; show paren mode
 (show-paren-mode t)
 (setq show-paren-delay 0.0)
+
+;; tab behavior
+(setq-default indent-tabs-mode nil)
 (setq tab-always-indent 'complete)
-(add-hook 'prog-mode-hook 'turn-on-adaptive-wrap)
+
+;; xref
 (setq xref-history-storage 'xref-window-local-history)
 (setq xref-search-program 'ripgrep)
+(global-xref-mouse-mode t)
+
+;; re-builder syntax
+(setq reb-re-syntax 'string)
+
+;; imenu
+(setq imenu-auto-rescan t)
+
+;; compilation
+(setq compilation-scroll-output 'first-error)
+
+;; common prog-mode behaviors
+(add-hook 'prog-mode-hook #'visual-wrap-prefix-mode)
+(add-hook 'prog-mode-hook #'flymake-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
+;;(etags-regen-mode t)
+
+;; Automatically make the current file executable if it has a shebang.
 (add-hook 'after-save-hook
           #'executable-make-buffer-file-executable-if-script-p)
-(setq reb-re-syntax 'string)
-(setq imenu-auto-rescan t)
-(etags-regen-mode t)
-(setq compilation-scroll-output 'first-error)
 
 
 ;;; Tree-sitter basic configuration

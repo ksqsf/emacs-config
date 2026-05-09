@@ -24,7 +24,6 @@
 (setq mouse-drag-and-drop-region t
       mouse-drag-and-drop-region-cross-program t
       mouse-drag-mode-line-buffer t)
-(global-xref-mouse-mode t)
 
 ;; Repeat
 (repeat-mode t)
@@ -431,13 +430,6 @@ Useful for reading Python exception traces."
       (find-file (concat "/sudo::" default-directory))
     (find-file (concat "/sudo::" buffer-file-name)))
   (kill-buffer buf))
-
-(use-package adaptive-wrap
-  :init
-  (setq adaptive-wrap-extra-indent 2)
-  (defun turn-on-adaptive-wrap ()
-    (setq-local word-wrap t)
-    (adaptive-wrap-prefix-mode t)))
 
 ;; Save positions in files
 (save-place-mode +1)
