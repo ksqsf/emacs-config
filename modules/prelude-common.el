@@ -28,7 +28,7 @@ double consecutive occurrences of that character with TO-CHAR."
 (defconst k|default-opener
   (cond (k|mac     "open")
         (k|windows "start")
-        (k|wsl     "wslview")
+        (k|wsl     "xdg-open")
         (t         "xdg-open"))
   "The default file opener on the current system. (No Windows support.)")
 
