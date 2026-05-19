@@ -24,6 +24,10 @@
 (add-to-list 'load-path prelude-lisp-dir)
 (add-to-list 'load-path prelude-modules-dir)
 
+;; Trusted content
+(setq trusted-content
+      '("~/.emacs.d/" "~/org/" "~/src/" "~/Papers/"))
+
 ;; Replace Emacs paths early -- before doing anything.
 (use-package no-littering
   :ensure t
