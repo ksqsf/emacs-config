@@ -40,7 +40,7 @@
 
 ;; Ghostel
 (use-package ghostel
-  :load-path "lisp/ghostel"
+  :load-path "lisp/ghostel/lisp"
   :bind
   (("M-g v" . ghostel)))
 
