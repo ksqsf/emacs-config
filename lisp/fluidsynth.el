@@ -15,7 +15,5 @@
 (defun fluidsynth-sheet (fs)
   (aref fs 1))
 
-(defun fluidsynth-shee)
-
 (provide 'fluidsynth)
 ;;; fluidsynth.el ends here

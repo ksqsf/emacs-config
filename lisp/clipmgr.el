@@ -1,5 +1,4 @@
 (require 'ring)
-(require 'ivy)
 
 (defvar clip-ring-size 100)
 (defvar clip-ring (make-ring clip-ring-size))
@@ -22,12 +21,12 @@
   (interactive)
   (when (ring-empty-p clip-ring)
     (error "The clip ring is empty."))
-  (ivy-read "Select a clip to restore: "
-            (cl-loop for it in (ring-elements clip-ring)
-                     collect (cons (cdr (assoc 'STRING it)) it))
-            :action (lambda (selection)
-                      (let ((clip (cdr selection)))
-                        (clipmgr--restore clip)))))
+  (let* ((candidates (cl-loop for it in (ring-elements clip-ring)
+                              collect (cons (cdr (assoc 'STRING it)) it)))
+         (choice (completing-read "Select a clip to restore: "
+                                  (mapcar #'car candidates)))
+         (clip (cdr (assoc candidates))))
+    (clipmgr--restore clip)))
 
 (defun clipmgr--current-clip ()
   (let ((targets (gui-get-selection 'CLIPBOARD 'TARGETS)))

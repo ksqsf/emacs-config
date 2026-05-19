@@ -261,25 +261,25 @@
   (setf (leitner-card-success-count leitner-card) -1))
 
 
-(leitner-defdeck
-    circle-of-fifths "Cycle of Fifths"
-  "F" "1b"
-  "C" "0"
-  "G" "1s"
-  "D" "2s"
-  "A" "3s"
-  "E" "4s"
-  "B" "5s"
-  "Gb" "6b"
-  "Db" "5b"
-  "Ab" "4b"
-  "Eb" "3b"
-  "Bb" "2b")
+;; (leitner-defdeck
+;;     circle-of-fifths "Cycle of Fifths"
+;;   "F" "1b"
+;;   "C" "0"
+;;   "G" "1s"
+;;   "D" "2s"
+;;   "A" "3s"
+;;   "E" "4s"
+;;   "B" "5s"
+;;   "Gb" "6b"
+;;   "Db" "5b"
+;;   "Ab" "4b"
+;;   "Eb" "3b"
+;;   "Bb" "2b")
 
-(leitner-defdeck
-    huma "Huma"
-  "一" "fi"
-  "二" "me")
+;; (leitner-defdeck
+;;     huma "Huma"
+;;   "一" "fi"
+;;   "二" "me")
 
 (provide 'leitner)
 ;;; leitner.el ends here

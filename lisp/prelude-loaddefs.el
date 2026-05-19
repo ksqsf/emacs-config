@@ -100,13 +100,6 @@ it is disabled.
 
 ;;;***
 
-;;;### (autoloads nil "flashback" "flashback.el" (0 0 0 0))
-;;; Generated autoloads from flashback.el
-
-(register-definition-prefixes "flashback" '("flashback-"))
-
-;;;***
-
 ;;;### (autoloads nil "fluidsynth" "fluidsynth.el" (0 0 0 0))
 ;;; Generated autoloads from fluidsynth.el
 

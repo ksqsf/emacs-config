@@ -30,3 +30,8 @@
 
 ;; Customization file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+;; User lisp directory (since Emacs 31)
+;; Call `prepare-user-lisp' to update autoloads.
+(setq user-lisp-auto-scrape nil)
+(setq user-lisp-directory (expand-file-name "lisp" user-emacs-directory))
