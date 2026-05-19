@@ -27,6 +27,11 @@
   ;; revisiting an existing Dired buffer always reverts it
   (setq dired-auto-revert-buffer t))
 
+(use-package dired-quick-sort
+  :after (dired)
+  :bind (:map dired-mode-map
+              ("s" . dired-quick-sort-transient)))
+
 (use-package dired-filter
   :after (dired)
   :custom
@@ -46,7 +51,7 @@
             (directory))
            ("PDF"
             (extension . "pdf"))
-           ("LaTeX"
+           ("TeX"
             (extension "tex" "bib"))
            ("Code"
             (extension "rs" "c" "cpp" "h" "hpp" "cc" "rb" "py" "el" "html" "js" "css" "jl" "rs" "m" "v" "hs" "lhs" "pl"))
