@@ -1,5 +1,16 @@
 ;;; -*- lexical-binding: t; -*-
 
+;;
+;; Agentic coding stuff
+;;
+
+(use-package codex-ide
+  :vc (:fetcher github :repo "dgillis/emacs-codex-ide")
+  :bind (("C-h ;" . codex-ide-menu)
+         ("C-h C-c" . codex-ide-menu)))
+
+
+
 (defun openai-api-key ()
   (require 'gptel)
   (gptel-api-key-from-auth-source "api.openai.com"))
@@ -28,9 +39,8 @@
   :bind (("C-h RET" . gptel-send)  ;; C-u C-h RET for gptel-menu
          ("C-h C-h" . gptel))
   :config
-  (setq gptel-default-mode 'org-mode)
-  (setq gptel-directives
-        '((default . "Respond in org-mode. Be terse, to the point, and helpful. Do not offer unprompted advice or clarifications.")))
+  (setq-default gptel-directives
+                '((+default . "Respond in org-mode. Be terse, to the point, and helpful. Do not offer unprompted advice or clarifications.")))
 
   ;; Gemini
   (gptel-make-gemini "Gemini"
@@ -53,12 +63,16 @@
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key #'openrouter-api-key
-    :models '((moonshotai/kimi-k2.5
+    :models '((moonshotai/kimi-k2.6
                :capabilities (media tool json url))
               google/gemini-3.1-pro-preview
               anthropic/claude-sonnet-4.6
               anthropic/claude-opus-4.6
-              openai/gpt-5.4))
+              openai/gpt-5.5
+              (deepseek/deepseek-v4-pro
+               :capabilities (media tool json url))
+              (deepseek/deepseek-v4-flash
+               :capabilities (media tool json url))))
 
   ;; Copilot
   (gptel-make-gh-copilot "Copilot")
@@ -109,17 +123,18 @@
    :function (lambda (cb url)
                (fetch-url-text-async cb url))))
 
-(use-package dall-e-shell
-  :commands (dall-e-shell)
-  :config
-  (setq dall-e-shell-openai-key #'gptel-api-key-from-auth-source))
-
 (use-package chatgpt-shell
   :commands (chatgpt-shell)
   :custom
   (chatgpt-shell-anthropic-key #'anthropic-api-key)
   (chatgpt-shell-openai-key #'openai-api-key)
   (chatgpt-shell-deepseek-key #'deepseek-api-key))
+
+
+
+;;
+;; Utilities for tools
+;;
 
 (defun tavily-search-async (callback query &optional search-depth max-results)
   "Perform a search using the Tavily API and return results as JSON string.
@@ -189,18 +204,10 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
       (goto-char start)
       (insert (format "[%s](%s)" text link)))))
 
-;; aider
-(use-package aider
-  :config
-  (setq aider-args '("--model" "sonnet" "--no-auto-accept-architect"))
-  (setenv "ANTHROPIC_API_KEY" (anthropic-api-key))
-  (global-set-key (kbd "C-x p h") 'aider-transient-menu))
-
-(use-package claude-code-ide
-  :load-path "lisp/claude-code-ide.el"
-  :bind ("C-h C-c" . claude-code-ide-menu)
-  :config
-  (claude-code-ide-emacs-tools-setup))
+
+;;
+;; Hide reasoning blocks in gptel
+;;
 
 (add-to-list 'hs-special-modes-alist
              '(markdown-mode
