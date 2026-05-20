@@ -60,6 +60,7 @@
 (require 'prelude-tex)
 (require 'prelude-org)
 (require 'prelude-blog)
+(require 'prelude-ai)
 
 (require 'prelude-prog)
 (require 'prelude-lang-lisp)
@@ -80,10 +81,9 @@
 (require 'prelude-help)
 (require 'prelude-os)
 (require 'prelude-mail)
-(require 'prelude-apps)
 (require 'prelude-irc)
-(require 'prelude-ai)
 
+(require 'prelude-apps)
 (require 'prelude-lifehacks)
 
 ;; (require 'prelude-evil)

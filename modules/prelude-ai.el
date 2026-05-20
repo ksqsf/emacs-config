@@ -1,43 +1,36 @@
 ;;; -*- lexical-binding: t; -*-
 
 ;;
-;; Agentic coding stuff
+;; Fundamental AI settings and stuff
 ;;
-
-(use-package codex-ide
-  :vc (:fetcher github :repo "dgillis/emacs-codex-ide")
-  :bind (("C-h ;" . codex-ide-menu)
-         ("C-h C-c" . codex-ide-menu)))
-
-
-
-(defun openai-api-key ()
-  (require 'gptel)
-  (gptel-api-key-from-auth-source "api.openai.com"))
-
-(defun deepseek-api-key ()
-  (require 'gptel)
-  (gptel-api-key-from-auth-source "api.deepseek.com"))
-
-(defun anthropic-api-key ()
-  (require 'gptel)
-  (gptel-api-key-from-auth-source "api.anthropic.com"))
-
-(defun tavily-api-key ()
-  (require 'gptel)
-  (gptel-api-key-from-auth-source "api.tavily.com"))
-
-(defun gemini-api-key ()
-  (require 'gptel)
-  (gptel-api-key-from-auth-source "generativelanguage.googleapis.com"))
-
-(defun openrouter-api-key ()
-  (require 'gptel)
-  (gptel-api-key-from-auth-source "api.openrouter.ai"))
 
 (use-package gptel
   :bind (("C-h RET" . gptel-send)  ;; C-u C-h RET for gptel-menu
          ("C-h C-h" . gptel))
+  :init
+  (defun openai-api-key ()
+    (require 'gptel)
+    (gptel-api-key-from-auth-source "api.openai.com"))
+
+  (defun deepseek-api-key ()
+    (require 'gptel)
+    (gptel-api-key-from-auth-source "api.deepseek.com"))
+
+  (defun anthropic-api-key ()
+    (require 'gptel)
+    (gptel-api-key-from-auth-source "api.anthropic.com"))
+
+  (defun tavily-api-key ()
+    (require 'gptel)
+    (gptel-api-key-from-auth-source "api.tavily.com"))
+
+  (defun gemini-api-key ()
+    (require 'gptel)
+    (gptel-api-key-from-auth-source "generativelanguage.googleapis.com"))
+
+  (defun openrouter-api-key ()
+    (require 'gptel)
+    (gptel-api-key-from-auth-source "api.openrouter.ai"))
   :config
   (setq-default gptel-directives
                 '((+default . "Respond in org-mode. Be terse, to the point, and helpful. Do not offer unprompted advice or clarifications.")))
@@ -122,6 +115,37 @@
                        :description "The url of the web page"))
    :function (lambda (cb url)
                (fetch-url-text-async cb url))))
+
+(use-package llm
+  :config
+  (setq llm-warn-on-nonfree nil)        ; Thanks, but there is no "truly free" models.
+
+  (require 'llm-openai))
+
+(setq +llm-small-model
+      (make-llm-openrouter
+       :key #'openrouter-api-key
+       :chat-model "deepseek/deepseek-v4-flash"))
+
+(setq +llm-smart-model
+      (make-llm-openrouter
+       :key #'openrouter-api-key
+       :chat-model "openai/gpt-5.5"))
+
+
+;;
+;; Agentic coding stuff
+;;
+
+(use-package codex-ide
+  :vc (:fetcher github :repo "dgillis/emacs-codex-ide")
+  :bind (("C-h ;" . codex-ide-menu)
+         ("C-h C-c" . codex-ide-menu)))
+
+
+;;
+;; Chat interface
+;;
 
 (use-package chatgpt-shell
   :commands (chatgpt-shell)
