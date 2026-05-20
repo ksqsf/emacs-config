@@ -160,18 +160,6 @@
 ;; Window and frame navigation
 (global-set-key (kbd "M-o") #'other-window)
 
-;; Use ace-window for quick window navigation
-;; Sorry, `other-window', but you are too weak!
-(use-package ace-window
-  :bind (("C-x o" . ace-window)
-         ("C-x C-o" . ace-window))  ;; was delete-blank-lines
-  :config
-  (custom-set-faces
-   '(aw-leading-char-face
-     ((t (:inherit ace-jump-face-foreground :height 3.0)))))
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
-        aw-scope 'frame))
-
 (use-package windmove
   :disabled ;; conflict with org!
   :ensure nil
@@ -326,7 +314,7 @@
   (global-set-key (kbd "C-w") #'k/kill-region-or-backward-word))
 
 ;; auth sources
-(setq auth-sources '("~/.authinfo" "~/.netrc"))
+(setq auth-sources '("~/.authinfo"))
 
 ;; swap C-h p and C-h P
 (global-set-key (kbd "C-h p") #'describe-package)
