@@ -31,7 +31,7 @@
 
 ;; common prog-mode behaviors
 (add-hook 'prog-mode-hook #'visual-wrap-prefix-mode)
-(add-hook 'prog-mode-hook #'flymake-mode)
+;; (add-hook 'prog-mode-hook #'flymake-mode) ; noise!
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
 ;;(etags-regen-mode t)
