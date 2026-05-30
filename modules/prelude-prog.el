@@ -179,9 +179,12 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
 
 
 (use-package dap-mode
+  :disabled
   :commands (dap-mode)
   :config
   (require 'dap-lldb))
+
+(use-package dape)
 
 
 (use-package dumb-jump
