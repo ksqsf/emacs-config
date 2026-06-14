@@ -1,0 +1,4 @@
+alias e find-file
+alias g magit-status
+alias less view-file $1
+alias ll ls -l $@*
