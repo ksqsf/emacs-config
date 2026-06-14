@@ -31,6 +31,11 @@
   (defun openrouter-api-key ()
     (require 'gptel)
     (gptel-api-key-from-auth-source "api.openrouter.ai"))
+
+  (defun ksqsf-api-key ()
+    (require 'gptel)
+    (gptel-api-key-from-auth-source "api.ksqsf.moe"))
+
   :config
   (setq-default gptel-directives
                 '((+default . "Respond in org-mode. Be terse, to the point, and helpful. Do not offer unprompted advice or clarifications.")))
@@ -66,6 +71,13 @@
                :capabilities (media tool json url))
               (deepseek/deepseek-v4-flash
                :capabilities (media tool json url))))
+
+  ;; My own API endpoint
+  (gptel-make-openai "My"
+    :host "api.ksqsf.moe"
+    :endpoint "/v1"
+    :stream t
+    :key #'ksqsf-api-key)
 
   ;; Copilot
   (gptel-make-gh-copilot "Copilot")
