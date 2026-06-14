@@ -69,7 +69,8 @@
     ("transient" . "https://magit.vc/manual/transient.html#%s")
     ("org" . "https://orgmode.org/manual/%s.html")
     ("org-roam" . "https://www.orgroam.com/manual.html#%s")
-    ("orderless" . "https://elpa.gnu.org/packages/doc/orderless.html#%s"))
+    ("orderless" . "https://elpa.gnu.org/packages/doc/orderless.html#%s")
+    ("emms" . "https://www.gnu.org/software/emms/manual/#%s"))
   "`Info-get-online-url' defaults to GNU's official manual URL base.
 %s will be replaced by the node name.")
 
