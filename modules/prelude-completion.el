@@ -240,4 +240,7 @@
   :init
   (corfu-terminal-mode))
 
+(use-package capf-autosuggest
+  :hook ((comint-mode . capf-autosuggest-mode)))
+
 (provide 'prelude-completion)
