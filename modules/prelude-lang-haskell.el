@@ -39,24 +39,6 @@
   ;;       (lambda (args) (apply 'nix-shell-command (nix-current-sandbox) args)))
   )
 
-(use-package dape
-  :config
-  (add-to-list 'dape-configs
-               '(haskell-debugger
-                 ensure dape-ensure-command
-                 modes (haskell-mode literate-haskell-mode)
-                 command "hdb"
-                 command-args ("server" "--port" :autoport)
-                 host "localhost"
-                 port :autoport
-                 :type "haskell-debugger"
-                 :name "Launch"
-                 :request "launch"
-                 :entryFile (buffer-file-name)
-                 :projectRoot (expand-file-name (project-root (project-current)))
-                 :entryArgs []
-                 :extraGhcArgs [])))
-
 (use-package speedbar
   :ensure nil
   :after haskell-mode
