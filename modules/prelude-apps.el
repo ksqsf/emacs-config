@@ -209,4 +209,47 @@
           ("C-c C-n" . outline-next-visible-heading)
           ("C-c C-p" . outline-previous-visible-heading)))
 
+;; elfeed
+(use-package elfeed)
+(use-package elfeed-summarize
+  :after elfeed
+  :config
+  (setq elfeed-summarize-llm-provider +llm-small-model)
+  (setq elfeed-feeds
+        '(("https://ksqsf.moe/atom.xml" blog)
+          ("https://mlzeng.com/index.xml" blog)
+          ("https://blog.taoky.moe/feed.xml" blog)
+          ("https://ibug.io/feed.xml" blog)
+          ("https://sirius1242.github.io/feed.xml" blog)
+          ("https://www.csslayer.info/wordpress/rss/" blog)
+          ("http://farseerfc.me/feeds/atom.xml" blog)
+          ("https://c-j.dev/atom.xml" blog)
+          ("https://ring0.me/atom.xml" blog)
+          ("https://voile.tech/atom.xml" blog)
+          ("https://blog.xuesong.io/rss.xml" blog)
+          ("https://konjacsource.github.io/rss.xml" blog)
+          ("https://soaked.in/feed.xml" blog)
+          ("https://www.qbitai.com/rss/" news ai)
+          ("https://www.solidot.org/index.rss" news tech)
+          ("https://hnrss.org/newest?points=150" news tech)
+          ("https://lobste.rs/rss" news tech)
+          ("https://www.quantamagazine.org/feed/")
+          ("https://sspai.com/feed" tech)
+          ("https://blog.rust-lang.org/feed.xml" tech rust)
+          ("https://rss.lilydjwg.me/zhihuzhuanlan/c_1749542169038483456" cs)
+          ("https://rss.lilydjwg.me/zhihuzhuanlan/c_1736814172640501761" cs)
+          ("https://rss.lilydjwg.me/zhihuzhuanlan/marisa" cs)
+          ("https://concurrencyfreaks.blogspot.com/atom.xml" cs)
+          ("https://this-week-in-rust.org/atom.xml" news rust)
+          ("https://haskellweekly.news/newsletter.atom" news haskell)
+          ("https://plink.anyfeeder.com/weixin/caixinwang" news finance)
+          )))
+
+;; emms
+(use-package emms
+  :config
+  (emms-all)
+  (setq emms-player-list '(emms-player-mpv)
+        emms-info-functions '(emms-info-native)))
+
 (provide 'prelude-apps)
