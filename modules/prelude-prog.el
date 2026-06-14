@@ -107,25 +107,14 @@
         eglot-autoreconnect 60
         eglot-autoshutdown t)
 
+  (setq eglot-documentation-renderer 'gfm-view-mode)
+
   (defun toggle-eglot-debug ()
     (interactive)
     (if (= 0 eglot-events-buffer-size)
         (setq eglot-events-buffer-size 20000)
       (setq eglot-events-buffer-size 0)))
-  (setq eglot-events-buffer-size 0)
-
-  ;; eglot expansion should be okay these days...
-  ;; (fset #'eglot--snippet-expansion-fn #'ignore)
-
-  ;; The buster conflicts with corfu, causing repeated insertions.
-  ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  )
-
-(use-package eglot-booster
-  :disabled
-  :vc (:fetcher github :repo "jdtsmith/eglot-booster")
-  :after eglot
-  :config (eglot-booster-mode))
+  (setq eglot-events-buffer-size 0))
 
 ;;
 ;; lsp-mode is powerful and cool!  but it has severe performance
