@@ -108,8 +108,6 @@
         eglot-autoreconnect 60
         eglot-autoshutdown t)
 
-  (setq eglot-documentation-renderer 'gfm-view-mode)
-
   (defun toggle-eglot-debug ()
     (interactive)
     (if (= 0 eglot-events-buffer-size)

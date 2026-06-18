@@ -52,6 +52,7 @@
 (require 'prelude-completion)
 (require 'prelude-workspace)
 
+(require 'prelude-text)
 (require 'prelude-search)
 (require 'prelude-ibuffer)
 (require 'prelude-chinese)
