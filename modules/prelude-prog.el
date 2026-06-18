@@ -42,6 +42,7 @@
 
 
 ;;; Tree-sitter basic configuration
+(setq treesit-enabled-modes t)
 (when (boundp 'treesit-extra-load-path)
   (add-to-list 'treesit-extra-load-path (no-littering-expand-var-file-name "tree-sitter")))
 
