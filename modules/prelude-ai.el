@@ -35,6 +35,9 @@
   (defun ksqsf-api-key ()
     (require 'gptel)
     (gptel-api-key-from-auth-source "api.ksqsf.moe"))
+  (defun cosmobot-token ()
+    (require 'gptel)
+    (gptel-api-key-from-auth-source "agent.ksqsf.moe"))
 
   :config
   (setq-default gptel-directives
@@ -156,7 +159,7 @@
 
 
 ;;
-;; Chat interface
+;; Chat/Agent interface
 ;;
 
 (use-package chatgpt-shell
@@ -165,6 +168,26 @@
   (chatgpt-shell-anthropic-key #'anthropic-api-key)
   (chatgpt-shell-openai-key #'openai-api-key)
   (chatgpt-shell-deepseek-key #'deepseek-api-key))
+
+(use-package agent-shell
+  :config
+  (defun +agent-shell-cosmobot-config ()
+    (agent-shell-make-agent-config
+     :identifier 'cosmobot
+     :mode-line-name "Cosmobot"
+     :buffer-name "Cosmobot"
+     :shell-prompt "cosmobot> "
+     :shell-prompt-regexp "cosmobot> "
+     :client-maker
+     (lambda (buffer)
+       (agent-shell--make-acp-client
+        :command "websocat"
+        :command-params
+        `(,(format "-H=Authorization: Bearer %s" (cosmobot-token))
+          "ws://git.ksqsf.moe:38766/acp")
+        :context-buffer buffer))))
+  (add-to-list 'agent-shell-agent-configs
+               (+agent-shell-cosmobot-config)))
 
 
 
