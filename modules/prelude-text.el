@@ -6,4 +6,12 @@
   :config
   (setq eglot-documentation-renderer 'markdown-ts-mode))
 
+(use-package yaml-mode
+  :iload (yaml-mode)
+  :mode ("\\.ya?ml\\'" . yaml-mode))
+
+(use-package dockerfile-mode
+  :mode ("Dockerfile.*\\'" . dockerfile-mode)
+  :mode (".dockerfile\\'" . dockerfile-mode))
+
 (provide 'prelude-text)

@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(setq elisp-fontify-semantically t)
+
 (use-package paredit
   :hook (emacs-lisp . paredit-mode))
 

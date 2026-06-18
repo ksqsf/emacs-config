@@ -45,16 +45,8 @@
 (setq treesit-enabled-modes t)
 (when (boundp 'treesit-extra-load-path)
   (add-to-list 'treesit-extra-load-path (no-littering-expand-var-file-name "tree-sitter")))
-
-;; (setq major-mode-remap-alist
-;;       '((python-mode . python-ts-mode)   ;; python-ts-mode is better than python-mode at indentation
-;;         ))
-(use-package yaml-mode
-  :iload (yaml-mode)
-  :mode ("\\.ya?ml\\'" . yaml-mode))
-(use-package dockerfile-mode
-  :mode ("Dockerfile.*\\'" . dockerfile-mode)
-  :mode (".dockerfile\\'" . dockerfile-mode))
+(setq major-mode-remap-alist
+      '((rust-mode . rust-ts-mode)))
 
 (with-eval-after-load 'treesit
   (defun treesit--explorer-jump-advice-really-jump (button)
@@ -114,6 +106,12 @@
         (setq eglot-events-buffer-size 20000)
       (setq eglot-events-buffer-size 0)))
   (setq eglot-events-buffer-size 0))
+
+(use-package eglot-x
+  :after eglot
+  :vc (:fetcher github :repo "nemethf/eglot-x")
+  :config
+  (eglot-x-setup))
 
 ;;
 ;; lsp-mode is powerful and cool!  but it has severe performance
