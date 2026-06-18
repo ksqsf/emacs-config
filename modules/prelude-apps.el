@@ -229,6 +229,7 @@
           ("https://blog.xuesong.io/rss.xml" blog)
           ("https://konjacsource.github.io/rss.xml" blog)
           ("https://soaked.in/feed.xml" blog)
+          ("https://lilting.ch/rss.xml" blog)
           ("https://www.qbitai.com/rss/" news ai)
           ("https://www.solidot.org/index.rss" news tech)
           ("https://hnrss.org/newest?points=150" news tech)
