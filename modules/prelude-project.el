@@ -4,7 +4,7 @@
 (use-package project
   :ensure nil
   :bind (:map project-prefix-map
-              ("s" . eat-project))
+              ("s" . project-shell))
   :custom
   (project-buffers-viewer 'project-list-buffers-buffer-ibuffer)
   (project-switch-use-entire-map nil)
