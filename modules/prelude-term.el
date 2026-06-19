@@ -2,6 +2,12 @@
 
 ;;; Code:
 
+;; Shell and Comint
+(use-package comint
+  :ensure nil
+  :config
+  (add-hook 'comint-output-filter-functions 'comint-osc-process-output))
+
 ;; Do not query on exit if the term process has no running child process.
 (advice-add 'process-kill-buffer-query-function :before-until
             (lambda (&rest args)
