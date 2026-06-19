@@ -20,6 +20,7 @@
            ("Text" (or
                     (mode . org-mode)
                     (mode . markdown-mode)
+                    (mode . markdown-ts-mode)
                     (mode . text-mode)))
            ("Tex" (mode . tex-mode))
            ("Code" (or

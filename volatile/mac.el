@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defun +set-transparent-background ()
   (interactive)
   (set-frame-parameter nil 'alpha-background 0.7))

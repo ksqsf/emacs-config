@@ -78,7 +78,7 @@
   ;; My own API endpoint
   (gptel-make-openai "My"
     :host "api.ksqsf.moe"
-    :endpoint "/v1"
+    :endpoint "/v1/chat/completions"
     :stream t
     :key #'ksqsf-api-key)
 
@@ -88,7 +88,7 @@
   ;; Default backend and model
   (setopt gptel-model 'claude-sonnet-4.6
           gptel-backend (cdr (assoc "Copilot" gptel--known-backends))
-          gptel-default-mode 'markdown-mode)
+          gptel-default-mode 'markdown-ts-mode)
 
   (gptel-make-tool
    :name "create_python_repl"
