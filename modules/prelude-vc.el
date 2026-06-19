@@ -15,6 +15,7 @@
   (magit-clone-default-directory (expand-file-name (expand-file-name "src/Clone/" (getenv "HOME"))))
   (magit-refresh-status-buffer nil)
   (magit-display-buffer 'display-buffer) ;; I've done my own customization
+  (magit-diff-fontify-hunk t)            ; Fontify hunk once it becomes the current selection.
   :bind (("C-c g" . magit-file-dispatch))
   :hook ((magit-status-mode magit-diff-mode) . buffer-disable-undo)
   :config
