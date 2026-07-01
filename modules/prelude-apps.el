@@ -244,6 +244,7 @@
           ("https://this-week-in-rust.org/atom.xml" news rust)
           ("https://haskellweekly.news/newsletter.atom" news haskell)
           ("https://plink.anyfeeder.com/weixin/caixinwang" news finance)
+          ("https://finance.yahoo.com/news/rssindex" news finance)
           )))
 
 ;; emms
