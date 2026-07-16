@@ -3,7 +3,7 @@
 (iload org-macs org-compat org-faces org-entities org-list org-pcomplete
        org-src org-footnote org-macro ob
        org org-clock org-agenda org-capture
-       ol-man ol-doi org-roam)
+       ol-man ol-doi)
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 
@@ -96,20 +96,7 @@
 
 
 ;; Capture templates
-(setq org-capture-templates
-      `(("t"                                      ; keys
-         "Task"                                   ; description
-         entry                                    ; type
-         (file+headline "plan.org" "Inbox")       ; target
-         "* TODO %?
-%a")
-        ("j" "journal" entry (file+datetree "journal.org")
-         "* %?\n%U\n%i\n%a")
-        ("n" "Note" plain
-         (file (lambda ()
-                 (vulpea-note-path
-                  (vulpea-create "Quick Note"))))
-         "%?")))
+(setq org-capture-templates nil)
 
 
 ;; Babel
@@ -256,47 +243,6 @@
     (project-find-file)))
 
 
-(use-package vulpea
-  :bind (("C-c n f" . vulpea-find)
-         ("C-c n i" . vulpea-insert)
-         ("C-c n d" . vulpea-journal-date))
-  :custom
-  (vulpea-default-notes-directory "~/org/Roam")
-  :config
-  (vulpea-db-autosync-mode +1)
-
-  ;; Don't show the original file name for notes.
-  (advice-add 'vulpea-find :after
-              (lambda (&rest r)
-                (when-let* ((title (org-get-title)))
-                  (rename-buffer title)))))
-
-(use-package vulpea-ui
-  :after (vulpea)
-  :bind ("C-c n l" . vulpea-ui-sidebar-toggle))
-
-(use-package vulpea-journal
-  :after (vulpea vulpea-ui)
-  :bind (("C-c n d" . vulpea-journal-date))
-  :vc (:fetcher github :repo "d12frosted/vulpea-journal")
-  :config
-
-  (setq vulpea-journal-default-template
-        '(:file-name "daily/%Y-%m-%d.org"
-                     :title "%Y-%m-%d %A"
-                     :tags ("journal")
-                     :head "#+created: %<[%Y-%m-%d]>"))
-
-  ;; this seems like a bug in vulpea-journal's current version.
-  (setq vulpea-directory "~/org")
-
-  (vulpea-journal-setup))
-
-;;
-;; Org-roam stuff all deleted in favor of Vulpea.
-;;
-
-
 ;; I shall discuss this with the org devs later:
 
 ;; (defvar +org-resource-dir (expand-file-name "~/MEGA"))
@@ -307,6 +253,42 @@
 ;;                      (append (list (cons +org-resource-dir "$RESOURCE"))
 ;;                              directory-abbrev-alist)))
 ;;                 (apply oldfun args))))
+
+
+
+(use-package denote
+  :ensure t
+  :hook (dired-mode . denote-dired-mode)
+  :bind
+  (("C-c n n" . denote)
+   ("C-c n t" . denote-template)
+   ("C-c n f" . denote-open-or-create)
+   ("C-c n r" . denote-rename-file)
+   ("C-c n i" . denote-link)
+   ("C-c n I" . denote-add-links)
+   ("C-c n b" . denote-backlinks)
+   ("C-c n d" . denote-dired)
+   ("C-c n g" . denote-grep))
+  :config
+  (setq denote-directory org-directory)
+  (setq denote-known-keywords
+        '("gtd" "personal" "work" "project" "book" "paper" "review"))
+  (setq denote-prompts
+        '(title keywords))
+  (setq denote-use-directory (expand-file-name "Roam" denote-directory))
+  (denote-rename-buffer-mode 1))
+
+(use-package denote-journal
+  :ensure t
+  :after denote
+  :commands (denote-journal-new-or-existing-entry
+             denote-journal-link-or-create-entry)
+  :hook (calendar-mode . denote-journal-calendar-mode)
+  :bind ("C-c n j" . denote-journal-new-or-existing-entry)
+  :config
+  (setq denote-journal-directory (expand-file-name "Journal" denote-directory)
+        denote-journal-keyword "journal"
+        denote-journal-title-format "%Y-%m-%d %A"))
 
 
 (provide 'prelude-org)
