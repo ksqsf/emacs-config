@@ -63,12 +63,18 @@
     (setq doom-modeline-project-detection 'project)))
 
 (use-package moody
+  :disabled                             ; Try sleek-modeline now
   :if (display-graphic-p)
   :config
   (moody-replace-mode-line-front-space)
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode)
   (moody-replace-eldoc-minibuffer-message-function))
+
+(use-package sleek-modeline
+  :hook (after-init . sleek-modeline-mode)
+  :config
+  (setopt sleek-modeline-diagnostics-ok-symbol "✓"))
 
 ;; I'm the winner ;-)
 (use-package winner
