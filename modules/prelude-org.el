@@ -260,22 +260,34 @@
   :ensure t
   :hook (dired-mode . denote-dired-mode)
   :bind
-  (("C-c n n" . denote)
-   ("C-c n t" . denote-template)
-   ("C-c n f" . denote-open-or-create)
-   ("C-c n r" . denote-rename-file)
-   ("C-c n i" . denote-link)
-   ("C-c n I" . denote-add-links)
-   ("C-c n b" . denote-backlinks)
-   ("C-c n d" . denote-dired)
-   ("C-c n g" . denote-grep))
+  ( :map global-map
+    ("C-c n n" . denote)
+    ("C-c n t" . denote-template)
+    ("C-c n f" . denote-open-or-create)
+    ("C-c n r" . denote-rename-file)
+    ("C-c n R" . denote-rename-file-using-front-matter)
+    ("C-c n i" . denote-link)
+    ("C-c n I" . denote-add-links)
+    ("C-c n b" . denote-backlinks)
+    ("C-c n d" . denote-dired)
+    ("C-c n g" . denote-grep)
+    ("C-c n q c" . denote-query-contents-link)
+    ("C-c n q f" . denote-query-filenames-link)
+    :map dired-mode-map
+    ("C-c C-d C-i" . denote-dired-link-marked-notes)
+    ("C-c C-d C-r" . denote-dired-rename-files)
+    ("C-c C-d C-k" . denote-dired-rename-marked-files-with-keywords)
+    ("C-c C-d C-R" . denote-dired-rename-marked-files-using-front-matter))
   :config
   (setq denote-directory org-directory)
+  (setq denote-use-directory (expand-file-name "Roam" denote-directory))  ; By default, create new notes in ./Roam
   (setq denote-known-keywords
-        '("gtd" "personal" "work" "project" "book" "paper" "review"))
-  (setq denote-prompts
-        '(title keywords))
-  (setq denote-use-directory (expand-file-name "Roam" denote-directory))
+        '("personal" "work" "project"
+          "research" "book" "paper" "review"
+          "gtd"
+          "people"))
+  (setq denote-save-buffers t)
+  (setq denote-date-prompt-use-org-read-date t)
   (denote-rename-buffer-mode 1))
 
 (use-package denote-journal
@@ -289,6 +301,14 @@
   (setq denote-journal-directory (expand-file-name "Journal" denote-directory)
         denote-journal-keyword "journal"
         denote-journal-title-format "%Y-%m-%d %A"))
+
+(use-package consult-denote
+  :after denote
+  :config
+  (consult-denote-mode +1))
+
+(use-package denote-explore
+  :after denote)
 
 
 (provide 'prelude-org)
