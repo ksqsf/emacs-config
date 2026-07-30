@@ -1,5 +1,11 @@
 ;; -*- lexical-binding: t; -*-
 
+(use-package js
+  :ensure nil
+  :mode (("\\.m?js\\'" . js-mode))
+  :config
+  (setq js-indent-level 2))
+
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
          ("\\.phtml\\'" . web-mode)
