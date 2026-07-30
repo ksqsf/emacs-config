@@ -242,10 +242,12 @@
           ("https://rss.lilydjwg.me/zhihuzhuanlan/c_1736814172640501761" cs)
           ("https://rss.lilydjwg.me/zhihuzhuanlan/marisa" cs)
           ("https://concurrencyfreaks.blogspot.com/atom.xml" cs)
-          ("https://this-week-in-rust.org/atom.xml" news rust)
-          ("https://haskellweekly.news/newsletter.atom" news haskell)
+          ("https://this-week-in-rust.org/atom.xml" magazine rust)
+          ("https://haskellweekly.news/newsletter.atom" magazine haskell)
           ("https://plink.anyfeeder.com/weixin/caixinwang" news finance)
           ("https://finance.yahoo.com/news/rssindex" news finance)
+          ("https://writings.stephenwolfram.com/feed/" blog science)
+          ("https://pagedout.institute/rss.xml" magazine)
           )))
 
 ;; emms
