@@ -52,30 +52,6 @@
 
 (setq mode-line-compact 'long)
 
-(use-package doom-modeline
-  :disabled   ;; Sometimes "C-SPC" & Down will lose the region. Seems related to doom-modeline.
-  :hook ((after-init . doom-modeline-mode))
-  :init
-  (setq doom-modeline-minor-modes nil)
-
-  ;; projectile undesirably resolves symlinks. This is a workaround.
-  (when k|mac
-    (setq doom-modeline-project-detection 'project)))
-
-(use-package moody
-  :disabled                             ; Try sleek-modeline now
-  :if (display-graphic-p)
-  :config
-  (moody-replace-mode-line-front-space)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode)
-  (moody-replace-eldoc-minibuffer-message-function))
-
-(use-package sleek-modeline
-  :hook (after-init . sleek-modeline-mode)
-  :config
-  (setopt sleek-modeline-diagnostics-ok-symbol "✓"))
-
 ;; I'm the winner ;-)
 (use-package winner
   :ensure nil
