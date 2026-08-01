@@ -6,6 +6,7 @@
 
 ;; See also occur (built-in), embark, consult-line, etc.
 (use-package wgrep
+  :when (version< emacs-version "31")
   :defer t
   :bind
   (:map grep-mode-map
