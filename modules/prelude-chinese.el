@@ -139,7 +139,7 @@
   ;; Keymaps
   (setq rime-translate-keybindings
         '("C-f" "C-b" "C-n" "C-p" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"
-          "C-`" "C-s" "C-k" "C-q" "C-k" "C-i"))
+          "C-`" "C-s" "C-k" "C-q" "C-k" "C-i" "C-g" "<ESC>"))
 
   :config
   (add-hook 'kill-emacs-hook #'rime-lib-finalize))
