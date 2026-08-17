@@ -13,7 +13,8 @@
 (setq use-package-always-ensure t)  ; All packages used have to be installed
 
 ;; Auto-suggest
-(package-autosuggest-mode t)
+(when (fboundp 'package-autosuggest-mode)
+  (package-autosuggest-mode t))
 
 ;; Package menu UI
 (setq package-menu-use-current-if-no-marks nil)

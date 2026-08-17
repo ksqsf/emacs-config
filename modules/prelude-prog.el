@@ -18,7 +18,8 @@
 ;; xref
 (setq xref-history-storage 'xref-window-local-history)
 (setq xref-search-program 'ripgrep)
-(global-xref-mouse-mode t)
+(when (fboundp 'global-xref-mouse-mode)
+  (global-xref-mouse-mode t))
 
 ;; re-builder syntax
 (setq reb-re-syntax 'string)
