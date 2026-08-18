@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t; -*-
 
+;; Don't show useless UI elements
+(menu-bar-mode 1)
+(tool-bar-mode -1)
+
 ;; Frame resize
 (setq frame-resize-pixelwise t)
 (setq frame-inhibit-implied-resize t)
@@ -26,16 +30,14 @@
 
 (add-hook 'server-after-make-frame-hook #'+tui-unset-background)
 
+(tty-tip-mode +1)
+
 ;; A quick way to toggle maximized
 (global-set-key (kbd "C-M-<return>") #'toggle-frame-fullscreen)
 
 ;; Enable smooth scroll when it's available
 (when (fboundp 'pixel-scroll-precision-mode)
   (pixel-scroll-precision-mode t))
-
-;; Don't show useless UI elements
-(menu-bar-mode 1)
-(tool-bar-mode -1)
 
 ;; NOTE: {initial,default}-buffer-alist is moved to early-init.el
 
