@@ -190,6 +190,7 @@
   (setq recentf-keep '(+recentf-keep-p)))
 
 ;; recursive edit
+(setq multiple-terminals-merge-keyboards t)   ; Only me using emacs
 (defun isearch-open-recursive-edit ()
   "Use `\\\\[exit-recursive-edit]' to end the recursive edit. Or
   use `abort-recursive-edit' to exit the recursive edit and
