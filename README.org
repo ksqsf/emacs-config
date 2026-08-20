@@ -70,26 +70,6 @@ Any of the following looks pretty good:
 - Doom mode line
 - Moody
 
-**** Modal editing (Evil)
-
-I'm not fully invested in Evil, so currently it can be disabled
-*completely* by commenting out =(require 'prelude-evil)= in =init.el=.
-
-I use Evil, because the Vi-style editing commands are the de facto
-standard right now, and evil-collection is great, and I still retain
-some muscle memory (I used to be a Vim user).  Though, conceptually, I
-like Meow better.
-
-Evil-collection offers a large collection of consistent,
-pre-configured keybindings for a variety of major modes.  See its
-[[https://github.com/emacs-evil/evil-collection][readme]].
-
-I use a hybrid editing style, i.e. in the insert mode, most Emacs
-commands are still available, so I can keep my muscle memory as much
-as possible.  This is done by customizing
-=evil-disable-insert-state-bindings=.  The conflicts are resolved
-depending on which is most familiar to me.
-
 **** Completion
 
 I use Vertico, Prescient, and Orderless.
@@ -107,9 +87,10 @@ Many temporary buffers pop up in the side windows.
 =C-TAB= toggles whether or not side windows are displayed.
 
 *** Editing
+
 **** Expand region
 
-=C-SPC C-SPC= to expand the current region meaningfully.  It supports
+=C-SPC C-SPC= to expand the current region semantically.  It supports
 tree-sitter-based expansion.
 
 **** Zap up to char
@@ -171,6 +152,7 @@ Coq is an interactive proof assistant, whose Emacs interface is Proof
 General, which defines its own set of commands.
 
 ** Unlimited Lisp Works
+
 This repo hosts some other Emacs Lisp works made by me for my own
 convenience. It might be useful for you, too, so I made a list here
 for better discoverability.
@@ -190,3 +172,21 @@ for better discoverability.
 | leitner        | ./lisp/leitner.el        | The Leitner system (a kind of SRS) |
 | org-xlatex     | github ksqsf/org-xlatex  | instant latex preview              |
 | flygpt         | ./lisp/flygpt.el         | semantic flymake based on GPT      |
+
+#+begin_quote
+I am the bone of my parentheses
+
+Cons is my body and symbol is my blood
+
+I have created over a thousand forms
+
+Unknown to Death,
+
+Nor known to Life.
+
+Have withstood pain to create many macros
+
+Yet, those hands will never hold anything
+
+So as I pray, Unlimited Lisp Works
+#+end_quote
