@@ -56,7 +56,10 @@
   ;;; Cache interface for Gnus
   (setq gnus-cache-enter-articles '(ticked dormant unread))
   (setq gnus-cache-remove-articles '(read))
-  (setq gnus-cacheable-groups "^\\(nntp\\|nnimap\\)"))
+  (setq gnus-cacheable-groups "^\\(nntp\\|nnimap\\)")
+  ;; Display smileys
+  (setq smiley-style 'emoji)
+  (setq gnus-treat-display-smileys t))
 
 ;; Group mode commands for Gnus
 (use-package gnus-group
