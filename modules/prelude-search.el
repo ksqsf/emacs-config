@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+;; Preview query-replace results (emacs 32)
+(setq query-replace-show-preview t)
+
 ;; Prefer regular expression-based searches
 (global-set-key [remap isearch-forward] #'isearch-forward-regexp)
 (global-set-key [remap query-replace] #'query-replace-regexp)
