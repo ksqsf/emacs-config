@@ -7,6 +7,10 @@
 (use-package gnus
   :commands (gnus)
   :ensure nil
+  :hook (((gnus-group-mode
+           gnus-summary-mode
+           gnus-article-mode)
+          . hl-line-mode))
   :config
   (setq gnus-use-cache t)
   (setq gnus-use-scoring nil)
