@@ -21,9 +21,7 @@
 
 (use-package sly
   :commands (sly sly-mode)
-  :mode (("\\.lisp\\'" . lisp-mode))
-  :config
-  (remove-hook 'lisp-mode-hook 'sly-editing-mode))
+  :mode (("\\.lisp\\'" . lisp-mode)))
 
 ;;
 ;; Scheme
@@ -55,7 +53,10 @@
 (use-package smtlib2-mode
   :ensure nil
   :mode (("\\.smt2?\\'" . smtlib2-mode)
-         ("\\.sygus2?\\'" . smtlib2-mode)))
+         ("\\.sygus2?\\'" . smtlib2-mode))
+  :config
+  (with-eval-after-load 'sly
+    (remove-hook 'smtlib2-mode-hook 'sly-editing-mode)))
 
 ;; Clojure
 (use-package cider
