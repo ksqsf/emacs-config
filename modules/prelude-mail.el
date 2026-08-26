@@ -21,13 +21,7 @@
   (setq gnus-inhibit-startup-message t)
   (setq gnus-select-method '(nnnil ""))
   (setq gnus-secondary-select-methods '((nntp "news.gmane.io")
-                                   (nntp "nntp.lore.kernel.org")
-                                   (nnimap "GMail"
-                                           (nnimap-inbox "INBOX")
-                                           (nnimap-address "imap.gmail.com")
-                                           (nnimap-server-port "imaps")
-                                           (nnimap-stream ssl)
-                                           (nnimap-expunge 'nerver))))
+                                        (nntp "nntp.lore.kernel.org")))
   ;;; Startup functions
   (setq gnus-save-killed-list nil)
   (setq gnus-check-new-newsgroups 'ask-server)
