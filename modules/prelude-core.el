@@ -50,6 +50,14 @@
 (setq kill-do-not-save-duplicates t)
 (setq kill-region-dwim t)
 (kill-ring-deindent-mode +1)
+(unless (boundp 'kill-region-dwim)
+  ;; Be compatible with Emacs 30
+  (defun k/kill-region-or-backward-word ()
+    (interactive)
+    (if (region-active-p)
+        (kill-region (region-beginning) (region-end))
+      (backward-kill-word 1)))
+  (global-set-key (kbd "C-w") #'k/kill-region-or-backward-word))
 
 ;; Move backups away
 (setq backup-directory-alist `(("/ssh:.*" . nil)
@@ -304,16 +312,6 @@
 (setq global-mark-ring-max 50)
 (setq mark-ring-max 50)
 (setq set-mark-command-repeat-pop t)
-
-;; C-w to kill word when region is inactive
-(if (boundp 'kill-region-dwim)
-    (setq kill-region-dwim t)
-  (defun k/kill-region-or-backward-word ()
-    (interactive)
-    (if (region-active-p)
-        (kill-region (region-beginning) (region-end))
-      (backward-kill-word 1)))
-  (global-set-key (kbd "C-w") #'k/kill-region-or-backward-word))
 
 ;; auth sources
 (setq auth-sources '("~/.authinfo"))

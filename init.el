@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 ;; I don't support any version other than what I use.
 (when (version< emacs-version "30")
-  (warn "This configuration is only tested on Emacs 30"))
+  (warn "This configuration only supports Emacs 30, 31, and 32"))
 
 ;; Hacks for speeding up initialization.
 (defconst +file-name-handler-alist file-name-handler-alist)
