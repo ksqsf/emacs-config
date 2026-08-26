@@ -138,14 +138,16 @@
   (require 'llm-openai))
 
 (setq +llm-small-model
-      (make-llm-openrouter
-       :key #'openrouter-api-key
-       :chat-model "deepseek/deepseek-v4-flash"))
+      (make-llm-openai-compatible
+       :url "https://api.ksqsf.moe/v1"
+       :key #'ksqsf-api-key
+       :chat-model "gpt-5.6-luna"))
 
 (setq +llm-smart-model
-      (make-llm-openrouter
-       :key #'openrouter-api-key
-       :chat-model "openai/gpt-5.5"))
+      (make-llm-openai-compatible
+       :url "https://api.ksqsf.moe/v1"
+       :key #'ksqsf-api-key
+       :chat-model "gpt-5.6-sol"))
 
 
 ;;
