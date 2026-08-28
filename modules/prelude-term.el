@@ -86,59 +86,15 @@
   :after eshell
   :hook (eshell-mode . (lambda () (require 'eshell-z))))
 
-;; vterm
-(use-package vterm
-  :commands (vterm)
-  :bind (:map vterm-mode-map
-              ("C-c C-t" . vterm-copy-mode))
-  :custom
-  (vterm-always-compile-module t)
-  :hook (vterm-mode . goto-address-mode)
-  :config
-
-  ;; Integration with desktop-save-mode
-  (defvar vterm-persist-buffer-contents t
-    "When t, desktop-save-mode also saves the buffer contents.")
-  (defun vterm-save-desktop-buffer (dirname)
-    (cons
-     (desktop-file-name default-directory dirname)
-     (if vterm-persist-buffer-contents (buffer-string) "")))
-  (defun vterm-restore-desktop-buffer (_filename buffer-name misc)
-    "MISC is the saved return value of `desktop-save-vterm'."
-    (let ((default-directory (car misc)))
-      (require 'vterm)
-      (with-current-buffer (get-buffer-create buffer-name)
-        (when vterm-persist-buffer-contents
-          (insert (cdr misc))
-          (insert "\n\n"))
-        (vterm-mode))))
-  (add-to-list 'desktop-buffer-mode-handlers '(vterm-mode . vterm-restore-desktop-buffer))
-  (add-hook 'vterm-mode-hook #'(lambda () (setq-local desktop-save-buffer 'vterm-save-desktop-buffer))))
-
 ;; Coterm
 (use-package coterm
   :hook (after-init . coterm-mode))
 
 ;; Ghostel
 (use-package ghostel
-  :load-path "lisp/ghostel/lisp"
   :bind
-  (("M-g v" . ghostel)
-   :map ghostel-semi-char-mode-map
-   ("C-q" . ghostel-send-next-key)))
-
-;; Eat
-(use-package eat
-  :vc (:fetcher github :repo "ksqsf/emacs-eat")  ; my own fork of eat
-  :bind
-  (("M-g v" . eat)  ;; Take place of vterm-toggle
-   :map eat-semi-char-mode-map
-   ("M-o" . other-window))
-  :config
-  (setq eat-term-name "xterm-color")
-  (setq eat-kill-buffer-on-exit t)
-  (setq eat-enable-blinking-text t)
-  (setq eat-enable-directory-tracking t))
+  (:map ghostel-semi-char-mode-map
+        ("C-q" . ghostel-send-next-key)))
 
 ;; VTerm
 (use-package vterm
