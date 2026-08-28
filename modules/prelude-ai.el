@@ -132,22 +132,20 @@
                (fetch-url-text-async cb url))))
 
 (use-package llm
+  :demand t
   :config
   (setq llm-warn-on-nonfree nil)        ; Thanks, but there is no "truly free" models.
-
-  (require 'llm-openai))
-
-(setq +llm-small-model
-      (make-llm-openai-compatible
-       :url "https://api.ksqsf.moe/v1"
-       :key #'ksqsf-api-key
-       :chat-model "gpt-5.6-luna"))
-
-(setq +llm-smart-model
-      (make-llm-openai-compatible
-       :url "https://api.ksqsf.moe/v1"
-       :key #'ksqsf-api-key
-       :chat-model "gpt-5.6-sol"))
+  (require 'llm-openai)
+  (setq +llm-small-model
+        (make-llm-openai-compatible
+         :url "https://api.ksqsf.moe/v1"
+         :key #'ksqsf-api-key
+         :chat-model "gpt-5.6-luna"))
+  (setq +llm-smart-model
+        (make-llm-openai-compatible
+         :url "https://api.ksqsf.moe/v1"
+         :key #'ksqsf-api-key
+         :chat-model "gpt-5.6-sol")))
 
 
 ;;

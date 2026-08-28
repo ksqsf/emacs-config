@@ -1,4 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
+
 ;; I don't support any version other than what I use.
 (when (version< emacs-version "30")
   (warn "This configuration only supports Emacs 30, 31, and 32"))
