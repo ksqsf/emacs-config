@@ -158,6 +158,8 @@
   :config
   (setq consult-narrow-key "<")
   (setq consult-async-min-input 1)
+  (setq consult-async-refresh-delay 0.1)
+  (setq consult-async-input-debounce 0.1)
 
   ;; vertico-posframe overlaps with the matched line.
   (defun k|recenter-around-top ()
