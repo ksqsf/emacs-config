@@ -63,7 +63,7 @@
 
 ;; LaTeX preview
 (setq org-latex-preview-ltxpng-directory (no-littering-expand-var-file-name "org/ltxpng"))
-(setq org-preview-latex-default-process 'dvisvgm)
+(setq org-preview-latex-default-process 'xelatex)
 (when k|mac
   (with-eval-after-load 'org
     (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75))))
