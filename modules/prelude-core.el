@@ -478,6 +478,10 @@ Useful for reading Python exception traces."
 (setq vterm-tramp-shells '(("docker" "/bin/sh")
                            ("ssh" "/bin/bash")))
 
+;; TRAMP methods
+(with-eval-after-load 'tramp
+  (tramp-enable-distrobox-method))
+
 
 ;; Bind C-h C-p to profiler (was: view-emacs-problems)
 (defun profiler-dwim ()
