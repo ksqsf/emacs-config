@@ -72,7 +72,7 @@
 (setq backup-by-copying t)
 
 ;; Don't recenter to the middle of the screen
-(setq recenter-positions '(top 0.3 bottom))
+(setq recenter-positions '(top 0.36 bottom))
 
 ;; Don't let Emacs hurt my ears
 (setq visible-bell nil)
