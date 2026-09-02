@@ -245,9 +245,12 @@
           ("https://this-week-in-rust.org/atom.xml" magazine rust)
           ("https://haskellweekly.news/newsletter.atom" magazine haskell)
           ("https://plink.anyfeeder.com/weixin/caixinwang" news finance)
-          ("https://finance.yahoo.com/news/rssindex" news finance)
           ("https://writings.stephenwolfram.com/feed/" blog science)
           ("https://pagedout.institute/rss.xml" magazine)
+          ("https://rss.arxiv.org/atom/cs.AI+cs.CL+cs.CV+cs.LG+cs.MA" cs ai)
+          ("https://rss.arxiv.org/atom/cs.CC+cs.DS+cs.DM+cs.DC+cs.FL" cs tcs)
+          ("https://rss.arxiv.org/atom/cs.DC+cs.OS" cs systems)
+          ("https://rss.arxiv.org/atom/cs.PL" cs pl)
           )))
 
 ;; emms
