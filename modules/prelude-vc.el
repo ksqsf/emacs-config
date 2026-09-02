@@ -81,4 +81,7 @@ This function returns nil if it cannot parse REMOTE."
   (let ((url (buffer-substring (point) (pos-eol))))
     (browse-url (s-trim url))))
 
+(use-package remoto
+  :vc (:fetcher github :repo "agzam/remoto.el"))
+
 (provide 'prelude-vc)
