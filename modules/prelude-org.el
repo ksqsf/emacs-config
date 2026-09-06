@@ -266,7 +266,7 @@
     ("C-c n f" . denote-open-or-create)
     ("C-c n r" . denote-rename-file)
     ("C-c n R" . denote-rename-file-using-front-matter)
-    ("C-c n i" . denote-link)
+    ("C-c n i" . denote-link-or-create)
     ("C-c n I" . denote-add-links)
     ("C-c n b" . denote-backlinks)
     ("C-c n d" . denote-dired)
@@ -292,7 +292,6 @@
 
 (use-package denote-journal
   :ensure t
-  :after denote
   :commands (denote-journal-new-or-existing-entry
              denote-journal-link-or-create-entry)
   :hook (calendar-mode . denote-journal-calendar-mode)
