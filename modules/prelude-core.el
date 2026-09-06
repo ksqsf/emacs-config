@@ -542,5 +542,9 @@ The DWIM behaviour of this command is as follows:
   :after tramp
   :load-path "lisp/tramp-rpc/lisp")
 
+;; Integrate with the system clipboard on TUI.
+(use-package xclip
+  :when (not (display-graphic-p))
+  :hook (after-init . xclip-mode))
 
 (provide 'prelude-core)

@@ -68,45 +68,4 @@ of the box `(w h)' inside the box `(cw ch)'."
          (center (ct/frame-get-center frame)))
     (apply 'set-frame-position (flatten-list (list frame center)))))
 
-;;; WSL2
-;;; Requires 'wslu' (https://wslutiliti.es/wslu/install.html)
-(defun wsl-copy (beg end)
-  "In a WSL2 environment, copy region to the system clipboard."
-  (interactive "r")
-  (k|with-suppressed-message
-    (let ((default-directory "/"))
-      (shell-command-on-region beg end "iconv -f utf-8 -t utf16le | clip.exe" " *wsl-copy*")))
-  (deactivate-mark))
-
-(defun wsl-get-clipboard ()
-  "In a WSL2 environment, get the clipboard text."
-  (let ((clipboard
-         (let ((default-directory "/"))
-           (shell-command-to-string "powershell.exe -command 'Get-Clipboard' 2>/dev/null")
-           ;; WSLu utility
-           ;; (shell-command-to-string "wslclip --get")
-           )))
-    (setq clipboard (replace-regexp-in-string "\r" "" clipboard))
-    (setq clipboard (substring clipboard 0 -1))
-    clipboard))
-
-(defun wsl-paste ()
-  "In a WSL2 environment, paste the text from the system clipboard."
-  (interactive)
-  (cond
-   ((derived-mode-p 'vterm-mode)
-    (vterm-insert (wsl-get-clipboard)))
-   ((derived-mode-p 'eat-mode)
-    (eat-term-send-string-as-yank eat-terminal (wsl-get-clipboard)))
-   (t
-    (insert (wsl-get-clipboard)))))
-
-(when k|wsl
-  (advice-add 'gui-select-text :before
-              (lambda (text)
-                (when select-enable-clipboard
-                  (with-temp-buffer
-                    (insert text)
-                    (wsl-copy (point-min) (point-max)))))))
-
 (provide 'prelude-os)
