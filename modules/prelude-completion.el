@@ -1,9 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 
+(savehist-mode +1)
+
 (use-package completion
   :ensure nil
   :custom
-  (completion-styles '(prescient flex orderless))
+  (completion-styles '(flex orderless))
   (completions-detailed t)
   (minibuffer-visible-completions t)
   (completions-group t)
@@ -11,11 +13,6 @@
   (completion-eager-update t)
   ;; (global-completion-preview-mode t)
   )
-
-(use-package prescient
-  :demand t
-  :config
-  (prescient-persist-mode))
 
 (use-package orderless
   :demand t
@@ -217,6 +214,7 @@
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode)
+  (corfu-history-mode)
   :config
   ;; Let RET be newlines.
   (define-key corfu-map (kbd "RET") nil))
