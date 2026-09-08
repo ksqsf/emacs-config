@@ -57,6 +57,7 @@
 
 ;; I'm the winner ;-)
 (use-package winner
+  :disabled                             ; Disabled due to clear evidence that this contributes to 10% latency
   :ensure nil
   :defer t
   :bind (:map winner-mode-map
