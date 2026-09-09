@@ -138,148 +138,148 @@
 ;; I want a "side" to be a list of buffers associated with this "side".
 ;; And I can hide or show them at once.
 ;; The "side window" however is still disconnected with the buffers.
-(setopt display-buffer-alist
- `(;; Side windows: bottom
-   ("^magit: "
-    (display-buffer-reuse-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (slot . 0)
-    (window-height . 0.4)
-    (dedicated . t))
-   ("^\\*.*-?compilation\\*"
-    (display-buffer-reuse-window
-     display-buffer-pop-up-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (window-height . 0.3)
-    (slot . 1)
-    (dedicated . t))
-   ("^\\*Backtrace\\*\\'"
-    (display-buffer-reuse-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (window-height . 0.3)
-    (slot . 2)
-    (dedicated . t))
-   ("\\*quickrun\\*"
-    (display-buffer-reuse-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (slot . 3)
-    (dedicated . t))
-   (,(+has-mode '(haskell-interactive-mode))
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (window-height . 0.4)
-    (slot . 4)
-    (dedicated . t))
-   (,(+has-mode '(inferior-python-mode))
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (window-height . 0.4)
-    (side . bottom)
-    (slot . 5)
-    (dedicated . t))
-   ("^\\*\\(.*-\\)?e?shell\\*"
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (slot . 6)
-    (window-height . 0.4)
-    (dedicated . t))
-   ("-eat\\*\\'"
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (window-height . 0.4)
-    (mode vterm-mode vterm-copy-mode)
-    (side . bottom)
-    (slot . 7)
-    (dedicated . t))
-   ("vterm*"
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (window-height . 0.4)
-    (mode vterm-mode vterm-copy-mode)
-    (side . bottom)
-    (slot . 7)
-    (dedicated . t))
-   ("^\\*ielm\\*"
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (window-height . 0.4)
-    (slot . 8)
-    (dedicated . t))
-   (,(+has-mode '(comint-mode))
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (window-height . 0.4)
-    (slot . 9)
-    (dedicated . t))
-   ("^\\*[Ff]ly"
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (side . bottom)
-    (window-height . 0.4)
-    (slot . 10)
-    (dedicated . t))
+;; (setopt display-buffer-alist
+;;  `(;; Side windows: bottom
+;;    ("^magit: "
+;;     (display-buffer-reuse-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (slot . 0)
+;;     (window-height . 0.4)
+;;     (dedicated . t))
+;;    ("^\\*.*-?compilation\\*"
+;;     (display-buffer-reuse-window
+;;      display-buffer-pop-up-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (window-height . 0.3)
+;;     (slot . 1)
+;;     (dedicated . t))
+;;    ("^\\*Backtrace\\*\\'"
+;;     (display-buffer-reuse-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (window-height . 0.3)
+;;     (slot . 2)
+;;     (dedicated . t))
+;;    ("\\*quickrun\\*"
+;;     (display-buffer-reuse-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (slot . 3)
+;;     (dedicated . t))
+;;    (,(+has-mode '(haskell-interactive-mode))
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (window-height . 0.4)
+;;     (slot . 4)
+;;     (dedicated . t))
+;;    (,(+has-mode '(inferior-python-mode))
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (window-height . 0.4)
+;;     (side . bottom)
+;;     (slot . 5)
+;;     (dedicated . t))
+;;    ("^\\*\\(.*-\\)?e?shell\\*"
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (slot . 6)
+;;     (window-height . 0.4)
+;;     (dedicated . t))
+;;    ("-eat\\*\\'"
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (window-height . 0.4)
+;;     (mode vterm-mode vterm-copy-mode)
+;;     (side . bottom)
+;;     (slot . 7)
+;;     (dedicated . t))
+;;    ("vterm*"
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (window-height . 0.4)
+;;     (mode vterm-mode vterm-copy-mode)
+;;     (side . bottom)
+;;     (slot . 7)
+;;     (dedicated . t))
+;;    ("^\\*ielm\\*"
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (window-height . 0.4)
+;;     (slot . 8)
+;;     (dedicated . t))
+;;    (,(+has-mode '(comint-mode))
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (window-height . 0.4)
+;;     (slot . 9)
+;;     (dedicated . t))
+;;    ("^\\*[Ff]ly"
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (window-height . 0.4)
+;;     (slot . 10)
+;;     (dedicated . t))
 
-   ;; Side windows: right
-   ("^\\*[Hh]elp.*"
-    (display-buffer-reuse-mode-window
-     display-buffer-in-side-window)
-    (side . right)
-    (window-width . 80)
-    (slot . 0)
-    (dedicated . t)
-    (inhibit-same-window . t))
+;;    ;; Side windows: right
+;;    ("^\\*[Hh]elp.*"
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-in-side-window)
+;;     (side . right)
+;;     (window-width . 80)
+;;     (slot . 0)
+;;     (dedicated . t)
+;;     (inhibit-same-window . t))
 
-   ;; Temporary buffers that contain rich contents
-   ("^\\*ripgrep-search\\*"
-    (display-buffer-reuse-window
-     display-buffer-reuse-mode-window
-     display-buffer-at-bottom))
-   ("^\\*grep\\*"
-    (display-buffer-reuse-window
-     display-buffer-reuse-mode-window
-     display-buffer-at-bottom))
-   ("^\\*vc-diff\\*\\'"
-    (display-buffer-reuse-window
-     display-buffer-reuse-mode-window
-     display-buffer-in-direction)
-    (direction . right))
-   ("^\\*Warnings"
-    (display-buffer-reuse-window
-     display-buffer-at-bottom))
+;;    ;; Temporary buffers that contain rich contents
+;;    ("^\\*ripgrep-search\\*"
+;;     (display-buffer-reuse-window
+;;      display-buffer-reuse-mode-window
+;;      display-buffer-at-bottom))
+;;    ("^\\*grep\\*"
+;;     (display-buffer-reuse-window
+;;      display-buffer-reuse-mode-window
+;;      display-buffer-at-bottom))
+;;    ("^\\*vc-diff\\*\\'"
+;;     (display-buffer-reuse-window
+;;      display-buffer-reuse-mode-window
+;;      display-buffer-in-direction)
+;;     (direction . right))
+;;    ("^\\*Warnings"
+;;     (display-buffer-reuse-window
+;;      display-buffer-at-bottom))
 
-   ;; Telega
-   (,(+has-mode '(telega-root-mode))
-    (display-buffer-in-side-window)
-    (window-width . 0.35)
-    (side . right)
-    (slot . 0)
-    (dedicated . t))
-   (,(+has-mode '(telega-chat-mode))
-    (display-buffer-reuse-mode-window
-     display-buffer-at-bottom)
-    (mode . telega-chat-mode)
-    (dedicated . t))
+;;    ;; Telega
+;;    (,(+has-mode '(telega-root-mode))
+;;     (display-buffer-in-side-window)
+;;     (window-width . 0.35)
+;;     (side . right)
+;;     (slot . 0)
+;;     (dedicated . t))
+;;    (,(+has-mode '(telega-chat-mode))
+;;     (display-buffer-reuse-mode-window
+;;      display-buffer-at-bottom)
+;;     (mode . telega-chat-mode)
+;;     (dedicated . t))
 
-   ;; Fix magit commit: show the two buffers simultaneously.
-   ("COMMIT_MSG"
-    (display-buffer-in-side-window)
-    (side . bottom)
-    (dedicated . t)
-    (slot . 0))
-   ("^magit-diff"
-    (display-buffer-in-side-window)
-    (side . bottom)
-    (dedicated . t)
-    (slot . 1))
-   ))
+;;    ;; Fix magit commit: show the two buffers simultaneously.
+;;    ("COMMIT_MSG"
+;;     (display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (dedicated . t)
+;;     (slot . 0))
+;;    ("^magit-diff"
+;;     (display-buffer-in-side-window)
+;;     (side . bottom)
+;;     (dedicated . t)
+;;     (slot . 1))
+;;    ))
 
 ;; FIXME: window-toggle-side-windows unfortunately relies on the
 ;; existence of side windows to decide whether to show or to hide side
