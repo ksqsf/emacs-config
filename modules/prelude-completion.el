@@ -5,7 +5,7 @@
 (use-package completion
   :ensure nil
   :custom
-  (completion-styles '(flex orderless))
+  (completion-styles '(orderless))
   (completions-detailed t)
   (minibuffer-visible-completions t)
   (completions-group t)
