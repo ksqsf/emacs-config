@@ -16,3 +16,6 @@
 [submodule "lisp/tramp-rpc"]
 	path = lisp/tramp-rpc
 	url = https://github.com/ArthurHeymans/emacs-tramp-rpc
+[submodule "lisp/codex-ide"]
+	path = lisp/codex-ide
+	url = git@github.com:dgillis/emacs-codex-ide.git

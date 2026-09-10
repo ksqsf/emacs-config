@@ -153,7 +153,7 @@
 ;;
 
 (use-package codex-ide
-  :vc (:fetcher github :repo "dgillis/emacs-codex-ide")
+  :load-path "lisp/codex-ide"
   :bind (("C-h ;" . codex-ide-menu)
          ("C-h C-c" . codex-ide-menu)))
 
