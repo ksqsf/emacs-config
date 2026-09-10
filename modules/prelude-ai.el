@@ -88,7 +88,9 @@
   ;; Default backend and model
   (setopt gptel-model 'claude-sonnet-4.6
           gptel-backend (cdr (assoc "Copilot" gptel--known-backends))
-          gptel-default-mode 'markdown-ts-mode)
+          gptel-default-mode (if (fboundp 'markdown-ts-mode)
+                                 'markdown-ts-mode
+                               'markdown-mode))
 
   (gptel-make-tool
    :name "create_python_repl"
