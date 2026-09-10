@@ -20,7 +20,6 @@
   (orderless-matching-styles
    '(orderless-prefixes                 ; Match a component as multiple word prefixes.
      orderless-initialism               ; Match a component as an initialism.
-     orderless-flex                     ; Match a component in flex style.
      orderless-regexp))                 ; Match a component as a regexp.
   (orderless-smart-case t))
 
