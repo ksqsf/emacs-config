@@ -32,17 +32,19 @@
   ;; Emacs 28 introduces a unified query lang
   (setq gnus-search-use-parsed-queries t)
   ;;; Article mode for Gnus
-  (setq gnus-visible-headers (rx line-start (or "From"
-                                           "Subject"
-                                           "Mail-Followup-To"
-                                           "Date"
-                                           "To"
-                                           "Cc"
-                                           "Newsgroups"
-                                           "User-Agent"
-                                           "X-Mailer"
-                                           "X-Newsreader")
-                            ":"))
+  (setq gnus-visible-headers (rx line-start
+                                 (or "From"
+                                     "Subject"
+                                     "Mail-Followup-To"
+                                     "Date"
+                                     "To"
+                                     "Cc"
+                                     "Newsgroups"
+                                     "Message-ID"
+                                     "User-Agent"
+                                     "X-Mailer"
+                                     "X-Newsreader")
+                                 ":"))
   (setq gnus-article-sort-functions '((not gnus-article-sort-by-number)
                                  (not gnus-article-sort-by-date)))
   (setq gnus-article-browse-delete-temp t)
