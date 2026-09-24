@@ -76,7 +76,7 @@
                :capabilities (media tool json url))))
 
   ;; My own API endpoint
-  (gptel-make-openai "My"
+  (gptel-make-openai "Ksqsf"
     :host "api.ksqsf.moe"
     :endpoint "/v1/chat/completions"
     :stream t
@@ -86,8 +86,8 @@
   (gptel-make-gh-copilot "Copilot")
 
   ;; Default backend and model
-  (setopt gptel-model 'claude-sonnet-4.6
-          gptel-backend (cdr (assoc "Copilot" gptel--known-backends))
+  (setopt gptel-model 'gpt-6-astra
+          gptel-backend (cdr (assoc "Ksqsf" gptel--known-backends))
           gptel-default-mode (if (fboundp 'markdown-ts-mode)
                                  'markdown-ts-mode
                                'markdown-mode))
@@ -277,5 +277,28 @@ Optional MAX-RESULTS is the maximum number of results (default 5)."
                nil
                nil))
 (add-hook 'markdown-mode-hook #'hs-minor-mode)
+
+
+;;
+;; Proofread
+;;
+
+(defun +proofread ()
+  "Proofread the current buffer and try to check it for you."
+  (interactive)
+  (let ((orig-buf (current-buffer)))
+    (split-window-right)
+    (other-window 1)
+    (with-current-buffer (get-buffer-create "*Proofread*")
+      (erase-buffer)
+      (markdown-mode)
+      (gptel-mode)
+      (insert "Read this buffer and check for any errors, be it grammar, vocabulary,
+inaccuracies, logic, or even bugs in code.  Check everything that others
+can see, including attachments or referenced files/documents.\n\n\n")
+      (insert-buffer orig-buf)
+      (goto-char (point-max))
+      (switch-to-buffer "*Proofread*")
+      (gptel-send))))
 
 (provide 'prelude-ai)
