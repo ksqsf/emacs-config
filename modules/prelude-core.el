@@ -84,13 +84,14 @@
 
 ;; Delete the selected region when press <del>
 (setq delete-active-region t)
-(delete-selection-mode t)
+(delete-selection-mode +1)
 
 ;; Scroll: avoid surprises (try to make scrolling "continous")
 (setq scroll-margin 1)
 (setq scroll-preserve-screen-position t)
 (setq scroll-step 1)
 (setq scroll-conservatively 10000)
+(setq scroll-error-top-bottom t)        ; Move the point when it signals an error
 
 ;; Disable fancy features when the file is too large
 (global-so-long-mode t)
