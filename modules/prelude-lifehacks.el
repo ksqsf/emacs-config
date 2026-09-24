@@ -21,9 +21,16 @@
   (interactive)
   (web-search "https://duckduckgo.com/?q="))
 
-(use-package life-calendar
-  :vc (:fetcher github :repo "vshender/emacs-life-calendar")
-  :ensure t)
+(setq webjump-sites
+      '(("DuckDuckGo"
+         . [simple-query "https://duckduckgo.com"
+                         "https://duckduckgo.com/?q=" ""])
+        ("Wikipedia"
+         . [simple-query "https://wikipedia.org"
+                         "https://wikipedia.org/w/?search=" ""])
+        ("Hacker News"
+         . "https://news.ycombinator.com")))
+(global-set-key (kbd "C-c j") #'webjump)
 
 (provide 'prelude-lifehacks)
 ;;; prelude-lifehacks.el ends here
