@@ -277,10 +277,8 @@ The history is stored in FILENAME."
   (editorconfig-mode t))
 
 
-(use-package cmake-mode)
-
 (use-package eldoc-cmake
-  :hook (cmake-mode-hook . eldoc-cmake-enable))
+  :hook (cmake-ts-mode-hook . eldoc-cmake-enable))
 
 
 (use-package flymake
