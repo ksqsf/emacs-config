@@ -35,3 +35,6 @@
 ;; Call `prepare-user-lisp' to update autoloads.
 (setq user-lisp-auto-scrape nil)
 (setq user-lisp-directory (expand-file-name "lisp" user-emacs-directory))
+
+;; Don't use all of my CPU cores
+(setq native-comp-async-jobs-number 1)
