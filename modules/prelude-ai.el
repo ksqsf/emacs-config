@@ -157,7 +157,10 @@
 (use-package codex-ide
   :load-path "lisp/codex-ide"
   :bind (("C-h ;" . codex-ide-menu)
-         ("C-h C-c" . codex-ide-menu)))
+         ("C-h C-c" . codex-ide-menu))
+  :config
+  ;; rendering streamed chunks causes excessive loads on the gc.
+  (setq codex-ide-renderer-render-markdown-during-streaming nil))
 
 
 ;;
