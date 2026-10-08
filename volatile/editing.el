@@ -361,15 +361,55 @@ The results are stored in three buffers:
       (when (re-search-forward "^version: \"[0-9]\\{8\\}\"" 10000 t)
         (when t ;(y-or-n-p "Update version? ")
           (replace-match (format "version: \"%s\""
-                               (format-time-string "%Y%m%d"))))))))
+                                 (format-time-string "%Y%m%d"))))))))
+
+(require 'font-lock)
+(defconst my-dict-code-colors
+  ["#e06c75" "#e5c07b" "#98c379" "#56b6c2"
+   "#61afef" "#c678dd" "#d19a66" "#be5046"
+   "#ff79c6" "#bd93f9" "#8be9fd" "#50fa7b"
+   "#ffb86c" "#f1fa8c" "#ff6b6b" "#4ecdc4"
+   "#a8e6cf" "#ffd3b6" "#dcedc1" "#82aaff"
+   "#c3e88d" "#f78c6c" "#f07178" "#ab9df2"])
+(defun my-dict-code-face (code)
+  "Return a consistent foreground color for CODE."
+  (let ((hash 0))
+    (dolist (char (string-to-list code))
+      (setq hash (mod (+ (* hash 31) char)
+                      (length my-dict-code-colors))))
+    (list :foreground (aref my-dict-code-colors hash))))
+(defun my-dict-code-matcher (limit)
+  (catch 'found
+    (while (re-search-forward "[^ \t\n]+" limit t)
+      (when
+          (save-match-data
+            (string-match-p
+             "\\`[^\t\n]*\t[^\t\n]*\\'"
+             (buffer-substring-no-properties
+              (line-beginning-position)
+              (match-beginning 0))))
+        (throw 'found t)))
+    nil))
+(defconst my-dict-code-keywords
+  '((my-dict-code-matcher
+     (0 (my-dict-code-face (match-string-no-properties 0))
+        prepend))))
 (define-minor-mode rime-maint-mode
   "Toggle automatic updating of Rime YAML file versions.
 When enabled, automatically updates the version field in YAML files
 before saving."
-  :global t
   :init-value t
   :lighter " Rime"
   (if rime-maint-mode
-      (add-hook 'before-save-hook 'my-update-rime-file-date)
-    (remove-hook 'before-save-hook 'my-update-rime-file-date)))
-(rime-maint-mode 1)
+      (progn
+        (font-lock-add-keywords nil my-dict-code-keywords 'append)
+        (add-hook 'before-save-hook 'my-update-rime-file-date)
+        (unless font-lock-mode
+          (font-lock-mode 1)))
+    (remove-hook 'before-save-hook 'my-update-rime-file-date)
+    (font-lock-remove-keywords nil my-dict-code-keywords))
+  (font-lock-flush))
+(with-eval-after-load 'yaml-mode
+  (add-hook 'yaml-mode-hook #'rime-maint-mode))
+(with-eval-after-load 'yaml-ts-mode
+  (add-hook 'yaml-ts-mode-hook #'rime-maint-mode))
