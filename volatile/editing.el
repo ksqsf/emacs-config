@@ -403,13 +403,13 @@ before saving."
   (if rime-maint-mode
       (progn
         (font-lock-add-keywords nil my-dict-code-keywords 'append)
-        (add-hook 'before-save-hook 'my-update-rime-file-date)
         (unless font-lock-mode
           (font-lock-mode 1)))
-    (remove-hook 'before-save-hook 'my-update-rime-file-date)
     (font-lock-remove-keywords nil my-dict-code-keywords))
   (font-lock-flush))
 (with-eval-after-load 'yaml-mode
   (add-hook 'yaml-mode-hook #'rime-maint-mode))
 (with-eval-after-load 'yaml-ts-mode
   (add-hook 'yaml-ts-mode-hook #'rime-maint-mode))
+(add-hook 'text-mode-hook #'rime-maint-mode)
+(add-hook 'before-save-hook #'time-stamp)
