@@ -1,6 +1,6 @@
 ;;; smtlib2-mode.el --- A SMTLIBv2 interactive development environment -*-lexical-binding: t-*-
 
-;; Version: 0.0.1
+;; Version: 0.1.0
 ;; Author: ksqsf <i@ksqsf.moe>
 ;; Homepage: https://github.com/ksqsf/emacs-config
 ;; Keywords: z3 yices mathsat cvc4 cvc5 smt beaver
@@ -52,7 +52,7 @@
 
 (defvar smtlib2-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c C-c") 'smtlib2-execute-region)
+    (define-key map (kbd "C-c C-c") 'smtlib2-execute-file)
     map)
   "Keymap for smtlib2-mode.")
 
@@ -114,41 +114,33 @@
            (ite 2)
            (synth-fun 3))))
   (cl-loop for (keyword indent) in l
-           do  (put keyword 'common-lisp-indent-function indent)))
+           do  (put keyword 'lisp-indent-function indent)))
 
 
 ;; mode-command and utility functions
 
 ;; Define the mode
 ;;;###autoload
-(define-derived-mode smtlib2-mode lisp-mode "SMT2"
+(define-derived-mode smtlib2-mode lisp-data-mode "SMT2"
   "Major mode for editing SMT-LIB2 files"
-  (setq font-lock-defaults smtlib2-font-lock-defaults)
-  ;; use cl-indent
-  (require 'cl-indent)
-  (setq-local lisp-indent-function 'common-lisp-indent-function)
-  ;; disable sly-mode
-  (when (fboundp 'sly-editing-mode)
-    (sly-editing-mode -1))
-  (when (fboundp 'sly-mode)
-    (sly-mode -1)))
+  (setq font-lock-defaults smtlib2-font-lock-defaults))
 
-;; Command to run SMT solver on the whole buffer
-(defun smtlib2-execute-region ()
-  "Pass optional header and region to a prover for noninteractive execution.
-The working directory is that of the buffer, and only environment variables
-are already set which is why you can mark a header within the script."
+(defun smtlib2-execute-file ()
+  "Execute the file with "
   (interactive)
-  (shell-command-on-region (if (region-active-p) (region-beginning) (point-min))
-                           (if (region-active-p) (region-end) (point-max))
-                           smtlib2-solver-cmd))
+  (or (buffer-file-name)
+      (error "Buffer must be associated with a file!"))
+  (save-buffer)
+  (shell-command
+   (format "'%s' '%s'" smtlib2-solver-cmd (buffer-file-name))
+   (format "*%s-output*" smtlib2-solver-cmd))
+  (with-current-buffer (format "*%s-output*" smtlib2-solver-cmd)
+    (smtlib2-mode)))
 
 
 
 ;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.smt2?\\'" . smtlib2-mode))
-;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.sygus2?\\'" . smtlib2-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(z3\\|smt2?\\|sygus2\\)\\'" . smtlib2-mode))
 
 (provide 'smtlib2-mode)
 
