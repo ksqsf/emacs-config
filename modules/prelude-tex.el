@@ -20,6 +20,9 @@
 
   (setq TeX-command-default "LaTeXMk")
 
+  ;; the default 'newline' function is affected by electric-indent-mode.
+  (setq TeX-newline-function 'newline-and-indent)
+
   (setq TeX-auto-save t
         TeX-parse-self t)
   (setq-default TeX-master nil)
