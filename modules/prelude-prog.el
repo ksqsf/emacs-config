@@ -97,16 +97,9 @@
 (use-package eglot
   :commands (eglot eglot-ensure)
   :config
-  (setq eglot-confirm-server-initiated-edits nil
-        eglot-autoreconnect 60
-        eglot-autoshutdown t)
-
-  (defun toggle-eglot-debug ()
-    (interactive)
-    (if (= 0 eglot-events-buffer-size)
-        (setq eglot-events-buffer-size 20000)
-      (setq eglot-events-buffer-size 0)))
-  (setq eglot-events-buffer-size 0))
+  (setq eglot-autoreconnect 60
+        eglot-autoshutdown t
+        eglot-events-buffer-config '(:size 0 :format full)))
 
 (use-package eglot-x
   :after eglot
@@ -284,7 +277,11 @@ The history is stored in FILENAME."
 (use-package flymake
   :ensure nil
   :config
-  (setopt flymake-show-diagnostics-at-end-of-line 'short))
+  (when (version< emacs-version "32")
+    (setopt flymake-show-diagnostics-at-end-of-line 'short))
+  (setopt flymake-inline-diagnostics
+          '((current-line . fancy)
+            (t . short))))
 
 
 (provide 'prelude-prog)
