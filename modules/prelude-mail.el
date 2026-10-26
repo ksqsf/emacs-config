@@ -2,7 +2,14 @@
 
 ;; Be sure to customize:
 ;; * user-full-name       will be displayed on all emails you send
-;; * user-mail-address    a GMail address
+;; * user-mail-address    the primary, default mail address
+
+;; For incoming news/mails, consider customizing:
+;; * gnus-secondary-select-methods
+
+;; For sending mails, consider customizing:
+;; * message-alternative-emails
+;; * smtpmail-servers-requiring-authorization
 
 (use-package gnus
   :commands (gnus)
@@ -127,9 +134,43 @@
   (setq message-signature user-full-name)
   (setq message-mail-alias-type 'ecomplete)
   (setq message-send-mail-function #'message-use-send-mail-function)
-  (setq send-mail-function #'smtpmail-send-it)
+  (setq send-mail-function #'+smtp-send-it)
   (setq smtpmail-smtp-server "smtp.gmail.com")
   (setq smtpmail-smtp-user user-mail-address)
   (setq smtpmail-smtp-service 587))
+
+;;
+;; Smarter SMTP settings
+;;
+(defvar +smtp-accounts nil
+  "List of SMTP accounts.
+
+An SMTP account is specified as a list:
+(FROM SMTP-SERVER SMTP-PORT SMTP-STREAM-TYPE SMTP-USER)
+
+The password (if needed) is determined from authinfo with AUTH-LOGIN.
+
+FROM is the 'From' field of the message.  SMTP-SERVER, SMTP-PORT,
+SMTP-STREAM-TYPE, and SMTP-USER correspond to 'smtpmail-smtp-server',
+'smtpmail-smtp-service', 'smtpmail-stream-type', and
+'smtpmail-smtp-user'.
+
+SMTP-USER is optional, and defaults to FROM.
+
+Consider customizing 'message-alternative-emails' if you use multiple
+accounts.")
+
+(defun +smtp-send-it ()
+  "Send an E-mail with the SMTP user determined from From."
+  (let* ((from (message-fetch-field "From"))
+         (address (and from (cadr (mail-extract-address-components from))))
+         (account (assoc address my-smtp-accounts)))
+    (unless account
+      (user-error "No SMTP account for %s" address))
+    (let ((smtpmail-smtp-server (nth 1 account))
+          (smtpmail-smtp-service (nth 2 account))
+          (smtpmail-stream-type (nth 3 account))
+          (smtpmail-smtp-user (or (nth 4 account) address)))
+      (smtpmail-send-it))))
 
 (provide 'prelude-mail)
