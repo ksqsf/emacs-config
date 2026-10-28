@@ -146,7 +146,7 @@
 ;; Fix cdlatex
 (define-advice texmathp (:before-until () org-cdlatex-fix)
   "In org-cdlatex-mode, call `org-inside-LaTeX-fragment-p'."
-  (and org-cdlatex-mode (org-inside-LaTeX-fragment-p)))
+  (and (bound-and-true-p org-cdlatex-mode) (org-inside-LaTeX-fragment-p)))
 
 
 ;;; CTeX support

@@ -164,7 +164,7 @@ accounts.")
   "Send an E-mail with the SMTP user determined from From."
   (let* ((from (message-fetch-field "From"))
          (address (and from (cadr (mail-extract-address-components from))))
-         (account (assoc address my-smtp-accounts)))
+         (account (assoc address +smtp-accounts)))
     (unless account
       (user-error "No SMTP account for %s" address))
     (let ((smtpmail-smtp-server (nth 1 account))
