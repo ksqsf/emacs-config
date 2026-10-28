@@ -1,10 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
-(use-package lean4-mode
-  :mode ("\\.lean\\'" . lean4-mode)
-  :vc (:fetcher github :repo "leanprover/lean4-mode")
+(use-package nael
+  :mode ("\\.lean\\'" . nael-mode)
   :config
-  ;; disable company in lean4 mode because we use corfu
-  (add-hook 'lean4-mode #'(lambda () (company-mode -1))))
+  (use-package nael-lsp))
 
 (provide 'prelude-lang-lean)
