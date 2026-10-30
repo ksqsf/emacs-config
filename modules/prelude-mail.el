@@ -166,6 +166,7 @@ accounts.")
 
 (defun +smtp-send-it ()
   "Send an E-mail with the SMTP user determined from From."
+  (require 'smtpmail)
   (let* ((from (message-fetch-field "From"))
          (address (and from (cadr (mail-extract-address-components from))))
          (account (assoc address +smtp-accounts)))
@@ -245,5 +246,10 @@ accounts.")
     (+gnus-copy-permalink
      (buffer-local-value 'gnus-newsgroup-name summary)
      message-id)))
+
+(use-package nngithub
+  :ensure nil
+  :load-path "lisp/nngithub"
+  :after gnus)
 
 (provide 'prelude-mail)
