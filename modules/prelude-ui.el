@@ -437,7 +437,9 @@
   (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab)))
 
 (use-package hl-line
-  :hook ((prog-mode yaml-ts-mode yaml-mode) . hl-line-mode))
+  :hook (( prog-mode yaml-ts-mode yaml-mode
+           TeX-mode LaTeX-mode)
+         . hl-line-mode))
 
 (use-package solaire-mode
   :disabled
