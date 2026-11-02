@@ -1,5 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 
+(setq vc-dir-save-some-buffers-on-revert t)
+(setq vc-find-revision-no-save t)
+(setq vc-follow-symlinks t)
+(setq vc-use-incoming-outgoing-prefixes t)
+(setq vc-dir-simple-unmark-all-files t)
+
 (with-eval-after-load 'diff-mode
   (keymap-unset diff-mode-map "M-o"))
 

@@ -6,6 +6,7 @@
 (use-package comint
   :ensure nil
   :config
+  (setq shell-command-prompt-show-cwd t)
   (add-hook 'comint-output-filter-functions 'comint-osc-process-output))
 
 ;; Do not query on exit if the term process has no running child process.

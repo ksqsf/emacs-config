@@ -6,6 +6,8 @@
 
 ;; Mirrors moved to early-init.el
 
+(setq package-menu-use-current-if-no-marks t)
+
 ;; use-package
 (require 'use-package)
 
