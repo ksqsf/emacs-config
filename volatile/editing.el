@@ -398,7 +398,7 @@ The results are stored in three buffers:
   "Toggle automatic updating of Rime YAML file versions.
 When enabled, automatically updates the version field in YAML files
 before saving."
-  :init-value t
+  :init-value nil
   :lighter " Rime"
   (if rime-maint-mode
       (progn
@@ -407,9 +407,15 @@ before saving."
           (font-lock-mode 1)))
     (font-lock-remove-keywords nil my-dict-code-keywords))
   (font-lock-flush))
+(defvar rime-maint-directory (expand-file-name "~/src/Clone/plum/package/"))
+(defun rime-maint-maybe-enable ()
+  "Enable `rime-maint-mode' only for Rime files."
+  (when (and buffer-file-name
+             (file-in-directory-p buffer-file-name rime-maint-directory))
+    (rime-maint-mode)))
 (with-eval-after-load 'yaml-mode
-  (add-hook 'yaml-mode-hook #'rime-maint-mode))
+  (add-hook 'yaml-mode-hook #'rime-maint-maybe-enable))
 (with-eval-after-load 'yaml-ts-mode
-  (add-hook 'yaml-ts-mode-hook #'rime-maint-mode))
-(add-hook 'text-mode-hook #'rime-maint-mode)
+  (add-hook 'yaml-ts-mode-hook #'rime-maint-maybe-enable))
+(add-hook 'text-mode-hook #'rime-maint-maybe-enable)
 (add-hook 'before-save-hook #'time-stamp)
