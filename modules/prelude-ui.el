@@ -284,7 +284,7 @@
 ;; FIXME: window-toggle-side-windows unfortunately relies on the
 ;; existence of side windows to decide whether to show or to hide side
 ;; windows.  It cannot toggle only one side.  Treemacs is a victim.
-(global-set-key [C-tab] #'window-toggle-side-windows)
+;; (global-set-key [C-tab] #'window-toggle-side-windows)
 
 ;; Minimap
 (use-package minimap
@@ -405,6 +405,8 @@
 
 (use-package tab-bar
   :ensure nil
+  :bind (("C-<tab>" . tab-next)
+         ("C-S-<tab>". tab-previous))
   :custom
   (tab-bar-history-mode t))
 
