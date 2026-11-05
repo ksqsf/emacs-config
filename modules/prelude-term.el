@@ -97,7 +97,8 @@
   ( :map ghostel-semi-char-mode-map
     ("C-q" . ghostel-send-next-key)
     ("M-o" . nil)
-    ("M-s" . nil)))
+    ("M-s" . nil)
+    ("C-/" . (lambda () (interactive) (ghostel-send-string "\x1f")))))
 
 ;; Dropdown terminal
 (defun drop-down-term ()

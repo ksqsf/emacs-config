@@ -154,6 +154,35 @@
 ;; Agentic coding stuff
 ;;
 
+(defun +ai-terminal (command resume-arg arg)
+  "Open COMMAND in a project terminal that closes on exit.
+ARG is the raw prefix: C-u starts fresh; C-u C-u adds RESUME-ARG."
+  (require 'ghostel)
+  (let* ((project (project-current t))
+         (default-directory (project-root project))
+         (ghostel-buffer-name (format "*%s-%s*" (project-name project) command))
+         (ghostel-shell (if (equal arg '(16)) "/bin/sh" command))
+         (ghostel-environment (cons "EDITOR=emacsclient" ghostel-environment)))
+    (with-current-buffer (ghostel arg)
+      (setq-local ghostel-kill-buffer-on-exit t
+                  ghostel-set-title-function nil)
+      (when (equal arg '(16))
+        (ghostel-send-string (format "exec %s %s\n" command resume-arg))))))
+
+(defun +codex (&optional arg)
+  "Switch to this project's Codex buffer, or start one.
+With C-u, start a new session; with C-u C-u, pick a session to resume."
+  (interactive "P")
+  (+ai-terminal "codex" "resume" arg))
+
+(defun +pi (&optional arg)
+  "Switch to this project's Pi buffer, or start one.
+With C-u, start a new session; with C-u C-u, pick a session to resume."
+  (interactive "P")
+  (+ai-terminal "pi" "--resume" arg))
+
+(keymap-set project-prefix-map "h" '+pi)
+
 (use-package codex-ide
   :load-path "lisp/codex-ide"
   :bind (("C-h ;" . codex-ide-menu)
