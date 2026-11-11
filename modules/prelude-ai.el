@@ -179,7 +179,10 @@ With C-u, start a new session; with C-u C-u, pick a session to resume."
   "Switch to this project's Pi buffer, or start one.
 With C-u, start a new session; with C-u C-u, pick a session to resume."
   (interactive "P")
-  (+ai-terminal "pi" "--resume" arg))
+  (require 'ghostel)
+  (let ((ghostel-environment
+         (append '("PI_TELEMETRY=0" "PI_OFFLINE=1" "PI_SKIP_VERSION_CHECK=1") ghostel-environment)))
+    (+ai-terminal "pi" "--resume" arg)))
 
 (keymap-set project-prefix-map "h" '+pi)
 
