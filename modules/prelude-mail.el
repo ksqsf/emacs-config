@@ -133,6 +133,8 @@
   :ensure nil
   :defer t
   :hook (message-mode . auto-fill-mode)
+  :bind (:map message-mode-map
+              ("C-o" . message-split-line))
   :config
   (setq message-kill-buffer-on-exit t)
   (setq message-signature user-full-name)
