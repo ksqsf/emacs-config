@@ -136,6 +136,7 @@
   :bind (:map message-mode-map
               ("C-o" . message-split-line))
   :config
+  (setq message-user-fqdn nil)
   (setq message-kill-buffer-on-exit t)
   (setq message-signature user-full-name)
   (setq message-mail-alias-type 'ecomplete)
