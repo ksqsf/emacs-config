@@ -21,7 +21,10 @@
   :bind (:map gnus-summary-mode-map
               ("C-c C-c" . +gnus-summary-copy-permalink)
               :map gnus-article-mode-map
-              ("C-c C-c" . +gnus-article-copy-permalink))
+              ("C-c C-c" . +gnus-article-copy-permalink)
+              :map gnus-topic-mode-map
+              ("TAB" . nil)
+              ("<tab>" . nil))
   :config
   (setq gnus-use-cache t)
   (setq gnus-use-scoring nil)
