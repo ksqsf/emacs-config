@@ -548,4 +548,10 @@ The DWIM behaviour of this command is as follows:
   :when (not (display-graphic-p))
   :hook (after-init . xclip-mode))
 
+;; Commands
+(defun +insert-iso-date ()
+  "Insert %Y-%m-%d"
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d")))
+
 (provide 'prelude-core)
