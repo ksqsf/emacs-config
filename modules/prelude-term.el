@@ -7,6 +7,9 @@
   :ensure nil
   :config
   (setq shell-command-prompt-show-cwd t)
+  (setq comint-buffer-maximum-size 100000)
+  (setq comint-input-ring-size 10000)
+  (add-hook 'shell-mode-hook #'comint-truncate-buffer)
   (add-hook 'comint-output-filter-functions 'comint-osc-process-output))
 
 ;; Do not query on exit if the term process has no running child process.
