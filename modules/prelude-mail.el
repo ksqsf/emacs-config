@@ -19,6 +19,12 @@
            gnus-article-mode)
           . hl-line-mode))
   :bind (:map gnus-summary-mode-map
+              ("m" . gnus-summary-mark-as-processable)
+              ("T m" . gnus-uu-mark-thread)
+              ("u" . gnus-summary-unmark-as-processable)
+              ("U" . gnus-summary-unmark-all-as-processable)
+              ("D" . gnus-summary-delete-article)
+              ("R" . gnus-summary-move-article)
               ("C-c C-c" . +gnus-summary-copy-permalink)
               :map gnus-article-mode-map
               ("C-c C-c" . +gnus-article-copy-permalink)
@@ -27,7 +33,8 @@
               ("<tab>" . nil))
   :config
   (setq gnus-use-cache t)
-  (setq gnus-use-scoring nil)
+  (setq gnus-use-scoring t)
+  (setq gnus-use-adaptive-scoring t)
   (setq gnus-suppress-duplicates t)
   (setq gnus-novice-user nil)
   (setq gnus-expert-user t)
@@ -73,7 +80,18 @@
   (setq gnus-cacheable-groups "^\\(nntp\\|nnimap\\)")
   ;; Display smileys
   (setq smiley-style 'emoji)
-  (setq gnus-treat-display-smileys t))
+  (setq gnus-treat-display-smileys t)
+  ;; GMail convenience
+  (setq gnus-parameters
+        '(("^nnimap\\+gmail:INBOX$"
+           (display . 100)
+           (total-expire . t))            ; auto-expiry after 7 days
+          ("^nnimap\\+gmail:\\[Gmail\\]/Sent Mail$"
+           (display . 50))))
+  ;; Prefer plain-text
+  (setq mm-discouraged-alternatives '("text/html" "text/richtext"))
+  ;; INBOX
+  (setq gnus-permanently-visible-groups ":INBOX$"))
 
 ;; Group mode commands for Gnus
 (use-package gnus-group
@@ -112,7 +130,6 @@
   (setq gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace))
   (setq gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject)
   ;; Filling in threads
-  ;; 2 old articles are enough for memory
   (setq gnus-fetch-old-headers 2)
   (setq gnus-fetch-old-ephemeral-headers 2)
   (setq gnus-build-sparse-threads 'some)
@@ -145,6 +162,8 @@
   (setq message-mail-alias-type 'ecomplete)
   (setq message-send-mail-function #'message-use-send-mail-function)
   (setq send-mail-function #'+smtp-send-it)
+
+  ;; Some default settings
   (setq smtpmail-smtp-server "smtp.gmail.com")
   (setq smtpmail-smtp-user user-mail-address)
   (setq smtpmail-smtp-service 587))
@@ -257,5 +276,10 @@ accounts.")
   :ensure nil
   :load-path "lisp/nngithub"
   :after gnus)
+
+;; do not conflict with ecomplete
+(add-hook 'message-mode-hook
+          (lambda ()
+            (setq-local corfu-auto 0)))
 
 (provide 'prelude-mail)

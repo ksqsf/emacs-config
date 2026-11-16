@@ -151,7 +151,7 @@ One of `lsp-mode', `eglot', or `lsp-bridge'."
           ((eq prelude-lsp-client 'lsp-bridge)
            (lsp-bridge-mode)
            ;; Let lsp-bridge control when popups should be displayed.
-           (setq corfu-auto nil))
+           (setq-local corfu-auto nil))
           ((eq prelude-lsp-client 'lsp-mode)
            (lsp-deferred))
           ((eq prelude-lsp-client 'eglot)
