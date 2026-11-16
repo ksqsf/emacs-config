@@ -19,3 +19,6 @@
 [submodule "lisp/codex-ide"]
 	path = lisp/codex-ide
 	url = git@github.com:dgillis/emacs-codex-ide.git
+[submodule "private"]
+	path = private
+	url = ssh://git@git.ksqsf.moe:2222/ksqsf/dotemacs-private.git

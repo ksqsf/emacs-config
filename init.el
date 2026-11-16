@@ -22,12 +22,12 @@
   files are loaded automatically.  You shouldn't byte-compile
   these Lisp files.  To disable a file, just change the extension
   from .el to whatever else.")
+(defvar prelude-private-dir (expand-file-name "private" user-emacs-directory)
+  "This directory contains private configuration.
+
+It behaves the same as volatile, but is a separate submodule.")
 (add-to-list 'load-path prelude-lisp-dir)
 (add-to-list 'load-path prelude-modules-dir)
-
-;; Trusted content
-(setq trusted-content
-      '("~/.emacs.d/" "~/org/" "~/src/" "~/Papers/"))
 
 ;; Replace Emacs paths early -- before doing anything.
 (use-package no-littering
@@ -95,6 +95,9 @@
 (when (file-exists-p prelude-volatile-dir)
   (message "Loading volatile configuration files in %s..." prelude-volatile-dir)
   (mapc 'load (directory-files prelude-volatile-dir 't "^[^#\.].*el$")))
+(when (file-exists-p prelude-private-dir)
+  (message "Loading private configuration files in %s..." prelude-private-dir)
+  (mapc 'load (directory-files prelude-private-dir 't "^[^#\.].*el$")))
 
 ;; Customization.
 (load custom-file t)
