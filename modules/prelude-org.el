@@ -96,7 +96,12 @@
 
 
 ;; Capture templates
-(setq org-capture-templates nil)
+(setq org-capture-templates
+      '(("t" "Task"
+         entry
+         (file+headline "~/org/Todo.org" "Tasks")
+         "* TODO %?
+%a")))
 
 
 ;; Babel

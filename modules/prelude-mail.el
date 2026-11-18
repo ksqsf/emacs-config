@@ -27,10 +27,7 @@
               ("R" . gnus-summary-move-article)
               ("C-c C-c" . +gnus-summary-copy-permalink)
               :map gnus-article-mode-map
-              ("C-c C-c" . +gnus-article-copy-permalink)
-              :map gnus-topic-mode-map
-              ("TAB" . nil)
-              ("<tab>" . nil))
+              ("C-c C-c" . +gnus-article-copy-permalink))
   :config
   (setq gnus-use-cache t)
   (setq gnus-use-scoring t)
@@ -98,6 +95,9 @@
   :ensure nil
   :defer t
   :hook (gnus-group-mode . gnus-topic-mode)
+  :map ((:map gnus-topic-mode-map
+              ("TAB" . nil)
+              ("<tab>" . nil)))
   :config
   (require 'gnus-topic)
   ;;          indentation ------------.
